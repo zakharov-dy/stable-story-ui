@@ -42,3 +42,4 @@ and that is not a pass.
 - A contract change updates the schemas, fixtures and consumers together.
 - Code, comments and docs are in English. The product name is a working name; web product code takes
   it only from `apps/web/src/texts.ts`, mobile from its resolved Expo config.
+Harness check.
