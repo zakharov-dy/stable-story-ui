@@ -1,0 +1,51 @@
+{
+  "from": "2026-10-09",
+  "to": "2026-10-09",
+  "quality": {
+    "complete": true,
+    "unreconciledDays": [],
+    "operationsComplete": true,
+    "unpairedEvents": 0
+  },
+  "byFlow": [
+    {
+      "flow": "bridge_out",
+      "events": 1,
+      "ops": 1,
+      "amount": "40",
+      "mean": "40"
+    }
+  ],
+  "buckets": [
+    {
+      "min": "0",
+      "max": "10000",
+      "ops": 1,
+      "amount": "40"
+    },
+    {
+      "min": "10000",
+      "max": "100000",
+      "ops": 0,
+      "amount": "0"
+    },
+    {
+      "min": "100000",
+      "max": "1000000",
+      "ops": 0,
+      "amount": "0"
+    },
+    {
+      "min": "1000000",
+      "max": "10000000",
+      "ops": 0,
+      "amount": "0"
+    },
+    {
+      "min": "10000000",
+      "max": null,
+      "ops": 0,
+      "amount": "0"
+    }
+  ]
+}

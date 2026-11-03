@@ -1,0 +1,32 @@
+{
+  "from": "2026-10-09",
+  "to": "2026-10-09",
+  "quality": {
+    "complete": true,
+    "unreconciledDays": [],
+    "operationsComplete": true,
+    "unpairedEvents": 0
+  },
+  "items": [
+    {
+      "id": "ethereum:0x73796e746865746963f63856af544095a9dde890d2b4d5a59776b348ebba7168:32",
+      "chain": "ethereum",
+      "flow": "bridge_out",
+      "amount": "40",
+      "time": "2026-10-09T09:36:00.000Z",
+      "txHash": "0x73796e746865746963f63856af544095a9dde890d2b4d5a59776b348ebba7168",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963f63856af544095a9dde890d2b4d5a59776b348ebba7168",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 1,
+        "peer": {
+          "domain": 6,
+          "chain": "base",
+          "name": "Base"
+        }
+      }
+    }
+  ],
+  "nextCursor": null
+}

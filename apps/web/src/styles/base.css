@@ -1,0 +1,309 @@
+/*
+ * Design foundation (D2-A): page background and glow, section rhythm, cards, links, motion and the
+ * primitives shared by every block (tags, quality notes, n/a). Colours, fonts and spacing only
+ * through tokens.css. Docs: docs/design.md.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+p {
+  margin: 0;
+}
+
+/* ---------- page ---------- */
+.page {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: var(--space-5) var(--gutter) var(--space-6);
+}
+
+/* Atmosphere: narrow ellipses inside the side gutters and below the composition, never under text or plots. */
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(56px 300px at 0 34%, var(--color-glow), transparent 70%),
+    radial-gradient(56px 300px at 100% 72%, var(--color-glow), transparent 70%),
+    radial-gradient(640px 72px at 50% 100%, var(--color-glow), transparent 70%);
+}
+
+.wrap {
+  position: relative;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+/* ---------- links ---------- */
+a {
+  color: var(--color-accent);
+  text-underline-offset: 3px;
+  transition: color var(--motion-fast) var(--motion-ease);
+}
+
+a:hover {
+  color: var(--color-text);
+}
+
+a:focus-visible,
+.card:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ---------- numbers ---------- */
+.num,
+.kpi-value,
+.record-value,
+.chart-frame,
+.legend-value {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1, 'zero' 0;
+}
+
+/* ---------- section rhythm ---------- */
+.sec {
+  margin-top: 136px;
+}
+
+.sec-h {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-5);
+  align-items: end;
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-5);
+  border-bottom: var(--stroke-hairline) solid var(--color-hairline);
+}
+
+.sec-h h2 {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.sec-h p {
+  justify-self: end;
+  max-width: 600px;
+  text-align: right;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* The /// 0N section label. */
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.label .ix {
+  color: var(--color-accent);
+  margin-right: 0.6em;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: var(--stroke-hairline) solid var(--color-hairline);
+  border-radius: var(--radius);
+  transition: border-color var(--motion-fast) var(--motion-ease);
+}
+
+.card:hover {
+  border-color: var(--color-border);
+}
+
+.hairline {
+  border: 0;
+  border-top: var(--stroke-hairline) solid var(--color-hairline);
+}
+
+/* ---------- tags ---------- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  line-height: 1.6;
+  padding: 1px 8px;
+  border: var(--stroke-hairline) solid currentColor;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.tag.delayed {
+  color: var(--color-delayed);
+}
+
+.tag.unrec {
+  color: var(--color-unreconciled);
+}
+
+.tag.noevents {
+  color: var(--color-text-muted);
+}
+
+.tag.unpaired {
+  color: var(--color-unpaired);
+}
+
+.tag.peer {
+  color: var(--color-text-muted);
+  border-style: dashed;
+}
+
+.tag.cctp {
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+  border-radius: 4px;
+}
+
+.tag.nodata {
+  color: var(--color-incomplete);
+}
+
+/* ---------- quality notes ---------- */
+.qnotes {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.qnote {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-3) var(--space-4);
+  border: var(--stroke-hairline) dashed var(--color-unreconciled);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.qnote .k {
+  flex: none;
+  padding-top: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-unreconciled);
+  white-space: nowrap;
+}
+
+.qnote p {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.qnote.delayed {
+  border-color: var(--color-delayed);
+}
+
+.qnote.delayed .k {
+  color: var(--color-delayed);
+}
+
+.qnote.gapn {
+  border-color: var(--color-incomplete);
+}
+
+.qnote.gapn .k {
+  color: var(--color-incomplete);
+}
+
+.qnote.unpairedn {
+  border-color: var(--color-unpaired);
+}
+
+.qnote.unpairedn .k {
+  color: var(--color-unpaired);
+}
+
+/* ---------- n/a ---------- */
+.na {
+  color: var(--color-incomplete);
+}
+
+.na-why {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* ---------- demo label ---------- */
+.demo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  padding: 3px 10px;
+  border: var(--stroke-hairline) dashed var(--color-accent);
+  border-radius: 4px;
+  background: var(--color-surface);
+}
+
+/* ---------- motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .sec {
+    margin-top: 96px;
+  }
+
+  .sec-h {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .sec-h p {
+    justify-self: start;
+    text-align: left;
+  }
+}
+
+/* Secondary text colour for plain text; kept last so that same-specificity rules above keep winning. */
+.muted {
+  color: var(--color-text-muted);
+}

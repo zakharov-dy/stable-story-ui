@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // Type-only contracts imports also check its HTTP client sources, which need DOM declarations.
+    // View itself uses ES APIs only; eslint.config.js guards platform imports/globals.
+    "lib": ["ES2023", "DOM"],
+    "types": []
+  },
+  "include": ["src"]
+}

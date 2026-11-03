@@ -1,0 +1,4073 @@
+{
+  "asset": "usdc",
+  "generatedAt": "2026-10-10T06:00:00.000Z",
+  "asOf": "2026-10-09",
+  "historyStart": "2026-09-25",
+  "chains": [
+    {
+      "slug": "ethereum",
+      "name": "Ethereum",
+      "explorerTx": "https://etherscan.io/tx/{hash}"
+    }
+  ],
+  "header": {
+    "days": [
+      "2026-09-10",
+      "2026-09-11",
+      "2026-09-12",
+      "2026-09-13",
+      "2026-09-14",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-19",
+      "2026-09-20",
+      "2026-09-21",
+      "2026-09-22",
+      "2026-09-23",
+      "2026-09-24",
+      "2026-09-25",
+      "2026-09-26",
+      "2026-09-27",
+      "2026-09-28",
+      "2026-09-29",
+      "2026-09-30",
+      "2026-10-01",
+      "2026-10-02",
+      "2026-10-03",
+      "2026-10-04",
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-08",
+      "2026-10-09"
+    ],
+    "supply": {
+      "value": "1674",
+      "changePct": null,
+      "spark": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "1000",
+        "1000",
+        "1067",
+        "1134",
+        "1201",
+        "1268",
+        "1335",
+        "1205",
+        "1272",
+        "1339",
+        "1406",
+        "1473",
+        "1540",
+        "1607",
+        "1674"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    },
+    "change1d": {
+      "value": "67",
+      "changePct": "4.169259",
+      "spark": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "0",
+        "67",
+        "67",
+        "67",
+        "67",
+        "67",
+        "-130",
+        "67",
+        "67",
+        "67",
+        "67",
+        "67",
+        "67",
+        "67"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    },
+    "change7d": {
+      "value": "469",
+      "changePct": "38.921162",
+      "spark": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "205",
+        "272",
+        "272",
+        "272",
+        "272",
+        "272",
+        "272",
+        "469"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    },
+    "issuerMinted7d": {
+      "value": "70",
+      "changePct": "-12.5",
+      "spark": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "70",
+        "80",
+        "70",
+        "70",
+        "70",
+        "70",
+        "70",
+        "70",
+        "70"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    },
+    "issuerBurned7d": {
+      "value": "21",
+      "changePct": "-91.06383",
+      "spark": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "35",
+        "235",
+        "218",
+        "218",
+        "218",
+        "218",
+        "218",
+        "218",
+        "21"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    }
+  },
+  "views": {
+    "30d": {
+      "from": "2026-09-10",
+      "to": "2026-10-09",
+      "period": "day",
+      "noDataChains": [
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "supplyByChain": {
+        "level": {
+          "period": "day",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-09-10",
+              "end": "2026-09-10",
+              "complete": false
+            },
+            {
+              "start": "2026-09-11",
+              "end": "2026-09-11",
+              "complete": false
+            },
+            {
+              "start": "2026-09-12",
+              "end": "2026-09-12",
+              "complete": false
+            },
+            {
+              "start": "2026-09-13",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-14",
+              "complete": false
+            },
+            {
+              "start": "2026-09-15",
+              "end": "2026-09-15",
+              "complete": false
+            },
+            {
+              "start": "2026-09-16",
+              "end": "2026-09-16",
+              "complete": false
+            },
+            {
+              "start": "2026-09-17",
+              "end": "2026-09-17",
+              "complete": false
+            },
+            {
+              "start": "2026-09-18",
+              "end": "2026-09-18",
+              "complete": false
+            },
+            {
+              "start": "2026-09-19",
+              "end": "2026-09-19",
+              "complete": false
+            },
+            {
+              "start": "2026-09-20",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-21",
+              "complete": false
+            },
+            {
+              "start": "2026-09-22",
+              "end": "2026-09-22",
+              "complete": false
+            },
+            {
+              "start": "2026-09-23",
+              "end": "2026-09-23",
+              "complete": false
+            },
+            {
+              "start": "2026-09-24",
+              "end": "2026-09-24",
+              "complete": false
+            },
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-25",
+              "complete": true
+            },
+            {
+              "start": "2026-09-26",
+              "end": "2026-09-26",
+              "complete": true
+            },
+            {
+              "start": "2026-09-27",
+              "end": "2026-09-27",
+              "complete": true
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-09-28",
+              "complete": true
+            },
+            {
+              "start": "2026-09-29",
+              "end": "2026-09-29",
+              "complete": true
+            },
+            {
+              "start": "2026-09-30",
+              "end": "2026-09-30",
+              "complete": true
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "complete": true
+            },
+            {
+              "start": "2026-10-02",
+              "end": "2026-10-02",
+              "complete": true
+            },
+            {
+              "start": "2026-10-03",
+              "end": "2026-10-03",
+              "complete": true
+            },
+            {
+              "start": "2026-10-04",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-05",
+              "complete": true
+            },
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-06",
+              "complete": true
+            },
+            {
+              "start": "2026-10-07",
+              "end": "2026-10-07",
+              "complete": true
+            },
+            {
+              "start": "2026-10-08",
+              "end": "2026-10-08",
+              "complete": true
+            },
+            {
+              "start": "2026-10-09",
+              "end": "2026-10-09",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1000",
+                "1000",
+                "1067",
+                "1134",
+                "1201",
+                "1268",
+                "1335",
+                "1205",
+                "1272",
+                "1339",
+                "1406",
+                "1473",
+                "1540",
+                "1607",
+                "1674"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "share": {
+          "period": "day",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-09-10",
+              "end": "2026-09-10",
+              "complete": false
+            },
+            {
+              "start": "2026-09-11",
+              "end": "2026-09-11",
+              "complete": false
+            },
+            {
+              "start": "2026-09-12",
+              "end": "2026-09-12",
+              "complete": false
+            },
+            {
+              "start": "2026-09-13",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-14",
+              "complete": false
+            },
+            {
+              "start": "2026-09-15",
+              "end": "2026-09-15",
+              "complete": false
+            },
+            {
+              "start": "2026-09-16",
+              "end": "2026-09-16",
+              "complete": false
+            },
+            {
+              "start": "2026-09-17",
+              "end": "2026-09-17",
+              "complete": false
+            },
+            {
+              "start": "2026-09-18",
+              "end": "2026-09-18",
+              "complete": false
+            },
+            {
+              "start": "2026-09-19",
+              "end": "2026-09-19",
+              "complete": false
+            },
+            {
+              "start": "2026-09-20",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-21",
+              "complete": false
+            },
+            {
+              "start": "2026-09-22",
+              "end": "2026-09-22",
+              "complete": false
+            },
+            {
+              "start": "2026-09-23",
+              "end": "2026-09-23",
+              "complete": false
+            },
+            {
+              "start": "2026-09-24",
+              "end": "2026-09-24",
+              "complete": false
+            },
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-25",
+              "complete": true
+            },
+            {
+              "start": "2026-09-26",
+              "end": "2026-09-26",
+              "complete": true
+            },
+            {
+              "start": "2026-09-27",
+              "end": "2026-09-27",
+              "complete": true
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-09-28",
+              "complete": true
+            },
+            {
+              "start": "2026-09-29",
+              "end": "2026-09-29",
+              "complete": true
+            },
+            {
+              "start": "2026-09-30",
+              "end": "2026-09-30",
+              "complete": true
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "complete": true
+            },
+            {
+              "start": "2026-10-02",
+              "end": "2026-10-02",
+              "complete": true
+            },
+            {
+              "start": "2026-10-03",
+              "end": "2026-10-03",
+              "complete": true
+            },
+            {
+              "start": "2026-10-04",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-05",
+              "complete": true
+            },
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-06",
+              "complete": true
+            },
+            {
+              "start": "2026-10-07",
+              "end": "2026-10-07",
+              "complete": true
+            },
+            {
+              "start": "2026-10-08",
+              "end": "2026-10-08",
+              "complete": true
+            },
+            {
+              "start": "2026-10-09",
+              "end": "2026-10-09",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "total": {
+          "period": "day",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-09-10",
+              "end": "2026-09-10",
+              "complete": false
+            },
+            {
+              "start": "2026-09-11",
+              "end": "2026-09-11",
+              "complete": false
+            },
+            {
+              "start": "2026-09-12",
+              "end": "2026-09-12",
+              "complete": false
+            },
+            {
+              "start": "2026-09-13",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-14",
+              "complete": false
+            },
+            {
+              "start": "2026-09-15",
+              "end": "2026-09-15",
+              "complete": false
+            },
+            {
+              "start": "2026-09-16",
+              "end": "2026-09-16",
+              "complete": false
+            },
+            {
+              "start": "2026-09-17",
+              "end": "2026-09-17",
+              "complete": false
+            },
+            {
+              "start": "2026-09-18",
+              "end": "2026-09-18",
+              "complete": false
+            },
+            {
+              "start": "2026-09-19",
+              "end": "2026-09-19",
+              "complete": false
+            },
+            {
+              "start": "2026-09-20",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-21",
+              "complete": false
+            },
+            {
+              "start": "2026-09-22",
+              "end": "2026-09-22",
+              "complete": false
+            },
+            {
+              "start": "2026-09-23",
+              "end": "2026-09-23",
+              "complete": false
+            },
+            {
+              "start": "2026-09-24",
+              "end": "2026-09-24",
+              "complete": false
+            },
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-25",
+              "complete": true
+            },
+            {
+              "start": "2026-09-26",
+              "end": "2026-09-26",
+              "complete": true
+            },
+            {
+              "start": "2026-09-27",
+              "end": "2026-09-27",
+              "complete": true
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-09-28",
+              "complete": true
+            },
+            {
+              "start": "2026-09-29",
+              "end": "2026-09-29",
+              "complete": true
+            },
+            {
+              "start": "2026-09-30",
+              "end": "2026-09-30",
+              "complete": true
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "complete": true
+            },
+            {
+              "start": "2026-10-02",
+              "end": "2026-10-02",
+              "complete": true
+            },
+            {
+              "start": "2026-10-03",
+              "end": "2026-10-03",
+              "complete": true
+            },
+            {
+              "start": "2026-10-04",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-05",
+              "complete": true
+            },
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-06",
+              "complete": true
+            },
+            {
+              "start": "2026-10-07",
+              "end": "2026-10-07",
+              "complete": true
+            },
+            {
+              "start": "2026-10-08",
+              "end": "2026-10-08",
+              "complete": true
+            },
+            {
+              "start": "2026-10-09",
+              "end": "2026-10-09",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "all",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1000",
+                "1000",
+                "1067",
+                "1134",
+                "1201",
+                "1268",
+                "1335",
+                "1205",
+                "1272",
+                "1339",
+                "1406",
+                "1473",
+                "1540",
+                "1607",
+                "1674"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedLevel": {
+          "period": "day",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-09-10",
+              "end": "2026-09-10",
+              "complete": false
+            },
+            {
+              "start": "2026-09-11",
+              "end": "2026-09-11",
+              "complete": false
+            },
+            {
+              "start": "2026-09-12",
+              "end": "2026-09-12",
+              "complete": false
+            },
+            {
+              "start": "2026-09-13",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-14",
+              "complete": false
+            },
+            {
+              "start": "2026-09-15",
+              "end": "2026-09-15",
+              "complete": false
+            },
+            {
+              "start": "2026-09-16",
+              "end": "2026-09-16",
+              "complete": false
+            },
+            {
+              "start": "2026-09-17",
+              "end": "2026-09-17",
+              "complete": false
+            },
+            {
+              "start": "2026-09-18",
+              "end": "2026-09-18",
+              "complete": false
+            },
+            {
+              "start": "2026-09-19",
+              "end": "2026-09-19",
+              "complete": false
+            },
+            {
+              "start": "2026-09-20",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-21",
+              "complete": false
+            },
+            {
+              "start": "2026-09-22",
+              "end": "2026-09-22",
+              "complete": false
+            },
+            {
+              "start": "2026-09-23",
+              "end": "2026-09-23",
+              "complete": false
+            },
+            {
+              "start": "2026-09-24",
+              "end": "2026-09-24",
+              "complete": false
+            },
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-25",
+              "complete": true
+            },
+            {
+              "start": "2026-09-26",
+              "end": "2026-09-26",
+              "complete": true
+            },
+            {
+              "start": "2026-09-27",
+              "end": "2026-09-27",
+              "complete": true
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-09-28",
+              "complete": true
+            },
+            {
+              "start": "2026-09-29",
+              "end": "2026-09-29",
+              "complete": true
+            },
+            {
+              "start": "2026-09-30",
+              "end": "2026-09-30",
+              "complete": true
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "complete": true
+            },
+            {
+              "start": "2026-10-02",
+              "end": "2026-10-02",
+              "complete": true
+            },
+            {
+              "start": "2026-10-03",
+              "end": "2026-10-03",
+              "complete": true
+            },
+            {
+              "start": "2026-10-04",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-05",
+              "complete": true
+            },
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-06",
+              "complete": true
+            },
+            {
+              "start": "2026-10-07",
+              "end": "2026-10-07",
+              "complete": true
+            },
+            {
+              "start": "2026-10-08",
+              "end": "2026-10-08",
+              "complete": true
+            },
+            {
+              "start": "2026-10-09",
+              "end": "2026-10-09",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1000",
+                "1000",
+                "1067",
+                "1134",
+                "1201",
+                "1268",
+                "1335",
+                "1205",
+                "1272",
+                "1339",
+                "1406",
+                "1473",
+                "1540",
+                "1607",
+                "1674"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedShare": {
+          "period": "day",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-09-10",
+              "end": "2026-09-10",
+              "complete": false
+            },
+            {
+              "start": "2026-09-11",
+              "end": "2026-09-11",
+              "complete": false
+            },
+            {
+              "start": "2026-09-12",
+              "end": "2026-09-12",
+              "complete": false
+            },
+            {
+              "start": "2026-09-13",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-14",
+              "complete": false
+            },
+            {
+              "start": "2026-09-15",
+              "end": "2026-09-15",
+              "complete": false
+            },
+            {
+              "start": "2026-09-16",
+              "end": "2026-09-16",
+              "complete": false
+            },
+            {
+              "start": "2026-09-17",
+              "end": "2026-09-17",
+              "complete": false
+            },
+            {
+              "start": "2026-09-18",
+              "end": "2026-09-18",
+              "complete": false
+            },
+            {
+              "start": "2026-09-19",
+              "end": "2026-09-19",
+              "complete": false
+            },
+            {
+              "start": "2026-09-20",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-21",
+              "complete": false
+            },
+            {
+              "start": "2026-09-22",
+              "end": "2026-09-22",
+              "complete": false
+            },
+            {
+              "start": "2026-09-23",
+              "end": "2026-09-23",
+              "complete": false
+            },
+            {
+              "start": "2026-09-24",
+              "end": "2026-09-24",
+              "complete": false
+            },
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-25",
+              "complete": true
+            },
+            {
+              "start": "2026-09-26",
+              "end": "2026-09-26",
+              "complete": true
+            },
+            {
+              "start": "2026-09-27",
+              "end": "2026-09-27",
+              "complete": true
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-09-28",
+              "complete": true
+            },
+            {
+              "start": "2026-09-29",
+              "end": "2026-09-29",
+              "complete": true
+            },
+            {
+              "start": "2026-09-30",
+              "end": "2026-09-30",
+              "complete": true
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "complete": true
+            },
+            {
+              "start": "2026-10-02",
+              "end": "2026-10-02",
+              "complete": true
+            },
+            {
+              "start": "2026-10-03",
+              "end": "2026-10-03",
+              "complete": true
+            },
+            {
+              "start": "2026-10-04",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-05",
+              "complete": true
+            },
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-06",
+              "complete": true
+            },
+            {
+              "start": "2026-10-07",
+              "end": "2026-10-07",
+              "complete": true
+            },
+            {
+              "start": "2026-10-08",
+              "end": "2026-10-08",
+              "complete": true
+            },
+            {
+              "start": "2026-10-09",
+              "end": "2026-10-09",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        }
+      },
+      "drivers": [
+        {
+          "scope": "all",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-09-10",
+                "end": "2026-09-10",
+                "complete": false
+              },
+              {
+                "start": "2026-09-11",
+                "end": "2026-09-11",
+                "complete": false
+              },
+              {
+                "start": "2026-09-12",
+                "end": "2026-09-12",
+                "complete": false
+              },
+              {
+                "start": "2026-09-13",
+                "end": "2026-09-13",
+                "complete": false
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-14",
+                "complete": false
+              },
+              {
+                "start": "2026-09-15",
+                "end": "2026-09-15",
+                "complete": false
+              },
+              {
+                "start": "2026-09-16",
+                "end": "2026-09-16",
+                "complete": false
+              },
+              {
+                "start": "2026-09-17",
+                "end": "2026-09-17",
+                "complete": false
+              },
+              {
+                "start": "2026-09-18",
+                "end": "2026-09-18",
+                "complete": false
+              },
+              {
+                "start": "2026-09-19",
+                "end": "2026-09-19",
+                "complete": false
+              },
+              {
+                "start": "2026-09-20",
+                "end": "2026-09-20",
+                "complete": false
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-21",
+                "complete": false
+              },
+              {
+                "start": "2026-09-22",
+                "end": "2026-09-22",
+                "complete": false
+              },
+              {
+                "start": "2026-09-23",
+                "end": "2026-09-23",
+                "complete": false
+              },
+              {
+                "start": "2026-09-24",
+                "end": "2026-09-24",
+                "complete": false
+              },
+              {
+                "start": "2026-09-25",
+                "end": "2026-09-25",
+                "complete": true
+              },
+              {
+                "start": "2026-09-26",
+                "end": "2026-09-26",
+                "complete": true
+              },
+              {
+                "start": "2026-09-27",
+                "end": "2026-09-27",
+                "complete": true
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-09-28",
+                "complete": true
+              },
+              {
+                "start": "2026-09-29",
+                "end": "2026-09-29",
+                "complete": true
+              },
+              {
+                "start": "2026-09-30",
+                "end": "2026-09-30",
+                "complete": true
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-01",
+                "complete": true
+              },
+              {
+                "start": "2026-10-02",
+                "end": "2026-10-02",
+                "complete": true
+              },
+              {
+                "start": "2026-10-03",
+                "end": "2026-10-03",
+                "complete": true
+              },
+              {
+                "start": "2026-10-04",
+                "end": "2026-10-04",
+                "complete": true
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-05",
+                "complete": true
+              },
+              {
+                "start": "2026-10-06",
+                "end": "2026-10-06",
+                "complete": true
+              },
+              {
+                "start": "2026-10-07",
+                "end": "2026-10-07",
+                "complete": true
+              },
+              {
+                "start": "2026-10-08",
+                "end": "2026-10-08",
+                "complete": true
+              },
+              {
+                "start": "2026-10-09",
+                "end": "2026-10-09",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "0",
+                  "20",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "0",
+                  "20",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "200",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "0",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "0",
+                  "100",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "0",
+                  "0",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "-130",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0,
+            6,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "scope": "ethereum",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-09-10",
+                "end": "2026-09-10",
+                "complete": false
+              },
+              {
+                "start": "2026-09-11",
+                "end": "2026-09-11",
+                "complete": false
+              },
+              {
+                "start": "2026-09-12",
+                "end": "2026-09-12",
+                "complete": false
+              },
+              {
+                "start": "2026-09-13",
+                "end": "2026-09-13",
+                "complete": false
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-14",
+                "complete": false
+              },
+              {
+                "start": "2026-09-15",
+                "end": "2026-09-15",
+                "complete": false
+              },
+              {
+                "start": "2026-09-16",
+                "end": "2026-09-16",
+                "complete": false
+              },
+              {
+                "start": "2026-09-17",
+                "end": "2026-09-17",
+                "complete": false
+              },
+              {
+                "start": "2026-09-18",
+                "end": "2026-09-18",
+                "complete": false
+              },
+              {
+                "start": "2026-09-19",
+                "end": "2026-09-19",
+                "complete": false
+              },
+              {
+                "start": "2026-09-20",
+                "end": "2026-09-20",
+                "complete": false
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-21",
+                "complete": false
+              },
+              {
+                "start": "2026-09-22",
+                "end": "2026-09-22",
+                "complete": false
+              },
+              {
+                "start": "2026-09-23",
+                "end": "2026-09-23",
+                "complete": false
+              },
+              {
+                "start": "2026-09-24",
+                "end": "2026-09-24",
+                "complete": false
+              },
+              {
+                "start": "2026-09-25",
+                "end": "2026-09-25",
+                "complete": true
+              },
+              {
+                "start": "2026-09-26",
+                "end": "2026-09-26",
+                "complete": true
+              },
+              {
+                "start": "2026-09-27",
+                "end": "2026-09-27",
+                "complete": true
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-09-28",
+                "complete": true
+              },
+              {
+                "start": "2026-09-29",
+                "end": "2026-09-29",
+                "complete": true
+              },
+              {
+                "start": "2026-09-30",
+                "end": "2026-09-30",
+                "complete": true
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-01",
+                "complete": true
+              },
+              {
+                "start": "2026-10-02",
+                "end": "2026-10-02",
+                "complete": true
+              },
+              {
+                "start": "2026-10-03",
+                "end": "2026-10-03",
+                "complete": true
+              },
+              {
+                "start": "2026-10-04",
+                "end": "2026-10-04",
+                "complete": true
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-05",
+                "complete": true
+              },
+              {
+                "start": "2026-10-06",
+                "end": "2026-10-06",
+                "complete": true
+              },
+              {
+                "start": "2026-10-07",
+                "end": "2026-10-07",
+                "complete": true
+              },
+              {
+                "start": "2026-10-08",
+                "end": "2026-10-08",
+                "complete": true
+              },
+              {
+                "start": "2026-10-09",
+                "end": "2026-10-09",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "0",
+                  "20",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "0",
+                  "20",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "200",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "0",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "0",
+                  "100",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "0",
+                  "0",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "-130",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            0,
+            6,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        }
+      ],
+      "issuerVsBridge": [
+        {
+          "scope": "all",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "150",
+              "bridge": "1400",
+              "issuerShare": "9.677419"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "256",
+              "bridge": "620",
+              "issuerShare": "29.223744"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          }
+        },
+        {
+          "scope": "ethereum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "150",
+              "bridge": "1400",
+              "issuerShare": "9.677419"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "256",
+              "bridge": "620",
+              "issuerShare": "29.223744"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          }
+        }
+      ]
+    },
+    "90d": {
+      "from": "2026-07-12",
+      "to": "2026-10-09",
+      "period": "week",
+      "noDataChains": [
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [
+          "ethereum"
+        ],
+        [],
+        [],
+        []
+      ],
+      "supplyByChain": {
+        "level": {
+          "period": "week",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-07-12",
+              "end": "2026-07-12",
+              "complete": false
+            },
+            {
+              "start": "2026-07-13",
+              "end": "2026-07-19",
+              "complete": false
+            },
+            {
+              "start": "2026-07-20",
+              "end": "2026-07-26",
+              "complete": false
+            },
+            {
+              "start": "2026-07-27",
+              "end": "2026-08-02",
+              "complete": false
+            },
+            {
+              "start": "2026-08-03",
+              "end": "2026-08-09",
+              "complete": false
+            },
+            {
+              "start": "2026-08-10",
+              "end": "2026-08-16",
+              "complete": false
+            },
+            {
+              "start": "2026-08-17",
+              "end": "2026-08-23",
+              "complete": false
+            },
+            {
+              "start": "2026-08-24",
+              "end": "2026-08-30",
+              "complete": false
+            },
+            {
+              "start": "2026-08-31",
+              "end": "2026-09-06",
+              "complete": false
+            },
+            {
+              "start": "2026-09-07",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1067",
+                "1339",
+                "1674"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "share": {
+          "period": "week",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-07-12",
+              "end": "2026-07-12",
+              "complete": false
+            },
+            {
+              "start": "2026-07-13",
+              "end": "2026-07-19",
+              "complete": false
+            },
+            {
+              "start": "2026-07-20",
+              "end": "2026-07-26",
+              "complete": false
+            },
+            {
+              "start": "2026-07-27",
+              "end": "2026-08-02",
+              "complete": false
+            },
+            {
+              "start": "2026-08-03",
+              "end": "2026-08-09",
+              "complete": false
+            },
+            {
+              "start": "2026-08-10",
+              "end": "2026-08-16",
+              "complete": false
+            },
+            {
+              "start": "2026-08-17",
+              "end": "2026-08-23",
+              "complete": false
+            },
+            {
+              "start": "2026-08-24",
+              "end": "2026-08-30",
+              "complete": false
+            },
+            {
+              "start": "2026-08-31",
+              "end": "2026-09-06",
+              "complete": false
+            },
+            {
+              "start": "2026-09-07",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "100",
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "total": {
+          "period": "week",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-07-12",
+              "end": "2026-07-12",
+              "complete": false
+            },
+            {
+              "start": "2026-07-13",
+              "end": "2026-07-19",
+              "complete": false
+            },
+            {
+              "start": "2026-07-20",
+              "end": "2026-07-26",
+              "complete": false
+            },
+            {
+              "start": "2026-07-27",
+              "end": "2026-08-02",
+              "complete": false
+            },
+            {
+              "start": "2026-08-03",
+              "end": "2026-08-09",
+              "complete": false
+            },
+            {
+              "start": "2026-08-10",
+              "end": "2026-08-16",
+              "complete": false
+            },
+            {
+              "start": "2026-08-17",
+              "end": "2026-08-23",
+              "complete": false
+            },
+            {
+              "start": "2026-08-24",
+              "end": "2026-08-30",
+              "complete": false
+            },
+            {
+              "start": "2026-08-31",
+              "end": "2026-09-06",
+              "complete": false
+            },
+            {
+              "start": "2026-09-07",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "all",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1067",
+                "1339",
+                "1674"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedLevel": {
+          "period": "week",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-07-12",
+              "end": "2026-07-12",
+              "complete": false
+            },
+            {
+              "start": "2026-07-13",
+              "end": "2026-07-19",
+              "complete": false
+            },
+            {
+              "start": "2026-07-20",
+              "end": "2026-07-26",
+              "complete": false
+            },
+            {
+              "start": "2026-07-27",
+              "end": "2026-08-02",
+              "complete": false
+            },
+            {
+              "start": "2026-08-03",
+              "end": "2026-08-09",
+              "complete": false
+            },
+            {
+              "start": "2026-08-10",
+              "end": "2026-08-16",
+              "complete": false
+            },
+            {
+              "start": "2026-08-17",
+              "end": "2026-08-23",
+              "complete": false
+            },
+            {
+              "start": "2026-08-24",
+              "end": "2026-08-30",
+              "complete": false
+            },
+            {
+              "start": "2026-08-31",
+              "end": "2026-09-06",
+              "complete": false
+            },
+            {
+              "start": "2026-09-07",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1067",
+                "1339",
+                "1674"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedShare": {
+          "period": "week",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-07-12",
+              "end": "2026-07-12",
+              "complete": false
+            },
+            {
+              "start": "2026-07-13",
+              "end": "2026-07-19",
+              "complete": false
+            },
+            {
+              "start": "2026-07-20",
+              "end": "2026-07-26",
+              "complete": false
+            },
+            {
+              "start": "2026-07-27",
+              "end": "2026-08-02",
+              "complete": false
+            },
+            {
+              "start": "2026-08-03",
+              "end": "2026-08-09",
+              "complete": false
+            },
+            {
+              "start": "2026-08-10",
+              "end": "2026-08-16",
+              "complete": false
+            },
+            {
+              "start": "2026-08-17",
+              "end": "2026-08-23",
+              "complete": false
+            },
+            {
+              "start": "2026-08-24",
+              "end": "2026-08-30",
+              "complete": false
+            },
+            {
+              "start": "2026-08-31",
+              "end": "2026-09-06",
+              "complete": false
+            },
+            {
+              "start": "2026-09-07",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "100",
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        }
+      },
+      "drivers": [
+        {
+          "scope": "all",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-07-12",
+                "end": "2026-07-12",
+                "complete": false
+              },
+              {
+                "start": "2026-07-13",
+                "end": "2026-07-19",
+                "complete": false
+              },
+              {
+                "start": "2026-07-20",
+                "end": "2026-07-26",
+                "complete": false
+              },
+              {
+                "start": "2026-07-27",
+                "end": "2026-08-02",
+                "complete": false
+              },
+              {
+                "start": "2026-08-03",
+                "end": "2026-08-09",
+                "complete": false
+              },
+              {
+                "start": "2026-08-10",
+                "end": "2026-08-16",
+                "complete": false
+              },
+              {
+                "start": "2026-08-17",
+                "end": "2026-08-23",
+                "complete": false
+              },
+              {
+                "start": "2026-08-24",
+                "end": "2026-08-30",
+                "complete": false
+              },
+              {
+                "start": "2026-08-31",
+                "end": "2026-09-06",
+                "complete": false
+              },
+              {
+                "start": "2026-09-07",
+                "end": "2026-09-13",
+                "complete": false
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-20",
+                "complete": false
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-27",
+                "complete": false
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-10-04",
+                "complete": true
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "30",
+                  "70",
+                  "50"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "23",
+                  "218",
+                  "15"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "200",
+                  "700",
+                  "500"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "140",
+                  "280",
+                  "200"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "67",
+                  "272",
+                  "335"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            11,
+            35,
+            25
+          ]
+        },
+        {
+          "scope": "ethereum",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-07-12",
+                "end": "2026-07-12",
+                "complete": false
+              },
+              {
+                "start": "2026-07-13",
+                "end": "2026-07-19",
+                "complete": false
+              },
+              {
+                "start": "2026-07-20",
+                "end": "2026-07-26",
+                "complete": false
+              },
+              {
+                "start": "2026-07-27",
+                "end": "2026-08-02",
+                "complete": false
+              },
+              {
+                "start": "2026-08-03",
+                "end": "2026-08-09",
+                "complete": false
+              },
+              {
+                "start": "2026-08-10",
+                "end": "2026-08-16",
+                "complete": false
+              },
+              {
+                "start": "2026-08-17",
+                "end": "2026-08-23",
+                "complete": false
+              },
+              {
+                "start": "2026-08-24",
+                "end": "2026-08-30",
+                "complete": false
+              },
+              {
+                "start": "2026-08-31",
+                "end": "2026-09-06",
+                "complete": false
+              },
+              {
+                "start": "2026-09-07",
+                "end": "2026-09-13",
+                "complete": false
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-20",
+                "complete": false
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-27",
+                "complete": false
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-10-04",
+                "complete": true
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "30",
+                  "70",
+                  "50"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "23",
+                  "218",
+                  "15"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "200",
+                  "700",
+                  "500"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "140",
+                  "280",
+                  "200"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "67",
+                  "272",
+                  "335"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            11,
+            35,
+            25
+          ]
+        }
+      ],
+      "issuerVsBridge": [
+        {
+          "scope": "all",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "150",
+              "bridge": "1400",
+              "issuerShare": "9.677419"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "256",
+              "bridge": "620",
+              "issuerShare": "29.223744"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          }
+        },
+        {
+          "scope": "ethereum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "150",
+              "bridge": "1400",
+              "issuerShare": "9.677419"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "256",
+              "bridge": "620",
+              "issuerShare": "29.223744"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          }
+        }
+      ]
+    },
+    "all": {
+      "from": "2026-09-25",
+      "to": "2026-10-09",
+      "period": "month",
+      "noDataChains": [
+        [],
+        []
+      ],
+      "supplyByChain": {
+        "level": {
+          "period": "month",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "1268",
+                "1674"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "share": {
+          "period": "month",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "total": {
+          "period": "month",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "all",
+              "values": [
+                "1268",
+                "1674"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedLevel": {
+          "period": "month",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "1268",
+                "1674"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedShare": {
+          "period": "month",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        }
+      },
+      "drivers": [
+        {
+          "scope": "all",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-09-25",
+                "end": "2026-09-30",
+                "complete": false
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "60",
+                  "90"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "32",
+                  "224"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "500",
+                  "900"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "260",
+                  "360"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "268",
+                  "406"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            26,
+            45
+          ]
+        },
+        {
+          "scope": "ethereum",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-09-25",
+                "end": "2026-09-30",
+                "complete": false
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "60",
+                  "90"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "32",
+                  "224"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "500",
+                  "900"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "260",
+                  "360"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "268",
+                  "406"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            26,
+            45
+          ]
+        }
+      ],
+      "issuerVsBridge": [
+        {
+          "scope": "all",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "150",
+              "bridge": "1400",
+              "issuerShare": "9.677419"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "256",
+              "bridge": "620",
+              "issuerShare": "29.223744"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          }
+        },
+        {
+          "scope": "ethereum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "150",
+              "bridge": "1400",
+              "issuerShare": "9.677419"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "256",
+              "bridge": "620",
+              "issuerShare": "29.223744"
+            },
+            "count": {
+              "issuer": 15,
+              "bridge": 14,
+              "issuerShare": "51.724138"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "day": {
+    "date": "2026-10-09",
+    "rows": [
+      {
+        "scope": "all",
+        "values": {
+          "issuer_mint": "10",
+          "issuer_burn": "3",
+          "bridge_in": "100",
+          "bridge_out": "40",
+          "net": "67"
+        },
+        "events": 5,
+        "unreconciled": false
+      },
+      {
+        "scope": "ethereum",
+        "values": {
+          "issuer_mint": "10",
+          "issuer_burn": "3",
+          "bridge_in": "100",
+          "bridge_out": "40",
+          "net": "67"
+        },
+        "events": 5,
+        "unreconciled": false
+      }
+    ]
+  },
+  "largestEvents": {
+    "from": "2026-10-03",
+    "to": "2026-10-09",
+    "quality": {
+      "complete": true,
+      "unreconciledDays": [],
+      "operationsComplete": true,
+      "unpairedEvents": 0
+    },
+    "items": [
+      {
+        "id": "ethereum:0x73796e746865746963c9ca51bd33d81a10773e481e82004c42da0b3ced7a93ad:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-09T07:12:00.000Z",
+        "txHash": "0x73796e746865746963c9ca51bd33d81a10773e481e82004c42da0b3ced7a93ad",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963c9ca51bd33d81a10773e481e82004c42da0b3ced7a93ad",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469631175745ed880f78cbdb364a1cf173054545da781cc447a:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-08T07:12:00.000Z",
+        "txHash": "0x73796e7468657469631175745ed880f78cbdb364a1cf173054545da781cc447a",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469631175745ed880f78cbdb364a1cf173054545da781cc447a",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469638f98012de966228f663c4da076631cc3d7641b70128d87:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-07T07:12:00.000Z",
+        "txHash": "0x73796e7468657469638f98012de966228f663c4da076631cc3d7641b70128d87",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469638f98012de966228f663c4da076631cc3d7641b70128d87",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e746865746963471b038e65106dc1120265e366e164a5b7016fa5e6c180:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-06T07:12:00.000Z",
+        "txHash": "0x73796e746865746963471b038e65106dc1120265e366e164a5b7016fa5e6c180",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963471b038e65106dc1120265e366e164a5b7016fa5e6c180",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469636cbe3e434caf6035a918b6f53a1f045fa4ae51f15670b9:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-05T07:12:00.000Z",
+        "txHash": "0x73796e7468657469636cbe3e434caf6035a918b6f53a1f045fa4ae51f15670b9",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469636cbe3e434caf6035a918b6f53a1f045fa4ae51f15670b9",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469636552086cefd79f9b9be802a1a1fb7addd0b35c431bab96:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-04T07:12:00.000Z",
+        "txHash": "0x73796e7468657469636552086cefd79f9b9be802a1a1fb7addd0b35c431bab96",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469636552086cefd79f9b9be802a1a1fb7addd0b35c431bab96",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-03T07:12:00.000Z",
+        "txHash": "0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e746865746963f63856af544095a9dde890d2b4d5a59776b348ebba7168:32",
+        "chain": "ethereum",
+        "flow": "bridge_out",
+        "amount": "40",
+        "time": "2026-10-09T09:36:00.000Z",
+        "txHash": "0x73796e746865746963f63856af544095a9dde890d2b4d5a59776b348ebba7168",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963f63856af544095a9dde890d2b4d5a59776b348ebba7168",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 1,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e746865746963900089b9e67c29d97cd88743803352f38c67b2b4b9809c:32",
+        "chain": "ethereum",
+        "flow": "bridge_out",
+        "amount": "40",
+        "time": "2026-10-08T09:36:00.000Z",
+        "txHash": "0x73796e746865746963900089b9e67c29d97cd88743803352f38c67b2b4b9809c",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963900089b9e67c29d97cd88743803352f38c67b2b4b9809c",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 1,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e74686574696363ce7c44d5cff355e68659141ab1d5dab0fd5b08279337:32",
+        "chain": "ethereum",
+        "flow": "bridge_out",
+        "amount": "40",
+        "time": "2026-10-07T09:36:00.000Z",
+        "txHash": "0x73796e74686574696363ce7c44d5cff355e68659141ab1d5dab0fd5b08279337",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e74686574696363ce7c44d5cff355e68659141ab1d5dab0fd5b08279337",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 1,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469639ac75494afb23c82f8cdf0a84e5bcf25edfafd190f177b:32",
+        "chain": "ethereum",
+        "flow": "bridge_out",
+        "amount": "40",
+        "time": "2026-10-06T09:36:00.000Z",
+        "txHash": "0x73796e7468657469639ac75494afb23c82f8cdf0a84e5bcf25edfafd190f177b",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469639ac75494afb23c82f8cdf0a84e5bcf25edfafd190f177b",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 1,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469631e3a5896d85e810ab48f4c78ef2222adc910d48da76f49:32",
+        "chain": "ethereum",
+        "flow": "bridge_out",
+        "amount": "40",
+        "time": "2026-10-05T09:36:00.000Z",
+        "txHash": "0x73796e7468657469631e3a5896d85e810ab48f4c78ef2222adc910d48da76f49",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469631e3a5896d85e810ab48f4c78ef2222adc910d48da76f49",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 1,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e746865746963602a857abda43f64ed6f20d82faa4e99b254e9f0820c03:32",
+        "chain": "ethereum",
+        "flow": "bridge_out",
+        "amount": "40",
+        "time": "2026-10-04T09:36:00.000Z",
+        "txHash": "0x73796e746865746963602a857abda43f64ed6f20d82faa4e99b254e9f0820c03",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963602a857abda43f64ed6f20d82faa4e99b254e9f0820c03",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 1,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e746865746963afd731a629c5e920a77ed8f745d2a2d766bd8b6d49cd4e:32",
+        "chain": "ethereum",
+        "flow": "bridge_out",
+        "amount": "40",
+        "time": "2026-10-03T09:36:00.000Z",
+        "txHash": "0x73796e746865746963afd731a629c5e920a77ed8f745d2a2d766bd8b6d49cd4e",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963afd731a629c5e920a77ed8f745d2a2d766bd8b6d49cd4e",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 1,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469638a99c4ccb499ce72d665e8185ba4d0fc816336cb05a469:2",
+        "chain": "ethereum",
+        "flow": "issuer_mint",
+        "amount": "10",
+        "time": "2026-10-09T02:24:00.000Z",
+        "txHash": "0x73796e7468657469638a99c4ccb499ce72d665e8185ba4d0fc816336cb05a469",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469638a99c4ccb499ce72d665e8185ba4d0fc816336cb05a469",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": null
+      },
+      {
+        "id": "ethereum:0x73796e746865746963c7ba7b64f69e2f869ff15628642d0774a80326559ed8b2:2",
+        "chain": "ethereum",
+        "flow": "issuer_mint",
+        "amount": "10",
+        "time": "2026-10-08T02:24:00.000Z",
+        "txHash": "0x73796e746865746963c7ba7b64f69e2f869ff15628642d0774a80326559ed8b2",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963c7ba7b64f69e2f869ff15628642d0774a80326559ed8b2",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": null
+      },
+      {
+        "id": "ethereum:0x73796e746865746963b9c34904f9645b03f4e11dc8a6bedc505eb4630cd4de3c:2",
+        "chain": "ethereum",
+        "flow": "issuer_mint",
+        "amount": "10",
+        "time": "2026-10-07T02:24:00.000Z",
+        "txHash": "0x73796e746865746963b9c34904f9645b03f4e11dc8a6bedc505eb4630cd4de3c",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963b9c34904f9645b03f4e11dc8a6bedc505eb4630cd4de3c",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": null
+      },
+      {
+        "id": "ethereum:0x73796e746865746963fc94594b721d1280a7e6eb321d9c827f53e2a13bab89df:2",
+        "chain": "ethereum",
+        "flow": "issuer_mint",
+        "amount": "10",
+        "time": "2026-10-06T02:24:00.000Z",
+        "txHash": "0x73796e746865746963fc94594b721d1280a7e6eb321d9c827f53e2a13bab89df",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963fc94594b721d1280a7e6eb321d9c827f53e2a13bab89df",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": null
+      },
+      {
+        "id": "ethereum:0x73796e7468657469639df658cb69a5e903ce21aae786e85a51f0b18541e6b7ea:2",
+        "chain": "ethereum",
+        "flow": "issuer_mint",
+        "amount": "10",
+        "time": "2026-10-05T02:24:00.000Z",
+        "txHash": "0x73796e7468657469639df658cb69a5e903ce21aae786e85a51f0b18541e6b7ea",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469639df658cb69a5e903ce21aae786e85a51f0b18541e6b7ea",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": null
+      },
+      {
+        "id": "ethereum:0x73796e746865746963bbfc8c1859c16c3015ee89e5715ce2411d3e61b226ecd1:2",
+        "chain": "ethereum",
+        "flow": "issuer_mint",
+        "amount": "10",
+        "time": "2026-10-04T02:24:00.000Z",
+        "txHash": "0x73796e746865746963bbfc8c1859c16c3015ee89e5715ce2411d3e61b226ecd1",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963bbfc8c1859c16c3015ee89e5715ce2411d3e61b226ecd1",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": null
+      }
+    ],
+    "nextCursor": null
+  },
+  "records": [
+    {
+      "kind": "max_supply",
+      "scope": "all",
+      "since": "2026-09-25",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "1674",
+      "day": "2026-10-09"
+    },
+    {
+      "kind": "max_issuer_mint_day",
+      "scope": "all",
+      "since": "2026-09-25",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "20",
+      "day": "2026-09-26"
+    },
+    {
+      "kind": "max_issuer_burn_day",
+      "scope": "all",
+      "since": "2026-09-25",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "200",
+      "day": "2026-10-02"
+    },
+    {
+      "kind": "largest_event",
+      "scope": "all",
+      "since": "2026-09-25",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "200",
+      "day": "2026-10-02",
+      "event": {
+        "id": "ethereum:0x73796e746865746963f2f39962c30329e9b030ee693b56bb05cfd4e4db72e1ae:4",
+        "chain": "ethereum",
+        "flow": "issuer_burn",
+        "amount": "200",
+        "time": "2026-10-02T04:48:00.000Z",
+        "txHash": "0x73796e746865746963f2f39962c30329e9b030ee693b56bb05cfd4e4db72e1ae",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963f2f39962c30329e9b030ee693b56bb05cfd4e4db72e1ae",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": null
+      }
+    },
+    {
+      "kind": "max_supply",
+      "scope": "ethereum",
+      "since": "2026-09-25",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "1674",
+      "day": "2026-10-09"
+    },
+    {
+      "kind": "max_issuer_mint_day",
+      "scope": "ethereum",
+      "since": "2026-09-25",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "20",
+      "day": "2026-09-26"
+    },
+    {
+      "kind": "max_issuer_burn_day",
+      "scope": "ethereum",
+      "since": "2026-09-25",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "200",
+      "day": "2026-10-02"
+    },
+    {
+      "kind": "largest_event",
+      "scope": "ethereum",
+      "since": "2026-09-25",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "200",
+      "day": "2026-10-02",
+      "event": {
+        "id": "ethereum:0x73796e746865746963f2f39962c30329e9b030ee693b56bb05cfd4e4db72e1ae:4",
+        "chain": "ethereum",
+        "flow": "issuer_burn",
+        "amount": "200",
+        "time": "2026-10-02T04:48:00.000Z",
+        "txHash": "0x73796e746865746963f2f39962c30329e9b030ee693b56bb05cfd4e4db72e1ae",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963f2f39962c30329e9b030ee693b56bb05cfd4e4db72e1ae",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": null
+      }
+    }
+  ],
+  "status": {
+    "chains": [
+      {
+        "chain": "ethereum",
+        "state": "ok",
+        "historyStart": "2026-09-25",
+        "lastClosedDay": "2026-10-09",
+        "lastBlock": "106999",
+        "nextDueAt": "2026-10-11T06:00:00.000Z",
+        "lagHours": 6,
+        "lastRun": {
+          "finishedAt": "2026-10-10T06:00:00.000Z",
+          "status": "ok",
+          "toBlock": "106999"
+        },
+        "reconciliation": {
+          "day": "2026-10-09",
+          "supply": "ok",
+          "supplyDiff": "0",
+          "bridge": "ok",
+          "continuity": "ok"
+        },
+        "unreconciledDays": []
+      }
+    ]
+  }
+}

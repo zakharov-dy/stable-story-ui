@@ -1,0 +1,109 @@
+{
+  "from": "2026-08-26",
+  "to": "2026-10-09",
+  "quality": {
+    "complete": true,
+    "unreconciledDays": [],
+    "operationsComplete": true,
+    "unpairedEvents": 0
+  },
+  "items": [
+    {
+      "id": "base:0x73796e746865746963eef61a9f5056580b9b8c8b156adb0ce1d0eb9a8929a04b:4",
+      "chain": "base",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-08-28T04:48:00.000Z",
+      "txHash": "0x73796e746865746963eef61a9f5056580b9b8c8b156adb0ce1d0eb9a8929a04b",
+      "explorerUrl": "https://basescan.org/tx/0x73796e746865746963eef61a9f5056580b9b8c8b156adb0ce1d0eb9a8929a04b",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "arbitrum:0x73796e74686574696388382af5b9f93e745a805eb477af51b935626807798d56:4",
+      "chain": "arbitrum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-08-28T04:48:00.000Z",
+      "txHash": "0x73796e74686574696388382af5b9f93e745a805eb477af51b935626807798d56",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e74686574696388382af5b9f93e745a805eb477af51b935626807798d56",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "ethereum:0x73796e746865746963e9e03eb2330fa08cd15efb2539c42fa761e9b17eb0b0b4:4",
+      "chain": "ethereum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-08-27T04:48:00.000Z",
+      "txHash": "0x73796e746865746963e9e03eb2330fa08cd15efb2539c42fa761e9b17eb0b0b4",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963e9e03eb2330fa08cd15efb2539c42fa761e9b17eb0b0b4",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "base:0x73796e74686574696316da53af25506bee7ce1e511de52fcdd53ac4d1ed15725:4",
+      "chain": "base",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-08-27T04:48:00.000Z",
+      "txHash": "0x73796e74686574696316da53af25506bee7ce1e511de52fcdd53ac4d1ed15725",
+      "explorerUrl": "https://basescan.org/tx/0x73796e74686574696316da53af25506bee7ce1e511de52fcdd53ac4d1ed15725",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "arbitrum:0x73796e74686574696352f69ca0218ad8aaed03c6540c151557c9e5aca4abae49:4",
+      "chain": "arbitrum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-08-27T04:48:00.000Z",
+      "txHash": "0x73796e74686574696352f69ca0218ad8aaed03c6540c151557c9e5aca4abae49",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e74686574696352f69ca0218ad8aaed03c6540c151557c9e5aca4abae49",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "ethereum:0x73796e746865746963b46967259d31636a67729d1f344850857b4a356448e553:4",
+      "chain": "ethereum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-08-26T04:48:00.000Z",
+      "txHash": "0x73796e746865746963b46967259d31636a67729d1f344850857b4a356448e553",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963b46967259d31636a67729d1f344850857b4a356448e553",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "base:0x73796e746865746963ae1501c464fce4aad68d178e608b4bbc7889f26f4d0726:4",
+      "chain": "base",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-08-26T04:48:00.000Z",
+      "txHash": "0x73796e746865746963ae1501c464fce4aad68d178e608b4bbc7889f26f4d0726",
+      "explorerUrl": "https://basescan.org/tx/0x73796e746865746963ae1501c464fce4aad68d178e608b4bbc7889f26f4d0726",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "arbitrum:0x73796e7468657469632f0516a2e3b8a307e64428cca2d7ca8a92a44fbba58ed8:4",
+      "chain": "arbitrum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-08-26T04:48:00.000Z",
+      "txHash": "0x73796e7468657469632f0516a2e3b8a307e64428cca2d7ca8a92a44fbba58ed8",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e7468657469632f0516a2e3b8a307e64428cca2d7ca8a92a44fbba58ed8",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    }
+  ],
+  "nextCursor": null
+}

@@ -1,0 +1,105 @@
+{
+  "period": "month",
+  "unit": "tokens",
+  "buckets": [
+    {
+      "start": "2026-11-15",
+      "end": "2026-11-30",
+      "complete": false
+    },
+    {
+      "start": "2026-12-01",
+      "end": "2026-12-31",
+      "complete": true
+    },
+    {
+      "start": "2027-01-01",
+      "end": "2027-01-31",
+      "complete": false
+    },
+    {
+      "start": "2027-02-01",
+      "end": "2027-02-28",
+      "complete": true
+    },
+    {
+      "start": "2027-03-01",
+      "end": "2027-03-15",
+      "complete": false
+    }
+  ],
+  "lines": [
+    {
+      "key": "ethereum",
+      "chain": "ethereum",
+      "values": [
+        "2072",
+        "4262.456789",
+        "6339.456789",
+        "8081.456789",
+        "9086.456789"
+      ],
+      "unreconciled": []
+    },
+    {
+      "key": "base",
+      "chain": "base",
+      "values": [
+        "4144",
+        "8298",
+        null,
+        "15936",
+        "17946"
+      ],
+      "unreconciled": []
+    },
+    {
+      "key": "arbitrum",
+      "chain": "arbitrum",
+      "values": [
+        "6216",
+        "12447",
+        "18678",
+        "23904",
+        "26919"
+      ],
+      "unreconciled": []
+    },
+    {
+      "key": "optimism",
+      "chain": "optimism",
+      "values": [
+        "8288",
+        "16596",
+        "24904",
+        "31872",
+        "35892"
+      ],
+      "unreconciled": []
+    },
+    {
+      "key": "polygon",
+      "chain": "polygon",
+      "values": [
+        "10360",
+        "20745",
+        "31130",
+        "39840",
+        "44865"
+      ],
+      "unreconciled": []
+    },
+    {
+      "key": "avalanche",
+      "chain": "avalanche",
+      "values": [
+        "12432",
+        "24894",
+        "37356",
+        "47808",
+        "53838"
+      ],
+      "unreconciled": []
+    }
+  ]
+}

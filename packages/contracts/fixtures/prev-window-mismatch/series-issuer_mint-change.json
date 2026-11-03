@@ -1,0 +1,28 @@
+{
+  "period": "week",
+  "unit": "tokens",
+  "buckets": [
+    {
+      "start": "2026-10-03",
+      "end": "2026-10-04",
+      "complete": false
+    },
+    {
+      "start": "2026-10-05",
+      "end": "2026-10-09",
+      "complete": false
+    }
+  ],
+  "lines": [
+    {
+      "key": "all",
+      "values": [
+        "-150",
+        "-60"
+      ],
+      "unreconciled": [
+        1
+      ]
+    }
+  ]
+}

@@ -1,0 +1,337 @@
+{
+  "from": "2026-08-26",
+  "to": "2026-10-08",
+  "quality": {
+    "complete": true,
+    "unreconciledDays": [],
+    "operationsComplete": true,
+    "unpairedEvents": 0
+  },
+  "items": [
+    {
+      "id": "ethereum:0x73796e746865746963afd731a629c5e920a77ed8f745d2a2d766bd8b6d49cd4e:32",
+      "chain": "ethereum",
+      "flow": "bridge_out",
+      "amount": "40",
+      "time": "2026-10-03T09:36:00.000Z",
+      "txHash": "0x73796e746865746963afd731a629c5e920a77ed8f745d2a2d766bd8b6d49cd4e",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963afd731a629c5e920a77ed8f745d2a2d766bd8b6d49cd4e",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 1,
+        "peer": {
+          "domain": 6,
+          "chain": "base",
+          "name": "Base"
+        }
+      }
+    },
+    {
+      "id": "base:0x73796e746865746963c30041cbe9854e8ced403c1beeac5e105437fa0c0a2437:32",
+      "chain": "base",
+      "flow": "bridge_out",
+      "amount": "40",
+      "time": "2026-10-03T09:36:00.000Z",
+      "txHash": "0x73796e746865746963c30041cbe9854e8ced403c1beeac5e105437fa0c0a2437",
+      "explorerUrl": "https://basescan.org/tx/0x73796e746865746963c30041cbe9854e8ced403c1beeac5e105437fa0c0a2437",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 1,
+        "peer": {
+          "domain": 0,
+          "chain": "ethereum",
+          "name": "Ethereum"
+        }
+      }
+    },
+    {
+      "id": "arbitrum:0x73796e74686574696366801dacd1cc6a18b822bcd42fc208decabacc3ccf0d1b:32",
+      "chain": "arbitrum",
+      "flow": "bridge_out",
+      "amount": "40",
+      "time": "2026-10-03T09:36:00.000Z",
+      "txHash": "0x73796e74686574696366801dacd1cc6a18b822bcd42fc208decabacc3ccf0d1b",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e74686574696366801dacd1cc6a18b822bcd42fc208decabacc3ccf0d1b",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 1,
+        "peer": {
+          "domain": 0,
+          "chain": "ethereum",
+          "name": "Ethereum"
+        }
+      }
+    },
+    {
+      "id": "ethereum:0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb:20",
+      "chain": "ethereum",
+      "flow": "bridge_in",
+      "amount": "100",
+      "time": "2026-10-03T07:12:00.000Z",
+      "txHash": "0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 2,
+        "peer": {
+          "domain": 6,
+          "chain": "base",
+          "name": "Base"
+        }
+      }
+    },
+    {
+      "id": "base:0x73796e746865746963b139b0209dd4d085a1d036e4a3e207f108554b50ea7d2e:20",
+      "chain": "base",
+      "flow": "bridge_in",
+      "amount": "100",
+      "time": "2026-10-03T07:12:00.000Z",
+      "txHash": "0x73796e746865746963b139b0209dd4d085a1d036e4a3e207f108554b50ea7d2e",
+      "explorerUrl": "https://basescan.org/tx/0x73796e746865746963b139b0209dd4d085a1d036e4a3e207f108554b50ea7d2e",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 2,
+        "peer": {
+          "domain": 0,
+          "chain": "ethereum",
+          "name": "Ethereum"
+        }
+      }
+    },
+    {
+      "id": "arbitrum:0x73796e746865746963d9fd07aa48cee101a36f62fa007ed7f40a3039cc030a82:20",
+      "chain": "arbitrum",
+      "flow": "bridge_in",
+      "amount": "100",
+      "time": "2026-10-03T07:12:00.000Z",
+      "txHash": "0x73796e746865746963d9fd07aa48cee101a36f62fa007ed7f40a3039cc030a82",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963d9fd07aa48cee101a36f62fa007ed7f40a3039cc030a82",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 2,
+        "peer": {
+          "domain": 0,
+          "chain": "ethereum",
+          "name": "Ethereum"
+        }
+      }
+    },
+    {
+      "id": "ethereum:0x73796e746865746963c810319a7bf48ad710a1976cca7fb574766cf483711f63:4",
+      "chain": "ethereum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-10-03T04:48:00.000Z",
+      "txHash": "0x73796e746865746963c810319a7bf48ad710a1976cca7fb574766cf483711f63",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963c810319a7bf48ad710a1976cca7fb574766cf483711f63",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "base:0x73796e74686574696348ff08f7a2f20dbb96904d52c3d852623a8dea7fb29e1d:4",
+      "chain": "base",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-10-03T04:48:00.000Z",
+      "txHash": "0x73796e74686574696348ff08f7a2f20dbb96904d52c3d852623a8dea7fb29e1d",
+      "explorerUrl": "https://basescan.org/tx/0x73796e74686574696348ff08f7a2f20dbb96904d52c3d852623a8dea7fb29e1d",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "arbitrum:0x73796e746865746963a15099fe52b4bb0ed4296d1806e9a40bb65c974fe9fd04:4",
+      "chain": "arbitrum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-10-03T04:48:00.000Z",
+      "txHash": "0x73796e746865746963a15099fe52b4bb0ed4296d1806e9a40bb65c974fe9fd04",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963a15099fe52b4bb0ed4296d1806e9a40bb65c974fe9fd04",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "ethereum:0x73796e746865746963629be6ebedebbd9ce1524a86a00e333d53a98b79b17903:2",
+      "chain": "ethereum",
+      "flow": "issuer_mint",
+      "amount": "10",
+      "time": "2026-10-03T02:24:00.000Z",
+      "txHash": "0x73796e746865746963629be6ebedebbd9ce1524a86a00e333d53a98b79b17903",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963629be6ebedebbd9ce1524a86a00e333d53a98b79b17903",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "base:0x73796e7468657469637069bed7a84d80831e72abb0456aa0b0adc0cef3fb81c1:2",
+      "chain": "base",
+      "flow": "issuer_mint",
+      "amount": "10",
+      "time": "2026-10-03T02:24:00.000Z",
+      "txHash": "0x73796e7468657469637069bed7a84d80831e72abb0456aa0b0adc0cef3fb81c1",
+      "explorerUrl": "https://basescan.org/tx/0x73796e7468657469637069bed7a84d80831e72abb0456aa0b0adc0cef3fb81c1",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "arbitrum:0x73796e74686574696387310eaebb246eec3c96c9fef76b40dad6bb3494ef8e22:2",
+      "chain": "arbitrum",
+      "flow": "issuer_mint",
+      "amount": "10",
+      "time": "2026-10-03T02:24:00.000Z",
+      "txHash": "0x73796e74686574696387310eaebb246eec3c96c9fef76b40dad6bb3494ef8e22",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e74686574696387310eaebb246eec3c96c9fef76b40dad6bb3494ef8e22",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "ethereum:0x73796e74686574696345975c5de8943334ae9f38b4903f91622543c449f2db6e:32",
+      "chain": "ethereum",
+      "flow": "bridge_out",
+      "amount": "40",
+      "time": "2026-10-02T09:36:00.000Z",
+      "txHash": "0x73796e74686574696345975c5de8943334ae9f38b4903f91622543c449f2db6e",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e74686574696345975c5de8943334ae9f38b4903f91622543c449f2db6e",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 1,
+        "peer": {
+          "domain": 6,
+          "chain": "base",
+          "name": "Base"
+        }
+      }
+    },
+    {
+      "id": "base:0x73796e7468657469633fa4fa6512740f00831a153c6aec0e764e0bf619b25cb5:32",
+      "chain": "base",
+      "flow": "bridge_out",
+      "amount": "40",
+      "time": "2026-10-02T09:36:00.000Z",
+      "txHash": "0x73796e7468657469633fa4fa6512740f00831a153c6aec0e764e0bf619b25cb5",
+      "explorerUrl": "https://basescan.org/tx/0x73796e7468657469633fa4fa6512740f00831a153c6aec0e764e0bf619b25cb5",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 1,
+        "peer": {
+          "domain": 0,
+          "chain": "ethereum",
+          "name": "Ethereum"
+        }
+      }
+    },
+    {
+      "id": "arbitrum:0x73796e74686574696343bbebe719d96d93a519c344c5888d4721c376053e2299:32",
+      "chain": "arbitrum",
+      "flow": "bridge_out",
+      "amount": "40",
+      "time": "2026-10-02T09:36:00.000Z",
+      "txHash": "0x73796e74686574696343bbebe719d96d93a519c344c5888d4721c376053e2299",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e74686574696343bbebe719d96d93a519c344c5888d4721c376053e2299",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 1,
+        "peer": {
+          "domain": 0,
+          "chain": "ethereum",
+          "name": "Ethereum"
+        }
+      }
+    },
+    {
+      "id": "ethereum:0x73796e746865746963fef14a34f573717e33e589c8c0db3184fbfaf4e8c24541:20",
+      "chain": "ethereum",
+      "flow": "bridge_in",
+      "amount": "100",
+      "time": "2026-10-02T07:12:00.000Z",
+      "txHash": "0x73796e746865746963fef14a34f573717e33e589c8c0db3184fbfaf4e8c24541",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963fef14a34f573717e33e589c8c0db3184fbfaf4e8c24541",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 2,
+        "peer": {
+          "domain": 6,
+          "chain": "base",
+          "name": "Base"
+        }
+      }
+    },
+    {
+      "id": "base:0x73796e746865746963e6f22a9a2f001df514cdb886c417ed7eda06e466292d3b:20",
+      "chain": "base",
+      "flow": "bridge_in",
+      "amount": "100",
+      "time": "2026-10-02T07:12:00.000Z",
+      "txHash": "0x73796e746865746963e6f22a9a2f001df514cdb886c417ed7eda06e466292d3b",
+      "explorerUrl": "https://basescan.org/tx/0x73796e746865746963e6f22a9a2f001df514cdb886c417ed7eda06e466292d3b",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 2,
+        "peer": {
+          "domain": 0,
+          "chain": "ethereum",
+          "name": "Ethereum"
+        }
+      }
+    },
+    {
+      "id": "arbitrum:0x73796e7468657469636ba59e45002c05242cb6eeeec14ae90b3fde255955d85f:20",
+      "chain": "arbitrum",
+      "flow": "bridge_in",
+      "amount": "100",
+      "time": "2026-10-02T07:12:00.000Z",
+      "txHash": "0x73796e7468657469636ba59e45002c05242cb6eeeec14ae90b3fde255955d85f",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e7468657469636ba59e45002c05242cb6eeeec14ae90b3fde255955d85f",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": {
+        "version": 2,
+        "peer": {
+          "domain": 0,
+          "chain": "ethereum",
+          "name": "Ethereum"
+        }
+      }
+    },
+    {
+      "id": "ethereum:0x73796e746865746963f2f39962c30329e9b030ee693b56bb05cfd4e4db72e1ae:4",
+      "chain": "ethereum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-10-02T04:48:00.000Z",
+      "txHash": "0x73796e746865746963f2f39962c30329e9b030ee693b56bb05cfd4e4db72e1ae",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963f2f39962c30329e9b030ee693b56bb05cfd4e4db72e1ae",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "base:0x73796e746865746963c4452588ad6a5ac4aa2f96e3403a7117acc613b813c7a7:4",
+      "chain": "base",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-10-02T04:48:00.000Z",
+      "txHash": "0x73796e746865746963c4452588ad6a5ac4aa2f96e3403a7117acc613b813c7a7",
+      "explorerUrl": "https://basescan.org/tx/0x73796e746865746963c4452588ad6a5ac4aa2f96e3403a7117acc613b813c7a7",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    }
+  ],
+  "nextCursor": "WzEsIltcInVzZGNcIixcInRpbWVcIixbXCJhcmJpdHJ1bVwiLFwiYmFzZVwiLFwiZXRoZXJldW1cIl0sW1wiaXNzdWVyX21pbnRcIixcImlzc3Vlcl9idXJuXCIsXCJicmlkZ2VfaW5cIixcImJyaWRnZV9vdXRcIl0sbnVsbCxudWxsXSIsWyIyMDI2LTEwLTAyVDA0OjQ4OjAwLjAwMFoiLCJiYXNlIiwiMHg3Mzc5NmU3NDY4NjU3NDY5NjNjNDQ1MjU4OGFkNmE1YWM0YWEyZjk2ZTM0MDNhNzExN2FjYzYxM2I4MTNjN2E3Iiw0XV0"
+}

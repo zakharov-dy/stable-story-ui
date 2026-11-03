@@ -1,0 +1,22 @@
+node_modules/
+dist/
+.next/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# Next.js build state and generated types.
+apps/web/next-env.d.ts
+# Per-slot agents the browser test writes while it runs and deletes at the end.
+apps/web/.agents/agents/browser-tester-slot*.md
+# The screenshot catalog browser-smoke --shots writes: never committed.
+apps/web/.shots/
+
+# Expo development state and generated native projects.
+apps/mobile/.expo/
+apps/mobile/expo-env.d.ts
+apps/mobile/ios/
+apps/mobile/android/

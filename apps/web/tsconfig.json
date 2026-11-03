@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // Next.js app: bundler resolution and the React JSX runtime; the values Next 16 would otherwise
+    // write into this file on build.
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "types": ["node"],
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "plugins": [{ "name": "next" }]
+  },
+  "include": ["next-env.d.ts", "next.config.ts", "src", "scripts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,61 @@
+{
+  "from": "2026-10-03",
+  "to": "2026-10-09",
+  "quality": {
+    "complete": true,
+    "unreconciledDays": [],
+    "operationsComplete": true,
+    "unpairedEvents": 0
+  },
+  "items": [
+    {
+      "id": "arbitrum:0x73796e746865746963593d03f43b93735b9d88c4b0b64c089d188d269ecf59d7:4",
+      "chain": "arbitrum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-10-04T04:48:00.000Z",
+      "txHash": "0x73796e746865746963593d03f43b93735b9d88c4b0b64c089d188d269ecf59d7",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963593d03f43b93735b9d88c4b0b64c089d188d269ecf59d7",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "ethereum:0x73796e746865746963c810319a7bf48ad710a1976cca7fb574766cf483711f63:4",
+      "chain": "ethereum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-10-03T04:48:00.000Z",
+      "txHash": "0x73796e746865746963c810319a7bf48ad710a1976cca7fb574766cf483711f63",
+      "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963c810319a7bf48ad710a1976cca7fb574766cf483711f63",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "base:0x73796e74686574696348ff08f7a2f20dbb96904d52c3d852623a8dea7fb29e1d:4",
+      "chain": "base",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-10-03T04:48:00.000Z",
+      "txHash": "0x73796e74686574696348ff08f7a2f20dbb96904d52c3d852623a8dea7fb29e1d",
+      "explorerUrl": "https://basescan.org/tx/0x73796e74686574696348ff08f7a2f20dbb96904d52c3d852623a8dea7fb29e1d",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    },
+    {
+      "id": "arbitrum:0x73796e746865746963a15099fe52b4bb0ed4296d1806e9a40bb65c974fe9fd04:4",
+      "chain": "arbitrum",
+      "flow": "issuer_burn",
+      "amount": "3",
+      "time": "2026-10-03T04:48:00.000Z",
+      "txHash": "0x73796e746865746963a15099fe52b4bb0ed4296d1806e9a40bb65c974fe9fd04",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963a15099fe52b4bb0ed4296d1806e9a40bb65c974fe9fd04",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    }
+  ],
+  "nextCursor": null
+}

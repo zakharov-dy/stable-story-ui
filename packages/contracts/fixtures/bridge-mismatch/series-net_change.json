@@ -1,0 +1,22 @@
+{
+  "period": "day",
+  "unit": "tokens",
+  "buckets": [
+    {
+      "start": "2026-10-09",
+      "end": "2026-10-09",
+      "complete": true
+    }
+  ],
+  "lines": [
+    {
+      "key": "all",
+      "values": [
+        "72"
+      ],
+      "unreconciled": [
+        0
+      ]
+    }
+  ]
+}

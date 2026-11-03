@@ -1,0 +1,53 @@
+{
+  "from": "2026-10-09",
+  "to": "2026-10-09",
+  "quality": {
+    "complete": true,
+    "unreconciledDays": [
+      "2026-10-09"
+    ],
+    "operationsComplete": true,
+    "unpairedEvents": 0
+  },
+  "byFlow": [
+    {
+      "flow": "issuer_mint",
+      "events": 1,
+      "ops": 1,
+      "amount": "10",
+      "mean": "10"
+    }
+  ],
+  "buckets": [
+    {
+      "min": "0",
+      "max": "10000",
+      "ops": 1,
+      "amount": "10"
+    },
+    {
+      "min": "10000",
+      "max": "100000",
+      "ops": 0,
+      "amount": "0"
+    },
+    {
+      "min": "100000",
+      "max": "1000000",
+      "ops": 0,
+      "amount": "0"
+    },
+    {
+      "min": "1000000",
+      "max": "10000000",
+      "ops": 0,
+      "amount": "0"
+    },
+    {
+      "min": "10000000",
+      "max": null,
+      "ops": 0,
+      "amount": "0"
+    }
+  ]
+}

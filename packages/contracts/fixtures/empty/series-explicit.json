@@ -1,0 +1,56 @@
+{
+  "period": "day",
+  "unit": "tokens",
+  "buckets": [
+    {
+      "start": "2026-10-03",
+      "end": "2026-10-03",
+      "complete": false
+    },
+    {
+      "start": "2026-10-04",
+      "end": "2026-10-04",
+      "complete": false
+    },
+    {
+      "start": "2026-10-05",
+      "end": "2026-10-05",
+      "complete": false
+    },
+    {
+      "start": "2026-10-06",
+      "end": "2026-10-06",
+      "complete": false
+    },
+    {
+      "start": "2026-10-07",
+      "end": "2026-10-07",
+      "complete": false
+    },
+    {
+      "start": "2026-10-08",
+      "end": "2026-10-08",
+      "complete": false
+    },
+    {
+      "start": "2026-10-09",
+      "end": "2026-10-09",
+      "complete": false
+    }
+  ],
+  "lines": [
+    {
+      "key": "all",
+      "values": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "unreconciled": []
+    }
+  ]
+}

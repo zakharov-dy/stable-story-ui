@@ -1,0 +1,27 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "types": [
+      "react",
+      "react-native"
+    ],
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "app.config.ts",
+    "app",
+    "src",
+    "index.ts",
+    ".rnstorybook/**/*.ts",
+    ".rnstorybook/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "ios",
+    "android"
+  ]
+}

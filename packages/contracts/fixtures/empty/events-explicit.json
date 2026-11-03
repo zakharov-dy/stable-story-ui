@@ -1,0 +1,12 @@
+{
+  "from": "2026-10-03",
+  "to": "2026-10-09",
+  "quality": {
+    "complete": false,
+    "unreconciledDays": [],
+    "operationsComplete": false,
+    "unpairedEvents": 0
+  },
+  "items": [],
+  "nextCursor": null
+}

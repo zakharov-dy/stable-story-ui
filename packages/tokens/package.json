@@ -1,0 +1,13 @@
+{
+  "name": "@app/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/tokens.ts"
+  },
+  "scripts": {
+    "generate": "node tools/generate.ts",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tools/tsconfig.json"
+  }
+}

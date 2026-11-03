@@ -1,0 +1,22 @@
+{
+  "period": "day",
+  "unit": "percent",
+  "buckets": [
+    {
+      "start": "2026-10-09",
+      "end": "2026-10-09",
+      "complete": true
+    }
+  ],
+  "lines": [
+    {
+      "key": "all",
+      "values": [
+        null
+      ],
+      "unreconciled": [
+        0
+      ]
+    }
+  ]
+}

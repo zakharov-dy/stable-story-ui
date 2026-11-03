@@ -1,0 +1,68 @@
+name: CI
+
+# Manual only, like the backend's workflow: the automatic runs stay off while GitHub
+# Actions billing is blocked. Run it on demand with the "Run workflow" button or
+# `gh workflow run CI`. To turn it back on, restore these two triggers:
+#
+#   pull_request:
+#   push:
+#     branches: [main]
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ui-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: typecheck · lint · unit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@v6
+        with:
+          cache: true
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test
+
+  web:
+    name: web build · HTML without JS
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@v6
+        with:
+          cache: true
+      - run: pnpm install --frozen-lockfile
+      # next build without the API, client assets, plain-HTTP pages per mock state, live recovery (apps/web/scripts/check-build.ts).
+      - run: pnpm --filter @app/web check:build
+      # headless Chrome (preinstalled on the runner) over every mock state at 1440 and 375, reusing that build (apps/web/scripts/browser-smoke.ts).
+      - run: pnpm --filter @app/web browser-smoke
+
+  mobile:
+    name: mobile components
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - uses: pnpm/action-setup@v6
+        with:
+          cache: true
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @app/mobile test:rn

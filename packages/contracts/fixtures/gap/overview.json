@@ -1,0 +1,6538 @@
+{
+  "asset": "usdc",
+  "generatedAt": "2026-10-10T06:00:00.000Z",
+  "asOf": "2026-10-09",
+  "historyStart": "2026-10-03",
+  "chains": [
+    {
+      "slug": "ethereum",
+      "name": "Ethereum",
+      "explorerTx": "https://etherscan.io/tx/{hash}"
+    },
+    {
+      "slug": "base",
+      "name": "Base",
+      "explorerTx": "https://basescan.org/tx/{hash}"
+    },
+    {
+      "slug": "arbitrum",
+      "name": "Arbitrum",
+      "explorerTx": "https://arbiscan.io/tx/{hash}"
+    }
+  ],
+  "header": {
+    "days": [
+      "2026-09-10",
+      "2026-09-11",
+      "2026-09-12",
+      "2026-09-13",
+      "2026-09-14",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-19",
+      "2026-09-20",
+      "2026-09-21",
+      "2026-09-22",
+      "2026-09-23",
+      "2026-09-24",
+      "2026-09-25",
+      "2026-09-26",
+      "2026-09-27",
+      "2026-09-28",
+      "2026-09-29",
+      "2026-09-30",
+      "2026-10-01",
+      "2026-10-02",
+      "2026-10-03",
+      "2026-10-04",
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-08",
+      "2026-10-09"
+    ],
+    "supply": {
+      "value": "9499",
+      "changePct": null,
+      "spark": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "8293",
+        "8494",
+        "8695",
+        "8896",
+        "9097",
+        "9298",
+        "9499"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    },
+    "change1d": {
+      "value": "201",
+      "changePct": "2.161755",
+      "spark": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "201",
+        "201",
+        "201",
+        "201",
+        "201",
+        "201"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    },
+    "change7d": {
+      "value": null,
+      "changePct": null,
+      "spark": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": false,
+        "unreconciledDays": [],
+        "operationsComplete": false,
+        "unpairedEvents": 0
+      }
+    },
+    "issuerMinted7d": {
+      "value": "210",
+      "changePct": null,
+      "spark": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "210"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": false,
+        "unreconciledDays": [],
+        "operationsComplete": false,
+        "unpairedEvents": 0
+      }
+    },
+    "issuerBurned7d": {
+      "value": "63",
+      "changePct": null,
+      "spark": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        "63"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": false,
+        "unreconciledDays": [],
+        "operationsComplete": false,
+        "unpairedEvents": 0
+      }
+    }
+  },
+  "views": {
+    "30d": {
+      "from": "2026-09-10",
+      "to": "2026-10-09",
+      "period": "day",
+      "noDataChains": [
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ],
+      "supplyByChain": {
+        "level": {
+          "period": "day",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-09-10",
+              "end": "2026-09-10",
+              "complete": false
+            },
+            {
+              "start": "2026-09-11",
+              "end": "2026-09-11",
+              "complete": false
+            },
+            {
+              "start": "2026-09-12",
+              "end": "2026-09-12",
+              "complete": false
+            },
+            {
+              "start": "2026-09-13",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-14",
+              "complete": false
+            },
+            {
+              "start": "2026-09-15",
+              "end": "2026-09-15",
+              "complete": false
+            },
+            {
+              "start": "2026-09-16",
+              "end": "2026-09-16",
+              "complete": false
+            },
+            {
+              "start": "2026-09-17",
+              "end": "2026-09-17",
+              "complete": false
+            },
+            {
+              "start": "2026-09-18",
+              "end": "2026-09-18",
+              "complete": false
+            },
+            {
+              "start": "2026-09-19",
+              "end": "2026-09-19",
+              "complete": false
+            },
+            {
+              "start": "2026-09-20",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-21",
+              "complete": false
+            },
+            {
+              "start": "2026-09-22",
+              "end": "2026-09-22",
+              "complete": false
+            },
+            {
+              "start": "2026-09-23",
+              "end": "2026-09-23",
+              "complete": false
+            },
+            {
+              "start": "2026-09-24",
+              "end": "2026-09-24",
+              "complete": false
+            },
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-25",
+              "complete": false
+            },
+            {
+              "start": "2026-09-26",
+              "end": "2026-09-26",
+              "complete": false
+            },
+            {
+              "start": "2026-09-27",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-09-28",
+              "complete": false
+            },
+            {
+              "start": "2026-09-29",
+              "end": "2026-09-29",
+              "complete": false
+            },
+            {
+              "start": "2026-09-30",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "complete": false
+            },
+            {
+              "start": "2026-10-02",
+              "end": "2026-10-02",
+              "complete": false
+            },
+            {
+              "start": "2026-10-03",
+              "end": "2026-10-03",
+              "complete": true
+            },
+            {
+              "start": "2026-10-04",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-05",
+              "complete": true
+            },
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-06",
+              "complete": true
+            },
+            {
+              "start": "2026-10-07",
+              "end": "2026-10-07",
+              "complete": true
+            },
+            {
+              "start": "2026-10-08",
+              "end": "2026-10-08",
+              "complete": true
+            },
+            {
+              "start": "2026-10-09",
+              "end": "2026-10-09",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "2072",
+                "2139",
+                "2206",
+                "2273",
+                "2340",
+                "2407",
+                "2474",
+                "2541",
+                "2608",
+                "2675",
+                "2742",
+                "2809",
+                "2876",
+                "2943",
+                "3010",
+                "3077",
+                "3144",
+                "3211",
+                "3278",
+                "3345",
+                "3412",
+                "3479",
+                "3546",
+                "3613",
+                "3680",
+                "3747",
+                "3814",
+                "3881",
+                "3948",
+                "4015"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1067",
+                "1134",
+                "1201",
+                "1268",
+                "1335",
+                "1402",
+                "1469"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "2072",
+                "2139",
+                "2206",
+                "2273",
+                "2340",
+                "2407",
+                "2474",
+                "2541",
+                "2608",
+                "2675",
+                "2742",
+                "2809",
+                "2876",
+                "2943",
+                "3010",
+                "3077",
+                "3144",
+                "3211",
+                "3278",
+                "3345",
+                "3412",
+                "3479",
+                "3546",
+                "3613",
+                "3680",
+                "3747",
+                "3814",
+                "3881",
+                "3948",
+                "4015"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "share": {
+          "period": "day",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-09-10",
+              "end": "2026-09-10",
+              "complete": false
+            },
+            {
+              "start": "2026-09-11",
+              "end": "2026-09-11",
+              "complete": false
+            },
+            {
+              "start": "2026-09-12",
+              "end": "2026-09-12",
+              "complete": false
+            },
+            {
+              "start": "2026-09-13",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-14",
+              "complete": false
+            },
+            {
+              "start": "2026-09-15",
+              "end": "2026-09-15",
+              "complete": false
+            },
+            {
+              "start": "2026-09-16",
+              "end": "2026-09-16",
+              "complete": false
+            },
+            {
+              "start": "2026-09-17",
+              "end": "2026-09-17",
+              "complete": false
+            },
+            {
+              "start": "2026-09-18",
+              "end": "2026-09-18",
+              "complete": false
+            },
+            {
+              "start": "2026-09-19",
+              "end": "2026-09-19",
+              "complete": false
+            },
+            {
+              "start": "2026-09-20",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-21",
+              "complete": false
+            },
+            {
+              "start": "2026-09-22",
+              "end": "2026-09-22",
+              "complete": false
+            },
+            {
+              "start": "2026-09-23",
+              "end": "2026-09-23",
+              "complete": false
+            },
+            {
+              "start": "2026-09-24",
+              "end": "2026-09-24",
+              "complete": false
+            },
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-25",
+              "complete": false
+            },
+            {
+              "start": "2026-09-26",
+              "end": "2026-09-26",
+              "complete": false
+            },
+            {
+              "start": "2026-09-27",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-09-28",
+              "complete": false
+            },
+            {
+              "start": "2026-09-29",
+              "end": "2026-09-29",
+              "complete": false
+            },
+            {
+              "start": "2026-09-30",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "complete": false
+            },
+            {
+              "start": "2026-10-02",
+              "end": "2026-10-02",
+              "complete": false
+            },
+            {
+              "start": "2026-10-03",
+              "end": "2026-10-03",
+              "complete": true
+            },
+            {
+              "start": "2026-10-04",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-05",
+              "complete": true
+            },
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-06",
+              "complete": true
+            },
+            {
+              "start": "2026-10-07",
+              "end": "2026-10-07",
+              "complete": true
+            },
+            {
+              "start": "2026-10-08",
+              "end": "2026-10-08",
+              "complete": true
+            },
+            {
+              "start": "2026-10-09",
+              "end": "2026-10-09",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "43.566864",
+                "43.3247",
+                "43.093732",
+                "42.873201",
+                "42.662416",
+                "42.460744",
+                "42.267607"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "12.866273",
+                "13.3506",
+                "13.812536",
+                "14.253597",
+                "14.675168",
+                "15.078512",
+                "15.464786"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "43.566864",
+                "43.3247",
+                "43.093732",
+                "42.873201",
+                "42.662416",
+                "42.460744",
+                "42.267607"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "total": {
+          "period": "day",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-09-10",
+              "end": "2026-09-10",
+              "complete": false
+            },
+            {
+              "start": "2026-09-11",
+              "end": "2026-09-11",
+              "complete": false
+            },
+            {
+              "start": "2026-09-12",
+              "end": "2026-09-12",
+              "complete": false
+            },
+            {
+              "start": "2026-09-13",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-14",
+              "complete": false
+            },
+            {
+              "start": "2026-09-15",
+              "end": "2026-09-15",
+              "complete": false
+            },
+            {
+              "start": "2026-09-16",
+              "end": "2026-09-16",
+              "complete": false
+            },
+            {
+              "start": "2026-09-17",
+              "end": "2026-09-17",
+              "complete": false
+            },
+            {
+              "start": "2026-09-18",
+              "end": "2026-09-18",
+              "complete": false
+            },
+            {
+              "start": "2026-09-19",
+              "end": "2026-09-19",
+              "complete": false
+            },
+            {
+              "start": "2026-09-20",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-21",
+              "complete": false
+            },
+            {
+              "start": "2026-09-22",
+              "end": "2026-09-22",
+              "complete": false
+            },
+            {
+              "start": "2026-09-23",
+              "end": "2026-09-23",
+              "complete": false
+            },
+            {
+              "start": "2026-09-24",
+              "end": "2026-09-24",
+              "complete": false
+            },
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-25",
+              "complete": false
+            },
+            {
+              "start": "2026-09-26",
+              "end": "2026-09-26",
+              "complete": false
+            },
+            {
+              "start": "2026-09-27",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-09-28",
+              "complete": false
+            },
+            {
+              "start": "2026-09-29",
+              "end": "2026-09-29",
+              "complete": false
+            },
+            {
+              "start": "2026-09-30",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "complete": false
+            },
+            {
+              "start": "2026-10-02",
+              "end": "2026-10-02",
+              "complete": false
+            },
+            {
+              "start": "2026-10-03",
+              "end": "2026-10-03",
+              "complete": true
+            },
+            {
+              "start": "2026-10-04",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-05",
+              "complete": true
+            },
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-06",
+              "complete": true
+            },
+            {
+              "start": "2026-10-07",
+              "end": "2026-10-07",
+              "complete": true
+            },
+            {
+              "start": "2026-10-08",
+              "end": "2026-10-08",
+              "complete": true
+            },
+            {
+              "start": "2026-10-09",
+              "end": "2026-10-09",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "all",
+              "values": [
+                "4144",
+                "4278",
+                "4412",
+                "4546",
+                "4680",
+                "4814",
+                "4948",
+                "5082",
+                "5216",
+                "5350",
+                "5484",
+                "5618",
+                "5752",
+                "5886",
+                "6020",
+                "6154",
+                "6288",
+                "6422",
+                "6556",
+                "6690",
+                "6824",
+                "6958",
+                "7092",
+                "8293",
+                "8494",
+                "8695",
+                "8896",
+                "9097",
+                "9298",
+                "9499"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedLevel": {
+          "period": "day",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-09-10",
+              "end": "2026-09-10",
+              "complete": false
+            },
+            {
+              "start": "2026-09-11",
+              "end": "2026-09-11",
+              "complete": false
+            },
+            {
+              "start": "2026-09-12",
+              "end": "2026-09-12",
+              "complete": false
+            },
+            {
+              "start": "2026-09-13",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-14",
+              "complete": false
+            },
+            {
+              "start": "2026-09-15",
+              "end": "2026-09-15",
+              "complete": false
+            },
+            {
+              "start": "2026-09-16",
+              "end": "2026-09-16",
+              "complete": false
+            },
+            {
+              "start": "2026-09-17",
+              "end": "2026-09-17",
+              "complete": false
+            },
+            {
+              "start": "2026-09-18",
+              "end": "2026-09-18",
+              "complete": false
+            },
+            {
+              "start": "2026-09-19",
+              "end": "2026-09-19",
+              "complete": false
+            },
+            {
+              "start": "2026-09-20",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-21",
+              "complete": false
+            },
+            {
+              "start": "2026-09-22",
+              "end": "2026-09-22",
+              "complete": false
+            },
+            {
+              "start": "2026-09-23",
+              "end": "2026-09-23",
+              "complete": false
+            },
+            {
+              "start": "2026-09-24",
+              "end": "2026-09-24",
+              "complete": false
+            },
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-25",
+              "complete": false
+            },
+            {
+              "start": "2026-09-26",
+              "end": "2026-09-26",
+              "complete": false
+            },
+            {
+              "start": "2026-09-27",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-09-28",
+              "complete": false
+            },
+            {
+              "start": "2026-09-29",
+              "end": "2026-09-29",
+              "complete": false
+            },
+            {
+              "start": "2026-09-30",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "complete": false
+            },
+            {
+              "start": "2026-10-02",
+              "end": "2026-10-02",
+              "complete": false
+            },
+            {
+              "start": "2026-10-03",
+              "end": "2026-10-03",
+              "complete": true
+            },
+            {
+              "start": "2026-10-04",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-05",
+              "complete": true
+            },
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-06",
+              "complete": true
+            },
+            {
+              "start": "2026-10-07",
+              "end": "2026-10-07",
+              "complete": true
+            },
+            {
+              "start": "2026-10-08",
+              "end": "2026-10-08",
+              "complete": true
+            },
+            {
+              "start": "2026-10-09",
+              "end": "2026-10-09",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "2072",
+                "2139",
+                "2206",
+                "2273",
+                "2340",
+                "2407",
+                "2474",
+                "2541",
+                "2608",
+                "2675",
+                "2742",
+                "2809",
+                "2876",
+                "2943",
+                "3010",
+                "3077",
+                "3144",
+                "3211",
+                "3278",
+                "3345",
+                "3412",
+                "3479",
+                "3546",
+                "3613",
+                "3680",
+                "3747",
+                "3814",
+                "3881",
+                "3948",
+                "4015"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "4680",
+                "4814",
+                "4948",
+                "5082",
+                "5216",
+                "5350",
+                "5484"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "4144",
+                "4278",
+                "4412",
+                "4546",
+                "4680",
+                "4814",
+                "4948",
+                "5082",
+                "5216",
+                "5350",
+                "5484",
+                "5618",
+                "5752",
+                "5886",
+                "6020",
+                "6154",
+                "6288",
+                "6422",
+                "6556",
+                "6690",
+                "6824",
+                "6958",
+                "7092",
+                "8293",
+                "8494",
+                "8695",
+                "8896",
+                "9097",
+                "9298",
+                "9499"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedShare": {
+          "period": "day",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-09-10",
+              "end": "2026-09-10",
+              "complete": false
+            },
+            {
+              "start": "2026-09-11",
+              "end": "2026-09-11",
+              "complete": false
+            },
+            {
+              "start": "2026-09-12",
+              "end": "2026-09-12",
+              "complete": false
+            },
+            {
+              "start": "2026-09-13",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-14",
+              "complete": false
+            },
+            {
+              "start": "2026-09-15",
+              "end": "2026-09-15",
+              "complete": false
+            },
+            {
+              "start": "2026-09-16",
+              "end": "2026-09-16",
+              "complete": false
+            },
+            {
+              "start": "2026-09-17",
+              "end": "2026-09-17",
+              "complete": false
+            },
+            {
+              "start": "2026-09-18",
+              "end": "2026-09-18",
+              "complete": false
+            },
+            {
+              "start": "2026-09-19",
+              "end": "2026-09-19",
+              "complete": false
+            },
+            {
+              "start": "2026-09-20",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-21",
+              "complete": false
+            },
+            {
+              "start": "2026-09-22",
+              "end": "2026-09-22",
+              "complete": false
+            },
+            {
+              "start": "2026-09-23",
+              "end": "2026-09-23",
+              "complete": false
+            },
+            {
+              "start": "2026-09-24",
+              "end": "2026-09-24",
+              "complete": false
+            },
+            {
+              "start": "2026-09-25",
+              "end": "2026-09-25",
+              "complete": false
+            },
+            {
+              "start": "2026-09-26",
+              "end": "2026-09-26",
+              "complete": false
+            },
+            {
+              "start": "2026-09-27",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-09-28",
+              "complete": false
+            },
+            {
+              "start": "2026-09-29",
+              "end": "2026-09-29",
+              "complete": false
+            },
+            {
+              "start": "2026-09-30",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-01",
+              "complete": false
+            },
+            {
+              "start": "2026-10-02",
+              "end": "2026-10-02",
+              "complete": false
+            },
+            {
+              "start": "2026-10-03",
+              "end": "2026-10-03",
+              "complete": true
+            },
+            {
+              "start": "2026-10-04",
+              "end": "2026-10-04",
+              "complete": true
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-05",
+              "complete": true
+            },
+            {
+              "start": "2026-10-06",
+              "end": "2026-10-06",
+              "complete": true
+            },
+            {
+              "start": "2026-10-07",
+              "end": "2026-10-07",
+              "complete": true
+            },
+            {
+              "start": "2026-10-08",
+              "end": "2026-10-08",
+              "complete": true
+            },
+            {
+              "start": "2026-10-09",
+              "end": "2026-10-09",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "43.566864",
+                "43.3247",
+                "43.093732",
+                "42.873201",
+                "42.662416",
+                "42.460744",
+                "42.267607"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "56.433136",
+                "56.6753",
+                "56.906268",
+                "57.126799",
+                "57.337584",
+                "57.539256",
+                "57.732393"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        }
+      },
+      "drivers": [
+        {
+          "scope": "all",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-09-10",
+                "end": "2026-09-10",
+                "complete": false
+              },
+              {
+                "start": "2026-09-11",
+                "end": "2026-09-11",
+                "complete": false
+              },
+              {
+                "start": "2026-09-12",
+                "end": "2026-09-12",
+                "complete": false
+              },
+              {
+                "start": "2026-09-13",
+                "end": "2026-09-13",
+                "complete": false
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-14",
+                "complete": false
+              },
+              {
+                "start": "2026-09-15",
+                "end": "2026-09-15",
+                "complete": false
+              },
+              {
+                "start": "2026-09-16",
+                "end": "2026-09-16",
+                "complete": false
+              },
+              {
+                "start": "2026-09-17",
+                "end": "2026-09-17",
+                "complete": false
+              },
+              {
+                "start": "2026-09-18",
+                "end": "2026-09-18",
+                "complete": false
+              },
+              {
+                "start": "2026-09-19",
+                "end": "2026-09-19",
+                "complete": false
+              },
+              {
+                "start": "2026-09-20",
+                "end": "2026-09-20",
+                "complete": false
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-21",
+                "complete": false
+              },
+              {
+                "start": "2026-09-22",
+                "end": "2026-09-22",
+                "complete": false
+              },
+              {
+                "start": "2026-09-23",
+                "end": "2026-09-23",
+                "complete": false
+              },
+              {
+                "start": "2026-09-24",
+                "end": "2026-09-24",
+                "complete": false
+              },
+              {
+                "start": "2026-09-25",
+                "end": "2026-09-25",
+                "complete": false
+              },
+              {
+                "start": "2026-09-26",
+                "end": "2026-09-26",
+                "complete": false
+              },
+              {
+                "start": "2026-09-27",
+                "end": "2026-09-27",
+                "complete": false
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-09-28",
+                "complete": false
+              },
+              {
+                "start": "2026-09-29",
+                "end": "2026-09-29",
+                "complete": false
+              },
+              {
+                "start": "2026-09-30",
+                "end": "2026-09-30",
+                "complete": false
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-01",
+                "complete": false
+              },
+              {
+                "start": "2026-10-02",
+                "end": "2026-10-02",
+                "complete": false
+              },
+              {
+                "start": "2026-10-03",
+                "end": "2026-10-03",
+                "complete": true
+              },
+              {
+                "start": "2026-10-04",
+                "end": "2026-10-04",
+                "complete": true
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-05",
+                "complete": true
+              },
+              {
+                "start": "2026-10-06",
+                "end": "2026-10-06",
+                "complete": true
+              },
+              {
+                "start": "2026-10-07",
+                "end": "2026-10-07",
+                "complete": true
+              },
+              {
+                "start": "2026-10-08",
+                "end": "2026-10-08",
+                "complete": true
+              },
+              {
+                "start": "2026-10-09",
+                "end": "2026-10-09",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "20",
+                  "30",
+                  "30",
+                  "30",
+                  "30",
+                  "30",
+                  "30",
+                  "30"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "6",
+                  "9",
+                  "9",
+                  "9",
+                  "9",
+                  "9",
+                  "9",
+                  "9"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "200",
+                  "300",
+                  "300",
+                  "300",
+                  "300",
+                  "300",
+                  "300",
+                  "300"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "80",
+                  "120",
+                  "120",
+                  "120",
+                  "120",
+                  "120",
+                  "120",
+                  "120"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "134",
+                  "201",
+                  "201",
+                  "201",
+                  "201",
+                  "201",
+                  "201",
+                  "201"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15,
+            15
+          ]
+        },
+        {
+          "scope": "ethereum",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-09-10",
+                "end": "2026-09-10",
+                "complete": true
+              },
+              {
+                "start": "2026-09-11",
+                "end": "2026-09-11",
+                "complete": true
+              },
+              {
+                "start": "2026-09-12",
+                "end": "2026-09-12",
+                "complete": true
+              },
+              {
+                "start": "2026-09-13",
+                "end": "2026-09-13",
+                "complete": true
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-14",
+                "complete": true
+              },
+              {
+                "start": "2026-09-15",
+                "end": "2026-09-15",
+                "complete": true
+              },
+              {
+                "start": "2026-09-16",
+                "end": "2026-09-16",
+                "complete": true
+              },
+              {
+                "start": "2026-09-17",
+                "end": "2026-09-17",
+                "complete": true
+              },
+              {
+                "start": "2026-09-18",
+                "end": "2026-09-18",
+                "complete": true
+              },
+              {
+                "start": "2026-09-19",
+                "end": "2026-09-19",
+                "complete": true
+              },
+              {
+                "start": "2026-09-20",
+                "end": "2026-09-20",
+                "complete": true
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-21",
+                "complete": true
+              },
+              {
+                "start": "2026-09-22",
+                "end": "2026-09-22",
+                "complete": true
+              },
+              {
+                "start": "2026-09-23",
+                "end": "2026-09-23",
+                "complete": true
+              },
+              {
+                "start": "2026-09-24",
+                "end": "2026-09-24",
+                "complete": true
+              },
+              {
+                "start": "2026-09-25",
+                "end": "2026-09-25",
+                "complete": true
+              },
+              {
+                "start": "2026-09-26",
+                "end": "2026-09-26",
+                "complete": true
+              },
+              {
+                "start": "2026-09-27",
+                "end": "2026-09-27",
+                "complete": true
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-09-28",
+                "complete": true
+              },
+              {
+                "start": "2026-09-29",
+                "end": "2026-09-29",
+                "complete": true
+              },
+              {
+                "start": "2026-09-30",
+                "end": "2026-09-30",
+                "complete": true
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-01",
+                "complete": true
+              },
+              {
+                "start": "2026-10-02",
+                "end": "2026-10-02",
+                "complete": true
+              },
+              {
+                "start": "2026-10-03",
+                "end": "2026-10-03",
+                "complete": true
+              },
+              {
+                "start": "2026-10-04",
+                "end": "2026-10-04",
+                "complete": true
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-05",
+                "complete": true
+              },
+              {
+                "start": "2026-10-06",
+                "end": "2026-10-06",
+                "complete": true
+              },
+              {
+                "start": "2026-10-07",
+                "end": "2026-10-07",
+                "complete": true
+              },
+              {
+                "start": "2026-10-08",
+                "end": "2026-10-08",
+                "complete": true
+              },
+              {
+                "start": "2026-10-09",
+                "end": "2026-10-09",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "scope": "base",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-09-10",
+                "end": "2026-09-10",
+                "complete": false
+              },
+              {
+                "start": "2026-09-11",
+                "end": "2026-09-11",
+                "complete": false
+              },
+              {
+                "start": "2026-09-12",
+                "end": "2026-09-12",
+                "complete": false
+              },
+              {
+                "start": "2026-09-13",
+                "end": "2026-09-13",
+                "complete": false
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-14",
+                "complete": false
+              },
+              {
+                "start": "2026-09-15",
+                "end": "2026-09-15",
+                "complete": false
+              },
+              {
+                "start": "2026-09-16",
+                "end": "2026-09-16",
+                "complete": false
+              },
+              {
+                "start": "2026-09-17",
+                "end": "2026-09-17",
+                "complete": false
+              },
+              {
+                "start": "2026-09-18",
+                "end": "2026-09-18",
+                "complete": false
+              },
+              {
+                "start": "2026-09-19",
+                "end": "2026-09-19",
+                "complete": false
+              },
+              {
+                "start": "2026-09-20",
+                "end": "2026-09-20",
+                "complete": false
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-21",
+                "complete": false
+              },
+              {
+                "start": "2026-09-22",
+                "end": "2026-09-22",
+                "complete": false
+              },
+              {
+                "start": "2026-09-23",
+                "end": "2026-09-23",
+                "complete": false
+              },
+              {
+                "start": "2026-09-24",
+                "end": "2026-09-24",
+                "complete": false
+              },
+              {
+                "start": "2026-09-25",
+                "end": "2026-09-25",
+                "complete": false
+              },
+              {
+                "start": "2026-09-26",
+                "end": "2026-09-26",
+                "complete": false
+              },
+              {
+                "start": "2026-09-27",
+                "end": "2026-09-27",
+                "complete": false
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-09-28",
+                "complete": false
+              },
+              {
+                "start": "2026-09-29",
+                "end": "2026-09-29",
+                "complete": false
+              },
+              {
+                "start": "2026-09-30",
+                "end": "2026-09-30",
+                "complete": false
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-01",
+                "complete": false
+              },
+              {
+                "start": "2026-10-02",
+                "end": "2026-10-02",
+                "complete": false
+              },
+              {
+                "start": "2026-10-03",
+                "end": "2026-10-03",
+                "complete": true
+              },
+              {
+                "start": "2026-10-04",
+                "end": "2026-10-04",
+                "complete": true
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-05",
+                "complete": true
+              },
+              {
+                "start": "2026-10-06",
+                "end": "2026-10-06",
+                "complete": true
+              },
+              {
+                "start": "2026-10-07",
+                "end": "2026-10-07",
+                "complete": true
+              },
+              {
+                "start": "2026-10-08",
+                "end": "2026-10-08",
+                "complete": true
+              },
+              {
+                "start": "2026-10-09",
+                "end": "2026-10-09",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "scope": "arbitrum",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-09-10",
+                "end": "2026-09-10",
+                "complete": true
+              },
+              {
+                "start": "2026-09-11",
+                "end": "2026-09-11",
+                "complete": true
+              },
+              {
+                "start": "2026-09-12",
+                "end": "2026-09-12",
+                "complete": true
+              },
+              {
+                "start": "2026-09-13",
+                "end": "2026-09-13",
+                "complete": true
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-14",
+                "complete": true
+              },
+              {
+                "start": "2026-09-15",
+                "end": "2026-09-15",
+                "complete": true
+              },
+              {
+                "start": "2026-09-16",
+                "end": "2026-09-16",
+                "complete": true
+              },
+              {
+                "start": "2026-09-17",
+                "end": "2026-09-17",
+                "complete": true
+              },
+              {
+                "start": "2026-09-18",
+                "end": "2026-09-18",
+                "complete": true
+              },
+              {
+                "start": "2026-09-19",
+                "end": "2026-09-19",
+                "complete": true
+              },
+              {
+                "start": "2026-09-20",
+                "end": "2026-09-20",
+                "complete": true
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-21",
+                "complete": true
+              },
+              {
+                "start": "2026-09-22",
+                "end": "2026-09-22",
+                "complete": true
+              },
+              {
+                "start": "2026-09-23",
+                "end": "2026-09-23",
+                "complete": true
+              },
+              {
+                "start": "2026-09-24",
+                "end": "2026-09-24",
+                "complete": true
+              },
+              {
+                "start": "2026-09-25",
+                "end": "2026-09-25",
+                "complete": true
+              },
+              {
+                "start": "2026-09-26",
+                "end": "2026-09-26",
+                "complete": true
+              },
+              {
+                "start": "2026-09-27",
+                "end": "2026-09-27",
+                "complete": true
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-09-28",
+                "complete": true
+              },
+              {
+                "start": "2026-09-29",
+                "end": "2026-09-29",
+                "complete": true
+              },
+              {
+                "start": "2026-09-30",
+                "end": "2026-09-30",
+                "complete": true
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-01",
+                "complete": true
+              },
+              {
+                "start": "2026-10-02",
+                "end": "2026-10-02",
+                "complete": true
+              },
+              {
+                "start": "2026-10-03",
+                "end": "2026-10-03",
+                "complete": true
+              },
+              {
+                "start": "2026-10-04",
+                "end": "2026-10-04",
+                "complete": true
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-05",
+                "complete": true
+              },
+              {
+                "start": "2026-10-06",
+                "end": "2026-10-06",
+                "complete": true
+              },
+              {
+                "start": "2026-10-07",
+                "end": "2026-10-07",
+                "complete": true
+              },
+              {
+                "start": "2026-10-08",
+                "end": "2026-10-08",
+                "complete": true
+              },
+              {
+                "start": "2026-10-09",
+                "end": "2026-10-09",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10",
+                  "10"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3",
+                  "3"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100",
+                  "100"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40",
+                  "40"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67",
+                  "67"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        }
+      ],
+      "issuerVsBridge": [
+        {
+          "scope": "all",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "670",
+              "bridge": "6700",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 67,
+              "bridge": 67,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "201",
+              "bridge": "2680",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 67,
+              "bridge": 67,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "ethereum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "300",
+              "bridge": "3000",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 30,
+              "bridge": 30,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "90",
+              "bridge": "1200",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 30,
+              "bridge": 30,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "base",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "70",
+              "bridge": "700",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 7,
+              "bridge": 7,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "21",
+              "bridge": "280",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 7,
+              "bridge": 7,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "arbitrum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "300",
+              "bridge": "3000",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 30,
+              "bridge": 30,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "90",
+              "bridge": "1200",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 30,
+              "bridge": 30,
+              "issuerShare": "50"
+            }
+          }
+        }
+      ]
+    },
+    "90d": {
+      "from": "2026-07-12",
+      "to": "2026-10-09",
+      "period": "week",
+      "noDataChains": [
+        [
+          "ethereum",
+          "base",
+          "arbitrum"
+        ],
+        [
+          "ethereum",
+          "base",
+          "arbitrum"
+        ],
+        [
+          "ethereum",
+          "base",
+          "arbitrum"
+        ],
+        [
+          "ethereum",
+          "base",
+          "arbitrum"
+        ],
+        [
+          "ethereum",
+          "base",
+          "arbitrum"
+        ],
+        [
+          "ethereum",
+          "base",
+          "arbitrum"
+        ],
+        [
+          "ethereum",
+          "base",
+          "arbitrum"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        [],
+        []
+      ],
+      "supplyByChain": {
+        "level": {
+          "period": "week",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-07-12",
+              "end": "2026-07-12",
+              "complete": false
+            },
+            {
+              "start": "2026-07-13",
+              "end": "2026-07-19",
+              "complete": false
+            },
+            {
+              "start": "2026-07-20",
+              "end": "2026-07-26",
+              "complete": false
+            },
+            {
+              "start": "2026-07-27",
+              "end": "2026-08-02",
+              "complete": false
+            },
+            {
+              "start": "2026-08-03",
+              "end": "2026-08-09",
+              "complete": false
+            },
+            {
+              "start": "2026-08-10",
+              "end": "2026-08-16",
+              "complete": false
+            },
+            {
+              "start": "2026-08-17",
+              "end": "2026-08-23",
+              "complete": false
+            },
+            {
+              "start": "2026-08-24",
+              "end": "2026-08-30",
+              "complete": false
+            },
+            {
+              "start": "2026-08-31",
+              "end": "2026-09-06",
+              "complete": false
+            },
+            {
+              "start": "2026-09-07",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-10-04",
+              "complete": false
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1335",
+                "1804",
+                "2273",
+                "2742",
+                "3211",
+                "3680",
+                "4015"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1134",
+                "1469"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1335",
+                "1804",
+                "2273",
+                "2742",
+                "3211",
+                "3680",
+                "4015"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "share": {
+          "period": "week",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-07-12",
+              "end": "2026-07-12",
+              "complete": false
+            },
+            {
+              "start": "2026-07-13",
+              "end": "2026-07-19",
+              "complete": false
+            },
+            {
+              "start": "2026-07-20",
+              "end": "2026-07-26",
+              "complete": false
+            },
+            {
+              "start": "2026-07-27",
+              "end": "2026-08-02",
+              "complete": false
+            },
+            {
+              "start": "2026-08-03",
+              "end": "2026-08-09",
+              "complete": false
+            },
+            {
+              "start": "2026-08-10",
+              "end": "2026-08-16",
+              "complete": false
+            },
+            {
+              "start": "2026-08-17",
+              "end": "2026-08-23",
+              "complete": false
+            },
+            {
+              "start": "2026-08-24",
+              "end": "2026-08-30",
+              "complete": false
+            },
+            {
+              "start": "2026-08-31",
+              "end": "2026-09-06",
+              "complete": false
+            },
+            {
+              "start": "2026-09-07",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-10-04",
+              "complete": false
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "43.3247",
+                "42.267607"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "13.3506",
+                "15.464786"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "43.3247",
+                "42.267607"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "total": {
+          "period": "week",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-07-12",
+              "end": "2026-07-12",
+              "complete": false
+            },
+            {
+              "start": "2026-07-13",
+              "end": "2026-07-19",
+              "complete": false
+            },
+            {
+              "start": "2026-07-20",
+              "end": "2026-07-26",
+              "complete": false
+            },
+            {
+              "start": "2026-07-27",
+              "end": "2026-08-02",
+              "complete": false
+            },
+            {
+              "start": "2026-08-03",
+              "end": "2026-08-09",
+              "complete": false
+            },
+            {
+              "start": "2026-08-10",
+              "end": "2026-08-16",
+              "complete": false
+            },
+            {
+              "start": "2026-08-17",
+              "end": "2026-08-23",
+              "complete": false
+            },
+            {
+              "start": "2026-08-24",
+              "end": "2026-08-30",
+              "complete": false
+            },
+            {
+              "start": "2026-08-31",
+              "end": "2026-09-06",
+              "complete": false
+            },
+            {
+              "start": "2026-09-07",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-10-04",
+              "complete": false
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "all",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "2670",
+                "3608",
+                "4546",
+                "5484",
+                "6422",
+                "8494",
+                "9499"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedLevel": {
+          "period": "week",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-07-12",
+              "end": "2026-07-12",
+              "complete": false
+            },
+            {
+              "start": "2026-07-13",
+              "end": "2026-07-19",
+              "complete": false
+            },
+            {
+              "start": "2026-07-20",
+              "end": "2026-07-26",
+              "complete": false
+            },
+            {
+              "start": "2026-07-27",
+              "end": "2026-08-02",
+              "complete": false
+            },
+            {
+              "start": "2026-08-03",
+              "end": "2026-08-09",
+              "complete": false
+            },
+            {
+              "start": "2026-08-10",
+              "end": "2026-08-16",
+              "complete": false
+            },
+            {
+              "start": "2026-08-17",
+              "end": "2026-08-23",
+              "complete": false
+            },
+            {
+              "start": "2026-08-24",
+              "end": "2026-08-30",
+              "complete": false
+            },
+            {
+              "start": "2026-08-31",
+              "end": "2026-09-06",
+              "complete": false
+            },
+            {
+              "start": "2026-09-07",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-10-04",
+              "complete": false
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "1335",
+                "1804",
+                "2273",
+                "2742",
+                "3211",
+                "3680",
+                "4015"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "4814",
+                "5484"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "2670",
+                "3608",
+                "4546",
+                "5484",
+                "6422",
+                "8494",
+                "9499"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedShare": {
+          "period": "week",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-07-12",
+              "end": "2026-07-12",
+              "complete": false
+            },
+            {
+              "start": "2026-07-13",
+              "end": "2026-07-19",
+              "complete": false
+            },
+            {
+              "start": "2026-07-20",
+              "end": "2026-07-26",
+              "complete": false
+            },
+            {
+              "start": "2026-07-27",
+              "end": "2026-08-02",
+              "complete": false
+            },
+            {
+              "start": "2026-08-03",
+              "end": "2026-08-09",
+              "complete": false
+            },
+            {
+              "start": "2026-08-10",
+              "end": "2026-08-16",
+              "complete": false
+            },
+            {
+              "start": "2026-08-17",
+              "end": "2026-08-23",
+              "complete": false
+            },
+            {
+              "start": "2026-08-24",
+              "end": "2026-08-30",
+              "complete": false
+            },
+            {
+              "start": "2026-08-31",
+              "end": "2026-09-06",
+              "complete": false
+            },
+            {
+              "start": "2026-09-07",
+              "end": "2026-09-13",
+              "complete": false
+            },
+            {
+              "start": "2026-09-14",
+              "end": "2026-09-20",
+              "complete": false
+            },
+            {
+              "start": "2026-09-21",
+              "end": "2026-09-27",
+              "complete": false
+            },
+            {
+              "start": "2026-09-28",
+              "end": "2026-10-04",
+              "complete": false
+            },
+            {
+              "start": "2026-10-05",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "50",
+                "50",
+                "50",
+                "50",
+                "50",
+                "43.3247",
+                "42.267607"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "56.6753",
+                "57.732393"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        }
+      },
+      "drivers": [
+        {
+          "scope": "all",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-07-12",
+                "end": "2026-07-12",
+                "complete": false
+              },
+              {
+                "start": "2026-07-13",
+                "end": "2026-07-19",
+                "complete": false
+              },
+              {
+                "start": "2026-07-20",
+                "end": "2026-07-26",
+                "complete": false
+              },
+              {
+                "start": "2026-07-27",
+                "end": "2026-08-02",
+                "complete": false
+              },
+              {
+                "start": "2026-08-03",
+                "end": "2026-08-09",
+                "complete": false
+              },
+              {
+                "start": "2026-08-10",
+                "end": "2026-08-16",
+                "complete": false
+              },
+              {
+                "start": "2026-08-17",
+                "end": "2026-08-23",
+                "complete": false
+              },
+              {
+                "start": "2026-08-24",
+                "end": "2026-08-30",
+                "complete": false
+              },
+              {
+                "start": "2026-08-31",
+                "end": "2026-09-06",
+                "complete": false
+              },
+              {
+                "start": "2026-09-07",
+                "end": "2026-09-13",
+                "complete": false
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-20",
+                "complete": false
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-27",
+                "complete": false
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-10-04",
+                "complete": false
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "100",
+                  "140",
+                  "140",
+                  "140",
+                  "140",
+                  "160",
+                  "150"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "30",
+                  "42",
+                  "42",
+                  "42",
+                  "42",
+                  "48",
+                  "45"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "1000",
+                  "1400",
+                  "1400",
+                  "1400",
+                  "1400",
+                  "1600",
+                  "1500"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "400",
+                  "560",
+                  "560",
+                  "560",
+                  "560",
+                  "640",
+                  "600"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "670",
+                  "938",
+                  "938",
+                  "938",
+                  "938",
+                  "1072",
+                  "1005"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            50,
+            70,
+            70,
+            70,
+            70,
+            80,
+            75
+          ]
+        },
+        {
+          "scope": "ethereum",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-07-12",
+                "end": "2026-07-12",
+                "complete": false
+              },
+              {
+                "start": "2026-07-13",
+                "end": "2026-07-19",
+                "complete": false
+              },
+              {
+                "start": "2026-07-20",
+                "end": "2026-07-26",
+                "complete": false
+              },
+              {
+                "start": "2026-07-27",
+                "end": "2026-08-02",
+                "complete": false
+              },
+              {
+                "start": "2026-08-03",
+                "end": "2026-08-09",
+                "complete": false
+              },
+              {
+                "start": "2026-08-10",
+                "end": "2026-08-16",
+                "complete": false
+              },
+              {
+                "start": "2026-08-17",
+                "end": "2026-08-23",
+                "complete": false
+              },
+              {
+                "start": "2026-08-24",
+                "end": "2026-08-30",
+                "complete": false
+              },
+              {
+                "start": "2026-08-31",
+                "end": "2026-09-06",
+                "complete": true
+              },
+              {
+                "start": "2026-09-07",
+                "end": "2026-09-13",
+                "complete": true
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-20",
+                "complete": true
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-27",
+                "complete": true
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-10-04",
+                "complete": true
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "50",
+                  "70",
+                  "70",
+                  "70",
+                  "70",
+                  "70",
+                  "50"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "15",
+                  "21",
+                  "21",
+                  "21",
+                  "21",
+                  "21",
+                  "15"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "500",
+                  "700",
+                  "700",
+                  "700",
+                  "700",
+                  "700",
+                  "500"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "200",
+                  "280",
+                  "280",
+                  "280",
+                  "280",
+                  "280",
+                  "200"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "335",
+                  "469",
+                  "469",
+                  "469",
+                  "469",
+                  "469",
+                  "335"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            25,
+            35,
+            35,
+            35,
+            35,
+            35,
+            25
+          ]
+        },
+        {
+          "scope": "base",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-07-12",
+                "end": "2026-07-12",
+                "complete": false
+              },
+              {
+                "start": "2026-07-13",
+                "end": "2026-07-19",
+                "complete": false
+              },
+              {
+                "start": "2026-07-20",
+                "end": "2026-07-26",
+                "complete": false
+              },
+              {
+                "start": "2026-07-27",
+                "end": "2026-08-02",
+                "complete": false
+              },
+              {
+                "start": "2026-08-03",
+                "end": "2026-08-09",
+                "complete": false
+              },
+              {
+                "start": "2026-08-10",
+                "end": "2026-08-16",
+                "complete": false
+              },
+              {
+                "start": "2026-08-17",
+                "end": "2026-08-23",
+                "complete": false
+              },
+              {
+                "start": "2026-08-24",
+                "end": "2026-08-30",
+                "complete": false
+              },
+              {
+                "start": "2026-08-31",
+                "end": "2026-09-06",
+                "complete": false
+              },
+              {
+                "start": "2026-09-07",
+                "end": "2026-09-13",
+                "complete": false
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-20",
+                "complete": false
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-27",
+                "complete": false
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-10-04",
+                "complete": false
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "20",
+                  "50"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "6",
+                  "15"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "200",
+                  "500"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "80",
+                  "200"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "134",
+                  "335"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            10,
+            25
+          ]
+        },
+        {
+          "scope": "arbitrum",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-07-12",
+                "end": "2026-07-12",
+                "complete": false
+              },
+              {
+                "start": "2026-07-13",
+                "end": "2026-07-19",
+                "complete": false
+              },
+              {
+                "start": "2026-07-20",
+                "end": "2026-07-26",
+                "complete": false
+              },
+              {
+                "start": "2026-07-27",
+                "end": "2026-08-02",
+                "complete": false
+              },
+              {
+                "start": "2026-08-03",
+                "end": "2026-08-09",
+                "complete": false
+              },
+              {
+                "start": "2026-08-10",
+                "end": "2026-08-16",
+                "complete": false
+              },
+              {
+                "start": "2026-08-17",
+                "end": "2026-08-23",
+                "complete": false
+              },
+              {
+                "start": "2026-08-24",
+                "end": "2026-08-30",
+                "complete": false
+              },
+              {
+                "start": "2026-08-31",
+                "end": "2026-09-06",
+                "complete": true
+              },
+              {
+                "start": "2026-09-07",
+                "end": "2026-09-13",
+                "complete": true
+              },
+              {
+                "start": "2026-09-14",
+                "end": "2026-09-20",
+                "complete": true
+              },
+              {
+                "start": "2026-09-21",
+                "end": "2026-09-27",
+                "complete": true
+              },
+              {
+                "start": "2026-09-28",
+                "end": "2026-10-04",
+                "complete": true
+              },
+              {
+                "start": "2026-10-05",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "50",
+                  "70",
+                  "70",
+                  "70",
+                  "70",
+                  "70",
+                  "50"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "15",
+                  "21",
+                  "21",
+                  "21",
+                  "21",
+                  "21",
+                  "15"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "500",
+                  "700",
+                  "700",
+                  "700",
+                  "700",
+                  "700",
+                  "500"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "200",
+                  "280",
+                  "280",
+                  "280",
+                  "280",
+                  "280",
+                  "200"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  "335",
+                  "469",
+                  "469",
+                  "469",
+                  "469",
+                  "469",
+                  "335"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            25,
+            35,
+            35,
+            35,
+            35,
+            35,
+            25
+          ]
+        }
+      ],
+      "issuerVsBridge": [
+        {
+          "scope": "all",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "970",
+              "bridge": "9700",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 97,
+              "bridge": 97,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "291",
+              "bridge": "3880",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 97,
+              "bridge": 97,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "ethereum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "450",
+              "bridge": "4500",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 45,
+              "bridge": 45,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "135",
+              "bridge": "1800",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 45,
+              "bridge": 45,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "base",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "70",
+              "bridge": "700",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 7,
+              "bridge": 7,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "21",
+              "bridge": "280",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 7,
+              "bridge": 7,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "arbitrum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "450",
+              "bridge": "4500",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 45,
+              "bridge": 45,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "135",
+              "bridge": "1800",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 45,
+              "bridge": 45,
+              "issuerShare": "50"
+            }
+          }
+        }
+      ]
+    },
+    "all": {
+      "from": "2026-08-26",
+      "to": "2026-10-09",
+      "period": "month",
+      "noDataChains": [
+        [
+          "base"
+        ],
+        [
+          "base"
+        ],
+        []
+      ],
+      "supplyByChain": {
+        "level": {
+          "period": "month",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-08-26",
+              "end": "2026-08-31",
+              "complete": false
+            },
+            {
+              "start": "2026-09-01",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "1402",
+                "3412",
+                "4015"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                "1469"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "1402",
+                "3412",
+                "4015"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "share": {
+          "period": "month",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-08-26",
+              "end": "2026-08-31",
+              "complete": false
+            },
+            {
+              "start": "2026-09-01",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "50",
+                "50",
+                "42.267607"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                "15.464786"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "50",
+                "50",
+                "42.267607"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "total": {
+          "period": "month",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-08-26",
+              "end": "2026-08-31",
+              "complete": false
+            },
+            {
+              "start": "2026-09-01",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "all",
+              "values": [
+                "2804",
+                "6824",
+                "9499"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedLevel": {
+          "period": "month",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-08-26",
+              "end": "2026-08-31",
+              "complete": false
+            },
+            {
+              "start": "2026-09-01",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "1402",
+                "3412",
+                "4015"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                "5484"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "2804",
+                "6824",
+                "9499"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedShare": {
+          "period": "month",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-08-26",
+              "end": "2026-08-31",
+              "complete": false
+            },
+            {
+              "start": "2026-09-01",
+              "end": "2026-09-30",
+              "complete": false
+            },
+            {
+              "start": "2026-10-01",
+              "end": "2026-10-09",
+              "complete": false
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "50",
+                "50",
+                "42.267607"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                null,
+                null,
+                "57.732393"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "100",
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        }
+      },
+      "drivers": [
+        {
+          "scope": "all",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-08-26",
+                "end": "2026-08-31",
+                "complete": false
+              },
+              {
+                "start": "2026-09-01",
+                "end": "2026-09-30",
+                "complete": false
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "120",
+                  "600",
+                  "250"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "36",
+                  "180",
+                  "75"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "1200",
+                  "6000",
+                  "2500"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "480",
+                  "2400",
+                  "1000"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "804",
+                  "4020",
+                  "1675"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            60,
+            300,
+            125
+          ]
+        },
+        {
+          "scope": "ethereum",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-08-26",
+                "end": "2026-08-31",
+                "complete": false
+              },
+              {
+                "start": "2026-09-01",
+                "end": "2026-09-30",
+                "complete": true
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "60",
+                  "300",
+                  "90"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "18",
+                  "90",
+                  "27"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "600",
+                  "3000",
+                  "900"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "240",
+                  "1200",
+                  "360"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "402",
+                  "2010",
+                  "603"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            30,
+            150,
+            45
+          ]
+        },
+        {
+          "scope": "base",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-08-26",
+                "end": "2026-08-31",
+                "complete": false
+              },
+              {
+                "start": "2026-09-01",
+                "end": "2026-09-30",
+                "complete": false
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  null,
+                  null,
+                  "70"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  null,
+                  null,
+                  "21"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  null,
+                  null,
+                  "700"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  null,
+                  null,
+                  "280"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  null,
+                  null,
+                  "469"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            null,
+            null,
+            35
+          ]
+        },
+        {
+          "scope": "arbitrum",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-08-26",
+                "end": "2026-08-31",
+                "complete": false
+              },
+              {
+                "start": "2026-09-01",
+                "end": "2026-09-30",
+                "complete": true
+              },
+              {
+                "start": "2026-10-01",
+                "end": "2026-10-09",
+                "complete": false
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "60",
+                  "300",
+                  "90"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "18",
+                  "90",
+                  "27"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "600",
+                  "3000",
+                  "900"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "240",
+                  "1200",
+                  "360"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "402",
+                  "2010",
+                  "603"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            30,
+            150,
+            45
+          ]
+        }
+      ],
+      "issuerVsBridge": [
+        {
+          "scope": "all",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "970",
+              "bridge": "9700",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 97,
+              "bridge": 97,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "291",
+              "bridge": "3880",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 97,
+              "bridge": 97,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "ethereum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "450",
+              "bridge": "4500",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 45,
+              "bridge": 45,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "135",
+              "bridge": "1800",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 45,
+              "bridge": 45,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "base",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "70",
+              "bridge": "700",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 7,
+              "bridge": 7,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "21",
+              "bridge": "280",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 7,
+              "bridge": 7,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "arbitrum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "450",
+              "bridge": "4500",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 45,
+              "bridge": 45,
+              "issuerShare": "50"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "135",
+              "bridge": "1800",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 45,
+              "bridge": 45,
+              "issuerShare": "50"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "day": {
+    "date": "2026-10-09",
+    "rows": [
+      {
+        "scope": "all",
+        "values": {
+          "issuer_mint": "30",
+          "issuer_burn": "9",
+          "bridge_in": "300",
+          "bridge_out": "120",
+          "net": "201"
+        },
+        "events": 15,
+        "unreconciled": false
+      },
+      {
+        "scope": "ethereum",
+        "values": {
+          "issuer_mint": "10",
+          "issuer_burn": "3",
+          "bridge_in": "100",
+          "bridge_out": "40",
+          "net": "67"
+        },
+        "events": 5,
+        "unreconciled": false
+      },
+      {
+        "scope": "base",
+        "values": {
+          "issuer_mint": "10",
+          "issuer_burn": "3",
+          "bridge_in": "100",
+          "bridge_out": "40",
+          "net": "67"
+        },
+        "events": 5,
+        "unreconciled": false
+      },
+      {
+        "scope": "arbitrum",
+        "values": {
+          "issuer_mint": "10",
+          "issuer_burn": "3",
+          "bridge_in": "100",
+          "bridge_out": "40",
+          "net": "67"
+        },
+        "events": 5,
+        "unreconciled": false
+      }
+    ]
+  },
+  "largestEvents": {
+    "from": "2026-10-03",
+    "to": "2026-10-09",
+    "quality": {
+      "complete": true,
+      "unreconciledDays": [],
+      "operationsComplete": true,
+      "unpairedEvents": 0
+    },
+    "items": [
+      {
+        "id": "ethereum:0x73796e746865746963c9ca51bd33d81a10773e481e82004c42da0b3ced7a93ad:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-09T07:12:00.000Z",
+        "txHash": "0x73796e746865746963c9ca51bd33d81a10773e481e82004c42da0b3ced7a93ad",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963c9ca51bd33d81a10773e481e82004c42da0b3ced7a93ad",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "base:0x73796e7468657469631a9b2cd1d7239a2670d410abf029efb557656acff4f7b2:20",
+        "chain": "base",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-09T07:12:00.000Z",
+        "txHash": "0x73796e7468657469631a9b2cd1d7239a2670d410abf029efb557656acff4f7b2",
+        "explorerUrl": "https://basescan.org/tx/0x73796e7468657469631a9b2cd1d7239a2670d410abf029efb557656acff4f7b2",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "arbitrum:0x73796e746865746963c4b654202bc32f5f5566470213265a8a8f524697134ebd:20",
+        "chain": "arbitrum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-09T07:12:00.000Z",
+        "txHash": "0x73796e746865746963c4b654202bc32f5f5566470213265a8a8f524697134ebd",
+        "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963c4b654202bc32f5f5566470213265a8a8f524697134ebd",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469631175745ed880f78cbdb364a1cf173054545da781cc447a:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-08T07:12:00.000Z",
+        "txHash": "0x73796e7468657469631175745ed880f78cbdb364a1cf173054545da781cc447a",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469631175745ed880f78cbdb364a1cf173054545da781cc447a",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "base:0x73796e746865746963369a8d0a84e0ad1ca3ce3db79d3b0a7367030eac3d988c:20",
+        "chain": "base",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-08T07:12:00.000Z",
+        "txHash": "0x73796e746865746963369a8d0a84e0ad1ca3ce3db79d3b0a7367030eac3d988c",
+        "explorerUrl": "https://basescan.org/tx/0x73796e746865746963369a8d0a84e0ad1ca3ce3db79d3b0a7367030eac3d988c",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "arbitrum:0x73796e7468657469637ae7ddd1a6ff746c87b7b9cc95773a0912c8419cacae77:20",
+        "chain": "arbitrum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-08T07:12:00.000Z",
+        "txHash": "0x73796e7468657469637ae7ddd1a6ff746c87b7b9cc95773a0912c8419cacae77",
+        "explorerUrl": "https://arbiscan.io/tx/0x73796e7468657469637ae7ddd1a6ff746c87b7b9cc95773a0912c8419cacae77",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469638f98012de966228f663c4da076631cc3d7641b70128d87:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-07T07:12:00.000Z",
+        "txHash": "0x73796e7468657469638f98012de966228f663c4da076631cc3d7641b70128d87",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469638f98012de966228f663c4da076631cc3d7641b70128d87",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "base:0x73796e7468657469638e4d52083bc837a18f3c927f011a2cdf67f55ad52936f2:20",
+        "chain": "base",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-07T07:12:00.000Z",
+        "txHash": "0x73796e7468657469638e4d52083bc837a18f3c927f011a2cdf67f55ad52936f2",
+        "explorerUrl": "https://basescan.org/tx/0x73796e7468657469638e4d52083bc837a18f3c927f011a2cdf67f55ad52936f2",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "arbitrum:0x73796e74686574696304537756d3b009fb9ee6949725fb755212acde1ffbdfeb:20",
+        "chain": "arbitrum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-07T07:12:00.000Z",
+        "txHash": "0x73796e74686574696304537756d3b009fb9ee6949725fb755212acde1ffbdfeb",
+        "explorerUrl": "https://arbiscan.io/tx/0x73796e74686574696304537756d3b009fb9ee6949725fb755212acde1ffbdfeb",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e746865746963471b038e65106dc1120265e366e164a5b7016fa5e6c180:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-06T07:12:00.000Z",
+        "txHash": "0x73796e746865746963471b038e65106dc1120265e366e164a5b7016fa5e6c180",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963471b038e65106dc1120265e366e164a5b7016fa5e6c180",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "base:0x73796e746865746963e2d0627640e341eef2660377db1c3e10ea7fb9dc4d3ae5:20",
+        "chain": "base",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-06T07:12:00.000Z",
+        "txHash": "0x73796e746865746963e2d0627640e341eef2660377db1c3e10ea7fb9dc4d3ae5",
+        "explorerUrl": "https://basescan.org/tx/0x73796e746865746963e2d0627640e341eef2660377db1c3e10ea7fb9dc4d3ae5",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "arbitrum:0x73796e746865746963d8add30265bbc2fdf25eccb9ebf28a282ad15a9fb7d9ec:20",
+        "chain": "arbitrum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-06T07:12:00.000Z",
+        "txHash": "0x73796e746865746963d8add30265bbc2fdf25eccb9ebf28a282ad15a9fb7d9ec",
+        "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963d8add30265bbc2fdf25eccb9ebf28a282ad15a9fb7d9ec",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469636cbe3e434caf6035a918b6f53a1f045fa4ae51f15670b9:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-05T07:12:00.000Z",
+        "txHash": "0x73796e7468657469636cbe3e434caf6035a918b6f53a1f045fa4ae51f15670b9",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469636cbe3e434caf6035a918b6f53a1f045fa4ae51f15670b9",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "base:0x73796e7468657469632b963b9b6260cdd89f2c7822974ce5c941173a80b72837:20",
+        "chain": "base",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-05T07:12:00.000Z",
+        "txHash": "0x73796e7468657469632b963b9b6260cdd89f2c7822974ce5c941173a80b72837",
+        "explorerUrl": "https://basescan.org/tx/0x73796e7468657469632b963b9b6260cdd89f2c7822974ce5c941173a80b72837",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "arbitrum:0x73796e746865746963d2cbc684693826134c82e74941322a62ebbaaf3defc447:20",
+        "chain": "arbitrum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-05T07:12:00.000Z",
+        "txHash": "0x73796e746865746963d2cbc684693826134c82e74941322a62ebbaaf3defc447",
+        "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963d2cbc684693826134c82e74941322a62ebbaaf3defc447",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e7468657469636552086cefd79f9b9be802a1a1fb7addd0b35c431bab96:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-04T07:12:00.000Z",
+        "txHash": "0x73796e7468657469636552086cefd79f9b9be802a1a1fb7addd0b35c431bab96",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e7468657469636552086cefd79f9b9be802a1a1fb7addd0b35c431bab96",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "base:0x73796e746865746963aaa5cc350a2200003f1f7acaa186c73d963e5e04ceb5c4:20",
+        "chain": "base",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-04T07:12:00.000Z",
+        "txHash": "0x73796e746865746963aaa5cc350a2200003f1f7acaa186c73d963e5e04ceb5c4",
+        "explorerUrl": "https://basescan.org/tx/0x73796e746865746963aaa5cc350a2200003f1f7acaa186c73d963e5e04ceb5c4",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "arbitrum:0x73796e746865746963d812ca717582a29a582f3f52d278a944c2310b0f7086d3:20",
+        "chain": "arbitrum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-04T07:12:00.000Z",
+        "txHash": "0x73796e746865746963d812ca717582a29a582f3f52d278a944c2310b0f7086d3",
+        "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963d812ca717582a29a582f3f52d278a944c2310b0f7086d3",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "ethereum:0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-03T07:12:00.000Z",
+        "txHash": "0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      },
+      {
+        "id": "base:0x73796e746865746963b139b0209dd4d085a1d036e4a3e207f108554b50ea7d2e:20",
+        "chain": "base",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-03T07:12:00.000Z",
+        "txHash": "0x73796e746865746963b139b0209dd4d085a1d036e4a3e207f108554b50ea7d2e",
+        "explorerUrl": "https://basescan.org/tx/0x73796e746865746963b139b0209dd4d085a1d036e4a3e207f108554b50ea7d2e",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      }
+    ],
+    "nextCursor": null
+  },
+  "records": [
+    {
+      "kind": "max_supply",
+      "scope": "all",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "9499",
+      "day": "2026-10-09"
+    },
+    {
+      "kind": "max_issuer_mint_day",
+      "scope": "all",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "30",
+      "day": "2026-10-03"
+    },
+    {
+      "kind": "max_issuer_burn_day",
+      "scope": "all",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "9",
+      "day": "2026-10-03"
+    },
+    {
+      "kind": "largest_event",
+      "scope": "all",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "100",
+      "day": "2026-10-03",
+      "event": {
+        "id": "arbitrum:0x73796e746865746963d9fd07aa48cee101a36f62fa007ed7f40a3039cc030a82:20",
+        "chain": "arbitrum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-03T07:12:00.000Z",
+        "txHash": "0x73796e746865746963d9fd07aa48cee101a36f62fa007ed7f40a3039cc030a82",
+        "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963d9fd07aa48cee101a36f62fa007ed7f40a3039cc030a82",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      }
+    },
+    {
+      "kind": "max_supply",
+      "scope": "ethereum",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "4015",
+      "day": "2026-10-09"
+    },
+    {
+      "kind": "max_issuer_mint_day",
+      "scope": "ethereum",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "10",
+      "day": "2026-10-03"
+    },
+    {
+      "kind": "max_issuer_burn_day",
+      "scope": "ethereum",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "3",
+      "day": "2026-10-03"
+    },
+    {
+      "kind": "largest_event",
+      "scope": "ethereum",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "100",
+      "day": "2026-10-03",
+      "event": {
+        "id": "ethereum:0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb:20",
+        "chain": "ethereum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-03T07:12:00.000Z",
+        "txHash": "0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb",
+        "explorerUrl": "https://etherscan.io/tx/0x73796e746865746963b55b7cc807c0cb88fbdd448ed843d4e1362644f51f5ebb",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 6,
+            "chain": "base",
+            "name": "Base"
+          }
+        }
+      }
+    },
+    {
+      "kind": "max_supply",
+      "scope": "base",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "1469",
+      "day": "2026-10-09"
+    },
+    {
+      "kind": "max_issuer_mint_day",
+      "scope": "base",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "10",
+      "day": "2026-10-03"
+    },
+    {
+      "kind": "max_issuer_burn_day",
+      "scope": "base",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "3",
+      "day": "2026-10-03"
+    },
+    {
+      "kind": "largest_event",
+      "scope": "base",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "100",
+      "day": "2026-10-03",
+      "event": {
+        "id": "base:0x73796e746865746963b139b0209dd4d085a1d036e4a3e207f108554b50ea7d2e:20",
+        "chain": "base",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-03T07:12:00.000Z",
+        "txHash": "0x73796e746865746963b139b0209dd4d085a1d036e4a3e207f108554b50ea7d2e",
+        "explorerUrl": "https://basescan.org/tx/0x73796e746865746963b139b0209dd4d085a1d036e4a3e207f108554b50ea7d2e",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      }
+    },
+    {
+      "kind": "max_supply",
+      "scope": "arbitrum",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "4015",
+      "day": "2026-10-09"
+    },
+    {
+      "kind": "max_issuer_mint_day",
+      "scope": "arbitrum",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "10",
+      "day": "2026-10-03"
+    },
+    {
+      "kind": "max_issuer_burn_day",
+      "scope": "arbitrum",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "3",
+      "day": "2026-10-03"
+    },
+    {
+      "kind": "largest_event",
+      "scope": "arbitrum",
+      "since": "2026-10-03",
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      },
+      "value": "100",
+      "day": "2026-10-03",
+      "event": {
+        "id": "arbitrum:0x73796e746865746963d9fd07aa48cee101a36f62fa007ed7f40a3039cc030a82:20",
+        "chain": "arbitrum",
+        "flow": "bridge_in",
+        "amount": "100",
+        "time": "2026-10-03T07:12:00.000Z",
+        "txHash": "0x73796e746865746963d9fd07aa48cee101a36f62fa007ed7f40a3039cc030a82",
+        "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963d9fd07aa48cee101a36f62fa007ed7f40a3039cc030a82",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      }
+    }
+  ],
+  "status": {
+    "chains": [
+      {
+        "chain": "ethereum",
+        "state": "ok",
+        "historyStart": "2026-08-26",
+        "lastClosedDay": "2026-10-09",
+        "lastBlock": "106999",
+        "nextDueAt": "2026-10-11T06:00:00.000Z",
+        "lagHours": 6,
+        "lastRun": {
+          "finishedAt": "2026-10-10T05:58:16.000Z",
+          "status": "ok",
+          "toBlock": "106999"
+        },
+        "reconciliation": {
+          "day": "2026-10-09",
+          "supply": "ok",
+          "supplyDiff": "0",
+          "bridge": "ok",
+          "continuity": "ok"
+        },
+        "unreconciledDays": []
+      },
+      {
+        "chain": "base",
+        "state": "ok",
+        "historyStart": "2026-10-03",
+        "lastClosedDay": "2026-10-09",
+        "lastBlock": "206999",
+        "nextDueAt": "2026-10-11T06:00:00.000Z",
+        "lagHours": 6,
+        "lastRun": {
+          "finishedAt": "2026-10-10T05:58:30.000Z",
+          "status": "ok",
+          "toBlock": "206999"
+        },
+        "reconciliation": {
+          "day": "2026-10-09",
+          "supply": "ok",
+          "supplyDiff": "0",
+          "bridge": "ok",
+          "continuity": "ok"
+        },
+        "unreconciledDays": []
+      },
+      {
+        "chain": "arbitrum",
+        "state": "ok",
+        "historyStart": "2026-08-26",
+        "lastClosedDay": "2026-10-09",
+        "lastBlock": "306999",
+        "nextDueAt": "2026-10-11T06:00:00.000Z",
+        "lagHours": 6,
+        "lastRun": {
+          "finishedAt": "2026-10-10T06:00:00.000Z",
+          "status": "ok",
+          "toBlock": "306999"
+        },
+        "reconciliation": {
+          "day": "2026-10-09",
+          "supply": "ok",
+          "supplyDiff": "0",
+          "bridge": "ok",
+          "continuity": "ok"
+        },
+        "unreconciledDays": []
+      }
+    ]
+  }
+}

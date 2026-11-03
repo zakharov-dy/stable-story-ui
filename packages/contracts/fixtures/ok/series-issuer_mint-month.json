@@ -1,0 +1,32 @@
+{
+  "period": "month",
+  "unit": "tokens",
+  "buckets": [
+    {
+      "start": "2026-08-26",
+      "end": "2026-08-31",
+      "complete": false
+    },
+    {
+      "start": "2026-09-01",
+      "end": "2026-09-30",
+      "complete": true
+    },
+    {
+      "start": "2026-10-01",
+      "end": "2026-10-09",
+      "complete": false
+    }
+  ],
+  "lines": [
+    {
+      "key": "all",
+      "values": [
+        "180",
+        "900",
+        "66660269.999988"
+      ],
+      "unreconciled": []
+    }
+  ]
+}

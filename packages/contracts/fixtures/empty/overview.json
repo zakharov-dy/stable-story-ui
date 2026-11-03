@@ -1,0 +1,145 @@
+{
+  "asset": "usdc",
+  "generatedAt": "2026-10-10T06:00:00.000Z",
+  "asOf": null,
+  "historyStart": null,
+  "chains": [
+    {
+      "slug": "ethereum",
+      "name": "Ethereum",
+      "explorerTx": "https://etherscan.io/tx/{hash}"
+    },
+    {
+      "slug": "base",
+      "name": "Base",
+      "explorerTx": "https://basescan.org/tx/{hash}"
+    },
+    {
+      "slug": "arbitrum",
+      "name": "Arbitrum",
+      "explorerTx": "https://arbiscan.io/tx/{hash}"
+    }
+  ],
+  "header": {
+    "days": [],
+    "supply": {
+      "value": null,
+      "changePct": null,
+      "spark": [],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": false,
+        "unreconciledDays": [],
+        "operationsComplete": false,
+        "unpairedEvents": 0
+      }
+    },
+    "change1d": {
+      "value": null,
+      "changePct": null,
+      "spark": [],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": false,
+        "unreconciledDays": [],
+        "operationsComplete": false,
+        "unpairedEvents": 0
+      }
+    },
+    "change7d": {
+      "value": null,
+      "changePct": null,
+      "spark": [],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": false,
+        "unreconciledDays": [],
+        "operationsComplete": false,
+        "unpairedEvents": 0
+      }
+    },
+    "issuerMinted7d": {
+      "value": null,
+      "changePct": null,
+      "spark": [],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": false,
+        "unreconciledDays": [],
+        "operationsComplete": false,
+        "unpairedEvents": 0
+      }
+    },
+    "issuerBurned7d": {
+      "value": null,
+      "changePct": null,
+      "spark": [],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": false,
+        "unreconciledDays": [],
+        "operationsComplete": false,
+        "unpairedEvents": 0
+      }
+    }
+  },
+  "views": {
+    "30d": null,
+    "90d": null,
+    "all": null
+  },
+  "day": null,
+  "largestEvents": {
+    "from": null,
+    "to": null,
+    "quality": {
+      "complete": false,
+      "unreconciledDays": [],
+      "operationsComplete": false,
+      "unpairedEvents": 0
+    },
+    "items": [],
+    "nextCursor": null
+  },
+  "records": [],
+  "status": {
+    "chains": [
+      {
+        "chain": "ethereum",
+        "state": "no_data",
+        "historyStart": null,
+        "lastClosedDay": null,
+        "lastBlock": null,
+        "nextDueAt": null,
+        "lagHours": null,
+        "lastRun": null,
+        "reconciliation": null,
+        "unreconciledDays": []
+      },
+      {
+        "chain": "base",
+        "state": "no_data",
+        "historyStart": null,
+        "lastClosedDay": null,
+        "lastBlock": null,
+        "nextDueAt": null,
+        "lagHours": null,
+        "lastRun": null,
+        "reconciliation": null,
+        "unreconciledDays": []
+      },
+      {
+        "chain": "arbitrum",
+        "state": "no_data",
+        "historyStart": null,
+        "lastClosedDay": null,
+        "lastBlock": null,
+        "nextDueAt": null,
+        "lagHours": null,
+        "lastRun": null,
+        "reconciliation": null,
+        "unreconciledDays": []
+      }
+    ]
+  }
+}

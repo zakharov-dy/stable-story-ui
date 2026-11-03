@@ -1,0 +1,12 @@
+{
+  "from": null,
+  "to": null,
+  "quality": {
+    "complete": false,
+    "unreconciledDays": [],
+    "operationsComplete": false,
+    "unpairedEvents": 0
+  },
+  "byFlow": [],
+  "buckets": []
+}

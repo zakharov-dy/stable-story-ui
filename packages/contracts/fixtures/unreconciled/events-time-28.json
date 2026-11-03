@@ -1,0 +1,27 @@
+{
+  "from": "2026-08-26",
+  "to": "2026-10-09",
+  "quality": {
+    "complete": true,
+    "unreconciledDays": [
+      "2026-10-09"
+    ],
+    "operationsComplete": false,
+    "unpairedEvents": 1
+  },
+  "items": [
+    {
+      "id": "arbitrum:0x73796e746865746963874508fa413cd862b1d0d14b1bb67016230b8ba7accd61:2",
+      "chain": "arbitrum",
+      "flow": "issuer_mint",
+      "amount": "10",
+      "time": "2026-08-26T02:24:00.000Z",
+      "txHash": "0x73796e746865746963874508fa413cd862b1d0d14b1bb67016230b8ba7accd61",
+      "explorerUrl": "https://arbiscan.io/tx/0x73796e746865746963874508fa413cd862b1d0d14b1bb67016230b8ba7accd61",
+      "unreconciled": false,
+      "unpaired": false,
+      "bridge": null
+    }
+  ],
+  "nextCursor": null
+}

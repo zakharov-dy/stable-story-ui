@@ -1,0 +1,20 @@
+{
+  "period": "all",
+  "unit": "count",
+  "buckets": [
+    {
+      "start": "2026-09-29",
+      "end": "2026-10-09",
+      "complete": true
+    }
+  ],
+  "lines": [
+    {
+      "key": "all",
+      "values": [
+        21
+      ],
+      "unreconciled": []
+    }
+  ]
+}
