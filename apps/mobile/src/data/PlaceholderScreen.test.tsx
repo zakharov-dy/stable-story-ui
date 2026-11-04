@@ -59,7 +59,7 @@ describe('real contract mock states', () => {
   it('zero chains remains zero, while coverage remains null', async () => {
     const mock = createMockClient('empty');
     const empty = await mock.overview();
-    const zero = Overview.parse({ ...empty, chains: [], status: { ...empty.status, chains: [] } });
+    const zero = Overview.parse({ ...empty, chains: [], status: { ...empty.status, chains: [] }, reconciliation: { ...empty.reconciliation, chains: [], reconciledChains: 0 } });
     await render(probe({ ...mock, overview: () => Promise.resolve(zero) }));
     await expectState('empty');
     expect(screen.getByTestId('overview.chains')).toHaveTextContent('chains: 0');
