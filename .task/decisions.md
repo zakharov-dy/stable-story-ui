@@ -42,3 +42,34 @@
 - Final monthly-axis smoke caught crowding between two month/year labels at 320px with JavaScript disabled. At that stress width only supplied endpoints are shown, while 390px keeps its intermediate labels. This preserves the full labels and avoids truncation.
 - Final stylesheet inspection separated waterfall hatch ink from the bridge bar's patterned fill to avoid a recursive pattern reference. Tooltip dots and chain markers share the same default swatch as the list for slot 11.
 - Added an explicit DOM geometry assertion that the desktop stack plot and chain list fit the first 800px, excluding the mock-only demo banner. This supplements the text overlap checks without image comparisons.
+
+## Implementation review submission
+
+Checked last code commit ac2dfa01cd67abcc3511ca5d7e7e600c9cbe2106, on origin/main caf458e with merged token and reconciliation dependencies. The subsequent verification-record commit changes only this task file.
+
+| Check | Actual exit | Evidence |
+| --- | --- | --- |
+| pnpm install | 0 | Installed the locked workspace dependencies |
+| set -o pipefail; pnpm typecheck / tail -40 | 0 | All workspace typechecks |
+| set -o pipefail; pnpm lint / tail -40 | 0 | ESLint |
+| set -o pipefail; pnpm test --reporter=dot / tail -40 | 0 | 49 files, 1,337 tests passed |
+| AI_AGENT and CLAUDECODE unset, pipefail, pnpm check:build / tail -40 | 0 | Nine mock states, published fake R2, live recovery, client isolation and old-daily HTML/RSC window gate |
+| AI_AGENT and CLAUDECODE unset, pipefail, pnpm browser-smoke / tail -30 | 0 | 30 runs, nine mock states plus published, each at 1280/390/320, eight checks per run |
+| Required LC-06 grep | 1 | No startOfWeek, isoWeek, monthOf or bucketBy in apps/web/src |
+| Required LC-08 grep | 1 | No prohibited copy in apps/web/src |
+| git diff --check | 0 | No whitespace errors |
+
+The `/ tail` notation above records the required shell pipe to tail, with pipefail enabled. Expected negative-case logging from the existing configuration/recovery tests accompanies successful build/unit exits.
+
+Launch evidence
+
+- LC-02. browser-smoke checks API chain order, distinct colours and every chain's disclosed state across the mock matrix. The six-chain long-history case exercises all six registry slots, plus synthetic ten/eleven-chain layout and fallback. The current ordinary mocks have their existing three-chain registry and remain in API order.
+- LC-04. home.test.ts verifies the complete Through date in brand and sticky markup. Sticky visibility, dimensions and synchronized controls are checked in the headless smoke.
+- LC-05. page-html.ts checks list/disclosure state attributes, header/feed quality and operation flags. The hydrated smoke reuses that check, opens the disclosure, verifies lag and retains delayed/unreconciled carriers over their mock states.
+- LC-06. tests check known ALL boundaries around absent layers, null shares versus zero, and server day/week/month resolutions. Native period controls are also exercised without JavaScript. Required grep exits 1.
+- LC-07. check:build's positive and negative window controls pass over source HTML and decoded Flight, including daily column anchors, historical gaps/mismatches and the new waterfall control. Removed split-table controls were replaced rather than silently bypassing all historical controls.
+- LC-08. the visible older-period sentence is asserted once by page-html and checked during period interaction in browser-smoke. Required prohibited-copy grep exits 1.
+
+The final page uses the new ready reconciliation fields. Only the illustrative current-chain fragment of the stamp remains omitted because the contract has no corresponding field. No metric totals are computed on the page. No test file touched by this task exceeds 400 lines. No screenshots, pixel comparison or interactive browser were used.
+
+Review state at submission. Plan round 1 approved. Implementation is now ready for round 1 of its new three-round limit. The outer driver owns PR creation and review execution. Retain .task until final approval, then remove it in its own cleanup commit and push. The final approved report must include the complete verbatim worktree verdict.
