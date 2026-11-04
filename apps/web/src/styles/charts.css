@@ -610,3 +610,6 @@
 
 .chart-x .phone { display: none; }
 @media (max-width: 720px) { .chart-x .phone { display: block; } }
+@media (max-width: 360px) {
+  .chart-x .phone { display: none; }
+}
