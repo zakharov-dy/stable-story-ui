@@ -38,3 +38,19 @@ Fresh `origin/main` of this repository (`zakharov-dy/stable-story-ui`), `pnpm in
 ## Для ревьюера
 
 Major: an existing token name or value changed; a new chain colour indistinguishable from an existing data colour (show the numbers); generated CSS out of sync with `tokens.ts`; a test that passes for the wrong reason. Everything else is minor.
+
+AI review, plan round 1/3 (commandcode deepseek/deepseek-v4.1-flash · high, commit a0bdbe5): plan approved.
+The plan is implementable and grounded in the repository: it reuses the existing WCAG plus CIE76/Machado palette method, correctly finds all four proposed colours below the ΔE 20 bar, and plans additive tokens, regenerated CSS, docs, mobile exposure and the full check sequence. The main open risk is finding four mutually separated replacements; the plan's investigate-then-escalate fallback is appropriate.
+
+Questions from the reviewer:
+- Where will the palette test live? Confirm packages/tokens/tools/ rather than packages/tokens/src/, because the src tsconfig has types: [] and include: ["src"], and confirm the test pins the final four values, the six original chain values, and rounded contrast/minimum-distance expectations.
+- If the mutual-separation search finds no four-colour set, what exact fallback will you present to the coordinator (which constraint is relaxed, with numbers), and will you still deliver four chain tokens?
+- Will the final report name each replaced chain colour with its old and new values and its computed contrast and minimum distances, as the task requires?
+
+Minor (optional, non-blocking):
+- Align the distance bar with the existing test, which rounds deltaE to one decimal before asserting >=20, or document why the planned unrounded >=20 bar is intentionally stricter.
+- List the exact reference set in the plan and test: six chains, five flows, positive/negative plus delayed/unreconciled/unpaired/incomplete, and the other new chain colours; note that color-shade-incomplete shares incomplete's hue.
+- Keep the mobile change to the minimum the task requires: theme.chains currently mirrors the six registry chains, so justify extending it to ten and adding an opacity field, or leave the generic maps untouched and change nothing there.
+- Confirm the first push opens the PR as the task requires, and keep all docs/design.md edits inside the Tokens section without touching the six-slot page rules or any Launch rule.
+
+Implement the plan now. Record decisions and any deviation from the plan, with the reason, in .task/decisions.md. Push when the implementation is ready for review: the same reviewer session reviews it, with a new limit of 3 rounds.
