@@ -13,15 +13,19 @@ const config: ExpoConfig = {
   version: '0.0.0',
   platforms: ['ios', 'android'],
   orientation: 'portrait',
-  ios: { bundleIdentifier: 'stablestory.mobile' },
-  android: { package: 'stablestory.mobile' },
+  icon: './assets/icon.png',
+  ios: { bundleIdentifier: 'stablestory.mobile', userInterfaceStyle: 'dark' },
+  android: {
+    package: 'stablestory.mobile',
+    adaptiveIcon: { foregroundImage: './assets/adaptive-foreground.png', backgroundColor: tokens['color-surface'] },
+  },
   // Public build configuration: never put credentials here.
   extra: { API_MODE: apiMode ?? 'live', API_URL: apiUrl },
   plugins: [
     'expo-router',
     'expo-status-bar',
     'expo-font',
-    ['expo-splash-screen', { backgroundColor: tokens['color-bg'] }],
+    ['expo-splash-screen', { image: './assets/splash.png', imageWidth: 96, backgroundColor: tokens['color-bg'] }],
   ],
 };
 

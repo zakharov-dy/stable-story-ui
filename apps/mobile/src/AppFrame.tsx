@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { Text as NativeText } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { SpaceGrotesk_400Regular } from '@expo-google-fonts/space-grotesk/400Regular';
 import { IBMPlexMono_400Regular } from '@expo-google-fonts/ibm-plex-mono/400Regular';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView, initialWindowMetrics } from 'react-native-safe-area-context';
 import { theme } from './theme/index.ts';
 
 void SplashScreen.preventAutoHideAsync();
@@ -20,8 +21,8 @@ export function AppFrame({ children }: { children: ReactNode }) {
     if (loaded || error) void SplashScreen.hideAsync();
   }, [loaded, error]);
   if (!loaded && !error) return null;
-  return <SafeAreaProvider><SafeAreaView style={{ flex: 1, backgroundColor: theme.colors['color-bg'] }}>
+  return <GestureHandlerRootView style={{ flex: 1 }}><SafeAreaProvider initialMetrics={initialWindowMetrics}><SafeAreaView edges={error ? undefined : ['left', 'right']} style={{ flex: 1, backgroundColor: theme.colors['color-bg'] }}>
     <StatusBar style="light" />
     {error ? <NativeText testID="app.font-error" accessibilityRole="alert" style={{ color: theme.colors['color-text'], fontSize: theme.typeScale.md }}>Fonts could not load. Please restart the app.</NativeText> : children}
-  </SafeAreaView></SafeAreaProvider>;
+  </SafeAreaView></SafeAreaProvider></GestureHandlerRootView>;
 }
