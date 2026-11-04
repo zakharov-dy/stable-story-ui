@@ -136,6 +136,15 @@ export async function checkLaunchInteractions(
 ): Promise<void> {
   await page.evaluate(() => window.scrollTo(0, 0));
   await checkLayout(page);
+  if (page.viewportSize()?.width === 1280 && overview.chains.length === 6) {
+    const fits = await page.evaluate(() => {
+      const top = document.querySelector('.brand-row')!.getBoundingClientRect().top;
+      const plot = document.querySelector('.stack-panel .chart-hover')!.getBoundingClientRect();
+      const list = document.querySelector('.clist')!.getBoundingClientRect();
+      return plot.bottom - top <= 800 && list.bottom - top <= 800;
+    });
+    requireFact(fits, 'the desktop stack plot and chain list fit the first 800px');
+  }
   const rows = page.locator('.crow');
   requireFact(
     (await rows.count()) === overview.chains.length,

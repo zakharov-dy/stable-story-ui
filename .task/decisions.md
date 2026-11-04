@@ -41,3 +41,4 @@
 - ALL axes use supplied bucket dates formatted as month/year. Daily and weekly axes retain short dates, with years at crossing endpoints. A visible supplied peak also contributes to the axis domain so its annotation stays inside the plot. This is geometry, not a derived metric.
 - Final monthly-axis smoke caught crowding between two month/year labels at 320px with JavaScript disabled. At that stress width only supplied endpoints are shown, while 390px keeps its intermediate labels. This preserves the full labels and avoids truncation.
 - Final stylesheet inspection separated waterfall hatch ink from the bridge bar's patterned fill to avoid a recursive pattern reference. Tooltip dots and chain markers share the same default swatch as the list for slot 11.
+- Added an explicit DOM geometry assertion that the desktop stack plot and chain list fit the first 800px, excluding the mock-only demo banner. This supplements the text overlap checks without image comparisons.
