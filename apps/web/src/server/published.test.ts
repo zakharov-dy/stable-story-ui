@@ -217,6 +217,14 @@ describe('storage failure classes', () => {
     await expectUnavailableWithoutSecrets(failure, f.client);
   });
 
+  it('access denied: a code-only denial names the class and key', async () => {
+    const f = await setup();
+    // No `name` override: the inherited 'Error' must not shadow `Code`.
+    f.get.mockRejectedValue(Object.assign(new Error(`denied for ${accessKey}`), { Code: 'AccessDenied' }));
+    const failure: unknown = await f.client.overview().catch((error: unknown) => error);
+    expect((failure as ApiError).message).toBe('Publication storage access denied for "current.json"');
+    await expectUnavailableWithoutSecrets(failure, f.client);
+  });
   it('not found: a 404 names the class, status and document key', async () => {
     const f = await setup();
     f.get.mockImplementation((key: string) =>
@@ -232,12 +240,28 @@ describe('storage failure classes', () => {
     await expectUnavailableWithoutSecrets(failure, f.client);
   });
 
-  it('timeout: an SDK timeout names the class and key', async () => {
+  it('not found: a code-only missing key names the class and key', async () => {
     const f = await setup();
-    f.get.mockRejectedValue(Object.assign(new Error(`socket hang up against ${endpoint}`), { name: 'TimeoutError' }));
+    // No `name` override: the inherited 'Error' must not shadow `Code`.
+    f.get.mockRejectedValue(Object.assign(new Error(`missing ${signature}`), { Code: 'NoSuchKey' }));
     const failure: unknown = await f.client.overview().catch((error: unknown) => error);
-    expect((failure as ApiError).message).toBe('Publication storage read timed out for "current.json"');
+    expect((failure as ApiError).message).toBe('Publication object not found for "current.json"');
     await expectUnavailableWithoutSecrets(failure, f.client);
+  });
+
+  it.each([
+    ['name', Object.assign(new Error('socket hang up'), { name: 'TimeoutError' })],
+    ['code', Object.assign(new Error(`connect ETIMEDOUT ${endpoint}`), { code: 'ETIMEDOUT' })],
+    ['S3 code', Object.assign(new Error('socket was not read from'), { Code: 'RequestTimeout' })],
+    ['status 408', Object.assign(new Error('Request Timeout'), { $metadata: { httpStatusCode: 408 } })],
+    ['status 504', Object.assign(new Error('Gateway Timeout'), { $metadata: { httpStatusCode: 504 } })],
+  ])('timeout (%s): an SDK or HTTP timeout names the class and key', (_label, cause: Error) => {
+    const get = vi.fn((): Promise<Uint8Array | null> => Promise.reject(cause));
+    const client = createPublishedClient(() => ({ get }));
+    return client.overview().catch((error: unknown) => error).then(async (failure: unknown) => {
+      expect((failure as ApiError).message).toBe('Publication storage read timed out for "current.json"');
+      await expectUnavailableWithoutSecrets(failure, client);
+    });
   });
 
   it('other: a 503 names the class, status and key without the response body', async () => {

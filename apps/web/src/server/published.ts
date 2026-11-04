@@ -20,17 +20,19 @@ const notPublished = (): Promise<never> => Promise.reject(new ApiError('http', '
 // or a signed URL, so they are never retained or interpolated.
 const ACCESS_DENIED_NAMES = new Set(['AccessDenied', 'Forbidden', 'InvalidAccessKeyId', 'SignatureDoesNotMatch']);
 const NOT_FOUND_NAMES = new Set(['NoSuchKey', 'NoSuchBucket', 'NotFound']);
-const TIMEOUT_NAMES = new Set(['TimeoutError', 'ETIMEDOUT']);
+const TIMEOUT_NAMES = new Set(['TimeoutError', 'ETIMEDOUT', 'RequestTimeout']);
+const TIMEOUT_STATUSES = new Set([408, 504]);
 
 const errorField = (error: unknown, field: string): unknown => {
   if (typeof error !== 'object' || error === null) return undefined;
   return (error as Record<string, unknown>)[field];
 };
 
+// `code`/`Code` first: every Error inherits the generic name 'Error', which must not shadow them.
 const errorName = (error: unknown): string | null => {
-  for (const field of ['name', 'code', 'Code'] as const) {
+  for (const field of ['code', 'Code', 'name'] as const) {
     const candidate = errorField(error, field);
-    if (typeof candidate === 'string' && candidate !== '') return candidate;
+    if (typeof candidate === 'string' && candidate !== '' && candidate !== 'Error') return candidate;
   }
   return null;
 };
@@ -50,6 +52,8 @@ const errorStatus = (error: unknown): number | null => {
 };
 
 const errorTimedOut = (error: unknown): boolean => {
+  const status = errorStatus(error);
+  if (status !== null && TIMEOUT_STATUSES.has(status)) return true;
   if (error instanceof ApiError) return error.timeout;
   const name = errorName(error);
   return name !== null && TIMEOUT_NAMES.has(name);
