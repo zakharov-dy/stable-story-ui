@@ -1,8 +1,8 @@
 import { Pressable, StyleSheet, View } from 'react-native';
-import { Group, Path, Rect, Skia } from '@shopify/react-native-skia';
+import { Group, Path, Skia } from '@shopify/react-native-skia';
 import type { Overview, OverviewView } from '@app/contracts';
 import {
-  chainInfo, columnWidth, columnX, driverColumns, driverDigits, driverExtent, fractionY, linePath,
+  chainInfo, columnX, driverColumns, driverDigits, driverExtent, fractionY, linePath,
   niceCeil, symmetricFraction, unscale,
 } from '@app/view';
 import { theme } from '../theme/index.ts';
@@ -54,7 +54,6 @@ function DriverPlot({ driver, id, name }: { driver: OverviewView['drivers'][numb
     const zero = () => y(0n);
     const { values } = columns;
     const valid = (index: number) => columns.known[index] === true;
-    const width = columnWidth(frame);
     const lines = linePath(values.net.map((value, index) => valid(index) && value !== null ? { x: columnX(frame, index), y: y(value) } : null));
     const hatch = Array.from({ length: Math.ceil((frame.width + frame.height) / 6) }, (_, index) =>
       `M${index * 6} 0l-${frame.height} ${frame.height}`).join('');
@@ -68,9 +67,6 @@ function DriverPlot({ driver, id, name }: { driver: OverviewView['drivers'][numb
     return {
       grid: ticks.map((value) => ({ y: y(value), label: seriesText.axisSigned(unscale(value, digits)) })),
       marks: <>
-        {columns.known.map((known, index) => known ? null : <Rect key={index}
-          x={columnX(frame, index) - width / 2} y={frame.top} width={width} height={frame.height - frame.top - frame.bottom}
-          color={colors['color-shade-incomplete']} />)}
         {bands.map(({ flow, edge, base }) => {
           const path = bandPath(frame, valid, edge, base);
           if (!path) return null;

@@ -1,6 +1,6 @@
-import { Path, Rect } from '@shopify/react-native-skia';
+import { Path } from '@shopify/react-native-skia';
 import type { Overview, OverviewView } from '@app/contracts';
-import { chainInfo, columnWidth, columnX, fraction, fractionY, levelAxis, linePath, lineValues, scale, sharedExtent, stackFromBoundaries, unscale } from '@app/view';
+import { chainInfo, columnX, fraction, fractionY, levelAxis, linePath, lineValues, scale, sharedExtent, stackFromBoundaries, unscale } from '@app/view';
 import { colors, chainColor, seriesText, tooltip } from '../view.ts';
 import { texts } from '../texts.ts';
 import { bandPath } from './geometry.ts';
@@ -21,14 +21,9 @@ export function SupplyChart({ overview, view }: { overview: Overview; view: Over
     const y = (value: bigint) => fractionY(frame, fraction(value, 0n, axis.top || 1n));
     const totalPath = linePath(totals.map((value, index) => value === null || missing[index] ? null : { x: columnX(frame, index), y: y(value) }));
     const flagged = new Set(level.lines.flatMap((line) => line.unreconciled));
-    const width = columnWidth(frame);
-    const gaps = missing.map((isMissing, index) => isMissing ? <Rect key={index}
-      x={columnX(frame, index) - width / 2} y={frame.top} width={width} height={frame.height - frame.top - frame.bottom}
-      color={colors['color-shade-incomplete']} /> : null);
     return {
       grid: [0n, ...axis.grid].map((value) => ({ y: y(value), label: seriesText.axisSigned(unscale(value, stack.digits)).replace(/^\+/, '') })),
       marks: <>
-        {gaps}
         {lines.map((line, layer) => {
           const upper = tops.get(line.key);
           const lower = level.buckets.map((_, index) => {
