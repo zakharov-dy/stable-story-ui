@@ -1,0 +1,5 @@
+# Decisions
+
+- 2026-11-04: Confirmed the mock `empty` fixture (`packages/contracts/fixtures/empty/overview.json`) has zero `reconciliation.all` counters (`closedDays/events/mismatchedDays/streakDays: 0`, `streakEnd: null`) and `reconciledChains: 0`, so spreading `...empty.reconciliation` with `chains: []` and `reconciledChains: 0` satisfies `reconciliation-invariants.ts` (chain-count match, zero-sum `all`, zero latest-ok count, null-asOf streak). No schema change needed; no `QUESTION:` stop.
+- 2026-11-04: Searched `grep -rn "chains: \[\]" apps packages` plus `Overview.parse|safeParse` in `apps/mobile`, `apps/web`, `packages/view`: the only hand-built `Overview` with a changed `chains` list in the allowed files is `PlaceholderScreen.test.tsx:62`. Contract tests (`query.test.ts`, `schemas.*.test.ts`) already carry consistent `reconciliation` or don't build `Overview`. No other fix needed.
+- 2026-11-04: Kept the test's assertions unchanged (`chains: 0`, `asOf: null`, `empty` state) — only made the fixture schema-valid.
