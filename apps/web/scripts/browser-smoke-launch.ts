@@ -3,75 +3,11 @@ import type { Overview } from '@app/contracts';
 import type { Page } from 'playwright-core';
 import { texts } from '../src/texts.ts';
 import { bucketLabel } from '../src/view.ts';
+import { checkLayout } from './browser-smoke-layout.ts';
 
 const requireFact = (condition: boolean, message: string): void => {
   if (!condition) throw new Error(`home smoke: ${message}`);
 };
-
-/** Inspect actual text rectangles, including wrapped labels and values, at each smoke width. */
-export async function checkLayout(page: Page): Promise<void> {
-  const problems = await page.evaluate(() => {
-    const boxes: { text: string; rect: DOMRect }[] = [];
-    const walker = document.createTreeWalker(
-      document.querySelector('main')!,
-      NodeFilter.SHOW_TEXT,
-    );
-    for (
-      let node = walker.nextNode();
-      node !== null;
-      node = walker.nextNode()
-    ) {
-      const element = node.parentElement;
-      if (
-        element === null ||
-        !(node.textContent ?? '').trim() ||
-        element.closest(
-          'svg, script, .sr, .chart-live, .chart-tooltip, .chart-chip, .sticky, .peak',
-        )
-      )
-        continue;
-      if (
-        !element.checkVisibility({
-          visibilityProperty: true,
-          opacityProperty: true,
-        })
-      )
-        continue;
-      const range = document.createRange();
-      range.selectNodeContents(node);
-      for (const rect of range.getClientRects()) {
-        if (rect.width > 0 && rect.height > 0)
-          boxes.push({ text: node.textContent!.trim(), rect });
-      }
-    }
-    const errors: string[] = [];
-    for (const [index, box] of boxes.entries()) {
-      if (box.rect.left < -1 || box.rect.right > innerWidth + 1)
-        errors.push(`text outside viewport: ${box.text}`);
-      for (const other of boxes.slice(index + 1)) {
-        const width =
-          Math.min(box.rect.right, other.rect.right) -
-          Math.max(box.rect.left, other.rect.left);
-        const height =
-          Math.min(box.rect.bottom, other.rect.bottom) -
-          Math.max(box.rect.top, other.rect.top);
-        if (width > 1 && height > 1)
-          errors.push(`text overlap: ${box.text} / ${other.text}`);
-      }
-    }
-    for (const node of document.querySelectorAll<HTMLElement>('main *')) {
-      if (
-        node.closest('.sr, .chart-live, svg') ||
-        !node.checkVisibility({ visibilityProperty: true })
-      )
-        continue;
-      if (getComputedStyle(node).textOverflow === 'ellipsis')
-        errors.push(`ellipsis: ${node.className}`);
-    }
-    return errors.slice(0, 12);
-  });
-  requireFact(problems.length === 0, problems.join('; '));
-}
 
 async function chainGrowth(page: Page): Promise<void> {
   await page.evaluate(() => {
@@ -138,12 +74,19 @@ export async function checkLaunchInteractions(
   await checkLayout(page);
   if (page.viewportSize()?.width === 1280 && overview.chains.length === 6) {
     const fits = await page.evaluate(() => {
-      const top = document.querySelector('.brand-row')!.getBoundingClientRect().top;
-      const plot = document.querySelector('.stack-panel .chart-hover')!.getBoundingClientRect();
+      const top = document
+        .querySelector('.brand-row')!
+        .getBoundingClientRect().top;
+      const plot = document
+        .querySelector('.stack-panel .chart-hover')!
+        .getBoundingClientRect();
       const list = document.querySelector('.clist')!.getBoundingClientRect();
       return plot.bottom - top <= 800 && list.bottom - top <= 800;
     });
-    requireFact(fits, 'the desktop stack plot and chain list fit the first 800px');
+    requireFact(
+      fits,
+      'the desktop stack plot and chain list fit the first 800px',
+    );
   }
   const rows = page.locator('.crow');
   requireFact(
@@ -207,6 +150,26 @@ export async function checkLaunchInteractions(
       .check({ force: true });
     const frame = section.locator('.chart-frame.level');
     const plot = frame.locator('.chart-hover');
+    const mapped = await section.locator('.chart-layer').evaluateAll(
+      (layers, chains) =>
+        layers.every((layer) => {
+          const expected =
+            chains.findIndex(
+              (chain) => chain.slug === layer.getAttribute('data-chain'),
+            ) + 1;
+          const row = document.querySelector(
+            `.crow[data-chain-index="${expected}"]`,
+          );
+          return (
+            layer.getAttribute('data-chain-index') === String(expected) &&
+            row !== null &&
+            getComputedStyle(layer).getPropertyValue('--chain-color') ===
+              getComputedStyle(row).getPropertyValue('--chain-color')
+          );
+        }),
+      overview.chains,
+    );
+    requireFact(mapped, 'stack identity and colour follow registry order');
     await plot.focus();
     await plot.press('End');
     requireFact(
@@ -302,11 +265,24 @@ export async function checkLaunchInteractions(
   await page
     .locator('input[name="period"][value="30d"]')
     .check({ force: true });
-  await rows.first().hover();
-  requireFact(
-    (await page.locator('.chart-layer.dimmed').count()) > 0,
-    'row hover dims other layers',
-  );
+  for (const [index, chain] of overview.chains.entries()) {
+    await rows.nth(index).hover();
+    const matched = await page
+      .locator('.chart-layer')
+      .evaluateAll(
+        (layers, slug) =>
+          layers.every(
+            (layer) =>
+              layer.classList.contains('dimmed') ===
+              (layer.getAttribute('data-chain') !== slug),
+          ),
+        chain.slug,
+      );
+    requireFact(
+      matched,
+      `hover dims exactly the other layers for ${chain.slug}`,
+    );
+  }
   const opacity = await page
     .locator('.chart-layer.dimmed')
     .first()

@@ -14,9 +14,9 @@ The monument is 128 pixels on desktop and 64 on phones. Section headings use the
 
 ## Page composition
 
-The brand row carries the wordmark, tagline and data date with its year. Direct delayed-chain notes name the chain and supplied lag. The chain-dot disclosure beneath it opens the status table. The brand tally uses the supplied reconciled-chain count and enabled registry size. The quiet stamp reads the supplied mismatched-day and closed-chain-day counts. A current-chain tally is shown only when a ready field exists. Every enabled chain appears in API order.
+The brand row carries the wordmark, tagline and data date with its year. Direct delayed-chain notes name the chain and supplied lag. The chain-dot disclosure beneath it opens the status table. The brand tally uses the supplied reconciled-chain count and enabled registry size, including when a chain is delayed. The quiet stamp reads the supplied mismatched-day and closed-chain-day counts. A current-chain tally is shown only when a ready field exists. Every enabled chain appears in API order.
 
-The hero pairs the tracked supply figure with its daily and seven-day changes. The five-column day waterfall reads issuer mint, issuer burn, bridge in, bridge out and ready net from the scope-all day row. Its caption contains the page's single /// marker and the day. Unreconciled notes sit beneath the figure and affected net marks are dashed.
+The hero pairs the tracked supply figure with its daily and seven-day changes. The five-column day waterfall reads issuer mint, issuer burn, bridge in, bridge out and ready net from the scope-all day row. Its caption contains the page's single /// marker and the day. Unreconciled notes sit beneath the figure and name each affected chain’s own last closed day. Affected net marks are dashed. The hero combines the quality of supply, daily change and seven-day change, with an explanation when any displayed figure is incomplete.
 
 The supply block follows the hero. Desktop places the stack beside the chain list. Phones place the list before the plot. Each list row carries the chain colour, full name, latest ready level, share, daily net and reconciliation or lag mark. The Level and Share controls show one panel at a time. The USDC lane label reserves a consistent header for an additional asset lane.
 
@@ -52,7 +52,7 @@ A chain colour never represents a flow. Issuer mint, issuer burn, bridge in, bri
 
 ## Quality and interaction
 
-Every state-carrying element retains data-chain-state. Quality-carrying elements retain data-quality, including delayed and unreconciled mocks. The disclosure table presents chain, state, last closed day, reconciliation checks, last run and mismatched days. It uses supplied dates and states, with labels that wrap at phone width.
+Every state-carrying element retains data-chain-state. Quality-carrying elements retain data-quality, including delayed and unreconciled mocks. A no_data chain retains that chain state and uses incomplete for its quality. Missing figures use neutral text, and missing records read n/a with a reason. The disclosure table presents chain, state, last closed day, reconciliation checks, last run and mismatched days. It uses supplied dates and states, with labels that wrap at phone width.
 
 Each chart has one structured tooltip with server-formatted values, dashed crosshair, markers and a date chip. Supply tooltips contain the ready tracked total, then chain levels and one-decimal ready shares, with the supplied bucket range and end-of-day, week-end or month-end wording. Flow tooltips contain the four signed flows and net, with the bucket range and sum-per-step scope. Quality notes remain visible where the data requires them.
 

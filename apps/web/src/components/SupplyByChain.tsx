@@ -1,5 +1,7 @@
 import type { Overview, OverviewView, Series } from '@app/contracts';
 import {
+  chainInfo,
+  type Chains,
   columnWidth,
   columnX,
   commonDigits,
@@ -38,17 +40,22 @@ import { Chart, type Tick } from './Chart.tsx';
 import { PeriodSwitch } from './PeriodSwitch.tsx';
 
 /** Known layers use the supplied cumulative boundary, skipping chains absent before coverage. */
-export function stackGeometry(view: OverviewView, kind: 'level' | 'share') {
+export function stackGeometry(
+  view: OverviewView,
+  kind: 'level' | 'share',
+  chains: Chains,
+) {
   const source = view.supplyByChain;
   const boundaries =
     kind === 'level' ? source.stackedLevel : source.stackedShare;
+  const ordered = [...boundaries.lines].sort(
+    (a, b) => chainInfo(chains, a.key).index - chainInfo(chains, b.key).index,
+  );
   const digits = commonDigits(
-    ...boundaries.lines.map(lineValues),
+    ...ordered.map(lineValues),
     ...source.total.lines.map(lineValues),
   );
-  const tops = boundaries.lines.map(
-    (line) => scale(lineValues(line), digits).values,
-  );
+  const tops = ordered.map((line) => scale(lineValues(line), digits).values);
   const absent = view.noDataChains ?? source.level.buckets.map(() => []);
   const missing = source.level.buckets.map((_, index) =>
     source.level.lines.some(
@@ -56,12 +63,13 @@ export function stackGeometry(view: OverviewView, kind: 'level' | 'share') {
         line.values[index] === null && !absent[index]?.includes(line.key),
     ),
   );
-  const layers = boundaries.lines.map((line, layer) => ({
+  const layers = ordered.map((line, layer) => ({
     key: line.key,
+    index: chainInfo(chains, line.key).index,
     top: tops[layer],
     bottom: source.level.buckets.map((_, index) => {
       for (let previous = layer - 1; previous >= 0; previous -= 1) {
-        if (absent[index]?.includes(boundaries.lines[previous].key)) continue;
+        if (absent[index]?.includes(ordered[previous].key)) continue;
         return tops[previous]?.[index] ?? null;
       }
       return 0n;
@@ -172,7 +180,11 @@ function StackPlot({
   kind: 'level' | 'share';
 }) {
   const { level, total } = view.supplyByChain;
-  const { digits, layers, missing } = stackGeometry(view, kind);
+  const { digits, layers, missing } = stackGeometry(
+    view,
+    kind,
+    overview.chains,
+  );
   const frame: Frame = {
     width: 1000,
     height: 340,
@@ -277,9 +289,14 @@ function StackPlot({
         markers={level.buckets.map((_, index) =>
           kind === 'share'
             ? []
-            : layers.flatMap((layer, at) =>
+            : layers.flatMap((layer) =>
                 layer.known[index]
-                  ? [{ at: y(layer.top[index]!) / frame.height, chain: at + 1 }]
+                  ? [
+                      {
+                        at: y(layer.top[index]!) / frame.height,
+                        chain: layer.index,
+                      },
+                    ]
                   : [],
               ),
         )}
@@ -292,7 +309,7 @@ function StackPlot({
               className={`peak ${peakIndex > level.buckets.length / 2 ? 'peak-left' : ''}`}
               style={{
                 left: `${(x(peakIndex) / frame.width) * 100}%`,
-                top: `${(y(peakValue) / frame.height) * 100}%`,
+                top: `max(2.9em, ${(y(peakValue) / frame.height) * 100}%)`,
               }}
             >
               {texts.supplyByChain.peak(
@@ -315,11 +332,11 @@ function StackPlot({
               y2={coordinate(fractionY(frame, 1 - tick.at))}
             />
           ))}
-        {layers.map((layer, at) => (
+        {layers.map((layer) => (
           <g
             key={layer.key}
             className="chart-layer"
-            data-chain-index={at + 1}
+            data-chain-index={layer.index}
             data-chain={layer.key}
           >
             {segments(
@@ -400,10 +417,26 @@ export function ChainList({ overview }: { overview: Overview }) {
             .find((line) => line.key === chain.slug)
             ?.values.at(-1) ?? null;
         const day = overview.day?.rows.find((row) => row.scope === chain.slug);
+        const lastFailed =
+          status?.lastClosedDay !== null &&
+          status?.lastClosedDay !== undefined &&
+          status.unreconciledDays.includes(status.lastClosedDay);
+        const unreconciled =
+          day?.unreconciled === true ||
+          lastFailed ||
+          status?.state === 'unreconciled';
+        const quality =
+          status?.state === 'no_data'
+            ? 'incomplete'
+            : unreconciled
+              ? status?.state === 'delayed'
+                ? 'delayed unreconciled'
+                : 'unreconciled'
+              : (status?.state ?? 'incomplete');
         const mark =
           status?.state === 'delayed'
             ? texts.tags.behindLabel(formatCountLag(status.lagHours))
-            : day?.unreconciled
+            : unreconciled
               ? texts.status.unreconciled
               : texts.status.checkMarks.ok;
         return (
@@ -415,11 +448,7 @@ export function ChainList({ overview }: { overview: Overview }) {
             data-chain-index={index + 1}
             data-chain={chain.slug}
             data-chain-state={status?.state}
-            data-quality={
-              day?.unreconciled
-                ? 'unreconciled'
-                : (status?.state ?? 'incomplete')
-            }
+            data-quality={quality}
           >
             <span className="dot" />
             <span className="cn">{chain.name}</span>
@@ -435,6 +464,9 @@ export function ChainList({ overview }: { overview: Overview }) {
             </span>
             <span className={`cm ${status?.state ?? ''}`}>
               {status?.state === 'no_data' ? texts.noData : mark}
+              {status?.state === 'delayed' && unreconciled ? (
+                <span className="unrec"> {texts.status.unreconciled}</span>
+              ) : null}
             </span>
           </a>
         );

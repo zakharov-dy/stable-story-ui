@@ -290,3 +290,4 @@ h2 {
     transition: none !important;
   }
 }
+.neutral { color: var(--color-text-muted); }

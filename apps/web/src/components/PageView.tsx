@@ -55,7 +55,7 @@ export function PageView({ model, demoState }: PageProps) {
               {date ?? texts.states.empty}
             </p>
           )}
-          {model.state === 'data' && delayed.length === 0 ? (
+          {model.state === 'data' ? (
             <span
               className={`brand-note ${flagged ? 'unrec' : ''}`}
               data-quality={flagged ? 'unreconciled' : 'ok'}

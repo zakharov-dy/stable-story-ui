@@ -36,7 +36,8 @@ import {
   type ToneFact,
 } from './browser-smoke-checks.ts';
 import { WEB, withServer } from './next-server.ts';
-import { checkLayout, checkNoJavascript, checkLaunchInteractions } from './browser-smoke-launch.ts';
+import { checkNoJavascript, checkLaunchInteractions } from './browser-smoke-launch.ts';
+import { checkLayout } from './browser-smoke-layout.ts';
 import { withFakeR2 } from './fake-r2.ts';
 import { assertNoR2Leaks } from './leak-check.ts';
 

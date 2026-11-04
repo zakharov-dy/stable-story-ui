@@ -52,7 +52,7 @@ export const roundedChange = (value: string | null): string =>
         : 0,
   });
 export const tone = (value: string | null): string =>
-  signOf(value) === 'negative' ? 'neg' : 'pos';
+  value === null ? 'neutral' : signOf(value) === 'negative' ? 'neg' : 'pos';
 
 /** Month labels use the supplied bucket date without changing the bucket. */
 export const formatMonth = (day: string): string =>

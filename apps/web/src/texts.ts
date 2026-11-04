@@ -1,7 +1,6 @@
 // Every visible and accessible label belongs here.
 import type { PeriodId } from '@app/view';
 
-const list = (items: readonly string[]) => items.join(', ');
 export const texts = {
   productName: 'Stable Story',
   tagline: 'The supply of USDC, accounted for.',
@@ -196,12 +195,6 @@ export const texts = {
   },
   disclaimer: { body: 'Not financial advice. Data as is, without warranty.' },
   quality: {
-    title: 'Data quality',
     incomplete: 'Some days in this range are missing or not closed.',
-    unreconciled: (days: readonly string[]) =>
-      `Reconciliation mismatch on ${list(days)}.`,
-    operationsIncomplete: 'Operation counts are incomplete for this range.',
-    unpaired: (count: number) =>
-      `${count} bridge ${count === 1 ? 'event is' : 'events are'} unpaired.`,
   },
 } as const;

@@ -143,7 +143,7 @@ describe('accepted home boards', () => {
         );
       }
     }
-    const stack = stackGeometry(view, 'level');
+    const stack = stackGeometry(view, 'level', overview.chains);
     expect(stack.missing.every((flag) => !flag)).toBe(true);
     expect(stack.layers[0].known.every(Boolean)).toBe(true);
     expect(stack.layers[1].known.some(Boolean)).toBe(false);
@@ -153,7 +153,7 @@ describe('accepted home boards', () => {
       'data-chain="avalanche"><path class="area"',
     );
     view.noDataChains[0] = [];
-    expect(stackGeometry(view, 'level').missing[0]).toBe(true);
+    expect(stackGeometry(view, 'level', overview.chains).missing[0]).toBe(true);
   });
 
   it('uses ready totals and record peaks without calculating them', async () => {

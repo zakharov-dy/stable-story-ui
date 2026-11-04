@@ -7,6 +7,7 @@ import {
   TERMS,
   signedValue,
   fromQuality,
+  merge,
   qualityAttribute,
 } from '@app/view';
 import { formatCompact, formatShortDay, roundedChange, tone } from '../view.ts';
@@ -110,14 +111,19 @@ function Waterfall({ overview }: { overview: Overview }) {
 }
 
 export function Header({ overview }: { overview: Overview }) {
+  const quality = merge(
+    [
+      overview.header.supply,
+      overview.header.change1d,
+      overview.header.change7d,
+    ].map((card) => fromQuality(card.quality)),
+  );
   return (
     <section
       className="hero"
       id="hero"
       data-block="header"
-      data-quality={qualityAttribute(
-        fromQuality(overview.header.supply.quality),
-      )}
+      data-quality={qualityAttribute(quality)}
       aria-label={texts.header.cards.supply}
     >
       <div>
@@ -134,19 +140,24 @@ export function Header({ overview }: { overview: Overview }) {
           </span>
         </p>
         {overview.status.chains
-          .filter((status) =>
-            status.unreconciledDays.includes(overview.asOf ?? ''),
+          .filter(
+            (status) =>
+              status.lastClosedDay !== null &&
+              status.unreconciledDays.includes(status.lastClosedDay),
           )
           .map((status) => (
             <p
               key={status.chain}
               className="hero-note unrec"
               data-unreconciled="true"
+              data-chain={status.chain}
+              data-day={status.lastClosedDay}
+              data-quality="unreconciled"
             >
               {texts.header.failed(
                 overview.chains.find((chain) => chain.slug === status.chain)
                   ?.name ?? status.chain,
-                formatShortDay(overview.asOf!),
+                formatShortDay(status.lastClosedDay!),
                 (['supply', 'bridge', 'continuity'] as const)
                   .filter(
                     (check) => status.reconciliation?.[check] === 'mismatch',
@@ -158,8 +169,12 @@ export function Header({ overview }: { overview: Overview }) {
               )}
             </p>
           ))}
-        {overview.header.supply.quality.complete ? null : (
-          <p className="hero-note" data-quality="incomplete">
+        {!quality.flags.includes('incomplete') ? null : (
+          <p
+            className="hero-note"
+            data-quality="incomplete"
+            data-header-note="incomplete"
+          >
             {texts.quality.incomplete}
           </p>
         )}

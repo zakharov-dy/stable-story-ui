@@ -7,10 +7,17 @@ import {
   formatCompact,
   formatCount,
   formatDay,
+  formatShortDay,
   roundedChange,
 } from '../view.ts';
 import { texts } from '../texts.ts';
-import { fromQuality, qualityAttribute, signedValue, TERMS } from '@app/view';
+import {
+  fromQuality,
+  qualityAttribute,
+  merge,
+  signedValue,
+  TERMS,
+} from '@app/view';
 
 export const DATA_BLOCKS = [
   'header',
@@ -284,14 +291,54 @@ export function checkPageHtml(
       overview.records.filter((record) => record.scope === 'all').length,
     'scope-all records',
   );
-  expect(
-    header.includes(
-      'data-quality="' +
-        qualityAttribute(fromQuality(overview.header.supply.quality)) +
-        '"',
-    ),
-    'header quality',
+  const displayed = [
+    overview.header.supply,
+    overview.header.change1d,
+    overview.header.change7d,
+  ];
+  const headerQuality = qualityAttribute(
+    merge(displayed.map((card) => fromQuality(card.quality))),
   );
+  const headerTag =
+    /<section\b(?=[^>]*data-block="header")[^>]*>/.exec(markup)?.[0] ?? '';
+  expect(
+    headerTag.includes(`data-quality="${headerQuality}"`),
+    'header quality must include every displayed figure',
+  );
+  const incomplete = displayed.some((card) => !card.quality.complete);
+  expect(
+    header.includes('data-header-note="incomplete"') === incomplete,
+    'header incomplete note must explain every displayed figure',
+  );
+  const brand = slice(markup, '<header class="brand-row"', '</header>');
+  expect(
+    visibleText(brand).includes(
+      texts.header.reconciled(
+        formatCount(overview.reconciliation.reconciledChains),
+        formatCount(overview.chains.length),
+      ),
+    ),
+    'brand ready tally in every data state',
+  );
+  for (const status of overview.status.chains) {
+    if (
+      status.lastClosedDay === null ||
+      !status.unreconciledDays.includes(status.lastClosedDay)
+    )
+      continue;
+    const name =
+      overview.chains.find((chain) => chain.slug === status.chain)?.name ??
+      status.chain;
+    expect(
+      visibleText(header).includes(
+        texts.tags.chainUnreconciled(
+          name,
+          formatShortDay(status.lastClosedDay),
+        ),
+      ),
+      `header latest mismatched day for ${status.chain}`,
+    );
+  }
   expect(
     slice(markup, 'data-block="feed"', '</section>').includes(
       'data-quality="' +

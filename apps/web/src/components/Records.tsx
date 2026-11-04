@@ -33,7 +33,7 @@ export function Records({ overview }: { overview: Overview }) {
             data-quality={qualityAttribute(fromQuality(record.quality))}
           >
             <span className="rk">{texts.records.kinds[record.kind]}</span>
-            <span className="rv">{formatCompact(record.value)}</span>
+            <span className="rv">{record.value === null ? texts.na.label : formatCompact(record.value)}</span>
             {record.value === null ? (
               <span className="rd">{texts.na.reasons.noDataForRange}</span>
             ) : null}
