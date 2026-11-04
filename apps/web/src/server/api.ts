@@ -8,8 +8,9 @@ import type { WebConfig } from './config.ts';
 import { createPublishedClient } from './published.ts';
 import { createR2Store } from './r2.ts';
 
-// Shorter than the API's 15 s `statement_timeout`: a render never waits on a query the database will abort anyway.
-export const PAGE_REQUEST_TIMEOUT_MS = 10_000;
+// The whole overview request, not one SQL statement: a cold computation was measured at about
+// 10 s, so the page waits up to 30 s before rendering unavailable.
+export const PAGE_REQUEST_TIMEOUT_MS = 30_000;
 
 export function createApiClient(config: WebConfig): ApiClient {
   if (config.mode === 'published') return createPublishedClient(() => createR2Store(config.r2));

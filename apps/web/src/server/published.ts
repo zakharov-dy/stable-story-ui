@@ -7,11 +7,67 @@ export interface PublishedStore {
   close?(): void;
 }
 
-// One deadline includes all three requests and body consumption, below the page's 10 seconds.
+// One deadline includes all three requests and body consumption, below the page's 30 seconds.
 export const PUBLICATION_TIMEOUT_MS = 6_000;
 const hash = (bytes: Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 const invalid = (reason: string): ApiError => new ApiError('invalid_response', `Publication ${reason}`);
 const notPublished = (): Promise<never> => Promise.reject(new ApiError('http', 'Request is not published', { status: 404, code: 'not_published' }));
+
+// R2 read failures are told apart in the logged ApiError message so the runtime log names the
+// class — configuration, access, a missing object, a timeout or another storage error — with the
+// HTTP status and the object key where known. Only those facts are ever embedded: the original
+// error, its message and its cause can carry the endpoint, bucket host, account id, credentials
+// or a signed URL, so they are never retained or interpolated.
+const ACCESS_DENIED_NAMES = new Set(['AccessDenied', 'Forbidden', 'InvalidAccessKeyId', 'SignatureDoesNotMatch']);
+const NOT_FOUND_NAMES = new Set(['NoSuchKey', 'NoSuchBucket', 'NotFound']);
+const TIMEOUT_NAMES = new Set(['TimeoutError', 'ETIMEDOUT']);
+
+const errorField = (error: unknown, field: string): unknown => {
+  if (typeof error !== 'object' || error === null) return undefined;
+  return (error as Record<string, unknown>)[field];
+};
+
+const errorName = (error: unknown): string | null => {
+  for (const field of ['name', 'code', 'Code'] as const) {
+    const candidate = errorField(error, field);
+    if (typeof candidate === 'string' && candidate !== '') return candidate;
+  }
+  return null;
+};
+
+// A numeric HTTP status from the SDK metadata or a status-like field; anything else is unknown.
+const errorStatus = (error: unknown): number | null => {
+  const metadata = errorField(error, '$metadata');
+  const candidates = [
+    typeof metadata === 'object' && metadata !== null ? (metadata as Record<string, unknown>).httpStatusCode : undefined,
+    errorField(error, 'statusCode'),
+    errorField(error, 'status'),
+  ];
+  for (const candidate of candidates) {
+    if (typeof candidate === 'number' && Number.isInteger(candidate) && candidate >= 100 && candidate <= 599) return candidate;
+  }
+  return null;
+};
+
+const errorTimedOut = (error: unknown): boolean => {
+  if (error instanceof ApiError) return error.timeout;
+  const name = errorName(error);
+  return name !== null && TIMEOUT_NAMES.has(name);
+};
+
+/** Classifies a `PublishedStore.get` rejection for one object key without leaking its details. */
+const storageError = (key: string, error: unknown): ApiError => {
+  const status = errorStatus(error);
+  const name = errorName(error);
+  const at = (message: string): ApiError =>
+    new ApiError('transport', status === null ? `${message} for "${key}"` : `${message} for "${key}" (status ${status})`);
+  if (status === 401 || status === 403 || (name !== null && ACCESS_DENIED_NAMES.has(name))) {
+    return at('Publication storage access denied');
+  }
+  if (status === 404 || (name !== null && NOT_FOUND_NAMES.has(name))) return at('Publication object not found');
+  if (errorTimedOut(error)) return new ApiError('transport', `Publication storage read timed out for "${key}"`);
+  return at('Publication storage read failed');
+};
 
 function json(bytes: Uint8Array, label: string): unknown {
   try { return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)) as unknown; }
@@ -38,13 +94,13 @@ export function createPublishedClient(openStore: () => PublishedStore): ApiClien
           onAbort = () => reject(cancelled());
           controller.signal.addEventListener('abort', onAbort, { once: true });
         });
-        try { store = openStore(); } catch { throw new ApiError('transport', 'Publication storage read failed'); }
+        try { store = openStore(); } catch { throw new ApiError('transport', 'Publication storage configuration error'); }
         const opened = store;
         const read = async (key: string, label: string): Promise<Uint8Array> => {
           if (controller.signal.aborted) throw cancelled();
           let bytes: Uint8Array | null;
           try { bytes = await opened.get(key, controller.signal); }
-          catch { throw new ApiError('transport', 'Publication storage read failed'); }
+          catch (error) { throw storageError(key, error); }
           if (bytes === null) throw invalid(`${label} is missing`);
           return bytes;
         };

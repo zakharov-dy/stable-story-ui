@@ -78,6 +78,7 @@ describe('createApiClient', () => {
   });
 
   it('gives the live http client the explicit page timeout', () => {
+    expect(PAGE_REQUEST_TIMEOUT_MS).toBe(30_000);
     createApiClient({ mode: 'live', apiUrl: 'https://api.example.com/' });
     expect(httpOptions).toEqual([{ baseUrl: 'https://api.example.com/', timeoutMs: PAGE_REQUEST_TIMEOUT_MS }]);
   });
