@@ -2,6 +2,7 @@
 import { publicFixture } from './overview.fixtures.ts';
 import { expect } from 'vitest';
 import type { z } from 'zod';
+import type { ChainStatus, Overview } from './schemas.ts';
 
 
 export const quality = { complete: true, operationsComplete: true, unpairedEvents: 0, unreconciledDays: [] };
@@ -36,6 +37,27 @@ export const noData = {
 };
 export const kpi = { value: null, changePct: null, spark: [], sparkUnreconciled: [], quality: missing };
 export const emptySeries = { period: 'day', unit: 'tokens', buckets: [], lines: [] };
+// These hand-authored fixtures have gap-free, zero-event histories.
+export function fixtureReconciliation(slugs: string[], statuses: unknown[], asOf: string | null = null, start: string | null = null): Overview['reconciliation'] {
+  const known = statuses as ChainStatus[];
+  const distance = (from: string, to: string) => Math.round((Date.parse(to) - Date.parse(from)) / 86_400_000);
+  const chains = slugs.map((chain) => {
+    const status = known.find((status) => status.chain === chain);
+    const closedDays = status?.historyStart && status.lastClosedDay ? distance(status.historyStart, status.lastClosedDay) + 1 : 0;
+    const lastMismatch = status?.unreconciledDays.at(-1);
+    return { chain, closedDays, events: 0, mismatchedDays: status?.unreconciledDays.length ?? 0,
+      streakDays: lastMismatch && status?.lastClosedDay ? distance(lastMismatch, status.lastClosedDay) : closedDays,
+      streakEnd: status?.lastClosedDay ?? null };
+  });
+  const lastMismatch = known.flatMap((status) => status.unreconciledDays).filter((day) => start !== null && asOf !== null && day >= start && day <= asOf).sort().at(-1);
+  return {
+    all: { closedDays: chains.reduce((n, chain) => n + chain.closedDays, 0), events: 0,
+      mismatchedDays: chains.reduce((n, chain) => n + chain.mismatchedDays, 0),
+      streakDays: asOf && start && chains.length > 0 && chains.every((chain) => chain.closedDays > 0) ? distance(lastMismatch ?? start, asOf) + (lastMismatch ? 0 : 1) : 0, streakEnd: asOf },
+    chains,
+    reconciledChains: known.filter(({ reconciliation }) => reconciliation?.supply === 'ok' && reconciliation.bridge === 'ok' && reconciliation.continuity === 'ok').length,
+  };
+}
 export const emptyOverview = {
   asset: 'usdc', generatedAt: '2026-10-07T01:00:00Z', asOf: null, historyStart: null,
   chains: [{ slug: 'ethereum', name: 'Ethereum', explorerTx: 'https://etherscan.io/tx/{hash}' }],
@@ -43,6 +65,7 @@ export const emptyOverview = {
   views: { '30d': null, '90d': null, all: null }, day: null,
   largestEvents: { from: null, to: null, quality: missing, items: [], nextCursor: null },
   records: [], status: { chains: [noData] },
+  reconciliation: fixtureReconciliation(['ethereum'], [noData]),
 };
 
 export const shiftDay = (day: string, days: number) =>
@@ -67,6 +90,7 @@ export function covered(slugs = ['ethereum'], statuses: unknown[] = slugs.map((c
     largestEvents: { from: '2026-09-30', to: '2026-10-06', quality: missing, items: [], nextCursor: null },
     records: [{ ...record, scope: 'all' }],
     status: { chains: statuses },
+    reconciliation: fixtureReconciliation(slugs, statuses, '2026-10-06', '2026-10-01'),
   };
 }
 export const coveredOverview = covered();

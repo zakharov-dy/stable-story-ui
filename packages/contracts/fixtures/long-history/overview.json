@@ -10291,5 +10291,65 @@
         "unreconciledDays": []
       }
     ]
+  },
+  "reconciliation": {
+    "all": {
+      "closedDays": 725,
+      "events": 3571,
+      "mismatchedDays": 1,
+      "streakDays": 68,
+      "streakEnd": "2027-03-15"
+    },
+    "chains": [
+      {
+        "chain": "ethereum",
+        "closedDays": 121,
+        "events": 596,
+        "mismatchedDays": 1,
+        "streakDays": 75,
+        "streakEnd": "2027-03-15"
+      },
+      {
+        "chain": "base",
+        "closedDays": 120,
+        "events": 591,
+        "mismatchedDays": 0,
+        "streakDays": 68,
+        "streakEnd": "2027-03-15"
+      },
+      {
+        "chain": "arbitrum",
+        "closedDays": 121,
+        "events": 596,
+        "mismatchedDays": 0,
+        "streakDays": 121,
+        "streakEnd": "2027-03-15"
+      },
+      {
+        "chain": "optimism",
+        "closedDays": 121,
+        "events": 596,
+        "mismatchedDays": 0,
+        "streakDays": 121,
+        "streakEnd": "2027-03-15"
+      },
+      {
+        "chain": "polygon",
+        "closedDays": 121,
+        "events": 596,
+        "mismatchedDays": 0,
+        "streakDays": 121,
+        "streakEnd": "2027-03-15"
+      },
+      {
+        "chain": "avalanche",
+        "closedDays": 121,
+        "events": 596,
+        "mismatchedDays": 0,
+        "streakDays": 121,
+        "streakEnd": "2027-03-15"
+      }
+    ],
+    "reconciledChains": 6
   }
 }

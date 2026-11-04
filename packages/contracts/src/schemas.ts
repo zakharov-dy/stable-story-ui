@@ -4,6 +4,7 @@
 
 import { z } from 'zod';
 import { overviewViewsIssues } from './overview-invariants.ts';
+import { reconciliationIssues } from './reconciliation-invariants.ts';
 import { Amount, BlockNumber, Count, Day, Decimal, FLOWS, Flow, Indices, IsoDateTime, Period } from './primitives.ts';
 
 const indicesWithin = (indices: number[], length: number): boolean => indices.every((index) => index < length);
@@ -466,6 +467,20 @@ export const OverviewDay = z.object({
 });
 export type OverviewDay = z.infer<typeof OverviewDay>;
 
+/** Retained chain-day counters and a calendar-day streak at streakEnd. */
+export const ReconciliationSummary = z.object({
+  closedDays: Count,
+  events: Count,
+  mismatchedDays: Count,
+  streakDays: Count,
+  streakEnd: Day.nullable(),
+}).superRefine((summary, ctx) => {
+  invariant(summary.mismatchedDays <= summary.closedDays, ctx, ['mismatchedDays'], 'Mismatched days are closed days');
+  invariant(summary.streakDays <= summary.closedDays - summary.mismatchedDays, ctx, ['streakDays'], 'A streak fits the clean closed days');
+  invariant(summary.closedDays !== 0 || summary.events === 0, ctx, ['events'], 'Events belong to closed days');
+});
+export type ReconciliationSummary = z.infer<typeof ReconciliationSummary>;
+
 const OverviewShape = z
   .object({
     asset: z.string(),
@@ -486,12 +501,19 @@ const OverviewShape = z
     largestEvents: EventsPageShape.extend({ nextCursor: z.null() }).superRefine(eventsPageRange), // 5; no paging in overview
     records: z.array(RecordItem), // 6
     status: z.object({ chains: z.array(ChainStatus) }), // 7
+    reconciliation: z.object({
+      all: ReconciliationSummary, // closedDays/mismatchedDays count chain-days, streakDays counts calendar days
+      chains: z.array(ReconciliationSummary.safeExtend({ chain: z.string() })),
+      reconciledChains: Count,
+    }),
   });
 type OverviewShape = z.infer<typeof OverviewShape>;
+const PreviousOverviewShape = OverviewShape.omit({ reconciliation: true });
+type OverviewForValidation = z.infer<typeof PreviousOverviewShape> & { reconciliation?: OverviewShape['reconciliation'] };
 
 // Chart 7 (accepted by the owner after review): one status per enabled chain (`chains`), no
 // other chains. A missing status is reported on the list, a duplicate or foreign one on its entry.
-function statusListIssues(overview: OverviewShape, ctx: z.RefinementCtx): boolean {
+function statusListIssues(overview: OverviewForValidation, ctx: z.RefinementCtx): boolean {
   const enabled = new Set<string>();
   overview.chains.forEach((chain, index) => {
     invariant(!enabled.has(chain.slug), ctx, ['chains', index, 'slug'], 'An enabled chain is listed once');
@@ -515,9 +537,9 @@ function statusListIssues(overview: OverviewShape, ctx: z.RefinementCtx): boolea
 // Common coverage: historyStart is the latest first closed day of the enabled chains and asOf
 // the earliest last closed day; an enabled chain without closed days or disjoint intervals leave both
 // null. `status.chains` holds exactly the enabled chains here.
-function coverageIssues(overview: OverviewShape, ctx: z.RefinementCtx): boolean {
+function coverageIssues(overview: OverviewForValidation, ctx: z.RefinementCtx): boolean {
   const statuses = overview.status.chains;
-  if (statuses.length === 0) return true; // no enabled chains: there is no common coverage
+  if (statuses.length === 0) return overview.asOf === null && overview.historyStart === null;
   const closed = statuses.flatMap((status) =>
     status.historyStart === null || status.lastClosedDay === null ? [] : [{ first: status.historyStart, last: status.lastClosedDay }]);
   const first = closed.reduce<string | null>((max, chain) => (max === null || chain.first > max ? chain.first : max), null);
@@ -530,7 +552,7 @@ function coverageIssues(overview: OverviewShape, ctx: z.RefinementCtx): boolean 
 }
 
 // Feed and records keep their own ranges, independently of the three public views.
-function viewRangeIssues(overview: OverviewShape, historyStart: string, asOf: string, ctx: z.RefinementCtx): void {
+function viewRangeIssues(overview: OverviewForValidation, historyStart: string, asOf: string, ctx: z.RefinementCtx): void {
   const week = addDays(asOf, -6);
   const scopes = ['all', ...overview.chains.map((chain) => chain.slug)];
   invariant(overview.largestEvents.from === week, ctx, ['largestEvents', 'from'], 'The feed starts seven days before asOf');
@@ -543,7 +565,7 @@ function viewRangeIssues(overview: OverviewShape, historyStart: string, asOf: st
 }
 
 // Each spark has one point per header day.
-export const Overview = OverviewShape.superRefine((overview, ctx) => {
+function overviewIssues(overview: OverviewForValidation, ctx: z.RefinementCtx): void {
   invariant((overview.asOf === null) === (overview.historyStart === null), ctx, ['historyStart'], 'Common coverage has both dates or neither');
   invariant(overview.asOf === null || overview.historyStart === null || overview.historyStart <= overview.asOf,
     ctx, ['historyStart'], 'Common history starts after asOf');
@@ -585,7 +607,12 @@ export const Overview = OverviewShape.superRefine((overview, ctx) => {
     (overview.asOf === null || overview.historyStart === null || overview.historyStart <= overview.asOf);
   const statusesMatch = statusListIssues(overview, ctx);
   if (datesConsistent) {
-    if (statusesMatch && coverageIssues(overview, ctx)) overviewViewsIssues(overview, ctx);
+    if (statusesMatch && coverageIssues(overview, ctx)) {
+      if (overview.reconciliation !== undefined) {
+        reconciliationIssues({ ...overview, reconciliation: overview.reconciliation }, ctx);
+      }
+      overviewViewsIssues(overview, ctx);
+    }
     if (overview.asOf !== null && overview.historyStart !== null) {
       viewRangeIssues(overview, overview.historyStart, overview.asOf, ctx);
     }
@@ -600,7 +627,11 @@ export const Overview = OverviewShape.superRefine((overview, ctx) => {
       });
     }
   }
-});
+}
+// Only the publisher's upgrade path reads the previous stored shape. Endpoints require Overview.
+export const PreviousOverview = PreviousOverviewShape.superRefine(overviewIssues);
+export type PreviousOverview = z.infer<typeof PreviousOverview>;
+export const Overview = OverviewShape.superRefine(overviewIssues);
 export type Overview = z.infer<typeof Overview>;
 
 export const ApiErrorBody = z.object({ error: z.object({ code: z.string(), message: z.string() }) });

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { Overview } from './schemas.ts';
 import type { Overview as Document } from './schemas.ts';
 import long from '../fixtures/long-history/overview.json' with { type: 'json' };
-import { covered, coveredOverview, emptyOverview } from './schemas.invariants.fixtures.ts';
+import { covered, coveredOverview, emptyOverview, fixtureReconciliation } from './schemas.invariants.fixtures.ts';
 
 // Expected paths are independent of schema traversal; preserve duplicate issues as well.
 // The long-history fixture has five supply panels, seven driver scopes and six chains.
@@ -143,7 +143,7 @@ describe('Overview public view invariants', () => {
   it('rejects extra window keys and data without common coverage', () => {
     const extra = Overview.safeParse({ ...long, views: { ...long.views, extra: long.views.all } });
     expect(extra.error?.issues.map((issue) => issue.path.join('.'))).toContain('views');
-    const emptyScope = Overview.safeParse({ ...emptyOverview, chains: [], status: { chains: [] }, views: { ...emptyOverview.views, all: long.views.all } });
+    const emptyScope = Overview.safeParse({ ...emptyOverview, chains: [], status: { chains: [] }, reconciliation: fixtureReconciliation([], []), views: { ...emptyOverview.views, all: long.views.all } });
     expect(emptyScope.error?.issues.map((issue) => issue.path.join('.'))).toContain('views.all');
     const missing = Overview.safeParse({ ...emptyOverview, day: coveredOverview.day });
     expect(missing.error?.issues.map((issue) => issue.path.join('.'))).toContain('day');

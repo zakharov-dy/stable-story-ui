@@ -3894,5 +3894,25 @@
         "unreconciledDays": []
       }
     ]
+  },
+  "reconciliation": {
+    "all": {
+      "closedDays": 2,
+      "events": 12,
+      "mismatchedDays": 0,
+      "streakDays": 2,
+      "streakEnd": "2026-10-09"
+    },
+    "chains": [
+      {
+        "chain": "ethereum",
+        "closedDays": 2,
+        "events": 12,
+        "mismatchedDays": 0,
+        "streakDays": 2,
+        "streakEnd": "2026-10-09"
+      }
+    ],
+    "reconciledChains": 1
   }
 }
