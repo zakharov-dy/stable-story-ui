@@ -74,8 +74,8 @@ export const texts = {
     marker: '///',
     reconciled: (count: string, total: string) =>
       `${count}/${total} reconciled`,
-    stamp: (mismatched: string, closed: string) =>
-      `${mismatched} mismatched ${mismatched === '1' ? 'day' : 'days'} · ${closed} chain-days closed`,
+    stamp: (count: string, total: string, mismatched: string, closed: string) =>
+      `${count}/${total} chains · ${mismatched} mismatched ${mismatched === '1' ? 'day' : 'days'} · ${closed} chain-days closed`,
     failed: (chain: string, day: string, checks: string) =>
       `◇ ${chain} · ${day} unreconciled: ${checks}`,
   },

@@ -45,7 +45,15 @@ describe('accepted home boards', () => {
     overview.reconciliation.reconciledChains = 4;
     const text = visibleText(render(overview));
     expect(text).toContain('4/6 reconciled');
-    expect(text).toContain('7 mismatched days · 9,700 chain-days closed');
+    expect(text).toContain(
+      '4/6 chains · 7 mismatched days · 9,700 chain-days closed',
+    );
+    expect(
+      checkPageHtml(render(overview).replace('4/6 chains · ', ''), {
+        overview,
+        demoState: null,
+      }),
+    ).toContain('ready reconciliation stamp');
   });
 
   it('places the full data date in the brand row and sticky bar', async () => {

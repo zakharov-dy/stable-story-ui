@@ -199,8 +199,10 @@ export function checkPageHtml(
     'one older-period sentence',
   );
   expect(
-    text.includes(
+    visibleText(slice(markup, 'class="stamp"', '</p>')).includes(
       texts.header.stamp(
+        formatCount(overview.reconciliation.reconciledChains),
+        formatCount(overview.chains.length),
         formatCount(overview.reconciliation.all.mismatchedDays),
         formatCount(overview.reconciliation.all.closedDays),
       ),

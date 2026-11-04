@@ -14,7 +14,7 @@ The monument is 128 pixels on desktop and 64 on phones. Section headings use the
 
 ## Page composition
 
-The brand row carries the wordmark, tagline and data date with its year. Direct delayed-chain notes name the chain and supplied lag. The chain-dot disclosure beneath it opens the status table. The brand tally uses the supplied reconciled-chain count and enabled registry size, including when a chain is delayed. The quiet stamp reads the supplied mismatched-day and closed-chain-day counts. A current-chain tally is shown only when a ready field exists. Every enabled chain appears in API order.
+The brand row carries the wordmark, tagline and data date with its year. Direct delayed-chain notes name the chain and supplied lag. The chain-dot disclosure beneath it opens the status table. The brand tally uses the supplied reconciled-chain count and enabled registry size, including when a chain is delayed. The quiet stamp reads the supplied reconciled-chain count over the enabled registry size, followed by supplied mismatched-day and closed-chain-day counts. Counts are formatted exactly. Every enabled chain appears in API order.
 
 The hero pairs the tracked supply figure with its daily and seven-day changes. The five-column day waterfall reads issuer mint, issuer burn, bridge in, bridge out and ready net from the scope-all day row. Its caption contains the page's single /// marker and the day. Unreconciled notes sit beneath the figure and name each affected chain’s own last closed day. Affected net marks are dashed. The hero combines the quality of supply, daily change and seven-day change, with an explanation when any displayed figure is incomplete.
 

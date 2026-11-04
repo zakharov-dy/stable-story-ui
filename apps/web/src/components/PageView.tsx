@@ -104,6 +104,8 @@ export function PageView({ model, demoState }: PageProps) {
             <div className="stamp-row">
               <p className="stamp">
                 {texts.header.stamp(
+                  formatCount(model.overview.reconciliation.reconciledChains),
+                  formatCount(model.overview.chains.length),
                   formatCount(model.overview.reconciliation.all.mismatchedDays),
                   formatCount(model.overview.reconciliation.all.closedDays),
                 )}

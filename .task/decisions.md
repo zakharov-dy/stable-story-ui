@@ -95,3 +95,9 @@ Round 1 remediation verification, checked code commit 23aade047be194ab3e1ac065b9
 - Nine new regression cases cover shuffled arrays, delayed ready tally, own last-day mismatch, each displayed quality independently, short-history quality, no-data tone/quality and missing records. All test files and the two smoke assertion modules remain below 400 lines.
 
 All four major findings are fixed. The next push submits the fixes for implementation review round 2/3. The outer driver continues to own review and PR operations.
+
+## Coordinator clarification before implementation round 2
+
+Rebased the round-1 fixes onto origin/main bcabebc. The only conflict was docs/design.md. Resolved it with the rewritten Home rules while preserving the merged native-app token guidance. No contract, token or mobile files were edited by this task.
+
+The coordinator identifies reconciliation.reconciledChains as the stamp numerator. This supersedes the partial-stamp decision above. The stamp now reads the ready reconciledChains over the enabled registry size, all.mismatchedDays and all.closedDays, with the accepted chains / mismatched days / chain-days closed wording. The chain-day count is exact, so the board's illustrative approximation sign is omitted. No counters are added, subtracted or inferred from statuses. The brand tally stays beside delayed notes as required by F2. The stamp regression uses deliberately different supplied values, and page-html requires the full text inside the stamp itself.
