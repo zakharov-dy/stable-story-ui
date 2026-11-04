@@ -129,9 +129,9 @@ describe('hover: the no-JS path and the hydrated path', () => {
     expect(count(html, 'class="chart-chip"')).toBe(0);
   });
 
-  it('leaves the plain path with its titles and its plain card, and without the new marks', () => {
+  it('removes native titles from the hydrated plain path and keeps one card', () => {
     const html = render({ tooltips: undefined, active: 0 });
-    expect(count(html, '<title>')).toBe(1 + tips.length);
+    expect(count(html, '<title>')).toBe(0);
     expect(count(html, 'class="chart-tip"')).toBe(1);
     expect(count(html, 'data-tooltip="plain"')).toBe(1);
     expect(count(html, 'data-tooltip="structured"')).toBe(0);
@@ -184,7 +184,7 @@ describe('hover: placement', () => {
   it('flips left at the right edge of the plot', () => {
     const html = render({ active: 2 });
     const style = styleOf(html, 'chart-tip chart-tooltip');
-    expect(Math.abs(px(style, 'left') - 567.333)).toBeLessThan(0.01);
+    expect(Math.abs(px(style, 'left') - 515.333)).toBeLessThan(0.01);
     expect(html).toContain('data-side="left"');
   });
 
@@ -304,8 +304,8 @@ describe('hover: styles', () => {
     expect(css).toMatch(/\.chart-hover\[data-mode='structured'\]:focus-visible\s*\{[^}]*outline:\s*2px solid var\(--color-focus-ring\)/);
   });
 
-  it('keeps the 248 px card and the plain card for the unmigrated charts', () => {
-    expect(css).toMatch(/\.chart-tooltip\s*\{[^}]*width:\s*248px/);
+  it('keeps the 300 px card and the plain card for the unmigrated charts', () => {
+    expect(css).toMatch(/\.chart-tooltip\s*\{[^}]*width:\s*300px/);
     expect(css).toMatch(/\.chart-tip\s*\{/);
   });
 });

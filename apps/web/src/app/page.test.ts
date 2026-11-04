@@ -88,7 +88,7 @@ describe('page in mock mode', () => {
     expect(unavailable).not.toContain(texts.states.empty);
   });
 
-  it('marks quality, unreconciled rows and spark points in the unreconciled state', async () => {
+  it('marks quality and unreconciled operation rows', async () => {
     vi.stubEnv('MOCK_STATE', 'unreconciled');
     const overview = await expectedOverview('unreconciled');
     const html = await render();
@@ -98,9 +98,9 @@ describe('page in mock mode', () => {
     expect(html).toMatch(/data-block="header" data-quality="[^"]*unreconciled/);
     expect(html).toMatch(/data-block="feed" data-quality="[^"]*unreconciled/);
     for (const row of overview?.largestEvents.items.filter((item) => item.unreconciled) ?? []) {
-      expect(html).toMatch(new RegExp(`<tr data-flow="${row.flow}"[^>]*data-unreconciled="true"[^>]*>`));
+      expect(html).toContain(`data-operation="${row.id}" data-flow="${row.flow}" data-quality="unreconciled" data-unreconciled="true"`);
     }
-    expect(html).toContain('data-flag="unreconciled"');
+    expect(html).toContain('data-unreconciled="true"');
   });
 
   it('shows the lag and state of the delayed chain', async () => {
@@ -110,66 +110,8 @@ describe('page in mock mode', () => {
     expect(delayed.length).toBeGreaterThan(0);
     const html = await render();
     for (const status of delayed) {
-      const row = html.slice(html.indexOf(`data-chain="${status.chain}"`));
-      expect(row.slice(0, row.indexOf('</tr>'))).toContain(texts.tags.behind(overview?.chains.find((chain) => chain.slug === status.chain)?.name ?? '', formatCount(status.lagHours)));
+      expect(html.slice(html.indexOf('<table class="status"'))).toContain(texts.tags.behind(overview?.chains.find((chain) => chain.slug === status.chain)?.name ?? '', formatCount(status.lagHours)));
     }
-  });
-});
-
-describe('page in mock mode: the day equation and its check chips', () => {
-  /** The equation cards of the page, in page order. */
-  const cardsOf = (html: string): string[] => {
-    const start = html.indexOf('data-block="day-equation"');
-    const section = html.slice(start, html.indexOf('</section>', start));
-    return section.split('<article ').slice(1).map((card) => card.slice(0, card.indexOf('</article>')));
-  };
-  const chipKinds = (card: string): string[] => [...card.matchAll(/data-chip-kind="([^"]+)"/g)].map((match) => match[1] ?? '');
-
-  it.each(['ok', 'delayed', 'unreconciled', 'empty-day', 'short-history', 'gap'] as const)('shows an equation card and chips for every chain in %s', async (state) => {
-    vi.stubEnv('MOCK_STATE', state);
-    const overview = (await expectedOverview(state))!;
-    const cards = cardsOf(await render());
-    expect(cards).toHaveLength(overview.chains.length);
-    for (const status of overview.status.chains) {
-      const card = cards[overview.chains.findIndex((chain) => chain.slug === status.chain)] ?? '';
-      expect(card).toContain(`data-chain-state="${status.state}"`);
-      expect(chipKinds(card).length).toBeGreaterThan(0);
-    }
-  });
-
-  it('shows the bridge mismatch of Ethereum as its own chip, and the other chains as passed', async () => {
-    vi.stubEnv('MOCK_STATE', 'unreconciled');
-    const overview = (await expectedOverview('unreconciled'))!;
-    const cards = cardsOf(await render());
-    // Expectations come from the mock status.
-    const expected = overview.status.chains.map((status) => (status.reconciliation?.bridge === 'mismatch' ? ['bridge'] : ['passed']));
-    expect(overview.status.chains.map((status) => status.chain)).toEqual(overview.chains.map((chain) => chain.slug));
-    expect(cards.map(chipKinds)).toEqual(expected);
-    expect(expected[0]).toEqual(['bridge']);
-    expect(cards[0]).toContain('data-unreconciled="true"');
-    expect(cards[0]).toContain(`${texts.equation.marks.failed}</span>${texts.equation.checks.bridge}`);
-    expect(cards.slice(1).every((card) => !card.includes('data-unreconciled'))).toBe(true);
-  });
-
-  it('shows the delayed chain with its own checks and the other chains with the later day named', async () => {
-    vi.stubEnv('MOCK_STATE', 'delayed');
-    const overview = (await expectedOverview('delayed'))!;
-    const html = await render();
-    const cards = cardsOf(html);
-    const delayed = overview.status.chains.findIndex((status) => status.state === 'delayed');
-    expect(delayed).toBeGreaterThanOrEqual(0);
-    overview.status.chains.forEach((status, index) => {
-      expect(chipKinds(cards[index] ?? '')).toEqual(index === delayed ? ['passed'] : ['notFlagged']);
-      if (index !== delayed) expect((status.reconciliation?.day ?? '') > (overview.asOf ?? '')).toBe(true);
-    });
-    expect(cards[delayed]).toContain('data-chain-state="delayed"');
-    expect(visibleText(html)).toContain(texts.tags.behind(overview.chains[delayed]?.name ?? '', formatCount(overview.status.chains[delayed]?.lagHours ?? null)));
-  });
-
-  it.each(['empty', 'unavailable'] as const)('has no equation, chips or charts in %s', async (state) => {
-    vi.stubEnv('MOCK_STATE', state);
-    const html = await render();
-    for (const fragment of ['day-equation', 'data-chip-kind', 'data-kpi', 'class="chart"', 'wf-bar']) expect(html).not.toContain(fragment);
   });
 });
 

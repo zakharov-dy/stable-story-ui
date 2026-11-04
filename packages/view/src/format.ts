@@ -88,13 +88,13 @@ export function createFormat(texts: FormatLabels) {
    * when rounding carries (999.995K → 1.00M). Amounts below 1,000 are formatted as formatAmount does.
    * Digit-string arithmetic only, never through `number`; null → "no data".
    */
-  function formatCompact(value: string | null, { signed = false } = {}): string {
+  function formatCompact(value: string | null, { signed = false, places = 2 } = {}): string {
     if (value === null) return texts.noData;
     const parts = parseDecimal(value);
     const top = COMPACT_UNITS.length - 1;
     let tier = Math.min(top, Math.floor((parts.int.length - 1) / 3));
     for (;;) {
-      const rounded = tier === 0 ? roundParts(parts, amountPlaces(parts)) : roundParts(shiftLeft(parts, tier * 3), 2);
+      const rounded = tier === 0 ? roundParts(parts, amountPlaces(parts)) : roundParts(shiftLeft(parts, tier * 3), places);
       if (tier < top && rounded.int.length > 3) {
         tier += 1;
         continue;
@@ -104,9 +104,9 @@ export function createFormat(texts: FormatLabels) {
   }
 
   /** A Decimal percentage with two fixed decimals: 1.697062 → 1.70%; null → "no data". */
-  function formatPercent(value: string | null, { signed = false } = {}): string {
+  function formatPercent(value: string | null, { signed = false, places = 2 } = {}): string {
     if (value === null) return texts.noData;
-    return `${render(roundParts(parseDecimal(value), 2), { signed, trimZeros: false })}${texts.percent}`;
+    return `${render(roundParts(parseDecimal(value), places), { signed, trimZeros: false })}${texts.percent}`;
   }
 
   /** A counter or a block number (string for blocks above 2^53); null → "no data". */

@@ -151,7 +151,7 @@ describe('supply tooltips: the quality line', () => {
     expect(column?.note).toEqual({ text: texts.supplyByChain.gapNote('Oct 9'), tone: 'incomplete' });
   });
 
-  it('shows a known partial period as partial, without a missing-data note', () => {
+  it('explains a cut period through the supplied range without a quality caption', () => {
     const partial = levels();
     partial.period = 'week';
     partial.buckets = [{ start: '2026-10-08', end: '2026-10-09', complete: false }];
@@ -159,7 +159,7 @@ describe('supply tooltips: the quality line', () => {
     const total = seriesOf('tokens', ['2026-10-08'], { all: ['55000000000'] });
     const column = suppliedTooltips(partial, shares(), total, chains, okStatus())[0];
     expect(column?.header.value).toBe('55.00B');
-    expect(column?.note?.text).toBe(texts.resolution.partial);
+    expect(column?.note).toBeUndefined();
     expect(column?.footer.value).toBe('level at week end');
   });
 
@@ -267,9 +267,9 @@ describe('driver tooltips: rows, signs and footer', () => {
     for (const line of series.lines) line.values[0] = null;
     const columns = driverTooltips(series, driverDigits(series), 'Ethereum');
     expect(columns[0]?.rows.map((row) => row.value)).toEqual(['no data', 'no data', 'no data', 'no data', 'no data']);
-    expect(columns[0]?.note?.text).toBe('▨ no data · Oct 8 (incomplete buckets)');
+    expect(columns[0]?.note?.text).toBe('no data · Oct 8');
     expect(tooltipTitle(columns[0])).toBe(
-      'Oct 8: issuer mint no data · issuer burn no data · bridge in no data · bridge out no data · net no data · ▨ no data · Oct 8 (incomplete buckets) · sum per day, Ethereum',
+      'Oct 8: issuer mint no data · issuer burn no data · bridge in no data · bridge out no data · net no data · no data · Oct 8 · sum per day, Ethereum',
     );
   });
 

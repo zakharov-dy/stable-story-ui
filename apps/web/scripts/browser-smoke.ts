@@ -36,7 +36,7 @@ import {
   type ToneFact,
 } from './browser-smoke-checks.ts';
 import { WEB, withServer } from './next-server.ts';
-import { checkLaunchInteractions } from './browser-smoke-launch.ts';
+import { checkLayout, checkNoJavascript, checkLaunchInteractions } from './browser-smoke-launch.ts';
 import { withFakeR2 } from './fake-r2.ts';
 import { assertNoR2Leaks } from './leak-check.ts';
 
@@ -176,7 +176,7 @@ async function collectDom(page: Page): Promise<DomFacts> {
       svgs: svgs.length,
       chartSvgs: svgs.filter((svg) => svg.getAttribute('aria-hidden') !== 'true').length,
       unreconciled: all('[data-unreconciled="true"]').length,
-      delayedFlags: all('[data-flag="delayed"]').length,
+      delayedFlags: all('[data-quality="delayed"]').length,
       demoLabels: all('[data-demo-state]').length,
       robots: attr('meta[name="robots"]', 'content'),
     };
@@ -236,11 +236,18 @@ async function collect(browser: Browser, url: string, viewport: { width: number;
     // still open at the bound is reported by the network check.
     for (const deadline = Date.now() + SETTLE_MS; network.pending().length > 0 && Date.now() < deadline; ) await new Promise((resolve) => setTimeout(resolve, 50));
 
-    if (overview?.asOf !== null && overview?.chains.length === 6) await checkLaunchInteractions(page, overview, viewport.width <= 720);
+    const interactions: string[] = [];
+    try {
+      if (overview !== null && overview.asOf !== null) await checkLaunchInteractions(page, overview, viewport.width <= 720);
+      await checkLayout(page);
+    } catch (error) {
+      interactions.push(error instanceof Error ? error.message : String(error));
+    }
     const widths = await page.evaluate(() => ({ scrollWidth: document.documentElement.scrollWidth, innerWidth: window.innerWidth }));
     const fontFaces = await page.evaluate(() => [...document.fonts].map((face) => ({ family: face.family, status: face.status })));
     return {
       origin,
+      interactions,
       documentStatus: navigation?.status() ?? null,
       pendingRequests: network.pending(),
       console: [...consoleEntries, ...network.failures],
@@ -285,7 +292,7 @@ async function captureShots(browser: Browser, url: string, viewport: { width: nu
       for (const period of ['30d', '90d', 'all']) {
         await page.check(`input[name="period"][value="${period}"]`);
         const suffix = period === '30d' ? '' : `-${period}`;
-        for (const [block, heading] of [['03', 'h-supply-by-chain'], ['04', 'h-drivers'], ['05', 'h-issuer-vs-bridge']] as const) {
+        for (const [block, heading] of [['stack', 'h-supply-by-chain'], ['flows', 'h-drivers']] as const) {
           // 04 is one section per page (its per-period figures hide inside); 03 and 05 have one copy per period.
           const id = heading === 'h-drivers' ? heading : `${heading}${suffix}`;
           const file = path.join(dir, `long-history-${size}-${period}-${block}.png`);
@@ -329,6 +336,14 @@ async function main(): Promise<number> {
             const name = `${viewport.width}x${viewport.height}`;
             const begun = Date.now();
             const facts = await collect(browser, `http://127.0.0.1:${port}/`, viewport, expected.overview);
+            if (state === 'long-history' && expected.overview !== null) {
+              const native = await browser.newContext({ viewport, javaScriptEnabled: false });
+              try {
+                const page = await native.newPage();
+                await page.goto(`http://127.0.0.1:${port}/`);
+                await checkNoJavascript(page, expected.overview);
+              } finally { await native.close(); }
+            }
             if (sentinels.length > 0) assertNoR2Leaks(facts.html, sentinels, 'hydrated published page');
             const expectation = options.live ? { ...expected, kind: liveKind(facts) } : expected;
             const results = checkPage(facts, expectation);

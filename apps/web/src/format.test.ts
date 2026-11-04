@@ -14,6 +14,7 @@ import {
   formatRunTime,
   formatShortDay,
   formatTime,
+  formatMonth,
 } from './view.ts';
 import { texts } from './texts.ts';
 
@@ -184,4 +185,9 @@ describe('formatCompact', () => {
     expect(formatCompact('9007199254999999999')).toBe('9,007,199.25T');
     expect(formatCompact('9007199255000000000')).toBe('9,007,199.26T');
   });
+});
+
+it('formats the supplied monthly bucket dates for the ALL axis', () => {
+  expect(formatMonth('2018-08-31')).toBe('Aug 2018');
+  expect(formatMonth('2026-11-02')).toBe('Nov 2026');
 });

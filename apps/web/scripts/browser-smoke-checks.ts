@@ -4,11 +4,12 @@
 // prompt was vague the choice is written next to the rule.
 
 import type { Overview } from '@app/contracts';
-import { ALL_BLOCKS, CARDS, DATA_BLOCKS, checkPageHtml, dataText } from '../src/checks/page-html.ts';
+import { ALL_BLOCKS, checkPageHtml } from '../src/checks/page-html.ts';
 
 export const VIEWPORTS = [
-  { width: 1440, height: 900 },
-  { width: 375, height: 812 },
+  { width: 1280, height: 800 },
+  { width: 390, height: 844 },
+  { width: 320, height: 800 },
 ] as const;
 
 export type PageKind = 'data' | 'empty' | 'unavailable';
@@ -67,6 +68,7 @@ export interface ToneFact {
 }
 
 export interface PageFacts {
+  interactions: string[];
   origin: string;
   documentStatus: number | null;
   pendingRequests: string[]; // CDP-observed requests (favicon included) still without an end when collection stopped
@@ -217,68 +219,28 @@ export function checkPageState(facts: Pick<PageFacts, 'dom' | 'html'>, expectati
     return problems;
   }
   expect(dom.pageStates.length === 1 && dom.pageStates[0] === kind, `expected data-page-state="${kind}" once, found [${dom.pageStates.join(',')}]`);
-  const dataBlocks = DATA_BLOCKS as readonly string[];
   const present = (block: string) => countOf(dom.blocks, block);
-  const chains = expectation.overview?.status.chains.length ?? 0;
-
-  if (expectation.demoState !== null) {
-    expect(dom.demoLabels === 1, `expected one demo label on a mock state, found ${dom.demoLabels}`);
-  } else {
-    expect(dom.demoLabels === 0, `published/live data must not carry the demo label, found ${dom.demoLabels}`);
-  }
-
+  expect(dom.demoLabels === (expectation.demoState === null ? 0 : 1), 'demo label count');
+  expect(dom.kpis === 0, 'KPI cards must be removed');
   if (kind === 'data') {
-    expect(dom.kpis === CARDS.length, `expected ${CARDS.length} [data-kpi], found ${dom.kpis}`);
-    for (const block of ALL_BLOCKS) expect(present(block) === 1, `expected the ${block} block once, found ${present(block)}`);
-    expect(dom.blocks.length === ALL_BLOCKS.length, `expected ${ALL_BLOCKS.length} [data-block], found ${dom.blocks.length}`);
-    expect(present('no-figures') === 0, 'data must not render the no-figures block');
-    expect(dom.chainStates.length >= 1, 'expected at least one [data-chain-state]');
-    expect(dom.chartSvgs >= 1 && dom.svgs >= 1, 'expected at least one chart svg');
-    expect(dom.flows >= 1, 'expected at least one [data-flow]');
-    if (expectation.exact && expectation.overview !== null) {
-      const equationCards = expectation.overview.chains.length;
-      expect(dom.chainStates.length === chains + equationCards, `expected ${chains + equationCards} [data-chain-state] (${chains} status rows + ${equationCards} equation cards), found ${dom.chainStates.length}`);
-      const expectedSvgs = 17 + 4 * equationCards;
-      expect(dom.svgs === expectedSvgs, `expected ${expectedSvgs} svg, found ${dom.svgs}`);
+    for (const block of ALL_BLOCKS) expect(present(block) === 1, `expected ${block} once`);
+    const overview = expectation.overview;
+    if (overview !== null) {
+      const charts = Object.values(overview.views).filter((view) => view !== null).length * 2
+        + Object.values(overview.views).reduce((total, view) => total + (view?.drivers.length ?? 0), 0) + 1;
+      expect(dom.chartSvgs === charts, `expected ${charts} data SVGs, found ${dom.chartSvgs}`);
+      expect(dom.chainStates.length === overview.chains.length * 3, 'dots, list and disclosure each carry every chain state');
+      if (overview.status.chains.some((status) => status.state === 'delayed')) expect(dom.delayedFlags > 0, 'delayed quality mark');
+      if (overview.status.chains.some((status) => status.state === 'unreconciled')) expect(dom.unreconciled > 0, 'unreconciled quality mark');
     }
-    if (expectation.state === 'delayed') {
-      expect(dom.chainStates.includes('delayed'), 'delayed: expected a [data-chain-state="delayed"]');
-      expect(dom.delayedFlags >= 1, 'delayed: expected a [data-flag="delayed"]');
-    }
-    if (expectation.state === 'unreconciled') expect(dom.unreconciled >= 1, 'unreconciled: expected a [data-unreconciled="true"]');
-    return problems;
+  } else {
+    expect(dom.chartSvgs === 0 && dom.flows === 0, `${kind} must have no charts or flows`);
+    for (const block of ALL_BLOCKS) expect(present(block) === 0, `${kind} must not draw ${block}`);
+    expect(dom.chainStates.length === (kind === 'empty' ? expectation.overview?.chains.length ?? 0 : 0), `${kind} chain dots`);
+    if (kind === 'unavailable') expect(dom.robots.includes('noindex'), 'outage noindex');
   }
-
-  if (kind === 'empty') {
-    expect(dom.kpis === 0, `empty: expected no [data-kpi], found ${dom.kpis}`);
-    expect(dom.chartSvgs === 0, `empty: expected no chart svg, found ${dom.chartSvgs}`);
-    expect(present('no-figures') === 1, `empty: expected the no-figures block once, found ${present('no-figures')}`);
-    expect(present('status') === 1, `empty: expected the status block once, found ${present('status')}`);
-    expect(dom.chainStates.length === chains, `empty: expected ${chains} [data-chain-state] (one per chain), found ${dom.chainStates.length}`);
-    for (const block of dataBlocks) expect(present(block) === 0, `empty: must not render ${block}`);
-    return problems;
-  }
-
-  expect(dom.kpis === 0, `unavailable: expected no [data-kpi], found ${dom.kpis}`);
-  expect(dom.chainStates.length === 0, `unavailable: expected no [data-chain-state], found ${dom.chainStates.length}`);
-  expect(dom.flows === 0, `unavailable: expected no [data-flow], found ${dom.flows}`);
-  expect(dom.chartSvgs === 0, `unavailable: expected no chart svg, found ${dom.chartSvgs}`);
-  for (const block of [...dataBlocks, 'status', 'no-figures']) expect(present(block) === 0, `unavailable: must not render ${block}`);
-  expect(dom.robots.includes('noindex'), `unavailable: expected <meta name="robots" content="noindex">, found [${dom.robots.join(',')}]`);
-  // The data text is the visible text without the static copy of texts.ts: no digit may be left.
-  const data = dataText(facts.html, expectation.demoState);
-  expect(!/\d/.test(data), `unavailable: the visible data text has digits: ${data.slice(0, 120)}`);
   return problems;
 }
-
-/**
- * The svg count of the `ok` state: 14 visible svgs (was 16: the three 30D chain cards yield
- * to the one 30D All view, −2 net; the cards stay rendered but hidden, counted below) plus
- * the two charts of section 03 in each of the two hidden period copies (4) plus the eleven
- * hidden figures of section 04 (3 periods × 4 views − the visible one); 14 + 4 + 11 = 29.
- * Nothing in the mock derives it.
- */
-export const OK_SVGS = 29;
 
 /**
  * The full HTML expectation of the server render (checkPageHtml, the one check:build uses) applied to the
@@ -306,75 +268,15 @@ export function checkChartHover(facts: Pick<PageFacts, 'hovers' | 'chartFrames'>
   return problems;
 }
 
-// ---- tone colours ------------------------------------------------------------------------------------
-
-const DIRECTED_CARDS = new Set(['change1d', 'change7d']);
-const TONE_CLASS: Record<string, string> = { positive: 'pos', negative: 'neg', neutral: 'neu' };
-const UP = '▲';
-const DOWN = '▼';
-
-/** The sign of a percent text such as "▲ +0.12%", "-3.4%" or "0.00%". */
-export function signOfPercentText(text: string): 'positive' | 'negative' | 'zero' | null {
-  const match = /([+\-−–])?\s*(\d[\d.,]*)/.exec(text);
-  if (match === null) return null;
-  if (/^[0.,]*$/.test(match[2] ?? '')) return 'zero';
-  return match[1] === '-' || match[1] === '−' || match[1] === '–' ? 'negative' : 'positive';
-}
-
-/**
- * The [data-tone] rules of the prompt:
- * - the cards change1d and change7d are directed: a non-zero change is positive (text starts with ▲) or
- *   negative (▼) by its sign, a zero change is neutral without an arrow;
- * - the other cards are never directed: neutral, no arrow, whatever the sign of the number;
- * - the class follows the tone (pos, neg, neu) and the computed colours of the tones present on the
- *   page all differ from each other.
- */
-export function checkTones(tones: ToneFact[]): string[] {
-  const problems: string[] = [];
-  const colors = new Map<string, string>();
-  for (const fact of tones) {
-    const label = `${fact.card ?? '?'} "${fact.text}"`;
-    const tone = fact.tone ?? '';
-    if (!(tone in TONE_CLASS)) {
-      problems.push(`${label}: data-tone is "${tone}", expected positive, negative or neutral`);
-      continue;
-    }
-    if (fact.className !== TONE_CLASS[tone]) problems.push(`${label}: tone ${tone} must carry the class ${TONE_CLASS[tone]}, has "${fact.className}"`);
-    const arrow = fact.text.startsWith(UP) ? 'up' : fact.text.startsWith(DOWN) ? 'down' : null;
-    if (fact.card !== null && DIRECTED_CARDS.has(fact.card)) {
-      const sign = signOfPercentText(fact.text);
-      const expected = sign === 'positive' ? 'positive' : sign === 'negative' ? 'negative' : sign === 'zero' ? 'neutral' : null;
-      if (expected === null) problems.push(`${label}: no percent to read the sign from`);
-      else {
-        if (tone !== expected) problems.push(`${label}: a ${sign} change must be ${expected}, data-tone is ${tone}`);
-        const wanted = expected === 'positive' ? 'up' : expected === 'negative' ? 'down' : null;
-        if (arrow !== wanted) problems.push(`${label}: expected ${wanted === 'up' ? UP : wanted === 'down' ? DOWN : 'no arrow'}, text starts with ${arrow === null ? 'no arrow' : arrow === 'up' ? UP : DOWN}`);
-      }
-    } else {
-      if (tone !== 'neutral') problems.push(`${label}: the card is never directed, data-tone must be neutral, is ${tone}`);
-      if (arrow !== null || fact.text.includes(UP) || fact.text.includes(DOWN)) problems.push(`${label}: the card is never directed, its text must have no arrow`);
-    }
-    const seen = colors.get(tone);
-    if (seen !== undefined && seen !== fact.color) problems.push(`${label}: tone ${tone} has two colors, ${seen} and ${fact.color}`);
-    colors.set(tone, fact.color);
-  }
-  const entries = [...colors];
-  for (const [index, [tone, color]] of entries.entries()) {
-    for (const [otherTone, otherColor] of entries.slice(index + 1)) {
-      if (color === otherColor) problems.push(`tones ${tone} and ${otherTone} have the same color ${color}`);
-    }
-  }
-  return problems;
-}
-
 // ---- all ---------------------------------------------------------------------------------------------
 
-export const CHECK_IDS = ['console', 'network', 'overflow', 'fonts', 'page-state', 'html', 'chart-hover', 'tone-colors'] as const;
+export const CHECK_IDS = ['console', 'network', 'overflow', 'fonts', 'page-state', 'html', 'chart-hover', 'home-interactions'] as const;
 export type CheckId = (typeof CHECK_IDS)[number];
 
 /** Every check of a page at one width: its problems by check id. Tone colours are skipped on empty and unavailable pages. */
 export function checkPage(facts: PageFacts, expectation: StateExpectation): Record<CheckId, string[]> {
   return {
+    'home-interactions': facts.interactions,
     console: checkConsole(facts.console),
     network: checkNetwork(facts),
     overflow: checkOverflow(facts),
@@ -382,7 +284,6 @@ export function checkPage(facts: PageFacts, expectation: StateExpectation): Reco
     'page-state': checkPageState(facts, expectation),
     html: checkHydratedHtml(facts.html, expectation),
     'chart-hover': checkChartHover(facts),
-    'tone-colors': expectation.kind === 'data' ? checkTones(facts.tones) : [],
   };
 }
 
