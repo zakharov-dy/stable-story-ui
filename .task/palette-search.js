@@ -1,3 +1,5 @@
+import process from 'node:process';
+import console from 'node:console';
 import { tokens } from '../packages/tokens/src/tokens.ts';
 // Reproduce the existing web palette method without editing the web test.
 const CVD = {

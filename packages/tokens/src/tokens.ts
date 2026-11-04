@@ -29,6 +29,11 @@ export const tokens = {
   'color-chain-4': '#cde793',
   'color-chain-5': '#d281b8',
   'color-chain-6': '#e06c77',
+  // Reserved for future chains; re-check when the seventh chain is enabled.
+  'color-chain-7': '#229165',
+  'color-chain-8': '#a6814a',
+  'color-chain-9': '#827b8a',
+  'color-chain-10': '#9e83fa',
 
   // Supply direction: lighter than issuer mint/burn so it never reads as issuer flow.
   'color-positive': '#c4f5dd',
@@ -62,6 +67,7 @@ export const tokens = {
   'space-4': '20px',
   'space-5': '32px',
   'space-6': '64px',
+  'section-gap': '96px', // between Home blocks
   radius: '10px',
   'radius-chip': '8px',
   'radius-pill': '999px',
@@ -70,6 +76,8 @@ export const tokens = {
   'shadow-tooltip': '0 12px 32px rgba(0, 0, 0, 0.45)',
   'content-max-width': '1280px',
   gutter: '80px', // page side gutter; 16px at phone
+  'sticky-bar-height': '48px', // Home sticky bar
+  'opacity-dimmed': '0.25', // other stack layers while a chain row is hovered
 
   'stroke-hairline': '1px',
   'stroke-line': '1.5px', // sparklines, area edges

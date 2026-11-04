@@ -30,7 +30,15 @@ describe('native token conversion', () => {
     expect(theme.radii.radius).toBe(10);
     expect(theme.radii.chip).toBe(8);
   });
-  it('keeps all six palette slots in chain order', () => {
-    expect(theme.chains).toEqual(['#7780d0', '#62d5f0', '#e8a16a', '#cde793', '#d281b8', '#e06c77']);
+  it('converts Home dimensions and the unitless dimming opacity', () => {
+    expect(theme.dimensions['sticky-bar-height']).toBe(48);
+    expect(theme.dimensions['section-gap']).toBe(96);
+    expect(theme.opacity.dimmed).toBe(0.25);
+  });
+  it('keeps all ten palette slots in chain order', () => {
+    expect(theme.chains).toEqual([
+      '#7780d0', '#62d5f0', '#e8a16a', '#cde793', '#d281b8', '#e06c77',
+      '#229165', '#a6814a', '#827b8a', '#9e83fa',
+    ]);
   });
 });

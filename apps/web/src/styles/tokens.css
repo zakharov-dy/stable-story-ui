@@ -25,6 +25,10 @@
   --color-chain-4: #cde793;
   --color-chain-5: #d281b8;
   --color-chain-6: #e06c77;
+  --color-chain-7: #229165;
+  --color-chain-8: #a6814a;
+  --color-chain-9: #827b8a;
+  --color-chain-10: #9e83fa;
   --color-positive: #c4f5dd;
   --color-negative: #ffcec6;
   --color-delayed: #f4c86a;
@@ -53,6 +57,7 @@
   --space-4: 20px;
   --space-5: 32px;
   --space-6: 64px;
+  --section-gap: 96px;
   --radius: 10px;
   --radius-chip: 8px;
   --radius-pill: 999px;
@@ -61,6 +66,8 @@
   --shadow-tooltip: 0 12px 32px rgba(0, 0, 0, 0.45);
   --content-max-width: 1280px;
   --gutter: 80px;
+  --sticky-bar-height: 48px;
+  --opacity-dimmed: 0.25;
   --stroke-hairline: 1px;
   --stroke-line: 1.5px;
   --stroke-net: 2.5px;
