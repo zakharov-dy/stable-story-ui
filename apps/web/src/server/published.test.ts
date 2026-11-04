@@ -1,4 +1,4 @@
-import { ApiError } from '@app/contracts';
+import { ApiError, type ApiClient } from '@app/contracts';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { loadPage } from './api.ts';
 import { createPublishedClient, PUBLICATION_TIMEOUT_MS } from './published.ts';
@@ -99,9 +99,14 @@ describe('invalid publications', () => {
 
 describe('read failures, cancellation and secrets', () => {
   const secret = 'secret-sentinel-never-log';
-  it('sanitizes errors constructing or closing a transport', async () => {
+  it('names an unconstructible store a configuration error and keeps the secret out of it', async () => {
     const failing = createPublishedClient(() => { throw new ApiError('http', secret, { cause: secret }); });
-    await expect(failing.overview()).rejects.toMatchObject({ kind: 'transport', message: 'Publication storage read failed' });
+    const failure: unknown = await failing.overview().catch((error: unknown) => error);
+    expect(failure).toBeInstanceOf(ApiError);
+    expect(failure).toMatchObject({ kind: 'transport', status: null, timeout: false });
+    expect((failure as ApiError).message).toBe('Publication storage configuration error');
+    expect(failure).not.toHaveProperty('cause');
+    expect(JSON.stringify(failure)).not.toContain(secret);
     const f = await setup();
     f.close.mockImplementation(() => { throw new Error(secret); });
     await expect(f.client.overview()).resolves.toEqual(f.overview);
@@ -111,7 +116,8 @@ describe('read failures, cancellation and secrets', () => {
     f.get.mockRejectedValue(new Error(`${message}: https://${secret}/?X-Amz-Signature=${secret}`));
     const failure: unknown = await f.client.overview().catch((error: unknown) => error);
     expect(failure).toBeInstanceOf(ApiError);
-    expect(failure).toMatchObject({ kind: 'transport', message: 'Publication storage read failed' });
+    expect(failure).toMatchObject({ kind: 'transport', status: null, timeout: false });
+    expect((failure as ApiError).message).toBe('Publication storage read failed for "current.json"');
     expect(failure).not.toHaveProperty('cause');
     expect(JSON.stringify(failure)).not.toContain(secret);
     const log = vi.spyOn(console, 'error').mockImplementation(() => {});
@@ -155,5 +161,116 @@ describe('read failures, cancellation and secrets', () => {
     expect(f.get).toHaveBeenCalledTimes(3);
     expect(f.get.mock.calls[2]?.[1].aborted).toBe(true);
     await vi.runAllTimersAsync(); // let the fake finish; no late unhandled rejection
+  });
+});
+
+describe('storage failure classes', () => {
+  const endpoint = 'https://account-id.r2.cloudflarestorage.com';
+  const accessKey = 'access-sentinel-never-log';
+  const secretKey = 'secret-sentinel-never-log';
+  const token = 'token-sentinel-never-log';
+  const signature = 'signed-sentinel-never-log';
+  const secrets = [endpoint, 'account-id', accessKey, secretKey, token, signature];
+
+  // Every class stays `unavailable` with a `transport` reason; the failure and the logged line
+  // carry only the class, the HTTP status and the object key — never credentials or URLs.
+  const expectUnavailableWithoutSecrets = async (failure: unknown, client: ApiClient): Promise<void> => {
+    expect(failure).toBeInstanceOf(ApiError);
+    expect(failure).toMatchObject({ kind: 'transport', status: null, timeout: false });
+    expect(failure).not.toHaveProperty('cause');
+    const log = vi.spyOn(console, 'error').mockImplementation(() => {});
+    expect(await loadPage(client)).toEqual({ state: 'unavailable', reason: 'transport' });
+    expect(log).toHaveBeenCalledTimes(1);
+    const text = `${JSON.stringify(failure)}${JSON.stringify(log.mock.calls)}`;
+    for (const secret of secrets) expect(text).not.toContain(secret);
+  };
+
+  it('configuration: a store that throws on construction names the class', async () => {
+    const failing = createPublishedClient(() => {
+      throw new Error(`bad endpoint ${endpoint} key=${accessKey} secret=${secretKey}`);
+    });
+    const failure: unknown = await failing.overview().catch((error: unknown) => error);
+    expect((failure as ApiError).message).toBe('Publication storage configuration error');
+    await expectUnavailableWithoutSecrets(failure, failing);
+  });
+
+  it.each([401, 403])('access denied: status %i names the class, status and key', async (status) => {
+    const f = await setup();
+    f.get.mockRejectedValue(Object.assign(
+      new Error(`AccessDenied: ${endpoint}/prepared/current.json?X-Amz-Signature=${signature}&token=${token}`),
+      { name: 'AccessDenied', $metadata: { httpStatusCode: status } },
+    ));
+    const failure: unknown = await f.client.overview().catch((error: unknown) => error);
+    expect((failure as ApiError).message).toBe(`Publication storage access denied for "current.json" (status ${status})`);
+    await expectUnavailableWithoutSecrets(failure, f.client);
+  });
+
+  it('access denied: a known denial code without metadata names the class and manifest key', async () => {
+    const f = await setup();
+    f.get.mockImplementation((key: string) =>
+      key === f.manifestKey
+        ? Promise.reject(Object.assign(new Error(`InvalidAccessKeyId: ${accessKey}`), { name: 'InvalidAccessKeyId' }))
+        : Promise.resolve(f.objects.get(key) ?? null),
+    );
+    const failure: unknown = await f.client.overview().catch((error: unknown) => error);
+    expect((failure as ApiError).message).toBe(`Publication storage access denied for "${f.manifestKey}"`);
+    await expectUnavailableWithoutSecrets(failure, f.client);
+  });
+
+  it('access denied: a code-only denial names the class and key', async () => {
+    const f = await setup();
+    // No `name` override: the inherited 'Error' must not shadow `Code`.
+    f.get.mockRejectedValue(Object.assign(new Error(`denied for ${accessKey}`), { Code: 'AccessDenied' }));
+    const failure: unknown = await f.client.overview().catch((error: unknown) => error);
+    expect((failure as ApiError).message).toBe('Publication storage access denied for "current.json"');
+    await expectUnavailableWithoutSecrets(failure, f.client);
+  });
+  it('not found: a 404 names the class, status and document key', async () => {
+    const f = await setup();
+    f.get.mockImplementation((key: string) =>
+      key === f.documentKey
+        ? Promise.reject(Object.assign(
+          new Error(`NoSuchKey: ${endpoint}/prepared/${key}?X-Amz-Signature=${signature}`),
+          { name: 'NoSuchKey', $metadata: { httpStatusCode: 404 } },
+        ))
+        : Promise.resolve(f.objects.get(key) ?? null),
+    );
+    const failure: unknown = await f.client.overview().catch((error: unknown) => error);
+    expect((failure as ApiError).message).toBe(`Publication object not found for "${f.documentKey}" (status 404)`);
+    await expectUnavailableWithoutSecrets(failure, f.client);
+  });
+
+  it('not found: a code-only missing key names the class and key', async () => {
+    const f = await setup();
+    // No `name` override: the inherited 'Error' must not shadow `Code`.
+    f.get.mockRejectedValue(Object.assign(new Error(`missing ${signature}`), { Code: 'NoSuchKey' }));
+    const failure: unknown = await f.client.overview().catch((error: unknown) => error);
+    expect((failure as ApiError).message).toBe('Publication object not found for "current.json"');
+    await expectUnavailableWithoutSecrets(failure, f.client);
+  });
+
+  it.each([
+    ['name', Object.assign(new Error('socket hang up'), { name: 'TimeoutError' })],
+    ['code', Object.assign(new Error(`connect ETIMEDOUT ${endpoint}`), { code: 'ETIMEDOUT' })],
+    ['S3 code', Object.assign(new Error('socket was not read from'), { Code: 'RequestTimeout' })],
+    ['status 408', Object.assign(new Error('Request Timeout'), { $metadata: { httpStatusCode: 408 } })],
+    ['status 504', Object.assign(new Error('Gateway Timeout'), { $metadata: { httpStatusCode: 504 } })],
+  ])('timeout (%s): an SDK or HTTP timeout names the class and key', (_label, cause: Error) => {
+    const get = vi.fn((): Promise<Uint8Array | null> => Promise.reject(cause));
+    const client = createPublishedClient(() => ({ get }));
+    return client.overview().catch((error: unknown) => error).then(async (failure: unknown) => {
+      expect((failure as ApiError).message).toBe('Publication storage read timed out for "current.json"');
+      await expectUnavailableWithoutSecrets(failure, client);
+    });
+  });
+
+  it('other: a 503 names the class, status and key without the response body', async () => {
+    const f = await setup();
+    f.get.mockRejectedValue(Object.assign(new Error(`ServiceUnavailable: ${secretKey}`), {
+      name: 'ServiceUnavailable', $metadata: { httpStatusCode: 503 },
+    }));
+    const failure: unknown = await f.client.overview().catch((error: unknown) => error);
+    expect((failure as ApiError).message).toBe('Publication storage read failed for "current.json" (status 503)');
+    await expectUnavailableWithoutSecrets(failure, f.client);
   });
 });

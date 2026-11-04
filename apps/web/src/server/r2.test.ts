@@ -33,14 +33,21 @@ describe('GET-only S3 transport with an offline handler', () => {
       body: Readable.from([`<Error><Code>ServiceUnavailable</Code><Message>${config.secretAccessKey}</Message></Error>`]),
     } }));
     const client = createPublishedClient(() => createR2Store(config, { handle }));
-    await expect(client.overview()).rejects.toMatchObject({ kind: 'transport', message: 'Publication storage read failed' });
+    const failure: unknown = await client.overview().catch((error: unknown) => error);
+    expect(failure).toMatchObject({ kind: 'transport', status: null });
+    expect((failure as Error).message).toBe('Publication storage read failed for "current.json" (status 503)');
+    expect(JSON.stringify(failure)).not.toContain(config.secretAccessKey);
+    expect(JSON.stringify(failure)).not.toContain(config.accessKeyId);
+    expect(JSON.stringify(failure)).not.toContain(config.endpoint);
     expect(handle).toHaveBeenCalledOnce();
   });
 
   it('rejects an object with no ETag rather than accepting unreadable publication bytes', async () => {
     const handle = vi.fn(() => Promise.resolve({ response: { statusCode: 200, headers: {}, body: Readable.from(['{}']) } }));
     const client = createPublishedClient(() => createR2Store(config, { handle }));
-    await expect(client.overview()).rejects.toMatchObject({ kind: 'transport', message: 'Publication storage read failed' });
+    await expect(client.overview()).rejects.toMatchObject({
+      kind: 'transport', message: 'Publication storage read failed for "current.json"',
+    });
     expect(handle).toHaveBeenCalledOnce();
   });
 });

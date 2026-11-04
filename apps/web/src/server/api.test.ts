@@ -8,8 +8,8 @@ import { publication } from '../test-support/publication.ts';
 
 vi.mock('server-only', () => ({}));
 
-// Captures the options `createApiClient` hands to the real http client. The client's default is the
-// same 10 000 ms, so only this boundary shows whether the page constant is really used.
+// Captures the options `createApiClient` hands to the real http client. The client's own default
+// stays 10 000 ms, so only this boundary shows whether the page constant is really used.
 const httpOptions = vi.hoisted(() => [] as Contracts.HttpClientOptions[]);
 const r2 = vi.hoisted(() => ({ configs: [] as R2Config[], objects: new Map<string, Uint8Array>() }));
 vi.mock('./r2.ts', () => ({ createR2Store: (config: R2Config) => {
@@ -78,6 +78,7 @@ describe('createApiClient', () => {
   });
 
   it('gives the live http client the explicit page timeout', () => {
+    expect(PAGE_REQUEST_TIMEOUT_MS).toBe(30_000);
     createApiClient({ mode: 'live', apiUrl: 'https://api.example.com/' });
     expect(httpOptions).toEqual([{ baseUrl: 'https://api.example.com/', timeoutMs: PAGE_REQUEST_TIMEOUT_MS }]);
   });
