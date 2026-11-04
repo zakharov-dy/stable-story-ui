@@ -135,8 +135,11 @@ the catalog. After adding or moving stories, regenerate and commit it:
 pnpm --filter @app/mobile storybook:generate
 ```
 
-Storybook's SVG and bottom-sheet peers are development dependencies for its catalog
-UI only. They introduce no product chart or sheet components.
+The Today waterfall uses `react-native-svg`; the History and Chain charts use Skia.
+Data is an Expo Router native sheet. Storybook's bottom-sheet peer is catalog-only.
+
+Route wrappers are under `app/`; screen implementations live under `src/screens/`.
+Shared native UI and chart rendering live under `src/ui/` and `src/charts/`.
 
 Rebuild with `ios` after changing native dependencies or app configuration.
 Generated `ios/`, `android/` and `.expo/` folders are ignored and never committed.
