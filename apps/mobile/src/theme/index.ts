@@ -18,6 +18,7 @@ const dimensions = Object.fromEntries(
 export const theme = {
   colors,
   dimensions,
+  opacity: { dimmed: Number(source['opacity-dimmed']) },
   fonts: { sans: fontFamily(source['font-sans']), mono: fontFamily(source['font-mono']) },
   typeScale: {
     xs: dimensions['font-size-xs'], sm: dimensions['font-size-sm'], md: dimensions['font-size-md'],
@@ -35,5 +36,6 @@ export const theme = {
   },
   // Palette slots follow overview.chains order, without importing the server registry.
   chains: [colors['color-chain-1'], colors['color-chain-2'], colors['color-chain-3'],
-    colors['color-chain-4'], colors['color-chain-5'], colors['color-chain-6']],
+    colors['color-chain-4'], colors['color-chain-5'], colors['color-chain-6'],
+    colors['color-chain-7'], colors['color-chain-8'], colors['color-chain-9'], colors['color-chain-10']],
 } as const;

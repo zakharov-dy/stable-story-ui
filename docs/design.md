@@ -18,7 +18,20 @@ Page and card backgrounds, with a raised chip for nested surfaces. Primary and s
 
 ### Data colors
 
-Issuer mint and burn, CCTP bridge in and out (hatched in charts), the net line, and six chain colours in `overview.chains` order. A chain colour is never used for a flow (mint, burn, bridge, net) in the same chart. Positive and negative name the direction of a supply change and are deliberately lighter than mint and burn, so a change never reads as an issuer flow. Separate marks for a chain that is behind, a day or chain whose checks fail, a bridge event without a CCTP operation, missing or incomplete data (`n/a`) with its shaded column, and the zero line of every chart.
+Issuer mint and burn, CCTP bridge in and out (hatched in charts), the net line, and ten chain colour slots in `overview.chains` order. A chain colour is never used for a flow (mint, burn, bridge, net) in the same chart. Positive and negative name the direction of a supply change and are deliberately lighter than mint and burn, so a change never reads as an issuer flow. Separate marks for a chain that is behind, a day or chain whose checks fail, a bridge event without a CCTP operation, missing or incomplete data (`n/a`) with its shaded column, and the zero line of every chart.
+
+Slots 7–10 are reserved for chains not enabled yet and are re-checked when a seventh chain is enabled.
+Their palette check uses WCAG contrast ≥ 4.5 on `--color-bg` and `--color-surface`, normal-vision CIE76 ΔE ≥ 20, and ΔE ≥ 14.2 under the Machado severity-1 protanopia, deuteranopia and tritanopia simulations, as approved on 2026-11-04. Comparisons cover the six enabled chain colours, five flow colours, positive/negative supply direction, delayed/unreconciled/unpaired/incomplete quality colours, and the other reserved chain slots. The incomplete shade uses the incomplete colour at 14% opacity.
+
+| New token | Value | Purpose |
+|---|---|---|
+| `color-chain-7` | `#229165` | Reserved seventh chain colour |
+| `color-chain-8` | `#a6814a` | Reserved eighth chain colour |
+| `color-chain-9` | `#827b8a` | Reserved ninth chain colour |
+| `color-chain-10` | `#9e83fa` | Reserved tenth chain colour |
+| `sticky-bar-height` | `48px` | Height of the Home sticky bar |
+| `opacity-dimmed` | `0.25` | Opacity of the other stack layers while a chain list row is hovered |
+| `section-gap` | `96px` | Gap between Home blocks |
 
 ### Quality marks: component × state × token
 
