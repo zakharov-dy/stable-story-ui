@@ -39,3 +39,29 @@
 - `git ls-remote origin 'refs/pull/*/head'` exit 0. Returned only PR heads 1 and 2 at unrelated commits. No pull-request head matches the initial pushed task/plan commits, so first-push PR creation is currently unconfirmed and appears pending in the outer driver.
 - No full project checks have run because production implementation is awaiting the required palette decision. `pnpm install` remains exit 0.
 - Escalate without a review push. The approved plan explicitly requires an owner decision before relaxing the palette bar. Local evidence and decisions are committed for the coordinator to inspect.
+
+# Approved implementation (2026-11-04)
+
+- The owner approved the exact fallback quartet and the simulated-vision floor of 14.2. The clarification is recorded verbatim in its own commit `febbfef`. This supersedes the pending decision above. Normal-vision distance remains >=20 and contrast remains >=4.5 on both backgrounds.
+- Added exactly seven tokens. The four reserved chain colours use the approved hex values. Added section-gap `96px`, sticky-bar-height `48px` and opacity-dimmed `0.25`.
+- Regenerated web CSS with `pnpm --filter @app/tokens generate` (exit 0).
+- Added `packages/tokens/tools/chain-palette.test.ts`. It pins six old colours and four reserved colours, asserts both unrounded contrast floors, every unrounded pairwise distance floor, and two-decimal expected contrasts/minimum distances computed from the imported tokens. Mathematical code matches the existing web palette test. No production helper or cross-module import was introduced.
+- Documented all new tokens, purposes, ten slots, comparison set and approved thresholds inside the Tokens section only. Added the requested single sentence reserving slots 7–10 and requiring re-check when a seventh chain is enabled.
+- Extended the explicit native chain list to ten entries. Kept generic colour/px conversion as-is. Added the planned `theme.opacity.dimmed` numeric field for the new unitless token, which those generic maps do not expose. Extended the existing native conversion tests for ten colours, both dimensions and opacity. `theme.chains` has no production consumers that iterate the list today.
+- Programmatic comparison to origin/main exits 0. All 74 original token names and exact values survive, phone overrides and breakpoint match, and there are exactly seven additions. The same check confirms every docs change lies inside Tokens. `git diff --check` exits 0.
+- Targeted Vitest command for palette, generated CSS drift and native conversion exits 0 (39 tests).
+- `pnpm typecheck | tail -40` with pipefail exits 0.
+- First `pnpm lint | tail -40` with pipefail exits 1 because the temporary `.task/palette-search.js` diagnostic used process/console without imports. Added explicit Node imports in that diagnostic. Production files had no lint findings. Re-run is recorded below.
+- `pnpm test --reporter=dot | tail -40` with pipefail exits 0 (58 files, 1,464 tests). The browser-test cleanup-failure stderr is from an intentional passing negative test.
+- `pnpm test:rn | tail -30` with pipefail exits 0 (4 suites, 17 tests).
+
+# Completed checks and review submission
+
+- Last code commit and checked content is `8e3660f5dfa7787192aff17da1d14ce3262a6d2f`. Checks ran on the identical code working tree subsequently committed at that SHA. Remaining changes in this review submission only record task decisions.
+- Lint re-run with pipefail exits 0 after the diagnostic import fix. Lint attempts are 1 then 0.
+- `pnpm check:build | tail -40` with pipefail and AI_AGENT/CLAUDECODE unset exits 0. The ConfigError logs are expected negative configuration scenarios, followed by the script's final ok.
+- `pnpm browser-smoke | tail -30` with pipefail and AI_AGENT/CLAUDECODE unset exits 0. All 20 mock/published desktop/phone runs pass. No screenshots requested and BROWSER_SMOKE_SHOTS is unset.
+- Final project check exit codes are typecheck 0, lint 0, unit tests 0, check:build 0, browser-smoke 0, test:rn 0. Unit tests number 1,464 in 58 files, native tests 17 in 4 suites.
+- Rejected alternatives remain the original four proposals, silently dropping reference colours, weakening normal contrast/distance floors, and claiming a globally nearest quartet from a sequential search. Applied the owner's exact quartet and simulated floor instead.
+- Plan deviation is limited to the expressly approved simulated-vision floor of 14.2. Preserve harness-assigned branch `worktree-go-hometokens` as previously recorded. PR creation remains delegated to the outer driver.
+- Ready for the first implementation review. The plan had one approved review round. Keep task files through review, then remove them in a separate cleanup commit after final approval.
