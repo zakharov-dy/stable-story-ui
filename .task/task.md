@@ -44,3 +44,26 @@ Fresh `origin/main` of this repository (`zakharov-dy/stable-story-ui`), `pnpm in
 ## Для ревьюера
 
 Major: a launch criterion check above fails or passes for the wrong reason; a value derived on the page (sum, difference, bucket) or a contract change; a block, order, text or state that contradicts the accepted boards; null rendered as 0; a second tooltip or a native title after hydration; hover on non-interactive elements; overlapping or truncated text at 320/390/1280 that the boards do not have; a chain colour used for a flow. Everything else is minor.
+## Coordinator clarification
+
+AI review, plan round 1/3 (commandcode deepseek/deepseek-v4.1-flash · high, commit 8e1cdd8): plan approved.
+The plan is coherent and implementable: it maps every launch criterion to a check, keeps all figures from contract fields, and respects the allowed paths and no-screenshot rules. The reconciliation stamp can be omitted as the task already permits; the remaining items are board details to confirm before coding rather than plan blockers.
+
+Questions from the reviewer:
+- The task already permits omitting the reconciliation stamp when the contract lacks the data; proceed with omission and note it in the report. Do not block the implementation waiting for a separate answer on the brand-row tally unless the coordinator says the board requires it.
+- Docs/design.md currently says How we count is drawn in every state (without its coverage line when unavailable). The plan says "no method/footer on unavailable or empty boards". Confirm from the accepted Home state boards that both How we count and the disclaimer are actually removed there; if they are kept, restore them in the plan.
+- The plan's chain-dot disclosure table lists state, last closed day, checks, last run and mismatched days, but the current status table also carries Last block. Confirm whether the board's disclosure keeps Last block (and the current table columns) or intentionally drops it.
+- Confirm the board actually shows a peak annotation on the supply stack. If it does not, drop it; adding an annotation not on the boards would contradict the specification.
+- The contract comment says largestEvents carries five items with no paging (nextCursor: null), and the task says "five largest operations". Confirm whether the board really has a "Show all N" disclosure for remaining rows; if items are exactly five, render the five rows and drop the empty disclosure.
+- Confirm whether the hero deltas use header.change1d/change7d .value or .changePct, or both. The plan's data-provenance list names only .value while the board may show percentages.
+- Confirm how the chain list is period-scoped. The plan says latest level/share from the 30D view; if the board's chain list follows the selected stack period, take the values from the selected view instead.
+- Confirm the tokens/home-redesign dependency is merged before CSS work; if not, state how --sticky-bar-height, --opacity-dimmed, and chain slots 7–10 will be obtained without adding token values locally.
+
+Minor (optional, non-blocking):
+- The plan says "four scope-all records"; the contract does not guarantee exactly four or that every record is scope-all. Render the overview.records array as supplied (filtered as the board shows) rather than assuming a cardinality.
+- Enumerate the texts.ts keys removed (cadence, KPI/equation/sparkline strings, incomplete-period wording) and the new board strings added, so no obsolete string survives or is tested by accident.
+- Keep the main 30D/90D/ALL switch CSS-only and test it without JavaScript, as docs/design.md requires; the plan only says selection is hydrated. The sticky copy may use JavaScript.
+- Spell out the exact docs/design.md sections to rewrite (glow, KPI cards, sparklines, status table, section numbers, incomplete shading and captions, period switch) and which old rules remain unchanged.
+- State explicitly that `pnpm browser-smoke` will include the 320 px stress width in addition to the 390 and 1280 board widths, and how overflow/overlap is asserted at each.
+
+Implement the plan now. Record decisions and any deviation from the plan, with the reason, in .task/decisions.md. Push when the implementation is ready for review: the same reviewer session reviews it, with a new limit of 3 rounds.
