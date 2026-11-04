@@ -85,6 +85,14 @@
   --motion-base: 240ms;
   --motion-max: 400ms;
   --motion-ease: cubic-bezier(0.2, 0, 0, 1);
+  --tab-bar-height: 56px;
+  --touch-target: 44px;
+  --tab-indicator: 2px;
+  --row-height-chain: 84px;
+  --row-height-ledger: 64px;
+  --row-height-operation: 64px;
+  --skeleton-pulse: 1600ms;
+  --radius-sheet: 16px;
 }
 
 @media (max-width: 720px) {

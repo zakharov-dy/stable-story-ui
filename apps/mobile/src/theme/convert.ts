@@ -4,6 +4,12 @@ export function px(value: string): number {
   return Number(value.slice(0, -2));
 }
 
+/** CSS ms become React Native milliseconds, without silently accepting other units. */
+export function ms(value: string): number {
+  if (!/^-?(?:\d+\.?\d*|\.\d+)ms$/.test(value)) throw new Error(`Expected ms: ${value}`);
+  return Number(value.slice(0, -2));
+}
+
 /** Both hex and rgba are native colors. Resolve CSS aliases before passing them on. */
 export function color(value: string, source: Readonly<Record<string, string>>, seen: readonly string[] = []): string {
   const alias = /^var\(--([\w-]+)\)$/.exec(value)?.[1];
