@@ -404,3 +404,5 @@
     padding-top: 0;
   }
 }
+.wf-plot pattern rect[data-flow] { fill: var(--flow-color); stroke: none; }
+.wf-plot rect[data-flow^='bridge'], .wf-plot [data-unreconciled='true'] { stroke-width: var(--stroke-line); }

@@ -613,3 +613,4 @@
 @media (max-width: 360px) {
   .chart-x .phone { display: none; }
 }
+.tt-dot, .chart-ring[data-chain-index] { background: var(--chain-color, var(--color-border)); }
