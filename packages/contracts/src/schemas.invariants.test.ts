@@ -25,6 +25,7 @@ import {
   coveredOverview,
   withHeaderDays,
   rejects,
+  fixtureReconciliation,
 } from './schemas.invariants.fixtures.ts';
 
 describe('response invariants', () => {
@@ -342,7 +343,7 @@ describe('response invariants', () => {
 
   it('lists each enabled chain once and has no coverage without one', () => {
     rejects(Overview, covered([], []), ['asOf']);
-    expect(Overview.safeParse({ ...emptyOverview, chains: [], status: { chains: [] } }).success).toBe(true);
+    expect(Overview.safeParse({ ...emptyOverview, chains: [], status: { chains: [] }, reconciliation: fixtureReconciliation([], []) }).success).toBe(true);
     rejects(Overview, covered(['ethereum', 'ethereum'], [status]), ['chains.1.slug']);
   });
 
@@ -353,10 +354,10 @@ describe('response invariants', () => {
   it('keeps per-chain data when there is no common coverage', () => {
     const chains = [...emptyOverview.chains, { slug: 'base', name: 'Base', explorerTx: 'https://basescan.org/tx/{hash}' }];
     const statuses = [status, { ...noData, chain: 'base' }];
-    expect(Overview.safeParse({ ...emptyOverview, chains, status: { chains: statuses } }).success).toBe(true);
+    expect(Overview.safeParse({ ...emptyOverview, chains, status: { chains: statuses }, reconciliation: fixtureReconciliation(['ethereum', 'base'], statuses) }).success).toBe(true);
     const disjoint = [status, { ...status, chain: 'base', historyStart: '2026-10-07', lastClosedDay: '2026-10-08',
       nextDueAt: '2026-10-10T06:00:00Z', reconciliation: { ...status.reconciliation, day: '2026-10-08' } }];
-    expect(Overview.safeParse({ ...emptyOverview, chains, status: { chains: disjoint } }).success).toBe(true);
+    expect(Overview.safeParse({ ...emptyOverview, chains, status: { chains: disjoint }, reconciliation: fixtureReconciliation(['ethereum', 'base'], disjoint) }).success).toBe(true);
   });
 
   it('derives common coverage from the statuses of the enabled chains', () => {

@@ -161,5 +161,41 @@
         "unreconciledDays": []
       }
     ]
+  },
+  "reconciliation": {
+    "all": {
+      "closedDays": 90,
+      "events": 450,
+      "mismatchedDays": 0,
+      "streakDays": 0,
+      "streakEnd": null
+    },
+    "chains": [
+      {
+        "chain": "ethereum",
+        "closedDays": 45,
+        "events": 225,
+        "mismatchedDays": 0,
+        "streakDays": 45,
+        "streakEnd": "2026-10-09"
+      },
+      {
+        "chain": "base",
+        "closedDays": 0,
+        "events": 0,
+        "mismatchedDays": 0,
+        "streakDays": 0,
+        "streakEnd": null
+      },
+      {
+        "chain": "arbitrum",
+        "closedDays": 45,
+        "events": 225,
+        "mismatchedDays": 0,
+        "streakDays": 45,
+        "streakEnd": "2026-10-09"
+      }
+    ],
+    "reconciledChains": 2
   }
 }

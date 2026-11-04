@@ -3913,5 +3913,25 @@
         ]
       }
     ]
+  },
+  "reconciliation": {
+    "all": {
+      "closedDays": 1,
+      "events": 5,
+      "mismatchedDays": 1,
+      "streakDays": 0,
+      "streakEnd": "2026-10-09"
+    },
+    "chains": [
+      {
+        "chain": "ethereum",
+        "closedDays": 1,
+        "events": 5,
+        "mismatchedDays": 1,
+        "streakDays": 0,
+        "streakEnd": "2026-10-09"
+      }
+    ],
+    "reconciledChains": 0
   }
 }

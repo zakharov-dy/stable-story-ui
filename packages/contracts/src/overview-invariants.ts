@@ -66,7 +66,7 @@ function seriesIssues(series: Series, view: OverviewView, keys: string[], unit: 
   check(ctx, valid, [...path, 'buckets'], 'Every calendar interval intersecting the window appears once, in order');
 }
 
-function flagIssues(overview: Overview, series: Series, scopes: string[], path: Path, ctx: z.RefinementCtx): void {
+function flagIssues(overview: Omit<Overview, 'reconciliation'>, series: Series, scopes: string[], path: Path, ctx: z.RefinementCtx): void {
   const days = overview.status.chains.filter((status) => scopes.includes(status.chain)).flatMap((status) => status.unreconciledDays);
   series.lines.forEach((line, index) => {
     const chainDays = series.unit === 'percent' || line.chain === undefined ? days : path.at(-1) === 'stackedLevel' ?
@@ -169,7 +169,7 @@ function aggregateIssues(view: OverviewView, absent: string[][], starts: Map<str
   });
 }
 
-export function overviewViewsIssues(overview: Overview, ctx: z.RefinementCtx): void {
+export function overviewViewsIssues(overview: Omit<Overview, 'reconciliation'>, ctx: z.RefinementCtx): void {
   if (overview.chains.length === 0 && overview.asOf !== null) return; // Report the forbidden common coverage once, in the outer invariant.
   const scopes = ['all', ...overview.chains.map((chain) => chain.slug)];
   const chains = scopes.slice(1);
