@@ -1,10 +1,11 @@
 import { phoneTokens, tokens } from '@app/tokens';
-import { color, fontFamily, px } from './convert.ts';
+import { color, fontFamily, ms, px } from './convert.ts';
 
 const source = { ...tokens, ...phoneTokens };
 type Source = typeof source;
 type ColorToken = Extract<keyof Source, `color-${string}`>;
 type PxToken = { [K in keyof Source]: Source[K] extends `${number}px` ? K : never }[keyof Source];
+type MsToken = { [K in keyof Source]: Source[K] extends `${number}ms` ? K : never }[keyof Source];
 
 const colors = Object.fromEntries(
   Object.entries(source).filter(([name]) => name.startsWith('color-'))
@@ -14,10 +15,15 @@ const dimensions = Object.fromEntries(
   Object.entries(source).filter(([, value]) => value.endsWith('px'))
     .map(([name, value]) => [name, px(value)]),
 ) as Record<PxToken, number>;
+const durations = Object.fromEntries(
+  Object.entries(source).filter(([, value]) => value.endsWith('ms'))
+    .map(([name, value]) => [name, ms(value)]),
+) as Record<MsToken, number>;
 
 export const theme = {
   colors,
   dimensions,
+  durations,
   opacity: { dimmed: Number(source['opacity-dimmed']) },
   fonts: { sans: fontFamily(source['font-sans']), mono: fontFamily(source['font-mono']) },
   typeScale: {

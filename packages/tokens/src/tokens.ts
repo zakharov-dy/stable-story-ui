@@ -97,6 +97,16 @@ export const tokens = {
   'motion-base': '240ms', // row and card background, border
   'motion-max': '400ms', // hard ceiling
   'motion-ease': 'cubic-bezier(0.2, 0, 0, 1)',
+
+  // Native app: tab bar, list rows, sheet and loading pulse (Mobile-* boards).
+  'tab-bar-height': '56px', // bottom tab bar
+  'touch-target': '44px', // minimum tap target
+  'tab-indicator': '2px', // active tab line
+  'row-height-chain': '84px', // Today chain row
+  'row-height-ledger': '64px', // History ledger row
+  'row-height-operation': '64px', // Operations row
+  'skeleton-pulse': '1600ms', // loading skeleton cycle
+  'radius-sheet': '16px', // Data sheet corners
 } as const satisfies Readonly<Record<string, string>>;
 
 export type TokenName = keyof typeof tokens;

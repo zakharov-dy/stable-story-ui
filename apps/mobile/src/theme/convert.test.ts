@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { color, fontFamily, px } from './convert.ts';
+import { color, fontFamily, ms, px } from './convert.ts';
 import { theme } from './index.ts';
 
 describe('native token conversion', () => {
@@ -34,6 +34,19 @@ describe('native token conversion', () => {
     expect(theme.dimensions['sticky-bar-height']).toBe(48);
     expect(theme.dimensions['section-gap']).toBe(96);
     expect(theme.opacity.dimmed).toBe(0.25);
+  });
+  it('converts native-app dimensions and the skeleton pulse without dropping units', () => {
+    expect(theme.dimensions['tab-bar-height']).toBe(56);
+    expect(theme.dimensions['touch-target']).toBe(44);
+    expect(theme.dimensions['tab-indicator']).toBe(2);
+    expect(theme.dimensions['row-height-chain']).toBe(84);
+    expect(theme.dimensions['row-height-ledger']).toBe(64);
+    expect(theme.dimensions['row-height-operation']).toBe(64);
+    expect(theme.dimensions['radius-sheet']).toBe(16);
+    expect(ms('1600ms')).toBe(1600);
+    expect(() => ms('1.6s')).toThrow('Expected ms');
+    expect(theme.durations['skeleton-pulse']).toBe(1600);
+    expect(theme.durations['motion-fast']).toBe(180);
   });
   it('keeps all ten palette slots in chain order', () => {
     expect(theme.chains).toEqual([

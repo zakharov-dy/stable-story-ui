@@ -10,7 +10,7 @@ A dark, blue-violet instrument panel: a deep background, a slightly lighter surf
 
 ## Tokens
 
-[`packages/tokens/src/tokens.ts`](../packages/tokens/src/tokens.ts) is the source of the token values for web and React Native ([ADR 0025](decisions/0025-shared-design-tokens.md)). Regenerate the committed web CSS with `pnpm --filter @app/tokens generate`; the Design System artifact is rebuilt from repository tokens. What follows is the purpose of each token group and the rules for using it.
+[`packages/tokens/src/tokens.ts`](../packages/tokens/src/tokens.ts) is the source of the token values for web and React Native ([ADR 0025](decisions/0025-shared-design-tokens.md)). Regenerate the committed web CSS with `pnpm --filter @app/tokens generate`; the Design System artifact is rebuilt from repository tokens. What follows is the purpose of each token group and the rules for using it. The native-app group (`tab-bar-height`, `touch-target`, `tab-indicator`, `row-height-chain`, `row-height-ledger`, `row-height-operation`, `skeleton-pulse`, `radius-sheet`) sizes the mobile tab bar, list rows and data sheet and times the loading skeleton pulse.
 
 ### Surfaces and text
 
