@@ -54,3 +54,5 @@ Minor (optional, non-blocking):
 - Confirm the first push opens the PR as the task requires, and keep all docs/design.md edits inside the Tokens section without touching the six-slot page rules or any Launch rule.
 
 Implement the plan now. Record decisions and any deviation from the plan, with the reason, in .task/decisions.md. Push when the implementation is ready for review: the same reviewer session reviews it, with a new limit of 3 rounds.
+
+Clarification (2026-11-04): approved. For chain slots 7–10 use your fallback quartet (`#229165`, `#a6814a`, `#827b8a`, `#9e83fa`): contrast ≥ 4.5 on bg and surface and normal-vision ΔE ≥ 20 stay as required; the floor under the three simulated visions for comparisons involving slots 7–10 is 14.2 ΔE. Slots 7–10 are reserved for chains not enabled yet; say in `docs/design.md`, in one sentence, that they are re-checked when a seventh chain is enabled. Keep the palette check as a unit test with these floors. Complete the task as planned.
