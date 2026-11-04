@@ -7,17 +7,17 @@
 // No-JS path: the server render holds the SVG root <title> and one <title> per column. In the
 // structured mode the first effect drops every one of them, the root label title included (browsers
 // can show that as a native tooltip too), so the card is the only tooltip; the accessible names stay
-// on the chart's aria-label and on the focusable plot. The plain path (drivers, sparklines) never
-// reads `hydrated` and keeps its titles and behaviour.
+// on the chart's aria-label and on the focusable plot. Every chart removes native titles.
 //
 // It gets ready-made strings and the server-rendered marks through props; it imports nothing but
 // React and never fetches.
 import { useEffect, useRef, useState } from 'react';
+import { texts } from '../../texts.ts';
 import type { KeyboardEvent, PointerEvent, ReactNode, RefObject } from 'react';
 import { Fragment } from 'react';
 import type { ChartMarker, TooltipColumn, TooltipMarker } from '@app/view';
 
-export const TOOLTIP_WIDTH = 248; // px, .chart-tooltip in charts.css
+export const TOOLTIP_WIDTH = 300; // px, .chart-tooltip in charts.css
 export const TOOLTIP_GAP = 18; // px from the column centre to the card
 
 /** A plot that shows one tooltip at a time together with the other plots of the page. */
@@ -236,11 +236,11 @@ export function ChartHoverView(props: ChartHoverViewProps) {
     yAxis, xAxis, aside, pinOnTouch, closeLabel, pinned = false, onClose, onKeyDown, ...handlers
   } = props;
   const structured = tooltips !== undefined;
-  const titles = !structured || !hydrated;
+  const titles = !hydrated;
   const center = active === null ? 0 : columnCenter(active, tips.length, plot.left, plot.right);
   const column = tooltips !== undefined && active !== null ? tooltips[active] : undefined;
   const tip = active === null ? undefined : tips[active];
-  const placement = column === undefined ? undefined : placeCard(center * width, TOOLTIP_WIDTH, TOOLTIP_GAP, plot.left * width, plot.right * width);
+  const placement = column === undefined ? undefined : placeCard(center * width, Math.min(width, TOOLTIP_WIDTH), TOOLTIP_GAP, plot.left * width, plot.right * width);
   const chipLeft = column === undefined ? 0 : clampChip(center * width, chipWidth, plot.left * width, plot.right * width);
   const rings = column === undefined || active === null ? [] : (markers?.[active] ?? []);
   const card = column === undefined ? null : (
@@ -252,7 +252,7 @@ export function ChartHoverView(props: ChartHoverViewProps) {
       data-side={placement?.flipped === true ? 'left' : 'right'}
       style={pinned ? undefined : { left: placement?.left ?? 0, top: `calc(${percent(plot.top)} + var(--space-3))` }}
     >
-      {pinned ? <button type="button" className="chart-tooltip-close" onClick={onClose} aria-label={closeLabel}>×</button> : null}
+      {pinned ? <button type="button" className="chart-tooltip-close" onClick={onClose} aria-label={closeLabel}>{texts.resolution.closeMark}</button> : null}
       {column.hideHeader === true ? null : <div className="chart-tooltip-head">
         {column.header.marker === 'none'
           ? <span className="tt-line" data-hidden="true" aria-hidden="true" />
@@ -277,7 +277,7 @@ export function ChartHoverView(props: ChartHoverViewProps) {
         </Fragment>
       ))}
       {column.note === undefined ? null : (
-        <div className="chart-tooltip-note" data-tone={column.note.tone}>{column.note.text}</div>
+        <div className="chart-tooltip-note" data-tone={column.note.tone} data-quality={column.note.tone}>{column.note.text}</div>
       )}
       <div className="chart-tooltip-foot">
         <span>{column.footer.label}</span>

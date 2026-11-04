@@ -19,6 +19,7 @@ export interface Tick {
   label: string;
   /** A date mark that is dropped at phone width, keeping fewer labels. */
   minor?: boolean;
+  phone?: boolean;
 }
 
 /** Axis labels as HTML around the SVG, so they keep their size at any width: value strings from the data. */
@@ -108,7 +109,7 @@ export function Chart({ frame, tips, tooltips, announcements, markers, label, ax
         <div className="chart-x" aria-hidden="true">
           <span className="s">{axis.start}</span>
           {(axis.marks ?? []).map((mark) => (
-            <span key={mark.label + String(mark.at)} className={mark.minor === true ? 'w minor' : 'w'} style={{ left: percent((frame.left + plotWidth(frame) * mark.at) / frame.width) }}>
+            <span key={mark.label + String(mark.at)} className={mark.phone === true ? 'w phone' : mark.minor === true ? 'w minor' : 'w'} style={{ left: percent((frame.left + plotWidth(frame) * mark.at) / frame.width) }}>
               {mark.label}
             </span>
           ))}
@@ -125,7 +126,7 @@ export function Chart({ frame, tips, tooltips, announcements, markers, label, ax
  * Column bands behind the plot: incomplete buckets (shaded) and days without data (shaded, with a
  * dashed border where a run of missing days meets known ones).
  */
-export function ColumnBands({ frame, incomplete, missing }: { frame: Frame; incomplete: readonly boolean[]; missing: readonly boolean[] }) {
+export function ColumnBands({ frame, missing }: { frame: Frame; missing: readonly boolean[] }) {
   const width = columnWidth(frame);
   const top = frame.top;
   const bottom = frame.height - frame.bottom;
@@ -137,12 +138,11 @@ export function ColumnBands({ frame, incomplete, missing }: { frame: Frame; inco
   });
   return (
     <g className="chart-bands">
-      {incomplete.map((flag, index) =>
-        flag || missing[index] ? (
+      {missing.map((flag, index) =>
+        flag ? (
           <rect
             key={index}
             className="chart-band"
-            data-incomplete={flag ? 'true' : undefined}
             data-missing={missing[index] ? 'true' : undefined}
             x={coordinate(columnX(frame, index) - width / 2)}
             y={top}

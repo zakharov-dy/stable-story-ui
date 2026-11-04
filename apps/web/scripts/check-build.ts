@@ -179,7 +179,7 @@ async function checkMockStates(): Promise<void> {
       if (state === 'long-history') {
         assert(overview !== null, 'long-history overview missing');
         await checkLongHistory(page.html, overview);
-        log('long-history source HTML and inline RSC contain no forbidden old daily values; daily/equation/quality controls present');
+        log('long-history source HTML and inline RSC contain no forbidden old daily values; daily/waterfall/quality controls present');
       }
       expectPage(page, overview, state, `MOCK_STATE=${state}`);
       await expectIcon(port, page.html, `MOCK_STATE=${state}`);

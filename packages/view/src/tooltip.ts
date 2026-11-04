@@ -108,7 +108,7 @@ export function createTooltip(texts: ViewLabels) {
       if (values.some((value) => value === null)) {
         notes.push({ text: texts.supplyByChain.gapNote(bucketLabel(bucket)), tone: 'incomplete' });
       }
-      if (isPartialBucket(bucket, level.period)) notes.push({ text: texts.resolution.partial, tone: 'incomplete' });
+      if (texts.resolution.partial !== '' && isPartialBucket(bucket, level.period)) notes.push({ text: texts.resolution.partial, tone: 'incomplete' });
       if (index === newest && delayed.length > 0) {
         notes.push({ text: delayed.map((note) => note.text).join(' · '), title: delayed.map((note) => note.title).join(' · '), tone: 'delayed' });
       }
@@ -165,7 +165,7 @@ export function createTooltip(texts: ViewLabels) {
       if (series.lines.some((line) => line.unreconciled.includes(index))) {
         notes.push({ text: series.period === 'day' ? texts.tags.unreconciledDay : texts.resolution.flagged, tone: 'unreconciled' });
       }
-      if (isPartialBucket(bucket, series.period)) notes.push({ text: texts.resolution.partial, tone: 'incomplete' });
+      if (texts.resolution.partial !== '' && isPartialBucket(bucket, series.period)) notes.push({ text: texts.resolution.partial, tone: 'incomplete' });
       return {
         header: { label: chainName, marker: 'none' },
         hideHeader: true,

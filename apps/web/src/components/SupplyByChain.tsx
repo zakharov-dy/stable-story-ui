@@ -1,329 +1,549 @@
-import type { ChainStatus, Overview, Series } from '@app/contracts';
+import type { Overview, OverviewView, Series } from '@app/contracts';
 import {
+  chainInfo,
+  type Chains,
   columnWidth,
   columnX,
+  commonDigits,
   coordinate,
   fraction,
   fractionY,
   levelAxis,
   linePath,
+  lineValues,
   maxOf,
-  plotHeight,
   scale,
   segments,
   unscale,
-  type Frame,
-  type ChartMarker,
-  type TooltipColumn,
-  chainInfo,
-  type Chains,
-  isShortHistory,
-  type PeriodId,
   fromSeries,
   qualityAttribute,
-  flagRuns,
-  lineValues,
-  stackFromBoundaries,
+  disabledPeriods,
+  historyDays,
+  PERIODS,
   tooltipText,
-  tooltipTitle,
+  type Frame,
+  type TooltipColumn,
 } from '@app/view';
 import {
-  formatCompact,
-  formatCount,
-  formatEnds,
-  formatHistoryRange,
-  formatRange,
-  formatDay,
+  assetName,
   bucketLabel,
-  formatSeriesValue,
-  runLabel,
-  shortDay,
-  supplyTooltips,
+  formatCompact,
+  formatDay,
+  formatShare,
+  formatShortDay,
+  formatMonth,
+  roundedChange,
+  tone,
 } from '../view.ts';
 import { texts } from '../texts.ts';
-import { Chart, ColumnBands, type Tick } from './Chart.tsx';
-import { QualityNote } from './QualityNote.tsx';
-import { SectionHeading } from './SectionHeading.tsx';
+import { Chart, type Tick } from './Chart.tsx';
+import { PeriodSwitch } from './PeriodSwitch.tsx';
 
-const WIDE = { width: 1000, left: 2, right: 2, top: 6, bottom: 2 } as const;
-const HEIGHT = { level: 240, share: 120 } as const;
-const clamp = (value: number): number => Math.min(1, Math.max(0, value));
-const percentOf = (value: number): string => `${coordinate(value * 100)}%`;
+/** Known layers use the supplied cumulative boundary, skipping chains absent before coverage. */
+export function stackGeometry(
+  view: OverviewView,
+  kind: 'level' | 'share',
+  chains: Chains,
+) {
+  const source = view.supplyByChain;
+  const boundaries =
+    kind === 'level' ? source.stackedLevel : source.stackedShare;
+  const ordered = [...boundaries.lines].sort(
+    (a, b) => chainInfo(chains, a.key).index - chainInfo(chains, b.key).index,
+  );
+  const digits = commonDigits(
+    ...ordered.map(lineValues),
+    ...source.total.lines.map(lineValues),
+  );
+  const tops = ordered.map((line) => scale(lineValues(line), digits).values);
+  const absent = view.noDataChains ?? source.level.buckets.map(() => []);
+  const missing = source.level.buckets.map((_, index) =>
+    source.level.lines.some(
+      (line) =>
+        line.values[index] === null && !absent[index]?.includes(line.key),
+    ),
+  );
+  const layers = ordered.map((line, layer) => ({
+    key: line.key,
+    index: chainInfo(chains, line.key).index,
+    top: tops[layer],
+    bottom: source.level.buckets.map((_, index) => {
+      for (let previous = layer - 1; previous >= 0; previous -= 1) {
+        if (absent[index]?.includes(ordered[previous].key)) continue;
+        return tops[previous]?.[index] ?? null;
+      }
+      return 0n;
+    }),
+    known: source.level.buckets.map(
+      (_, index) =>
+        !missing[index] &&
+        !absent[index]?.includes(line.key) &&
+        source.level.lines.find((candidate) => candidate.key === line.key)
+          ?.values[index] !== null &&
+        tops[layer]?.[index] !== null,
+    ),
+  }));
+  return { digits, layers, missing };
+}
 
-/**
- * formatCompact rounds to two decimals (20.00B); the axis wants no trailing zeros: 20B, never
- * 100.00B. Only those decimals of formatCompact are trimmed here; its compact units are the ones
- * used, no other compact formatter exists.
- */
-const axisLabel = (value: string): string => formatCompact(value).replace(/(\.\d*?)0+(?=\D|$)/, '$1').replace(/\.(?=\D|$)/, '');
+function supplyColumns(
+  view: OverviewView,
+  overview: Overview,
+): TooltipColumn[] {
+  const { level, share, total } = view.supplyByChain;
+  return level.buckets.map((bucket, index) => {
+    const readyTotal = total.lines[0]?.values[index] ?? null;
+    const flagged = level.lines.some((line) =>
+      line.unreconciled.includes(index),
+    );
+    return {
+      header: {
+        label: texts.header.cards.supply,
+        value: formatCompact(readyTotal === null ? null : String(readyTotal)),
+        share:
+          readyTotal === null || readyTotal === '0'
+            ? undefined
+            : texts.supplyByChain.shareTotal,
+      },
+      rows: overview.chains
+        .map((chain, at) => {
+          const value =
+            level.lines.find((line) => line.key === chain.slug)?.values[
+              index
+            ] ?? null;
+          const pct =
+            share.lines.find((line) => line.key === chain.slug)?.values[
+              index
+            ] ?? null;
+          return {
+            label: chain.name,
+            value: formatCompact(value === null ? null : String(value)),
+            share: formatShare(pct === null ? null : String(pct)),
+            chain: at + 1,
+          };
+        })
+        .reverse(),
+      note: flagged
+        ? { text: texts.resolution.flagged, tone: 'unreconciled' }
+        : undefined,
+      footer: {
+        label: bucketLabel(bucket),
+        value:
+          level.period === 'day'
+            ? texts.supplyByChain.endOfDay
+            : texts.resolution.levelEnd(level.period),
+      },
+    };
+  });
+}
 
-/**
- * A stacked area by chain, layers in `overview.chains` order. A day where any chain is null is a gap
- * in the whole stack: an unknown value is not stacked as 0, and each run of known days is its own
- * shape. Incomplete buckets are shaded; points listed in a line's `unreconciled` are hollow
- * diamonds. The level panel runs to the tracked total plus 5 % on a whole axis step, with the total
- * line on the stack and the direct labels beside it; the share panel is 0–100 %.
- */
-function StackedArea({ series, boundaries, levels, total, chains, status, kind, dates, tooltips }: {
-  series: Series;
-  boundaries: Series;
-  levels: Series;
-  total: Series;
-  chains: Chains;
-  status: readonly ChainStatus[];
+/** Date positions select supplied buckets. They do not create time buckets. */
+export function dateTicks(series: Series): Tick[] {
+  const last = series.buckets.length - 1;
+  const first = series.buckets[0];
+  const end = series.buckets.at(-1);
+  const crossYear = first?.start.slice(0, 4) !== end?.end.slice(0, 4);
+  const marks = [0.2, 0.4, 0.6, 0.8].map((at) => ({
+    at,
+    minor: true,
+    phone: false,
+  }));
+  if (!crossYear || series.period === 'month')
+    marks.push(
+      ...[1 / 3, 2 / 3].map((at) => ({ at, minor: false, phone: true })),
+    );
+  return marks.flatMap(({ at, minor, phone }) => {
+    const bucket = series.buckets[Math.round(last * at)];
+    return bucket === undefined
+      ? []
+      : [
+          {
+            at,
+            label:
+              series.period === 'month'
+                ? formatMonth(bucket.end)
+                : formatShortDay(bucket.end),
+            minor,
+            phone,
+          },
+        ];
+  });
+}
+
+function StackPlot({
+  overview,
+  view,
+  kind,
+}: {
+  overview: Overview;
+  view: OverviewView;
   kind: 'level' | 'share';
-  dates: boolean;
-  tooltips: readonly TooltipColumn[];
 }) {
-  const { buckets } = series;
-  const lines = [...series.lines].sort((a, b) => chainInfo(chains, a.key).index - chainInfo(chains, b.key).index);
-  const values = lines.map(lineValues);
-  const stack = stackFromBoundaries(boundaries, levels);
-  const { digits, missing, tops } = stack;
-  const frame: Frame = { ...WIDE, height: HEIGHT[kind], columns: buckets.length };
-  const readyTotal = scale(lineValues(total.lines[0] ?? { values: [] }), digits).values;
-  const axis = kind === 'share' ? null : levelAxis(maxOf(readyTotal) ?? 0n);
-  const max = kind === 'share' ? (scale(['100'], digits).values[0] ?? 0n) : (axis?.top ?? 0n);
-  const fractionOf = (value: bigint): number => (max === 0n ? 0 : clamp(fraction(value, 0n, max)));
-  const y = (value: bigint): number => fractionY(frame, fractionOf(value));
-  const half = columnWidth(frame) / 2;
-  const label = texts.supplyByChain[kind];
-  const names = lines.map((line) => chainInfo(chains, line.key).name);
-  const first = buckets[0];
-  const last = buckets.at(-1);
-  const lastIndex = buckets.length - 1;
-  const text = (index: number, layer: number): string => {
-    const value = values[layer]?.[index] ?? null;
-    return kind === 'share' && value === null ? texts.na.label : formatSeriesValue(series.unit, value);
+  const { level, total } = view.supplyByChain;
+  const { digits, layers, missing } = stackGeometry(
+    view,
+    kind,
+    overview.chains,
+  );
+  const frame: Frame = {
+    width: 1000,
+    height: 340,
+    left: 2,
+    right: 2,
+    top: 6,
+    bottom: 2,
+    columns: level.buckets.length,
   };
-
-  const lower = (layer: number, index: number): bigint => (layer === 0 ? 0n : (tops[layer - 1]?.[index] ?? 0n));
-  const area = (layer: number, [from, to]: [number, number]): string => {
-    // Left to right along the top of the layer, then back right to left along its bottom.
+  const totals = scale(lineValues(total.lines[0]), digits).values;
+  const peak = overview.records.find(
+    (record) => record.scope === 'all' && record.kind === 'max_supply',
+  );
+  const peakIndex =
+    peak?.day === null || peak?.day === undefined
+      ? -1
+      : level.buckets.findIndex(
+          (bucket) => bucket.start <= peak.day! && bucket.end >= peak.day!,
+        );
+  const peakValue =
+    peak?.value === null || peak?.value === undefined
+      ? null
+      : scale([peak.value], digits).values[0];
+  const axis = levelAxis(
+    maxOf(peakIndex >= 0 ? [...totals, peakValue ?? null] : totals) ?? 0n,
+  );
+  const max = kind === 'share' ? scale(['100'], digits).values[0]! : axis.top;
+  const ratio = (value: bigint) => (max === 0n ? 0 : fraction(value, 0n, max));
+  const y = (value: bigint) => fractionY(frame, ratio(value));
+  const x = (index: number) => columnX(frame, index);
+  const half = columnWidth(frame) / 2;
+  const path = (
+    top: readonly (bigint | null)[],
+    bottom: readonly (bigint | null)[],
+    [from, to]: [number, number],
+  ) => {
     const upper: string[] = [];
-    const lowerEdge: string[] = [];
+    const lower: string[] = [];
     for (let index = from; index <= to; index += 1) {
-      const xs = from === to ? [columnX(frame, index) - half, columnX(frame, index) + half] : [columnX(frame, index)];
-      const top = coordinate(y(tops[layer]?.[index] ?? 0n));
-      const base = coordinate(y(lower(layer, index)));
-      for (const x of xs) {
-        upper.push(`${coordinate(x)} ${top}`);
-        lowerEdge.push(`${coordinate(x)} ${base}`);
+      const xs = from === to ? [x(index) - half, x(index) + half] : [x(index)];
+      for (const at of xs) {
+        upper.push(`${coordinate(at)} ${coordinate(y(top[index]!))}`);
+        lower.push(`${coordinate(at)} ${coordinate(y(bottom[index]!))}`);
       }
     }
-    const bottom = lowerEdge.reverse();
-    return `M${[...upper, ...bottom].join('L')}Z`;
+    return `M${[...upper, ...lower.reverse()].join('L')}Z`;
   };
-  // The top edge of a layer run: the same points as the area's upper edge, without the baseline.
-  const topEdge = (layer: number, [from, to]: [number, number]): string => {
-    const points: string[] = [];
-    for (let index = from; index <= to; index += 1) {
-      const xs = from === to ? [columnX(frame, index) - half, columnX(frame, index) + half] : [columnX(frame, index)];
-      const top = coordinate(y(tops[layer]?.[index] ?? 0n));
-      for (const x of xs) points.push(`${coordinate(x)} ${top}`);
-    }
-    return `M${points.join('L')}`;
-  };
-  const runs = segments(buckets.length, (index) => !missing[index]);
-  const gaps = flagRuns(missing);
-
-  // The layer boundary at a column; a flagged column without a stack sits on the baseline.
-  const boundary = (layer: number, index: number): number => {
-    const top = tops[layer]?.[index];
-    return top === null || top === undefined ? fractionY(frame, 0) : y(top);
-  };
-  const separators = lines.slice(0, -1).map((_, layer) =>
-    linePath(buckets.map((_bucket, index) => (missing[index] || (tops[layer]?.[index] ?? null) === null ? null : { x: columnX(frame, index), y: boundary(layer, index) }))));
-
-  // The structured card needs one column per tip; a length mismatch (contract violation) falls back
-  // to the plain string path instead of pairing the wrong rows with the wrong column.
-  const columns = tooltips.length === buckets.length ? tooltips : undefined;
-  const tips = buckets.map((bucket, index) => {
-    const column = columns?.[index];
-    return column === undefined
-      ? `${bucketLabel(bucket)}: ${lines.map((line, layer) => `${names[layer] ?? line.key} ${text(index, layer)}`).join(' · ')}`
-      : tooltipTitle(column);
-  });
-  // The live region announces the whole card, the quality line with the chain name included.
-  const announcements = columns?.map((column) => tooltipText(column));
-  // One ready coordinate per known layer boundary, only on the level panel.
-  const lastLayer = lines.length - 1;
-  const markers: ChartMarker[][] | undefined = kind === 'share' ? undefined : buckets.map((_bucket, index) =>
-    missing[index] ? [] : lines.flatMap((line, layer) => {
-      const top = tops[layer]?.[index] ?? null;
-      return top === null ? [] : [{ at: y(top) / frame.height, chain: chainInfo(chains, line.key).index }];
-    }));
-
-  // Anchor the column to the top layer's midpoint. CSS applies the token step,
-  // independent of plot scaling; no label is suppressed for a thin layer.
-  const wanted = lines.map((_, layer) => {
-    const upper = tops[layer]?.[lastIndex];
-    if (upper === null || upper === undefined) return 1 - (layer + 0.5) / Math.max(1, lines.length);
-    return (frame.top + plotHeight(frame) * (1 - (fractionOf(upper) + fractionOf(lower(layer, lastIndex))) / 2)) / frame.height;
-  });
-  const anchor = percentOf(wanted[lastLayer] ?? 0);
-
-  // Horizontal gridlines at the steps of the axis and nowhere else.
-  const gridAt = (kind === 'share' ? [0.25, 0.5, 0.75].map((at) => frame.top + plotHeight(frame) * at) : (axis?.grid ?? []).map((value) => y(value))).map((at) =>
-    coordinate(at),
-  );
+  const columns = supplyColumns(view, overview);
   const ticks: Tick[] =
     kind === 'share'
-      ? [{ at: 0, label: '100%' }, { at: 0.5, label: '50%' }, { at: 1, label: '0' }]
-      : axis === null || axis.grid.length === 0
-        ? [{ at: 1, label: formatCompact('0') }]
-        : [
-            { at: 0, label: axisLabel(unscale(axis.top, digits)) },
-            ...axis.grid
-              .slice(0, -1)
-              .reverse()
-              .map((value) => ({ at: 1 - fractionOf(value), label: axisLabel(unscale(value, digits)) })),
-            { at: 1, label: formatCompact('0') },
-          ];
-  const marks: Tick[] =
-    buckets.length < 8
-      ? []
-      : [0.25, 0.5, 0.75].flatMap((at) => {
-          const index = Math.round(at * lastIndex);
-          const bucket = buckets[index];
-          return bucket === undefined ? [] : [{ at: (index + 0.5) / buckets.length, label: shortDay(bucket.end), minor: true }];
-        });
-  const ends = first && last ? formatEnds(first.start, last.end) : null;
-  const range = first && last ? formatRange(first.start, last.end) : texts.noData;
-  const lastDay = last
-    ? (series.period === 'day' ? texts.supplyByChain.lastDay(shortDay(last.end)) : texts.resolution.end(texts.resolution.units[series.period] ?? series.period) + ' · ' + bucketLabel(last))
-    : texts.noData;
-  const description = texts.supplyByChain.describe(
-    label + ', ' + (texts.resolution.steps[series.period] ?? series.period),
-    range,
-    last ? `${shortDay(last.end)}: ${lines.map((line, layer) => `${names[layer] ?? line.key} ${text(lastIndex, layer)}`).join(', ')}.` : texts.noData,
+      ? [
+          { at: 0, label: texts.supplyByChain.shareTotal },
+          { at: 0.5, label: texts.axis.halfShare },
+          { at: 1, label: texts.axis.zero },
+        ]
+      : [
+          ...axis.grid.map((value) => ({
+            at: 1 - ratio(value),
+            label: formatCompact(unscale(value, digits)).replace(
+              /\.0+(?=\D|$)/,
+              '',
+            ),
+          })),
+          { at: 1, label: texts.axis.zero },
+        ];
+  const points = totals.map((value, index) =>
+    value === null || missing[index] ? null : { x: x(index), y: y(value) },
   );
-
+  const lastIndex = points.length - 1;
+  const dashed = level.lines.some((line) =>
+    line.unreconciled.includes(lastIndex),
+  );
+  const first = level.buckets[0];
+  const last = level.buckets.at(-1);
   return (
     <figure className="areas" data-series={kind}>
-      <figcaption className="chart-k">
-        <span className="label">{label}</span>
-        <span className="caption">{kind === 'share' ? texts.supplyByChain.shareRange : lastDay}</span>
-      </figcaption>
       <Chart
         frame={frame}
-        tips={tips}
+        tips={columns.map(tooltipText)}
         tooltips={columns}
-        announcements={announcements}
-        markers={markers}
-        label={description}
+        label={`${texts.supplyByChain[kind]}, ${texts.resolution.steps[view.period]}`}
         stretch
         variant={kind}
         axis={{
-          top: ticks[0]?.label ?? '',
-          bottom: ticks.at(-1)?.label ?? '',
+          top: '',
+          bottom: '',
           ticks,
-          start: dates ? ends?.[0] : undefined,
-          end: dates ? ends?.[1] : undefined,
-          marks: dates ? marks : undefined,
+          start:
+            first === undefined
+              ? undefined
+              : view.period === 'month'
+                ? formatMonth(first.end)
+                : formatShortDay(first.end),
+          end:
+            last === undefined
+              ? undefined
+              : view.period === 'month'
+                ? formatMonth(last.end)
+                : formatShortDay(last.end),
+          marks: dateTicks(level),
         }}
-        overlay={lines.flatMap((line, layer) =>
-          line.unreconciled.map((index) => (
+        markers={level.buckets.map((_, index) =>
+          kind === 'share'
+            ? []
+            : layers.flatMap((layer) =>
+                layer.known[index]
+                  ? [
+                      {
+                        at: y(layer.top[index]!) / frame.height,
+                        chain: layer.index,
+                      },
+                    ]
+                  : [],
+              ),
+        )}
+        overlay={
+          kind === 'level' &&
+          peakIndex >= 0 &&
+          peakValue !== null &&
+          peakValue !== undefined ? (
             <span
-              key={`${line.key}-${index}`}
-              className="chart-point ovl-dia"
-              data-unreconciled="true"
-              data-chain-index={chainInfo(chains, line.key).index}
-              style={{ left: percentOf(columnX(frame, index) / frame.width), top: percentOf(boundary(layer, index) / frame.height) }}
-              aria-hidden="true"
-            />
-          )))}
-        aside={
-          kind === 'level'
-            ? lines.map((line, layer) => {
-                const info = chainInfo(chains, line.key);
-                const lag = status.find((candidate) => candidate.chain === line.key);
-                const row = columns?.[lastIndex]?.rows.find((candidate) => candidate.chain === info.index);
-                return (
-                  <span
-                    key={line.key}
-                    className="dlab"
-                    data-chain-index={info.index}
-                    style={{ top: `calc(${anchor} + ${lastLayer - layer} * var(--chart-chain-label-step))` }}
-                  >
-                    {info.name}{' '}
-                    <b className="dlab-value">{row?.value ?? texts.na.label}</b>
-                    <span className="dlab-share">{row?.share ?? texts.na.label}</span>
-                    {lag?.state === 'delayed' && lag.lagHours !== null ? (
-                      <span className="tag delayed">{texts.tags.behindLabel(formatCount(lag.lagHours))}</span>
-                    ) : null}
-                  </span>
-                );
-              })
-            : []
+              className={`peak ${peakIndex > level.buckets.length / 2 ? 'peak-left' : ''}`}
+              style={{
+                left: `${(x(peakIndex) / frame.width) * 100}%`,
+                top: `max(2.9em, ${(y(peakValue) / frame.height) * 100}%)`,
+              }}
+            >
+              {texts.supplyByChain.peak(
+                formatCompact(peak!.value),
+                formatDay(peak!.day),
+              )}
+            </span>
+          ) : undefined
         }
       >
-        {gridAt.map((at) => <line key={at} className="agrid" x1={frame.left} x2={frame.width - frame.right} y1={at} y2={at} />)}
-        <ColumnBands frame={frame} incomplete={buckets.map((bucket) => !bucket.complete)} missing={missing} />
-        {lines.map((line, layer) => (
-          <g key={line.key} className="chart-layer" data-chain-index={chainInfo(chains, line.key).index}>
-            {runs.map((run) => <path key={run[0]} className="area" d={area(layer, run)} />)}
+        {ticks
+          .filter((tick) => tick.at !== 1)
+          .map((tick) => (
+            <line
+              key={tick.label}
+              className="agrid"
+              x1={frame.left}
+              x2={frame.width - frame.right}
+              y1={coordinate(fractionY(frame, 1 - tick.at))}
+              y2={coordinate(fractionY(frame, 1 - tick.at))}
+            />
+          ))}
+        {layers.map((layer) => (
+          <g
+            key={layer.key}
+            className="chart-layer"
+            data-chain-index={layer.index}
+            data-chain={layer.key}
+          >
+            {segments(
+              level.buckets.length,
+              (index) =>
+                layer.known[index] === true && layer.bottom[index] !== null,
+            ).map((run) => (
+              <path
+                key={run[0]}
+                className="area"
+                d={path(layer.top, layer.bottom, run)}
+              />
+            ))}
+            <path
+              className="asep"
+              d={linePath(
+                layer.top.map((value, index) =>
+                  value === null || !layer.known[index]
+                    ? null
+                    : { x: x(index), y: y(value) },
+                ),
+              )}
+            />
           </g>
         ))}
-        {separators.map((d, layer) => <path key={layer} className="asep" d={d} />)}
-        {kind === 'level' ? runs.map((run) => <path key={`total-${run[0]}`} className="atotal" d={topEdge(lastLayer, run)} />) : null}
-        <line className="azero" x1={frame.left} x2={frame.width - frame.right} y1={coordinate(fractionY(frame, 0))} y2={coordinate(fractionY(frame, 0))} />
+        {kind === 'level' ? (
+          <>
+            <path
+              className="atotal"
+              d={linePath(dashed ? points.slice(0, -1) : points)}
+            />
+            {dashed ? (
+              <path
+                className="atotal net-dash"
+                data-unreconciled="true"
+                d={linePath(points.slice(-2))}
+              />
+            ) : null}
+          </>
+        ) : null}
+        <line
+          className="azero"
+          x1={frame.left}
+          x2={frame.width - frame.right}
+          y1={y(0n)}
+          y2={y(0n)}
+        />
       </Chart>
-      {gaps.length === 0 ? null : (
-        <p className="chart-note" data-note="no-data">{gaps.map((run) => texts.supplyByChain.gapNote(runLabel(buckets, run))).join(' · ')}</p>
-      )}
     </figure>
   );
 }
 
-/** Chart 2: supply by chain over the common history, in tokens and in shares, on one time axis. */
-export function SupplyByChain({ overview, period = 'all', block = 'supply-by-chain', headingId = 'h-supply-by-chain' }: {
-  overview: Overview;
-  /**
-   * The window this copy shows. The internal default is `all` so a direct render is the whole history
-   * exactly as before; PageView always passes an explicit period for each of its three copies.
-   */
-  period?: PeriodId;
-  /**
-   * The block marker for the page checks. Only the visible default copy carries the canonical
-   * `supply-by-chain`: hidden copies pass null and render no `data-block` at all.
-   */
-  block?: string | null;
-  /** The heading id; hidden copies pass a suffixed one so no `id` is duplicated. */
-  headingId?: string;
-}) {
-  const source = overview.views[period]?.supplyByChain;
-  if (source === undefined) return null;
-  const { level, share, total, stackedLevel, stackedShare } = source;
-  const tooltips = supplyTooltips(level, share, total, overview.chains, overview.status.chains);
-  const summary = fromSeries(level);
-  const first = level.buckets[0];
-  const last = level.buckets.at(-1);
-  const range = first && last ? formatHistoryRange(first.start, last.end) : texts.noData;
-  const windowRange = first && last ? formatRange(first.start, last.end) : texts.noData;
-  const caption =
-    isShortHistory(overview) && overview.historyStart !== null
-      ? texts.supplyByChain.shortHistory(formatDay(overview.historyStart))
-      : period === 'all'
-        ? texts.supplyByChain.caption(range, overview.chains.map((chain) => chain.name))
-        : texts.supplyByChain.windowCaption(windowRange, overview.chains.map((chain) => chain.name));
+export function ChainList({ overview }: { overview: Overview }) {
+  const source = overview.views['30d']?.supplyByChain;
   return (
-    <section className="sec" data-block={block ?? undefined} data-period={period} data-quality={qualityAttribute(summary)} aria-labelledby={headingId}>
-      <SectionHeading
-        index={3}
-        label={texts.supplyByChain.title}
-        title={texts.supplyByChain.headline}
-        caption={caption}
-        id={headingId}
-      />
-      <QualityNote summary={summary} points step={texts.resolution.units[level.period] ?? level.period} />
-      <div className="supply-plots">
-        <StackedArea series={level} boundaries={stackedLevel} levels={level} total={total} chains={overview.chains} status={overview.status.chains} kind="level" dates={false} tooltips={tooltips} />
-        <StackedArea series={share} boundaries={stackedShare} levels={level} total={total} chains={overview.chains} status={overview.status.chains} kind="share" dates tooltips={tooltips} />
+    <div className="clist" aria-label={texts.supplyByChain.title}>
+      <div className="clist-head">
+        <span>{texts.supplyByChain.chain}</span>
+        <span>{texts.supplyByChain.level}</span>
+        <span>{texts.supplyByChain.share}</span>
+        <span>
+          {overview.day === null
+            ? texts.noData
+            : formatShortDay(overview.day.date)}
+        </span>
+        <span />
       </div>
-      {level.lines.some((line) => line.values.includes(null)) ? (
-        <p className="chart-note">{texts.supplyByChain.missing}</p>
-      ) : null}
-    </section>
+      {overview.chains.map((chain, index) => {
+        const status = overview.status.chains.find(
+          (item) => item.chain === chain.slug,
+        );
+        const value =
+          source?.level.lines
+            .find((line) => line.key === chain.slug)
+            ?.values.at(-1) ?? null;
+        const share =
+          source?.share.lines
+            .find((line) => line.key === chain.slug)
+            ?.values.at(-1) ?? null;
+        const day = overview.day?.rows.find((row) => row.scope === chain.slug);
+        const lastFailed =
+          status?.lastClosedDay !== null &&
+          status?.lastClosedDay !== undefined &&
+          status.unreconciledDays.includes(status.lastClosedDay);
+        const unreconciled =
+          day?.unreconciled === true ||
+          lastFailed ||
+          status?.state === 'unreconciled';
+        const quality =
+          status?.state === 'no_data'
+            ? 'incomplete'
+            : unreconciled
+              ? status?.state === 'delayed'
+                ? 'delayed unreconciled'
+                : 'unreconciled'
+              : (status?.state ?? 'incomplete');
+        const mark =
+          status?.state === 'delayed'
+            ? texts.tags.behindLabel(formatCountLag(status.lagHours))
+            : unreconciled
+              ? texts.status.unreconciled
+              : texts.status.checkMarks.ok;
+        return (
+          <a
+            key={chain.slug}
+            href="#chain-status"
+            className="crow"
+            data-status-link
+            data-chain-index={index + 1}
+            data-chain={chain.slug}
+            data-chain-state={status?.state}
+            data-quality={quality}
+          >
+            <span className="dot" />
+            <span className="cn">{chain.name}</span>
+            <span className="cl">
+              {formatCompact(value === null ? null : String(value))}
+            </span>
+            <span className="cs">
+              {formatShare(share === null ? null : String(share)) ??
+                texts.noData}
+            </span>
+            <span className={`cd ${tone(day?.values.net ?? null)}`}>
+              {roundedChange(day?.values.net ?? null)}
+            </span>
+            <span className={`cm ${status?.state ?? ''}`}>
+              {status?.state === 'no_data' ? texts.noData : mark}
+              {status?.state === 'delayed' && unreconciled ? (
+                <span className="unrec"> {texts.status.unreconciled}</span>
+              ) : null}
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  );
+}
+
+const formatCountLag = (hours: number | null) =>
+  hours === null ? texts.noData : String(hours);
+
+export function SupplyByChain({ overview }: { overview: Overview }) {
+  const off = new Set(disabledPeriods(historyDays(overview)));
+  const reason = off.has('90d')
+    ? texts.period.shortNote
+    : off.has('all') && overview.historyStart !== null
+      ? texts.period.allNote(formatDay(overview.historyStart))
+      : null;
+  return (
+    <div className="supply-layout" data-block="supply-by-chain">
+      <div className="stack-panel">
+        <div className="chart-head">
+          <fieldset className="seg mode">
+            <legend className="sr">{texts.supplyByChain.title}</legend>
+            {(['level', 'share'] as const).map((kind) => (
+              <label key={kind}>
+                <input
+                  name="stack-mode"
+                  type="radio"
+                  value={kind}
+                  defaultChecked={kind === 'level'}
+                />
+                <span>{texts.supplyByChain[kind]}</span>
+              </label>
+            ))}
+          </fieldset>
+          <PeriodSwitch overview={overview} />
+        </div>
+        {reason === null ? null : <p className="reason">{reason}</p>}
+        <div className="lane-head">
+          <span>{assetName(overview)}</span>
+          <span className="lane-rule" />
+        </div>
+        {PERIODS.map((period) => {
+          const view = overview.views[period];
+          if (view === null) return null;
+          return (
+            <section
+              key={period}
+              data-period={period}
+              data-quality={qualityAttribute(
+                fromSeries(view.supplyByChain.level),
+              )}
+              aria-labelledby={
+                period === '30d'
+                  ? 'h-supply-by-chain'
+                  : `h-supply-by-chain-${period}`
+              }
+            >
+              <h2
+                className="sr"
+                id={
+                  period === '30d'
+                    ? 'h-supply-by-chain'
+                    : `h-supply-by-chain-${period}`
+                }
+              >
+                {texts.supplyByChain.title}
+              </h2>
+              <StackPlot overview={overview} view={view} kind="level" />
+              <StackPlot overview={overview} view={view} kind="share" />
+            </section>
+          );
+        })}
+        <p className="resolution-note">{texts.resolution.sentence}</p>
+      </div>
+      <ChainList overview={overview} />
+    </div>
   );
 }

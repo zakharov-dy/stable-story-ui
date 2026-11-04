@@ -162,22 +162,18 @@ describe('chain palette', () => {
 
   it('maps chain slots 1..6 to the chain tokens wherever slots exist', () => {
     const charts = readFileSync(path.join(STYLES, 'charts.css'), 'utf8');
-    const firstScreen = readFileSync(path.join(STYLES, 'first-screen.css'), 'utf8');
     for (const [token] of EXPECTED) {
       const slot = token.slice('--color-chain-'.length);
       expect(charts).toMatch(
         new RegExp(`\\[data-chain-index='${slot}'\\]\\s*\\{\\s*--chain-color:\\s*var\\(${token}\\);`),
       );
-      expect(firstScreen).toMatch(
-        new RegExp(`\\.b-chain\\[data-chain-index='${slot}'\\]\\s*\\{\\s*--chain:\\s*var\\(${token}\\);`),
-      );
     }
   });
 
-  it('keeps the fallback for a chain index outside 1..6', () => {
+  it('keeps the fallback for a chain index outside 1..10', () => {
     const charts = readFileSync(path.join(STYLES, 'charts.css'), 'utf8');
     expect(charts).toContain('var(--chain-color, var(--color-border))');
     expect(charts).not.toContain("[data-chain-index='0']");
-    expect(charts).not.toContain("[data-chain-index='7']");
+    expect(charts).not.toContain("[data-chain-index='11']");
   });
 });

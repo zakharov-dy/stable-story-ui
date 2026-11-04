@@ -1,32 +1,25 @@
-// The page-wide period switch: one `fieldset` of three radios above section 03, a server component
-// with no client JS. A radio group gives keyboard and no-JS behaviour for free; CSS shows the section
-// copy the checked radio names. The caption names the driven sections from `texts.period.driven`.
 import { texts } from '../texts.ts';
-import { disabledPeriods, PERIODS, type PeriodId } from '@app/view';
+import { disabledPeriods, historyDays, PERIODS } from '@app/view';
+import type { Overview } from '@app/contracts';
 
-/** One switch for the chart block, default 30D; short histories disable the longer periods. */
-export function PeriodSwitch({ days }: { days: number }) {
-  const off: ReadonlySet<PeriodId> = new Set(disabledPeriods(days));
-  const note = off.has('90d') ? texts.period.shortNote : off.has('all') ? texts.period.allNote : null;
-  const caption = [texts.period.caption(texts.period.driven), note].filter(Boolean).join(' ');
+/** Native radios drive the server-rendered views through CSS, including without JavaScript. */
+export function PeriodSwitch({ overview }: { overview: Overview }) {
+  const off = new Set(disabledPeriods(historyDays(overview)));
   return (
-    <>
-      <div className="pbar">
-        <div className="pb-l">
-          <span className="label"><span className="ix">///</span>{texts.period.label}</span>
-          <p>{caption}</p>
-        </div>
-        <fieldset className="seg" id="period">
-          <legend>{texts.period.legend}</legend>
-          {PERIODS.map((period) => (
-            <label key={period}>
-              <input type="radio" name="period" value={period} defaultChecked={period === '30d'} disabled={off.has(period)} />
-              <span>{texts.period.options[period]}</span>
-            </label>
-          ))}
-        </fieldset>
-      </div>
-      <p className="resolution-note">{texts.resolution.sentence}</p>
-    </>
+    <fieldset className="seg" id="period">
+      <legend className="sr">{texts.period.legend}</legend>
+      {PERIODS.map((period) => (
+        <label key={period}>
+          <input
+            type="radio"
+            name="period"
+            value={period}
+            defaultChecked={period === '30d'}
+            disabled={off.has(period) || overview.views[period] === null}
+          />
+          <span>{texts.period.options[period]}</span>
+        </label>
+      ))}
+    </fieldset>
   );
 }

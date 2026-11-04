@@ -1,105 +1,368 @@
-// Launch-board interactions use a real touch context on phones. Expectations come from the
-// supplied overview; independent literal number regressions live beside the components.
+// DOM assertions over the accepted home states. No images or pixel comparisons.
 import type { Overview } from '@app/contracts';
 import type { Page } from 'playwright-core';
 import { texts } from '../src/texts.ts';
 import { bucketLabel } from '../src/view.ts';
+import { checkLayout } from './browser-smoke-layout.ts';
 
 const requireFact = (condition: boolean, message: string): void => {
-  if (!condition) throw new Error(`launch smoke: ${message}`);
+  if (!condition) throw new Error(`home smoke: ${message}`);
 };
 
-async function aligned(page: Page, section: string): Promise<void> {
-  const ok = await page.locator(`${section} .chart-frame`).evaluateAll((frames) => frames.every((frame) => {
-    const plot = frame.querySelector('.chart-hover')!.getBoundingClientRect();
-    const y = frame.querySelector('.chart-y')!.getBoundingClientRect();
-    const x = frame.querySelector('.chart-x');
-    const dates = x?.getBoundingClientRect();
-    return Math.abs(plot.top - y.top) < 1 && Math.abs(plot.height - y.height) < 1
-      && (dates === undefined || (dates.top >= plot.bottom && Math.abs(dates.left - plot.left) < 1));
-  }));
-  requireFact(ok, 'the pinned row must not offset either axis relative to the plot');
+async function chainGrowth(page: Page): Promise<void> {
+  await page.evaluate(() => {
+    const list = document.querySelector('.clist')!;
+    const choices = document.querySelector('.scope-choices')!;
+    const source = list.querySelector('.crow')!;
+    const chip = choices.querySelector('.scope-option')!;
+    for (
+      let index = list.querySelectorAll('.crow').length + 1;
+      index <= 11;
+      index += 1
+    ) {
+      const row = source.cloneNode(true) as HTMLElement;
+      row.dataset.chainIndex = String(index);
+      row.dataset.growth = 'true';
+      row.querySelector('.cn')!.textContent = `Long placeholder chain ${index}`;
+      list.append(row);
+      const option = chip.cloneNode(true) as HTMLElement;
+      option.dataset.growth = 'true';
+      option.querySelector('.scope-plots')?.remove();
+      const label = option.querySelector('label')!;
+      label.dataset.chainIndex = String(index);
+      label.querySelector('input')!.name = 'growth-chain';
+      label.querySelector('input')!.checked = false;
+      label.append(document.createTextNode(` Long placeholder ${index}`));
+      choices.append(option);
+    }
+  });
+  try {
+    await checkLayout(page);
+    const colours = await page
+      .locator('.crow .dot')
+      .evaluateAll((dots) =>
+        dots.map((dot) => getComputedStyle(dot).backgroundColor),
+      );
+    requireFact(
+      new Set(colours.slice(0, 10)).size === 10,
+      'ten distinct chain colour slots',
+    );
+    const fallback = await page
+      .locator('.crow')
+      .last()
+      .evaluate((row) => ({
+        actual: getComputedStyle(row.querySelector('.dot')!).backgroundColor,
+        token: getComputedStyle(row).getPropertyValue('--color-border').trim(),
+      }));
+    requireFact(
+      fallback.actual !== 'rgba(0, 0, 0, 0)' && fallback.token !== '',
+      'chain eleven has a readable default swatch',
+    );
+  } finally {
+    await page
+      .locator('[data-growth]')
+      .evaluateAll((nodes) => nodes.forEach((node) => node.remove()));
+  }
 }
 
-export async function checkLaunchInteractions(page: Page, overview: Overview, phone: boolean): Promise<void> {
+export async function checkLaunchInteractions(
+  page: Page,
+  overview: Overview,
+  phone: boolean,
+): Promise<void> {
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await checkLayout(page);
+  if (page.viewportSize()?.width === 1280 && overview.chains.length === 6) {
+    const fits = await page.evaluate(() => {
+      const top = document
+        .querySelector('.brand-row')!
+        .getBoundingClientRect().top;
+      const plot = document
+        .querySelector('.stack-panel .chart-hover')!
+        .getBoundingClientRect();
+      const list = document.querySelector('.clist')!.getBoundingClientRect();
+      return plot.bottom - top <= 800 && list.bottom - top <= 800;
+    });
+    requireFact(
+      fits,
+      'the desktop stack plot and chain list fit the first 800px',
+    );
+  }
+  const rows = page.locator('.crow');
+  requireFact(
+    (await rows.count()) === overview.chains.length,
+    'every enabled chain in the list',
+  );
+  const names = await rows.locator('.cn').allTextContents();
+  requireFact(
+    JSON.stringify(names) ===
+      JSON.stringify(overview.chains.map((chain) => chain.name)),
+    'API chain order',
+  );
+  const colours = await rows
+    .locator('.dot')
+    .evaluateAll((nodes) =>
+      nodes.map((node) => getComputedStyle(node).backgroundColor),
+    );
+  requireFact(
+    new Set(colours).size === overview.chains.length,
+    'distinct enabled chain colours',
+  );
+  await page.locator('#chain-status summary').click();
+  requireFact(
+    (await page.locator('table.status tbody tr').count()) ===
+      overview.chains.length,
+    'every chain has disclosed status',
+  );
+  for (const chain of overview.status.chains) {
+    const row = page.locator(`table.status tr[data-chain="${chain.chain}"]`);
+    requireFact(
+      (await row.getAttribute('data-chain-state')) === chain.state,
+      `${chain.chain} state`,
+    );
+    if (chain.state === 'delayed')
+      requireFact(
+        (await row.innerText()).includes(`${chain.lagHours} h behind`),
+        'disclosed delay',
+      );
+  }
+  await checkLayout(page);
+  await page.locator('#chain-status summary').click();
+  if (overview.chains.length === 6) await chainGrowth(page);
+
   for (const period of ['30d', '90d', 'all'] as const) {
-    const view = overview.views[period];
-    if (view === null) continue;
     const radio = page.locator(`input[name="period"][value="${period}"]`);
     if (await radio.isDisabled()) continue;
-    await radio.check();
-    requireFact(await page.getByText(texts.resolution.sentence, { exact: true }).count() === 1
-      && await page.getByText(texts.resolution.sentence, { exact: true }).isVisible(), 'exactly one resolution sentence');
-    const section = `section[data-period="${period}"][aria-labelledby^="h-supply-by-chain"]`;
-    const level = page.locator(`${section} .chart-frame.level`);
-    const sameAxis = await page.locator(`${section} .chart-hover`).evaluateAll((plots) => {
-      const [level, share] = plots.map((plot) => plot.getBoundingClientRect());
-      return Math.abs(level.left - share.left) < 1 && Math.abs(level.width - share.width) < 1;
-    });
-    requireFact(sameAxis, 'level and share panels use the same time axis width');
-    const labels = level.locator('.dlab');
-    requireFact(await labels.count() === overview.chains.length, 'every chain has a direct label');
-    for (const [index, chain] of overview.chains.entries()) {
-      const label = level.locator(`.dlab[data-chain-index="${index + 1}"]`);
-      requireFact((await label.innerText()).includes(chain.name) && await label.isVisible(), `visible label for ${chain.name}`);
-      requireFact(await label.locator('.dlab-value').isVisible(), `${chain.name} level is visible`);
-      requireFact(await label.locator('.dlab-share').isVisible() !== phone, 'share appears only on desktop');
-    }
-    if (!phone) {
-      const positions = (await labels.evaluateAll((nodes) => nodes.map((node) => node.getBoundingClientRect().top))).sort((a, b) => a - b);
-      requireFact(positions.slice(1).every((position, index) => Math.abs(position - positions[index] - 30) < 1), '30 px label step');
-    }
-    const plot = level.locator('.chart-hover');
+    await radio.check({ force: true });
+    const view = overview.views[period]!;
+    const section = page.locator(
+      `section[data-period="${period}"][aria-labelledby^="h-supply-by-chain"]`,
+    );
+    requireFact(await section.isVisible(), `${period} stack visible`);
+    requireFact(
+      await page
+        .getByText(texts.resolution.sentence, { exact: true })
+        .isVisible(),
+      'older-period sentence visible',
+    );
+    await page
+      .locator('input[name="stack-mode"][value="level"]')
+      .check({ force: true });
+    const frame = section.locator('.chart-frame.level');
+    const plot = frame.locator('.chart-hover');
+    const mapped = await section.locator('.chart-layer').evaluateAll(
+      (layers, chains) =>
+        layers.every((layer) => {
+          const expected =
+            chains.findIndex(
+              (chain) => chain.slug === layer.getAttribute('data-chain'),
+            ) + 1;
+          const row = document.querySelector(
+            `.crow[data-chain-index="${expected}"]`,
+          );
+          return (
+            layer.getAttribute('data-chain-index') === String(expected) &&
+            row !== null &&
+            getComputedStyle(layer).getPropertyValue('--chain-color') ===
+              getComputedStyle(row).getPropertyValue('--chain-color')
+          );
+        }),
+      overview.chains,
+    );
+    requireFact(mapped, 'stack identity and colour follow registry order');
     await plot.focus();
     await plot.press('End');
-    const card = level.locator('.chart-tooltip');
-    await card.waitFor({ state: 'visible' });
-    requireFact(await level.locator('.chart-ring').count() === overview.chains.length, 'one level marker per chain');
-    requireFact(await plot.locator('title').count() === 0, 'no competing native tooltip');
-    requireFact(await level.locator('.chart-ring').first().evaluate((node) => getComputedStyle(node).width === '5px'), 'marker token gives 5 px diameter');
-    const last = view.supplyByChain.level.buckets.at(-1)!;
-    requireFact((await card.innerText()).includes(bucketLabel(last)), 'last bucket date is correct');
-    if (period !== '30d') requireFact((await card.innerText()).includes('incomplete period'), 'cut bucket quality is shown');
+    requireFact(
+      (await frame.locator('.chart-tooltip').innerText()).includes(
+        bucketLabel(view.supplyByChain.level.buckets.at(-1)!),
+      ),
+      'last ready bucket date',
+    );
+    requireFact(
+      (await page.locator('.chart-tip:visible').count()) === 1,
+      'one chart tooltip',
+    );
+    requireFact(
+      (await page.locator('svg title').count()) === 0,
+      'zero native SVG titles after hydration',
+    );
+    await plot.press('Home');
+    await plot.press('ArrowRight');
+    const absent = view.noDataChains?.[1] ?? [];
+    const missing = view.supplyByChain.level.lines.some(
+      (line) => line.values[1] === null && !absent.includes(line.key),
+    );
+    const knownCount = missing
+      ? 0
+      : view.supplyByChain.level.lines.filter((line) => line.values[1] !== null)
+          .length;
+    requireFact(
+      (await frame.locator('.chart-ring').count()) === knownCount,
+      'markers follow the ready known layers',
+    );
+    await plot.press('Escape');
+    await plot.blur();
     if (phone) {
-      await plot.press('Escape');
-      await plot.blur();
       await plot.locator('.chart-hit').last().tap();
-      const pin = level.locator('.chart-tooltip[data-pinned="true"]');
+      const pin = frame.locator('.chart-tooltip[data-pinned="true"]');
       await pin.waitFor({ state: 'visible' });
-      requireFact(await pin.evaluate((node) => node.parentElement?.classList.contains('chart-frame') === true), 'pin is a sibling outside the measured plot');
-      requireFact((await pin.innerText()).includes(bucketLabel(last)), 'tap keeps its selected bucket');
-      if (period !== '30d') requireFact((await pin.innerText()).includes('incomplete period'), 'pin keeps quality');
-      const above = await pin.evaluate((node) => node.getBoundingClientRect().bottom <= node.parentElement!.querySelector('.chart-hover')!.getBoundingClientRect().top);
-      requireFact(above, 'phone card is above the plot');
-      await aligned(page, section);
-      await pin.getByRole('button', { name: 'Close tooltip' }).tap();
-      requireFact(await level.locator('.chart-tooltip').count() === 0, 'close dismisses the pinned card');
-      await aligned(page, section);
-    } else {
-      requireFact(await card.getAttribute('data-side') === 'left', 'card flips left at the right edge');
-      await plot.press('Escape');
+      requireFact(
+        await pin.evaluate(
+          (node) =>
+            node.getBoundingClientRect().bottom <=
+            node
+              .parentElement!.querySelector('.chart-hover')!
+              .getBoundingClientRect().top,
+        ),
+        'touch card above the plot',
+      );
+      await pin
+        .getByRole('button', { name: texts.resolution.closeTooltip })
+        .tap();
+      requireFact(
+        (await frame.locator('.chart-tip').count()) === 0,
+        'touch close',
+      );
     }
-    const driver = page.locator(`figure[data-period="${period}"][data-pos="0"] .chart-hover`);
-    await driver.focus();
-    await driver.press('End');
-    const flowCard = driver.locator('.chart-tooltip');
-    requireFact(await flowCard.locator('.chart-tooltip-head').count() === 0, '04 starts with a flow, without duplicate scope header');
-    requireFact((await flowCard.locator('.chart-tooltip-row').first().innerText()).includes('issuer mint'), '04 first row is issuer mint');
-    requireFact((await flowCard.innerText()).includes(`sum per ${view.period}, all chains`), '04 footer names step and scope');
-    requireFact(await driver.locator('.chart-ring[data-flow="net"]').count() === 1, '04 has one net marker');
-    await driver.press('Escape');
+    await page
+      .locator('input[name="stack-mode"][value="share"]')
+      .check({ force: true });
+    requireFact(
+      (await section.locator('.chart-frame.share').isVisible()) &&
+        !(await frame.isVisible()),
+      'single Level or Share panel',
+    );
+    await page
+      .locator('input[name="stack-mode"][value="level"]')
+      .check({ force: true });
+    for (const scope of [
+      'all',
+      ...overview.chains.map((chain) => chain.slug),
+    ]) {
+      await page
+        .locator(`input[name="chain"][value="${scope}"]`)
+        .check({ force: true });
+      const driver = page.locator(
+        `figure[data-period="${period}"][data-scope="${scope}"]`,
+      );
+      requireFact(await driver.isVisible(), `${period} ${scope} flow chart`);
+      await driver.locator('.chart-hover').focus();
+      await driver.locator('.chart-hover').press('End');
+      requireFact(
+        (await driver.locator('.chart-ring[data-flow="net"]').count()) <= 1,
+        'only net flow marker',
+      );
+      requireFact(
+        (await page.locator('.chart-tip:visible').count()) === 1,
+        'one flow tooltip',
+      );
+      await driver.locator('.chart-hover').press('Escape');
+      await driver.locator('.chart-hover').blur();
+    }
+    await checkLayout(page);
   }
-  await page.check('input[name="period"][value="30d"]');
-  if (!phone) {
-    const size = page.viewportSize()!;
-    await page.setViewportSize({ ...size, width: 1280 });
-    const fits = await page.locator('table.status tbody tr').evaluateAll((rows) => rows.every((row) => {
-      const cells = row.querySelectorAll('td');
-      const run = cells[4]?.querySelector('.sv');
-      return run === null || run === undefined || cells[5] === undefined
-        || run.getBoundingClientRect().right <= cells[5].getBoundingClientRect().left;
-    }));
-    requireFact(fits, 'Last run does not overlap Mismatched days at 1280');
-    await page.setViewportSize(size);
+  await page.locator('input[name="chain"][value="all"]').check({ force: true });
+  await page
+    .locator('input[name="period"][value="30d"]')
+    .check({ force: true });
+  for (const [index, chain] of overview.chains.entries()) {
+    await rows.nth(index).hover();
+    const matched = await page
+      .locator('.chart-layer')
+      .evaluateAll(
+        (layers, slug) =>
+          layers.every(
+            (layer) =>
+              layer.classList.contains('dimmed') ===
+              (layer.getAttribute('data-chain') !== slug),
+          ),
+        chain.slug,
+      );
+    requireFact(
+      matched,
+      `hover dims exactly the other layers for ${chain.slug}`,
+    );
   }
+  const opacity = await page
+    .locator('.chart-layer.dimmed')
+    .first()
+    .evaluate((node) => getComputedStyle(node).opacity);
+  requireFact(opacity === '0.25', 'dimmed token opacity');
+  await page.mouse.move(0, 0);
+  await page.locator('#h-drivers').scrollIntoViewIfNeeded();
+  await page.locator('#sticky-bar').waitFor({ state: 'visible' });
+  const stickyFits = await page.locator('#sticky-bar').evaluate((bar) => {
+    const boundary = bar.getBoundingClientRect();
+    const children = [...bar.children].map((child) =>
+      child.getBoundingClientRect(),
+    );
+    return (
+      boundary.height === 48 &&
+      children.every((box, index) => {
+        const next = children[index + 1];
+        return (
+          box.left >= boundary.left &&
+          box.right <= boundary.right &&
+          box.top >= boundary.top &&
+          box.bottom <= boundary.bottom &&
+          (next === undefined || box.right <= next.left)
+        );
+      })
+    );
+  });
+  requireFact(
+    stickyFits,
+    'sticky date and controls fit the 48px bar without overlap',
+  );
+  const stickyPeriod = page.locator('[data-sticky-period="90d"]');
+  if (!(await stickyPeriod.isDisabled())) {
+    await stickyPeriod.click();
+    requireFact(
+      await page.locator('input[name="period"][value="90d"]').isChecked(),
+      'sticky period drives native control',
+    );
+    await page.locator('[data-sticky-period="30d"]').click();
+  }
+  await page.locator('[data-status-link].sdot').click();
+  requireFact(
+    (await page.locator('#chain-status').getAttribute('open')) !== null,
+    'sticky status opens disclosure',
+  );
+  await page.locator('#chain-status summary').click();
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.locator('#sticky-bar').waitFor({ state: 'hidden' });
+  await checkLayout(page);
+}
+
+/** The principal controls keep their behavior without hydration. */
+export async function checkNoJavascript(
+  page: Page,
+  overview: Overview,
+): Promise<void> {
+  for (const period of ['30d', '90d', 'all'] as const) {
+    const radio = page.locator(`input[name="period"][value="${period}"]`);
+    if (await radio.isDisabled()) continue;
+    await radio.check({ force: true });
+    requireFact(
+      await page
+        .locator(
+          `section[data-period="${period}"][aria-labelledby^="h-supply-by-chain"]`,
+        )
+        .isVisible(),
+      `no-JS ${period} stack`,
+    );
+    requireFact(
+      await page
+        .locator(`figure[data-period="${period}"][data-scope="all"]`)
+        .isVisible(),
+      `no-JS ${period} flows`,
+    );
+  }
+  await page.locator('#chain-status summary').click();
+  requireFact(
+    (await page.locator('table.status tbody tr').count()) ===
+      overview.chains.length,
+    'no-JS disclosure',
+  );
+  await checkLayout(page);
 }

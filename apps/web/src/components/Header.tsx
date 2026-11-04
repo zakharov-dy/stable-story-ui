@@ -1,206 +1,185 @@
-import type { Kpi, Overview } from '@app/contracts';
+import type { Overview } from '@app/contracts';
 import {
-  signOf,
-  chainInfo,
-  splitCompact,
-  splitFull,
+  coordinate,
+  fraction,
+  maxOf,
+  scale,
+  TERMS,
+  signedValue,
   fromQuality,
   merge,
   qualityAttribute,
-  splitHeaderNotes,
 } from '@app/view';
-import {
-  addDays,
-  formatAmount,
-  formatCompact,
-  formatCount,
-  formatDay,
-  formatEnds,
-  formatPercent,
-  formatShortDay,
-  assetName,
-  beforeHistoryReason,
-} from '../view.ts';
+import { formatCompact, formatShortDay, roundedChange, tone } from '../view.ts';
 import { texts } from '../texts.ts';
-import { Coverage } from './Notes.tsx';
-import { QualityNote } from './QualityNote.tsx';
-import { Sparkline, type SparkSize } from './Sparkline.tsx';
 
-const CARDS = ['supply', 'change1d', 'change7d', 'issuerMinted7d', 'issuerBurned7d'] as const;
-type Card = (typeof CARDS)[number];
-
-// Only the changes of the supply carry the direction: a sign, ▲▼ and the positive/negative colours.
-// Levels and issuer volumes have no direction, and neither do the percentages of the issuer cards.
-const DIRECTED: Record<Card, boolean> = { supply: false, change1d: true, change7d: true, issuerMinted7d: false, issuerBurned7d: false };
-const WEEKLY: Record<Card, boolean> = { supply: false, change1d: false, change7d: true, issuerMinted7d: true, issuerBurned7d: true };
-
-const HISTORY_CARDS = new Set<Card>(['change1d', 'change7d', 'issuerMinted7d', 'issuerBurned7d']);
-
-/** The reason a card is cut short by the start of the history, when the quality says the data is incomplete. */
-function historyReason(card: Card, kpi: Kpi, overview: Overview): string | null {
-  if (kpi.quality.complete || !HISTORY_CARDS.has(card)) return null;
-  return beforeHistoryReason(card as Parameters<typeof beforeHistoryReason>[0], overview);
-}
-
-/** The reason a percentage is unknown, from the quality the API sent with the card. */
-function whyPercentUnknown(card: Card, kpi: Kpi, overview: Overview): string {
-  if (kpi.quality.complete) return texts.header.zeroBase;
-  return historyReason(card, kpi, overview) ?? (WEEKLY[card] ? texts.na.reasons.previousWeekIncomplete : texts.na.reasons.noDataForRange);
-}
-
-function Figure({ value, signed, hero, unit, why }: { value: string | null; signed: boolean; hero: boolean; unit: string; why: string }) {
-  if (value === null) {
-    return (
-      <>
-        <p className={`kpi kpi-value na${hero ? ' hero' : ''}`}>{texts.na.label}</p>
-        <p className="na-why">{why}</p>
-      </>
-    );
-  }
-  const compact = splitCompact(formatCompact(value, { signed }));
-  const full = splitFull(formatAmount(value, { signed }));
-  return (
-    <>
-      <p className={`kpi kpi-value${hero ? ' hero' : ''}`}>
-        {compact.number}
-        {compact.suffix === '' ? null : <span className="sfx">{compact.suffix}</span>}
-      </p>
-      <p className="full">
-        {full.whole}
-        {full.fraction === '' ? null : <span className="frac">{full.fraction}</span>}
-        <span className="u">{unit}</span>
-      </p>
-    </>
+/** Only coordinates accumulate. All five labels, including net, come from the scope-all row. */
+function Waterfall({ overview }: { overview: Overview }) {
+  const row = overview.day?.rows.find((candidate) => candidate.scope === 'all');
+  const values = TERMS.map((term) =>
+    signedValue(term, row?.values[term] ?? null),
   );
-}
-
-function Change({ card, kpi, overview }: { card: Card; kpi: Kpi; overview: Overview }) {
-  // The 7-day card names the compared day: the last closed day minus 7 days. Every other card
-  // keeps its static reference; a missing day list (no header days) shows no reference.
-  const last = overview.header.days.at(-1);
-  let reference: string;
-  if (card === 'change7d') {
-    reference = last === undefined ? '' : texts.header.changePct.change7d(formatShortDay(addDays(last, -7)));
-  } else {
-    reference = texts.header.changePct[card];
-  }
-  if (kpi.changePct === null) {
-    return (
-      <p className="chg">
-        <span className="na">{texts.na.label}</span> <span className="na-why">{whyPercentUnknown(card, kpi, overview)}</span>
-      </p>
-    );
-  }
-  const sign = signOf(kpi.changePct);
-  const directed = DIRECTED[card] && sign !== 'zero';
-  const tone = !directed ? 'neutral' : sign === 'negative' ? 'negative' : 'positive';
-  const arrow = !directed ? '' : `${sign === 'negative' ? texts.header.sign.down : texts.header.sign.up} `;
+  const scaled = scale(values).values;
+  const known = scaled.every((value) => value !== null);
+  let position = 0n;
+  const edges = scaled.map((value, index) => {
+    const start = index === 4 ? 0n : position;
+    position = start + (value ?? 0n);
+    return [start, position] as const;
+  });
+  const bound =
+    maxOf(edges.flat().map((value) => (value < 0n ? -value : value))) ?? 0n;
+  const y = (value: bigint) => 60 - fraction(value, 0n, bound || 1n) * 50;
   return (
-    <p className="chg">
-      <span className={tone === 'positive' ? 'pos' : tone === 'negative' ? 'neg' : 'neu'} data-tone={tone}>
-        {arrow}{formatPercent(kpi.changePct, { signed: true })}
-      </span>{' '}
-      {reference}
-    </p>
-  );
-}
-
-function KpiCard({ card, kpi, overview, size }: { card: Card; kpi: Kpi; overview: Overview; size: SparkSize }) {
-  const { header } = overview;
-  const summary = fromQuality(kpi.quality);
-  const directed = DIRECTED[card];
-  const first = header.days[0];
-  const last = header.days.at(-1);
-  const sparkLabel = first !== undefined && last !== undefined
-    ? texts.header.spark.label(texts.header.cards[card], ...formatEnds(first, last))
-    : texts.header.cards[card];
-  const spark = (
-    <Sparkline days={header.days} values={kpi.spark} unreconciled={kpi.sparkUnreconciled} label={sparkLabel} signed={directed} size={size} />
-  );
-  const flagged = kpi.sparkUnreconciled.length > 0 ? 'true' : undefined;
-  const quality = qualityAttribute(summary);
-  const unit = assetName(overview);
-  // A value that is n/a for want of history says which day it needs; otherwise there is no data.
-  const why = historyReason(card, kpi, overview) ?? texts.na.reasons.noDataForRange;
-  if (card === 'supply') {
-    return (
-      <div className="a-mon" data-kpi={card} data-quality={quality} data-unreconciled={flagged}>
-        <span className="label">{texts.header.cards[card]}</span>
-        <Figure value={kpi.value} signed={false} hero unit={unit} why={why} />
-        <Coverage overview={overview} />
-        {spark}
-      </div>
-    );
-  }
-  const big = card === 'change1d';
-  return (
-    <article className={`card${big ? ' a-day' : ''}`} data-kpi={card} data-quality={quality} data-unreconciled={flagged}>
-      {big ? (
-        <div className="head">
-          <span className="label">{texts.header.cards[card]}</span>
-          <span className="chg">{last === undefined ? null : formatShortDay(last)}</span>
-        </div>
-      ) : (
-        <span className="label">{texts.header.cards[card]}</span>
-      )}
-      <div className="vals">
-        <Figure value={kpi.value} signed={directed} hero={false} unit={unit} why={why} />
-        <Change card={card} kpi={kpi} overview={overview} />
-      </div>
-      {spark}
-    </article>
-  );
-}
-
-/** Block 01: the supply monument beside the day's change, then the 7-day band; the date, a delayed chain and missing data above. */
-export function Header({ overview }: { overview: Overview }) {
-  const { header } = overview;
-  const summary = merge(CARDS.map((card) => fromQuality(header[card].quality)));
-  const { above, below } = splitHeaderNotes(summary);
-  const delayed = overview.status.chains.filter((status) => status.state === 'delayed' && status.lagHours !== null);
-  const names = delayed.map((status) => chainInfo(overview.chains, status.chain).name);
-  // A chain whose last closed day is among its mismatched days.
-  const unreconciled = overview.status.chains.flatMap((status) =>
-    status.lastClosedDay !== null && status.unreconciledDays.includes(status.lastClosedDay)
-      ? [{ chain: status.chain, day: status.lastClosedDay }]
-      : []);
-  const delayedNote = names.length === 0 || overview.asOf === null ? null : texts.states.delayed(names, formatShortDay(overview.asOf));
-  return (
-    <section className="ab-header" data-block="header" data-quality={qualityAttribute(summary)} aria-labelledby="header-title">
-      <div className="a-meta">
-        <h2 className="label" id="header-title">
-          <span className="ix">{texts.section.label(1)}</span>
-          {texts.header.label}
-        </h2>
-        <div className="date-row">
-          {overview.asOf === null ? null : <p className="date">{texts.asOf(formatDay(overview.asOf))}</p>}
-          {delayed.map((status) => (
-            <span key={status.chain} className="tag delayed">
-              {texts.tags.behind(chainInfo(overview.chains, status.chain).name, formatCount(status.lagHours))}
-            </span>
+    <figure
+      className="waterfall"
+      data-block="waterfall"
+      data-quality={
+        row?.unreconciled ? 'unreconciled' : known ? 'ok' : 'incomplete'
+      }
+    >
+      {known ? (
+        <svg
+          className="wf-plot"
+          viewBox="0 0 520 120"
+          role="img"
+          aria-label={texts.header.waterfall(
+            overview.day === null
+              ? texts.noData
+              : formatShortDay(overview.day.date),
+          )}
+        >
+          <defs>
+            {(['bridge_in', 'bridge_out'] as const).map((flow) => (
+              <pattern
+                key={flow}
+                id={`waterfall-${flow}`}
+                width="4"
+                height="4"
+                patternUnits="userSpaceOnUse"
+                patternTransform="rotate(45)"
+              >
+                <rect data-flow={flow} width="1.6" height="4" />
+              </pattern>
+            ))}
+          </defs>
+          <line className="wf-zero" x1="0" x2="520" y1="60" y2="60" />
+          {edges.map(([start, end], index) => (
+            <g key={TERMS[index]}>
+              {index < 4 ? (
+                <line
+                  className="wf-connector"
+                  x1={index * 104 + 78}
+                  x2={(index + 1) * 104 + 26}
+                  y1={coordinate(y(end))}
+                  y2={coordinate(y(end))}
+                />
+              ) : null}
+              <rect
+                data-flow={TERMS[index]}
+                data-unreconciled={
+                  index === 4 && row?.unreconciled ? 'true' : undefined
+                }
+                x={index * 104 + 26}
+                y={coordinate(Math.min(y(start), y(end)))}
+                width="52"
+                height={coordinate(Math.max(1, Math.abs(y(start) - y(end))))}
+              />
+            </g>
           ))}
-          {unreconciled.map(({ chain, day }) => (
-            <span key={chain} className="tag unrec">
-              {texts.tags.chainUnreconciled(chainInfo(overview.chains, chain).name, formatShortDay(day))}
-            </span>
-          ))}
-        </div>
-      </div>
-      <QualityNote summary={above} delayed={delayedNote} />
-      <div className="a-hero">
-        <KpiCard card="supply" kpi={header.supply} overview={overview} size="tall" />
-        <KpiCard card="change1d" kpi={header.change1d} overview={overview} size="tall" />
-      </div>
-      <div className="a-band">
-        {(['change7d', 'issuerMinted7d', 'issuerBurned7d'] as const).map((card) => (
-          <KpiCard key={card} card={card} kpi={header[card]} overview={overview} size="compact" />
+        </svg>
+      ) : null}
+      <div className="wf-row">
+        {TERMS.map((term, index) => (
+          <div key={term} data-flow={term}>
+            <div className="wf-v">{roundedChange(values[index] ?? null)}</div>
+            <div className="wf-c">
+              <span className="sw" data-flow={term} />
+              {texts.flows[term]}
+            </div>
+          </div>
         ))}
       </div>
-      <p className="inote a-foot">
-        <strong>{texts.header.issuerNote.term}</strong>
-        {texts.header.issuerNote.body}
-      </p>
-      <QualityNote summary={below} />
+      <figcaption className="wf-cap">
+        <span className="ix">{texts.header.marker}</span>{' '}
+        {overview.day === null
+          ? texts.noData
+          : texts.header.waterfall(formatShortDay(overview.day.date))}
+      </figcaption>
+    </figure>
+  );
+}
+
+export function Header({ overview }: { overview: Overview }) {
+  const quality = merge(
+    [
+      overview.header.supply,
+      overview.header.change1d,
+      overview.header.change7d,
+    ].map((card) => fromQuality(card.quality)),
+  );
+  return (
+    <section
+      className="hero"
+      id="hero"
+      data-block="header"
+      data-quality={qualityAttribute(quality)}
+      aria-label={texts.header.cards.supply}
+    >
+      <div>
+        <p className="monument" aria-label={texts.header.cards.supply}>
+          {formatCompact(overview.header.supply.value)}
+        </p>
+        <p className="delta">
+          <span className={tone(overview.header.change1d.value)}>
+            {texts.header.today(roundedChange(overview.header.change1d.value))}
+          </span>
+          <span className="sep"> · </span>
+          <span className={tone(overview.header.change7d.value)}>
+            {texts.header.week(roundedChange(overview.header.change7d.value))}
+          </span>
+        </p>
+        {overview.status.chains
+          .filter(
+            (status) =>
+              status.lastClosedDay !== null &&
+              status.unreconciledDays.includes(status.lastClosedDay),
+          )
+          .map((status) => (
+            <p
+              key={status.chain}
+              className="hero-note unrec"
+              data-unreconciled="true"
+              data-chain={status.chain}
+              data-day={status.lastClosedDay}
+              data-quality="unreconciled"
+            >
+              {texts.header.failed(
+                overview.chains.find((chain) => chain.slug === status.chain)
+                  ?.name ?? status.chain,
+                formatShortDay(status.lastClosedDay!),
+                (['supply', 'bridge', 'continuity'] as const)
+                  .filter(
+                    (check) => status.reconciliation?.[check] === 'mismatch',
+                  )
+                  .map((check) =>
+                    texts.status.failure(texts.status.checks[check]),
+                  )
+                  .join(', '),
+              )}
+            </p>
+          ))}
+        {!quality.flags.includes('incomplete') ? null : (
+          <p
+            className="hero-note"
+            data-quality="incomplete"
+            data-header-note="incomplete"
+          >
+            {texts.quality.incomplete}
+          </p>
+        )}
+      </div>
+      <Waterfall overview={overview} />
     </section>
   );
 }

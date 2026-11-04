@@ -150,15 +150,15 @@ export async function checkLongHistory(html: string, overview: Overview): Promis
       if (JSON.stringify(column?.footer).includes(label) && note?.tone === (gap ? 'incomplete' : 'unreconciled')) controls.add(gap ? 'gap' : 'mismatch');
     }
   });
-  for (const period of ['30d', '90d', 'all']) for (const kind of ['supply', 'split', 'driver']) {
+  for (const period of ['30d', '90d', 'all']) for (const kind of ['supply', 'driver']) {
     requireControl(controls.has(`${kind}-${period}`), `${kind} ${period} in Flight`);
     const suffix = period === '30d' ? '' : `-${period}`;
     const markup = kind === 'driver' ? figure(period, 'ethereum') : section(`h-${kind === 'supply' ? 'supply-by-chain' : 'issuer-vs-bridge'}${suffix}`);
-    requireControl(markup.includes(`data-period="${period}"`) && markup.includes(kind === 'split' ? 'data-scope="all"' : '<svg'), `${kind} ${period} in HTML`);
+    requireControl(markup.includes(`data-period="${period}"`) && markup.includes('<svg'), `${kind} ${period} in HTML`);
   }
   for (const control of ['daily-level', 'daily-driver', 'gap', 'mismatch']) requireControl(controls.has(control), control);
   for (const heading of ['supply-by-chain', 'drivers']) requireControl(new RegExp(`<section\\b[^>]*aria-labelledby="h-${heading}"[\\s\\S]*?<svg`).test(body), `${heading} SVG`);
-  const equation = sections.find((match) => match[1]?.includes('data-block="day-equation"'))?.[0] ?? '';
+  const equation = sections.find((match) => match[1]?.includes('data-block="header"'))?.[0] ?? '';
   requireControl(equation.includes('<svg'), 'day equation');
   for (const term of ['issuer_mint', 'issuer_burn', 'bridge_in', 'bridge_out', 'net']) requireControl(equation.includes(`data-flow="${term}"`), `day equation ${term}`);
   requireControl(figure('90d', 'base').includes('data-missing="true"') && figure('90d', 'ethereum').includes('data-unreconciled="true"'), 'historical HTML gap/mismatch marks');

@@ -1,16 +1,3 @@
-/*
- * Charts of blocks 03–05 (D2-B2): supply by chain, what moved the supply, issuer vs bridge, and the
- * shared chart frame (axes, tooltips, bands) the sparklines of the header use too. Colours, fonts
- * and spacing only through tokens.css; inline `style` in the markup is for computed coordinates.
- * Docs: docs/design.md.
- */
-
-/* Quality notes sit between a section's head and its chart. */
-.sec > .qnotes,
-.sec > .qwrap > .qnotes {
-  margin: 0 0 var(--space-4);
-}
-
 /* ---------- chain colours: the --color-chain-N slot of a data-chain-index ---------- */
 [data-chain-index='1'] {
   --chain-color: var(--color-chain-1);
@@ -39,7 +26,7 @@
 /* ---------- chart frame: y labels | plot | direct labels, dates under the plot ---------- */
 .chart-frame {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 44px;
   column-gap: var(--space-2);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
@@ -52,7 +39,7 @@
 }
 
 .chart-y {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 2;
   display: flex;
   flex-direction: column;
@@ -65,12 +52,12 @@
 .chart-y.ticked {
   position: relative;
   display: block;
-  min-width: 48px;
+  min-width: 0;
 }
 
 .yl {
   position: absolute;
-  left: 0;
+  right: 0;
   transform: translateY(-50%);
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
@@ -79,7 +66,7 @@
 
 .chart-hover {
   position: relative;
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 2;
   min-width: 0;
 }
@@ -92,11 +79,11 @@
 
 /* A wide plot fitted to the width at a fixed height; strokes keep their width. */
 .chart.stretch {
-  height: 260px;
+  height: 340px;
 }
 
 .share .chart.stretch {
-  height: 132px;
+  height: 340px;
 }
 
 .chart-aside {
@@ -107,7 +94,7 @@
 }
 
 .chart-x {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 3;
   position: relative;
   display: flex;
@@ -144,16 +131,6 @@
 }
 
 .chart-hit {
-  fill: transparent;
-}
-
-.chart-hit:hover {
-  fill: var(--color-shade-incomplete);
-}
-
-/* ---------- the structured hover of block 03: one card, a crosshair, a ring and a date chip ---------- */
-/* The card replaces the hover band and the native titles: no shading under the pointer. */
-.chart-hover[data-mode='structured'] .chart-hit:hover {
   fill: transparent;
 }
 
@@ -248,16 +225,19 @@
   position: absolute;
   z-index: 3;
   transform: none;
-  width: 248px;
+  width: 300px;
+  max-width: 100%;
   max-width: none;
   border: 0;
   padding: 12px 14px 10px;
   border-radius: var(--radius-tooltip);
   background: var(--color-tooltip-bg);
-  box-shadow: inset 0 0 0 var(--stroke-hairline) var(--color-hairline), var(--shadow-tooltip);
+  box-shadow:
+    inset 0 0 0 var(--stroke-hairline) var(--color-hairline),
+    var(--shadow-tooltip);
   backdrop-filter: blur(6px);
   color: var(--color-text);
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   line-height: 1.35;
   pointer-events: none;
   animation: chart-tooltip-in var(--motion-tooltip) linear;
@@ -317,12 +297,20 @@
 }
 
 .tt-sq-hatched[data-flow='bridge_in'] {
-  background: repeating-linear-gradient(135deg, var(--color-bridge-in) 0 calc(var(--hatch-size) * 0.4), transparent 0 var(--hatch-size));
+  background: repeating-linear-gradient(
+    135deg,
+    var(--color-bridge-in) 0 calc(var(--hatch-size) * 0.4),
+    transparent 0 var(--hatch-size)
+  );
   box-shadow: inset 0 0 0 var(--stroke-hairline) var(--color-bridge-in);
 }
 
 .tt-sq-hatched[data-flow='bridge_out'] {
-  background: repeating-linear-gradient(135deg, var(--color-bridge-out) 0 calc(var(--hatch-size) * 0.4), transparent 0 var(--hatch-size));
+  background: repeating-linear-gradient(
+    135deg,
+    var(--color-bridge-out) 0 calc(var(--hatch-size) * 0.4),
+    transparent 0 var(--hatch-size)
+  );
   box-shadow: inset 0 0 0 var(--stroke-hairline) var(--color-bridge-out);
 }
 
@@ -341,10 +329,8 @@
 }
 
 .tt-label {
-  overflow: hidden;
   color: var(--color-text-muted);
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .chart-tooltip-head .tt-label {
@@ -413,975 +399,218 @@
   border: 0;
 }
 
-/* Incomplete buckets and days without data are shaded; a dashed edge marks where data stops. */
-.chart-band[data-incomplete],
-.chart-band[data-missing] {
-  fill: var(--color-shade-incomplete);
+[data-chain-index='7'] {
+  --chain-color: var(--color-chain-7);
 }
 
+[data-chain-index='8'] {
+  --chain-color: var(--color-chain-8);
+}
+
+[data-chain-index='9'] {
+  --chain-color: var(--color-chain-9);
+}
+
+[data-chain-index='10'] {
+  --chain-color: var(--color-chain-10);
+}
+.chart-point {
+  fill: var(--color-bg);
+  stroke: var(--color-unreconciled);
+  stroke-width: var(--stroke-line);
+}
 .chart-gap-edge {
   stroke: var(--color-incomplete);
   stroke-width: var(--stroke-hairline);
   stroke-dasharray: 3 3;
   vector-effect: non-scaling-stroke;
 }
-
-/* A flagged point: a hollow diamond, in the SVG or as an HTML overlay over a stretched plot. */
-.chart-point {
-  fill: var(--color-bg);
-  stroke: var(--color-unreconciled);
-  stroke-width: var(--stroke-line);
+.chart-band {
+  fill: none;
 }
-
-.ovl-dia,
-.spark-point {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  margin: -5px 0 0 -5px;
-  transform: rotate(45deg);
-  border: var(--stroke-line) solid var(--color-unreconciled);
-  background: var(--color-bg);
-  pointer-events: none;
-}
-
-.chart-k .caption,
-.mult .caption {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-dim);
-}
-
-.chart-note {
-  margin: var(--space-3) 0 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-}
-
-.chart-note[data-note='no-data'] {
-  color: var(--color-incomplete);
-}
-
-/* ---------- 03 supply by chain ---------- */
-.supply-plots {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto max-content;
-  column-gap: var(--space-3);
-}
-
-.areas {
-  margin: 0;
-  min-width: 0;
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: subgrid;
-}
-
-.areas > .chart-k,
-.areas > .chart-note {
-  grid-column: 1 / -1;
-}
-
-.areas + .areas {
-  margin-top: var(--space-5);
-}
-
-.chart-k {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: var(--space-3);
-  margin-bottom: var(--space-3);
-}
-
-/* The board sets the chart-03 share sub-heading in mixed case; every other label stays uppercase. */
-.areas[data-series='share'] > .chart-k .label {
-  text-transform: none;
-}
-
-.chart-layer .area {
+.area {
   fill: var(--chain-color, var(--color-border));
-  fill-opacity: 0.86; /* the chain colour at 86 %; no outline on a layer: the hairline is the only separator */
+  fill-opacity: 0.86;
 }
-
-/* The hairline between neighbouring layers, #13112a = --color-surface, 1 px. */
+.chart-layer.dimmed {
+  opacity: var(--opacity-dimmed);
+}
 .asep {
   fill: none;
   stroke: var(--color-surface);
   stroke-width: var(--stroke-hairline);
-  stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
-
-/* The total line on top of the stack (the level panel), #f4f1ff at 92 %. */
 .atotal {
   fill: none;
   stroke: var(--color-text);
-  stroke-width: var(--stroke-line);
   stroke-opacity: 0.92;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-
-.agrid {
-  stroke: var(--color-hairline);
-  stroke-width: var(--stroke-hairline);
-  vector-effect: non-scaling-stroke;
-}
-
-.azero {
-  stroke: var(--color-zero-line);
-  stroke-width: var(--stroke-hairline);
-  vector-effect: non-scaling-stroke;
-}
-
-/* 03 keeps its value axis at the right edge of the plot, right-aligned, between the plot and the
-   direct labels; the mono small dim style of the labels is the shared .yl. */
-.chart-frame.level.has-aside,
-.chart-frame.share.has-aside {
-  grid-column: 1 / -1;
-  grid-template-columns: subgrid;
-}
-
-.chart-frame.level .chart-y,
-.chart-frame.share .chart-y {
-  grid-column: 2;
-}
-
-.chart-frame.level .chart-hover,
-.chart-frame.share .chart-hover {
-  grid-column: 1;
-}
-
-.chart-frame.level .yl,
-.chart-frame.share .yl {
-  left: auto;
-  right: 0;
-  text-align: right;
-}
-
-.chart-frame.level .chart-x,
-.chart-frame.share .chart-x {
-  grid-column: 1;
-}
-
-/* Every chain stays in the token-spaced desktop column and the mobile legend. */
-.dlab {
-  position: relative;
-  grid-area: 1 / 1;
-  align-self: start;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  white-space: nowrap;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-}
-
-.dlab::before {
-  content: '';
-  align-self: center;
-  flex: none;
-  width: var(--swatch-size);
-  height: var(--swatch-size);
-  border-radius: var(--radius-swatch);
-  background: var(--chain-color, var(--color-border));
-}
-
-.dlab-value,
-.dlab-share {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  font-weight: 500;
-}
-
-.dlab-value {
-  color: var(--color-text);
-  margin-left: auto;
-}
-
-.resolution-note {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-  margin: var(--space-3) 0 0;
-}
-
-/* ---------- 04 what moved the supply ---------- */
-.legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-5);
-  margin: 0 0 var(--space-4);
-  padding: 0;
-  list-style: none;
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-}
-
-.legend li {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.legend li::before {
-  content: '';
-  flex: none;
-  width: var(--swatch-size);
-  height: var(--swatch-size);
-  border-radius: var(--radius-swatch);
-  background: var(--chain-color, var(--color-border));
-}
-
-.legend [data-flow='issuer_mint']::before {
-  background: var(--color-issuer-mint);
-}
-
-.legend [data-flow='issuer_burn']::before {
-  background: var(--color-issuer-burn);
-}
-
-.legend [data-flow='bridge_in']::before {
-  background: repeating-linear-gradient(135deg, var(--color-bridge-in) 0 calc(var(--hatch-size) * 0.4), transparent 0 var(--hatch-size));
-  box-shadow: inset 0 0 0 var(--stroke-hairline) var(--color-bridge-in);
-}
-
-.legend [data-flow='bridge_out']::before {
-  background: repeating-linear-gradient(135deg, var(--color-bridge-out) 0 calc(var(--hatch-size) * 0.4), transparent 0 var(--hatch-size));
-  box-shadow: inset 0 0 0 var(--stroke-hairline) var(--color-bridge-out);
-}
-
-.legend [data-flow='net']::before {
-  height: var(--swatch-line);
-  border-radius: 0;
-  background: var(--color-net);
-}
-
-.legend [data-flow='zero']::before {
-  height: var(--swatch-line);
-  border-radius: 0;
-  background: var(--color-text-muted);
-}
-
-.views > figure {
-  max-width: 720px;
-}
-
-/* The All view has no chain dot (the board's `All chains` is dotless). */
-.views > figure[data-pos='0'] .chain::before {
-  display: none;
-}
-
-.mult {
-  margin: 0;
-  gap: var(--space-3);
-}
-
-.mult .head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-1) var(--space-3);
-}
-
-/* A tag with several days wraps inside the card. */
-.mult .tag {
-  min-width: 0;
-  max-width: 100%;
-  white-space: normal;
-  overflow-wrap: anywhere;
-}
-
-.mult .chain {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-weight: 500;
-}
-
-.mult .chain::before {
-  content: '';
-  width: var(--swatch-size);
-  height: var(--swatch-size);
-  border-radius: var(--radius-swatch);
-  background: var(--chain-color, var(--color-border));
-}
-
-/* A delayed chain is outlined amber; an unreconciled one is outlined red and wins when both apply. */
-.mult[data-delayed='true'] {
-  border: var(--stroke-hairline) dashed var(--color-delayed);
-}
-
-.mult[data-unreconciled='true'] {
-  border: var(--stroke-hairline) dashed var(--color-unreconciled);
-}
-
-.chart-frame.drivers .chart-y.ticked {
-  min-width: 44px;
-}
-
-/* Section 04 reads its values at the right edge: the plot comes first, the labels second, and the
-   dates sit under the plot. */
-.chart-frame.drivers {
-  grid-template-columns: minmax(0, 1fr) auto;
-}
-
-.chart-frame.drivers .chart-y {
-  grid-column: 2;
-}
-
-.chart-frame.drivers .chart-hover,
-.chart-frame.drivers .chart-x {
-  grid-column: 1;
-}
-
-.chart-frame.drivers .yl {
-  left: auto;
-  right: 0;
-}
-
-/* Issuer is a soft gradient area (opaque at the flow edge, 6 % toward zero) with a solid edge;
-   the bridge is a hatched band stacked outside it with a dashed edge. */
-.issuer-area {
-  stroke: none;
-}
-
-.grad-fill stop {
-  stop-color: currentColor;
-}
-
-.grad-up {
-  color: var(--color-issuer-mint);
-}
-
-.grad-down {
-  color: var(--color-issuer-burn);
-}
-
-.issuer-edge {
-  fill: none;
   stroke-width: var(--stroke-line);
-  stroke-linejoin: round;
-  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
 }
-
-.issuer-edge[data-flow='issuer_mint'] {
-  stroke: var(--color-issuer-mint);
-}
-
-.issuer-edge[data-flow='issuer_burn'] {
-  stroke: var(--color-issuer-burn);
-}
-
-.bridge-area {
-  stroke: none;
-}
-
-.bridge-edge {
-  fill: none;
-  stroke-width: var(--stroke-line);
-  stroke-dasharray: 4 3;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
-
-.bridge-edge[data-flow='bridge_in'] {
-  stroke: var(--color-bridge-in);
-}
-
-.bridge-edge[data-flow='bridge_out'] {
-  stroke: var(--color-bridge-out);
-}
-
-.hatch-ink.in {
-  fill: var(--color-bridge-in);
-}
-
-.hatch-ink.out {
-  fill: var(--color-bridge-out);
-}
-
+.agrid,
 .b-grid {
   stroke: var(--color-hairline);
   stroke-width: var(--stroke-hairline);
   vector-effect: non-scaling-stroke;
 }
-
-.b-zero {
+.azero,
+.b-zero,
+.b-zero0 {
   stroke: var(--color-zero-line);
   stroke-width: var(--stroke-hairline);
   vector-effect: non-scaling-stroke;
 }
-
-/* A closed day with no events: a real zero, a tick on the zero line. */
-.b-zero0 {
-  stroke: var(--color-text-muted);
-  stroke-width: var(--stroke-net);
+.peak {
+  position: absolute;
+  transform: translate(var(--space-2), -100%);
+  font: var(--font-size-xs)/1.45 var(--font-mono);
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 0 var(--space-1);
+  max-width: 75%;
 }
-
+.peak-left {
+  transform: translate(calc(-100% - var(--space-2)), -100%);
+}
+.resolution-note {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+}
+.scope-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.scope-option {
+  display: contents;
+}
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--space-1) * 1.5);
+  padding: calc(var(--space-1) * 1.5) var(--space-3);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-chip);
+  min-height: 36px;
+  max-width: 100%;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.chip:hover {
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+.chip:has(input:checked) {
+  background: var(--color-surface-2);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+.scope-plots {
+  display: none;
+  order: 1;
+  width: 100%;
+  margin-top: var(--space-3);
+}
+.scope-option:has(input:checked) > .scope-plots {
+  display: block;
+}
+.flow-plot .chart.stretch {
+  height: 260px;
+}
+.issuer-area {
+  fill: var(--flow-color);
+  fill-opacity: 0.18;
+}
+.issuer-edge,
+.bridge-edge {
+  fill: none;
+  stroke: var(--flow-color);
+  stroke-width: var(--stroke-line);
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.bridge-edge {
+  stroke-dasharray: 4 3;
+}
+.hatch-ink.in {
+  fill: var(--color-bridge-in);
+}
+.hatch-ink.out {
+  fill: var(--color-bridge-out);
+}
 .net-line {
   fill: none;
   stroke: var(--color-net);
   stroke-width: var(--stroke-net);
   stroke-linejoin: round;
   stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
 }
-
-/* The final segment of the net line, drawn alone when the last day is unreconciled. */
-.net-line.net-dash {
+.net-dash {
   stroke-dasharray: 3 4;
 }
-
 .b-netdot {
   fill: var(--color-net);
 }
-
-.mnote {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1) var(--space-4);
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-}
-
-.mnote .nd {
-  color: var(--color-incomplete);
-}
-
-.mnote .ur {
-  color: var(--color-unreconciled);
-}
-
-.mnote .zr {
-  color: var(--color-text);
-}
-
-.vscale {
-  margin: var(--space-3) 0 0;
-  font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-}
-
-/* ---------- 05 issuer vs bridge ---------- */
-.mx {
-  border-top: var(--stroke-hairline) solid var(--color-border);
-  border-bottom: var(--stroke-hairline) solid var(--color-border);
-}
-
-.mx-row {
-  display: grid;
-  grid-template-columns: 170px repeat(4, minmax(0, 1fr));
-  border-top: var(--stroke-hairline) solid var(--color-hairline);
-}
-
-.mx-row:first-child {
-  border-top: 0;
-}
-
-.mx-row.grp,
-.mx-row.sub {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.mx-row.grp > span,
-.mx-row.sub > span {
-  padding: var(--space-2) var(--space-4) var(--space-2) 0;
-}
-
-.mx-row.grp .g {
-  grid-column: span 2;
-  padding-left: var(--space-4);
-  border-left: var(--stroke-hairline) solid var(--color-hairline);
-  color: var(--color-text);
-}
-
-.mx-row.sub > span + span {
-  padding-left: var(--space-4);
-  border-left: var(--stroke-hairline) solid var(--color-hairline);
-}
-
-.mx-scope {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin: 0;
-  padding: var(--space-4) var(--space-4) var(--space-4) 0;
-  font-size: var(--font-size-md);
-  font-weight: 500;
-}
-
-.mx-row[data-chain-index] .mx-scope::before {
-  content: '';
-  flex: none;
-  width: var(--swatch-size);
-  height: var(--swatch-size);
-  border-radius: var(--radius-swatch);
-  background: var(--chain-color, var(--color-border));
-}
-
-.mx-cell {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  min-width: 0;
-  padding: var(--space-4);
-  border-left: var(--stroke-hairline) solid var(--color-hairline);
-}
-
-.mx-cell .k {
+/* Period and panel selections remain native controls without hydration. */
+.period-group [data-period],
+.areas[data-series='share'] {
   display: none;
 }
-
-.mx-cell .top {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: var(--space-2);
+.period-group:has(input[name='period'][value='30d']:checked)
+  [data-period='30d'],
+.period-group:has(input[name='period'][value='90d']:checked)
+  [data-period='90d'],
+.period-group:has(input[name='period'][value='all']:checked)
+  [data-period='all'] {
+  display: block;
 }
-
-.mx-cell .pct {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-lg);
-  font-variant-numeric: tabular-nums;
-}
-
-.mx-cell .pct small {
-  margin-left: var(--space-1);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-}
-
-.mx-cell .pct.na {
-  font-size: var(--font-size-sm);
-}
-
-.mx-cell .ur {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  color: var(--color-unreconciled);
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-.mx-cell .words {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  line-height: 1.5;
-  color: var(--color-text-muted);
-}
-
-.mx-cell .words b {
-  font-weight: 500;
-  color: var(--color-text);
-}
-
-.share-bar {
-  display: flex;
-  height: 10px;
-  border-radius: 3px;
-  overflow: hidden;
-  background: var(--color-surface-2);
-}
-
-.share-bar .iss {
-  min-width: 2px;
-}
-
-.share-bar .iss.in {
-  background: var(--color-issuer-mint);
-}
-
-.share-bar .iss.out {
-  background: var(--color-issuer-burn);
-}
-
-.share-bar .brg.in {
-  background: repeating-linear-gradient(135deg, var(--color-bridge-in) 0 calc(var(--hatch-size) * 0.4), transparent 0 var(--hatch-size));
-  box-shadow: inset 0 0 0 var(--stroke-hairline) var(--color-bridge-in);
-}
-
-.share-bar .brg.out {
-  background: repeating-linear-gradient(135deg, var(--color-bridge-out) 0 calc(var(--hatch-size) * 0.4), transparent 0 var(--hatch-size));
-  box-shadow: inset 0 0 0 var(--stroke-hairline) var(--color-bridge-out);
-}
-
-/* An unknown share: an empty bar, never a 0 %. */
-.share-bar.empty {
-  box-shadow: inset 0 0 0 var(--stroke-hairline) var(--color-hairline);
-}
-
-/* ---------- period switch: one radio group above sections 03 and 05 ---------- */
-.period-group {
-  margin-top: 136px;
-}
-
-/* The copies of section 03 sit tight under the switch; Drivers and the section-05 copies keep
-   the page section rhythm (they hold their 03 → 04 → 05 places, and hidden copies are display
-   none, so their margins never apply). */
-.period-group > section[aria-labelledby^='h-supply-by-chain'] {
-  margin-top: var(--space-5);
-}
-
-/* Surface card: label, one caption line, then the segmented control. */
-.pbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  justify-content: space-between;
-  gap: var(--space-3) var(--space-5);
-  padding: var(--space-4) var(--space-5);
-  background: var(--color-surface);
-  border: var(--stroke-hairline) solid var(--color-hairline);
-  border-radius: var(--radius);
-}
-
-.pb-l {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  min-width: min(100%, 320px);
-  flex: 1 1 320px;
-}
-
-.pb-l p {
-  margin: 0;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-}
-
-/* The segmented control: a real fieldset of radios with a hidden legend. The group sits on the
-   surface card (transparent, pill), the selected segment is the raised chip. */
-.seg {
-  display: flex;
-  margin: 0;
-  padding: 3px;
-  gap: 0;
-  border: var(--stroke-hairline) solid var(--color-hairline);
-  border-radius: var(--radius-pill);
-  background: transparent;
-}
-
-.seg > legend {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.seg label {
-  position: relative;
-  flex: 1 1 0;
-  min-width: 52px;
-}
-
-/* The native radio stays focusable under its segment; the span draws the segment. */
-.seg input {
-  position: absolute;
-  inset: 0;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.seg input:disabled {
-  cursor: default;
-}
-
-.seg span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 32px;
-  padding: 0 var(--space-3);
-  border-radius: var(--radius-pill);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  white-space: nowrap;
-}
-
-.seg input:checked + span {
-  background: var(--color-surface-2);
-  color: var(--color-accent);
-  box-shadow: inset 0 0 0 var(--stroke-hairline) var(--color-hairline);
-}
-
-.seg label:hover input:not(:disabled) + span {
-  color: var(--color-text);
-}
-
-.seg input:focus-visible + span {
-  outline: 2px solid var(--color-focus-ring);
-  outline-offset: 2px;
-}
-
-.seg input:disabled + span {
-  color: var(--color-text-dim);
-  text-decoration: line-through;
-  text-decoration-color: var(--color-hairline);
-}
-
-/* ---------- 04 toolbar: chain switch left, period echo right ---------- */
-.dtoolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3) var(--space-5);
-  margin-bottom: var(--space-4);
-}
-
-/* The chain switch reuses the segmented control: labels in sans, a chain colour
-   swatch, and the delayed dot of the board (a title-only dot plus a visually
-   hidden lag for screen readers). */
-.seg.chains {
-  flex-wrap: nowrap;
-}
-
-.seg.chains span {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  letter-spacing: 0;
-  min-width: 0;
-}
-
-.seg.chains span i {
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-  background: var(--chain-color);
-  flex: none;
-}
-
-.seg.chains span b.dl {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-delayed);
-  flex: none;
-}
-
-/* Visually hidden, like the `.seg` legend: overrides the whole `.seg span` box. */
-.seg .vh {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* The period echo: a dashed pill, a link to the page-wide switch, never a switch.
-   Its value follows the checked period radio by CSS (one `b` per period). */
-.pecho {
-  display: inline-flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  border: var(--stroke-hairline) dashed var(--color-hairline);
-  border-radius: var(--radius-pill);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.pecho b {
-  font-weight: 500;
-  color: var(--color-text);
-}
-
-.pecho:hover {
-  color: var(--color-text);
-}
-
-/* One checked radio names the visible copy; the rules only hide, never show, so an unknown
-   state keeps every copy readable. Supported browsers implement `:has` (2023 and later). The rule
-   covers every section copy in the group: 03 and 05 share the switch, each with its own period. */
-.period-group:has(input[name='period'][value='30d']:checked) section[data-period]:not([data-period='30d']),
-.period-group:has(input[name='period'][value='90d']:checked) section[data-period]:not([data-period='90d']),
-.period-group:has(input[name='period'][value='all']:checked) section[data-period]:not([data-period='all']) {
+.supply-layout:has(input[name='stack-mode'][value='share']:checked)
+  .areas[data-series='level'] {
   display: none;
 }
-
-/* Section 04 is one section: the checked period names the visible per-period text
-   (headline, caption, quality note, legend entry, echo value, scale note) … */
-.period-group:has(input[name='period'][value='30d']:checked) [data-ph]:not([data-ph='30d']),
-.period-group:has(input[name='period'][value='90d']:checked) [data-ph]:not([data-ph='90d']),
-.period-group:has(input[name='period'][value='all']:checked) [data-ph]:not([data-ph='all']),
-/* … and the checked period AND the checked chain name the visible figure … */
-.period-group:has(input[name='period'][value='30d']:checked) .views figure[data-period]:not([data-period='30d']),
-.period-group:has(input[name='period'][value='90d']:checked) .views figure[data-period]:not([data-period='90d']),
-.period-group:has(input[name='period'][value='all']:checked) .views figure[data-period]:not([data-period='all']),
-/* … with the chain matched by position (`data-pos`, 0 = All chains): slugs are
-   unbounded, positions enumerate the registry's six chains (0…6). Beyond the
-   enumerated positions every view stays readable. */
-.period-group:has(input[name='chain'][data-pos='0']:checked) .views figure[data-pos]:not([data-pos='0']),
-.period-group:has(input[name='chain'][data-pos='1']:checked) .views figure[data-pos]:not([data-pos='1']),
-.period-group:has(input[name='chain'][data-pos='2']:checked) .views figure[data-pos]:not([data-pos='2']),
-.period-group:has(input[name='chain'][data-pos='3']:checked) .views figure[data-pos]:not([data-pos='3']),
-.period-group:has(input[name='chain'][data-pos='4']:checked) .views figure[data-pos]:not([data-pos='4']),
-.period-group:has(input[name='chain'][data-pos='5']:checked) .views figure[data-pos]:not([data-pos='5']),
-.period-group:has(input[name='chain'][data-pos='6']:checked) .views figure[data-pos]:not([data-pos='6']),
-.period-group:has(input[name='chain'][data-pos='0']:checked) .vscale span[data-pos]:not([data-pos='0']),
-.period-group:has(input[name='chain'][data-pos='1']:checked) .vscale span[data-pos]:not([data-pos='1']),
-.period-group:has(input[name='chain'][data-pos='2']:checked) .vscale span[data-pos]:not([data-pos='2']),
-.period-group:has(input[name='chain'][data-pos='3']:checked) .vscale span[data-pos]:not([data-pos='3']),
-.period-group:has(input[name='chain'][data-pos='4']:checked) .vscale span[data-pos]:not([data-pos='4']),
-.period-group:has(input[name='chain'][data-pos='5']:checked) .vscale span[data-pos]:not([data-pos='5']),
-.period-group:has(input[name='chain'][data-pos='6']:checked) .vscale span[data-pos]:not([data-pos='6']) {
-  display: none;
+.supply-layout:has(input[name='stack-mode'][value='share']:checked)
+  .areas[data-series='share'] {
+  display: block;
 }
-
-/* Without `:has` nothing hides: every period and view stays readable, and the echo
-   keeps its default (30D, the checked period) instead of three values. */
-@supports not selector(:has(*)) {
-  .pecho b[data-ph]:not([data-ph='30d']) {
-    display: none;
-  }
-}
-
-/* ---------- phone ---------- */
 @media (max-width: 720px) {
-  .supply-plots {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-  .chart-frame.has-aside {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .chart-y.ticked {
-    min-width: 40px;
-  }
-
-  .chart.stretch {
-    height: 190px;
-  }
-
+  .chart.stretch,
   .share .chart.stretch {
-    height: 110px;
+    height: 240px;
   }
-
-  /* Direct labels move under the chart, as a row. */
-  .chart-aside {
-    grid-column: 1 / -1;
-    grid-row: 4;
-    position: static;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-1) var(--space-4);
-    margin-top: var(--space-3);
-    padding-left: 40px;
-  }
-
-  /* 03: the axis stays at the right edge, so the label row starts at the plot's left edge and
-     keeps every chain and its compact level at phone width. */
-  .chart-frame.level.has-aside,
-  .chart-frame.share.has-aside {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-
-  .chart-frame.level .chart-aside,
-  .chart-frame.share .chart-aside {
-    padding-left: 0;
-  }
-
-  .dlab-share {
+  .flow-plot .chart.stretch { height: 220px; }
+  .chart-x .minor {
     display: none;
   }
-
-  .dlab {
-    position: static;
-    transform: none;
-    font-size: var(--font-size-sm);
+  .chart-frame {
+    grid-template-columns: minmax(0, 1fr) 40px;
   }
-
-  /* Fewer date labels. */
-  .chart-x .w.minor {
-    display: none;
-  }
-
-  /* The period bar stacks: label and line, then the switch as three equal full-width segments. */
-  .pbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .seg span {
-    height: 36px;
-  }
-
-  .dtoolbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .seg.chains {
-    flex-wrap: wrap;
-  }
-
-  .mx {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    border: 0;
-  }
-
-  .mx-row.grp,
-  .mx-row.sub {
-    display: none;
-  }
-
-  .mx-row {
-    grid-template-columns: 1fr;
-    padding: var(--space-3);
-    border: var(--stroke-hairline) solid var(--color-hairline);
-    border-radius: var(--radius);
-    background: var(--color-surface);
-  }
-
-  .mx-row:first-child {
-    border-top: var(--stroke-hairline) solid var(--color-hairline);
-  }
-
-  .mx-scope {
-    padding: 0 0 var(--space-2);
-    font-size: var(--font-size-lg);
-  }
-
-  .mx-cell {
-    padding: var(--space-3) 0;
-    border-left: 0;
-    border-top: var(--stroke-hairline) solid var(--color-hairline);
-  }
-
-  .mx-cell .k {
-    display: block;
-    font-family: var(--font-mono);
+  .chart-tooltip {
     font-size: var(--font-size-xs);
-    letter-spacing: var(--tracking-label);
-    text-transform: uppercase;
-    color: var(--color-text-dim);
+    width: 260px;
+  }
+  .chart-frame:has(.chart-tooltip[data-pinned='true'])
+    .chart-tooltip[data-pinned='true'] {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    pointer-events: auto;
   }
 }
+.period-group:has(input[name='period'][value='30d']:checked) span[data-period='30d'],
+.period-group:has(input[name='period'][value='90d']:checked) span[data-period='90d'],
+.period-group:has(input[name='period'][value='all']:checked) span[data-period='all'] { display: inline; }
+
+.chart-x .phone { display: none; }
+@media (max-width: 720px) { .chart-x .phone { display: block; } }
+@media (max-width: 360px) {
+  .chart-x .phone { display: none; }
+}
+.tt-dot, .chart-ring[data-chain-index] { background: var(--chain-color, var(--color-border)); }
