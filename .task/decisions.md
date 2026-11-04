@@ -33,3 +33,24 @@
 - Initial current-code runs overlapped lint/typecheck and took 6568.922958, 4604.898125 and 4406.931042 ms. Recorded these noisy samples rather than discarding their existence. Removed repeated ISO formatting from the summary chain pass and repeated measurements with no other task commands running.
 - Alternated fresh-process baseline and current computations against identical 9975-day snapshots and fixed now 2026-11-04T06:00:00Z. Baseline code was git show d45f79a:packages/supply/src/metrics/service.ts, transpiled in memory with imports resolved to the unchanged metrics files and validated with the shared previous schema. Baseline times were 3340.728458, 4269.490959 and 3080.428875 ms, median 3340.728458. Current times were 4939.997, 2978.494209 and 3022.07725 ms, median 3022.07725. Variation exceeds the summary cost, and the median cold time did not regress.
 - Thirty isolated builder repetitions per process measured median CPU times of 2.404708, 5.043230, 2.556209, 2.794104, 2.564250 and 3.048542 ms respectively. The added work is about 0.1% of cold overview time, with zero added SQL. Raw samples and the local measurement recipe are retained temporarily in .task/perf-*.jsonl and .task/measure-command.txt. The live result is 9975 closed chain-days, 19178190 supply logs, zero mismatched chain-days, a 1036-calendar-day common streak ending 2026-11-03, and 6 latest-day all-ok chains. No live row or service was changed.
+
+## Implementation gate results
+
+Full gates ran on root code commit 4d63eb5e6d47b96a4b83f3b02f89a63960da35c2 and UI code commit 285911eb0e5b3de8b1165085aaa94f31eb9500f1. Subsequent review-preparation commits change only task records, architecture wording and the pin to the same UI code plus its task records.
+
+| Command | Actual exit | Result |
+| --- | --- | --- |
+| pnpm typecheck | 0 | Root and delegated UI application types pass |
+| pnpm lint | 0 | Root gate passes |
+| pnpm test --reporter=dot | 0 | 168 files, 3870 tests pass |
+| DATABASE_URL=postgres://postgres:postgres@localhost:5432/app pnpm test:int | 0 | 30 files, 591 tests pass on disposable databases |
+| pnpm -C ui typecheck | 0 | UI standalone gate passes |
+| pnpm -C ui lint | 0 | UI standalone gate passes |
+| pnpm -C ui test --reporter=dot | 0 | 58 files, 1458 tests pass |
+| env -u AI_AGENT -u CLAUDECODE pnpm -C ui --filter @app/web check:build | 0 | Production build and HTTP mock-state checks pass |
+| env -u AI_AGENT -u CLAUDECODE pnpm -C ui --filter @app/web browser-smoke | 0 | 20 viewport/state runs pass |
+| pnpm --filter @app/fixtures generate:api | 0 | Regenerated 462 cases and the index with no further diff |
+| pnpm --filter @app/fixtures check:api | 0 | Verified 462 cases and the index |
+| DATABASE_URL=postgres://postgres:postgres@localhost:5432/app pnpm exec vitest run --project integration apps/api/src/reconciliation.int.test.ts apps/publisher/src/api-parity.int.test.ts | 0 | Both files pass, 6 tests total. LC-05 literal/SQL comparison and publisher/API parity plus concurrency are exercised |
+
+All gate commands used pipefail, and each pipeline's actual status was captured before the next command. Native mobile tests are inapplicable because no mobile file changed. CI remains manual and was not dispatched. The LC-05 state and prior evidence are unchanged. Full implementation review is pending. No implementation-review round has run yet. Web-track confirmation of latest-day reconciledChains remains pending through the coordinator question.
