@@ -67,3 +67,49 @@ Minor (optional, non-blocking):
 - State explicitly that `pnpm browser-smoke` will include the 320 px stress width in addition to the 390 and 1280 board widths, and how overflow/overlap is asserted at each.
 
 Implement the plan now. Record decisions and any deviation from the plan, with the reason, in .task/decisions.md. Push when the implementation is ready for review: the same reviewer session reviews it, with a new limit of 3 rounds.
+
+## Implementation review round 1
+
+AI review, round 1/3 (commandcode deepseek/deepseek-v4.1-flash · high, commit 0966dc0): changes requested.
+The rewrite is largely complete and the launch checks pass on the supplied mocks, but four state/quality defects still need fixing: stack layers take their colour slots from the server series array instead of overview.chains order, the brand reconciled tally disappears whenever a chain is delayed, the hero unreconciled note keys on the common asOf instead of the chain's lastClosedDay, and the header quality/note only reads the supply card so the short-history 7-day change is not marked.
+
+Major findings:
+F1 — Stack layers and colours follow the series array, not overview.chains order
+  Location: apps/web/src/components/SupplyByChain.tsx:51 (stackGeometry) and apps/web/src/components/SupplyByChain.tsx:264 (data-chain-index={at + 1})
+  Scenario: An Overview whose views.all.stackedLevel.lines are returned in a different order from overview.chains (the contract does not require line order; the old SupplyByChain sorted by chainInfo). The first layer is drawn with --color-chain-1 and data-chain-index=1 although it is another chain, while the chain list, status table and tooltips use overview.chains order. Hovering that chain's list row then dims the wrong stack layer.
+  Expected: Stack layers, their data-chain-index and their colour slots are joined to overview.chains by chain key (chainInfo index), so the six chains use their API-order colours in every chart and the chain-row hover dims the matching layer.
+  Evidence: stackGeometry returns boundaries.lines.map((line, layer) => ({ key: line.key, ... })) with no chainInfo sort; StackPlot renders data-chain-index={at + 1} from that array position. The old SupplyByChain sorted series.lines by chainInfo. home.test.ts only reverses share.lines and checks the chain list by key; browser-smoke-launch.ts checks chain order and colours on .crow .dot only, not .chart-layer, so the mocks' already-ordered lines let this pass.
+
+F2 — Brand reconciled tally is hidden whenever a chain is delayed
+  Location: apps/web/src/components/PageView.tsx:57-70
+  Scenario: MOCK_STATE=delayed (fixture packages/contracts/fixtures/delayed/overview.json has reconciledChains:3 and three chains) renders Base · 30 h behind but no 3/3 reconciled, although the accepted delayed state board carries the reconciled tally (the plan records 5/6 in state boards).
+  Expected: The brand tally reads reconciliation.reconciledChains over the enabled registry size in every data state, alongside any delayed-chain notes, as the board shows.
+  Evidence: PageView renders texts.header.reconciled only when model.state === 'data' && delayed.length === 0; delayed.length > 0 replaces it with the delayed notes. home.test.ts only tests the tally on long-history with no delayed chain, and browser-smoke-launch.ts never asserts the brand tally on the delayed state.
+
+F3 — Hero unreconciled note keys on asOf, not the chain's last closed day
+  Location: apps/web/src/components/Header.tsx:72-95
+  Scenario: A delayed chain has lastClosedDay 2026-10-08 and unreconciledDays ['2026-10-08'] while overview.asOf is 2026-10-09. The filter status.unreconciledDays.includes(overview.asOf) is false, so the hero shows no unreconciled note for a chain whose last closed day failed; if asOf did match, the date rendered would be the common asOf rather than the chain's day.
+  Expected: For each chain whose own lastClosedDay is among its mismatched days, the hero shows the note with that lastClosedDay, as the old Header and the plan/docs specify.
+  Evidence: Header.tsx filters status.unreconciledDays.includes(overview.asOf ?? '') and formats formatShortDay(overview.asOf!); the old Header used status.lastClosedDay. page-html.ts no longer checks the header mismatch tag, and browser-smoke's unreconciled count only proves some data-unreconciled element exists, so the separate unreconciled mock (all chains closed on asOf) hides the bug.
+
+F4 — Header quality and incomplete note ignore the displayed change1d/change7d cards
+  Location: apps/web/src/components/Header.tsx:103-126 and apps/web/src/checks/page-html.ts:278-286
+  Scenario: MOCK_STATE=short-history has header.change7d.quality.complete=false while header.supply.quality.complete=true (fixture lines 92-97 and 178-183). The hero renders 'no data over 7 days', sets data-quality="ok" from the supply card and shows no incomplete note; the old page merged the header card qualities and showed the missing-data note.
+  Expected: The hero's data-quality and quality note reflect the figures it displays (supply, change1d, change7d), so an incomplete 7-day change is marked and explained, and page-html asserts that union rather than the supply card alone.
+  Evidence: Header.tsx uses qualityAttribute(fromQuality(overview.header.supply.quality)) and the incomplete note condition overview.header.supply.quality.complete; page-html.ts asserts the same supply-only attribute. The old Header used merge(CARDS.map(fromQuality)) and checkMarks checked any header card. The all-state home.test/page-html run passes because it never asserts the change7d quality.
+
+Questions from the reviewer:
+- Confirm the exact accepted stamp wording. The code renders 'x/y reconciled' in the brand row and 'm mismatched days · n chain-days closed' in the stamp; the task quote is '6/6 chains · 0 mismatched days · ≈9,700 chain-days closed'. Should the stamp carry the '6/6 chains' fragment and the '≈' literally, or is the split wording what the board shows?
+- Confirm the Header short-history intent: does the accepted Home-state-short-history board mark the missing 7-day change (and the incomplete issuer 7-day figures) in the hero, or does it intentionally show 'no data over 7 days' with the supply quality only? If intentional, F4 can be withdrawn.
+- Confirm the Records null value wording: the new line renders formatCompact(null) ('no data') plus a reason, while the old line and texts.na use 'n/a'. Which does the board show?
+- Confirm the ChainList data-quality for a no_data chain should be the quality token ('incomplete') as ChainDots and the status table use, rather than data-quality="no_data".
+
+Minor (optional, non-blocking):
+- Records renders 'no data' for a null record value instead of texts.na.label ('n/a'); the reason is present, but the label differs from the board vocabulary.
+- tone(null) returns 'pos', so a missing hero delta or chain net is coloured positive even though it shows 'no data'.
+- The ChainList reconciliation mark uses day?.unreconciled (the common asOf row) rather than status.state, so a chain whose lastClosedDay mismatch is not asOf shows a check mark; the status table still shows the correct state.
+- checkLayout deliberately skips .peak and .sticky, so the visible peak annotation and sticky-bar text are not covered by the DOM overlap check; add a targeted peak/sticky geometry assertion if the boards require no overlap there.
+- page-html should assert the header quality and incomplete note against the union of the displayed header cards, not only the supply card, so the short-history regression cannot pass again.
+- Unused text groups remain after the rewrite (tags.chainUnreconciled, parts of quality/na.history); remove or use them to keep texts.ts honest.
+
+What to do: fix the code for the major findings and record how each was settled (fixed, or dropped and why) in .task/decisions.md before the push, since a push may be the last one; then commit and push, and the push starts the next review round. If you disagree with a major finding, or answer a question, do not push: end your turn with a message whose first line starts with `TO REVIEWER:`, followed by your reasoning and evidence. The hook passes it to the same reviewer session, and its answer comes back to you. Do not repeat an argument the reviewer has already answered: a finding it keeps after your second objection goes to the coordinator as an escalation. A decision only the coordinator can take: ask it in a message that starts with `QUESTION:` and stop.
