@@ -83,3 +83,15 @@ Review state at submission. Plan round 1 approved. Implementation is now ready f
 - Minor fixes. Missing deltas/net use neutral text. Null records use n/a with their reason. A no_data chain uses incomplete for data-quality while retaining data-chain-state=no_data. Latest chain mismatch marks also survive a differing common day. Removed unused quality text functions. na.history remains required by the existing shared ViewLabels formatting bindings and their tests; tags.chainUnreconciled is now used by the page-html latest-day assertion.
 - Peak annotations are included in text overlap checks. This exposed a real phone collision with the short-history period reason in the gap mock. The annotation's top coordinate now reserves two text lines inside the plot, keeping its full label away from the toolbar. The existing targeted sticky-bar child geometry check remains in the smoke. Layout assertions were moved into a focused browser-smoke-layout.ts so smoke check files stay below 400 lines.
 - No major finding was dropped or disputed. The task's contract-only partial-stamp treatment from the first submission is retained. No token or contract change is part of these fixes.
+
+Round 1 remediation verification, checked code commit 23aade047be194ab3e1ac065b9274a67e2eab3b5
+
+- pnpm typecheck with pipefail and tail -40 exited 0.
+- pnpm lint with pipefail and tail -40 exited 0.
+- pnpm test --reporter=dot with pipefail and tail -40 exited 0. All 50 test files and 1,346 tests passed.
+- pnpm check:build with AI_AGENT/CLAUDECODE unset and pipefail exited 0, including the HTML/RSC window controls and every mock state.
+- pnpm browser-smoke with AI_AGENT/CLAUDECODE unset, pipefail and tail -30 exited 0. All 30 runs at 1280/390/320 passed with layer identity, every-row hover and peak text geometry included.
+- Both required LC-06 and LC-08 searches exited 1 with no matches. git diff --check exited 0. The launch-criterion evidence recorded above remains green, with stronger F1/F2/F3/F4 assertions in page-html and smoke.
+- Nine new regression cases cover shuffled arrays, delayed ready tally, own last-day mismatch, each displayed quality independently, short-history quality, no-data tone/quality and missing records. All test files and the two smoke assertion modules remain below 400 lines.
+
+All four major findings are fixed. The next push submits the fixes for implementation review round 2/3. The outer driver continues to own review and PR operations.
