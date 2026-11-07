@@ -8,7 +8,7 @@ path of each invariant.
 ## The three reconciliations
 
 1. **Supply.** The day's computed supply level is checked against the on-chain `totalSupply` of the chain's
-   USDC contract. A difference beyond tolerance is a mismatch, with the signed diff kept on the status record.
+   USDC contract. A nonzero difference is a mismatch, with the signed diff kept on the status record.
 2. **Bridge.** Every CCTP operation must pair across chains: a mint on one side, a burn on the other, with
    matching version and peer. Unpaired supply logs are flagged and counted — never silently counted as
    operations.

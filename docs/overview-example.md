@@ -2,9 +2,10 @@
 
 An excerpt of the `overview` document the page is rendered from: one versioned, schema-verified JSON
 produced after the day closes. The full document lives in the mock catalog at
-`packages/contracts/fixtures/long-history/overview.json`; the excerpt is
-[`overview-example.json`](overview-example.json). Every value below is copied verbatim from that fixture —
-arrays were cut short, nothing was invented or recomputed.
+`packages/contracts/fixtures/long-history/overview.json` and is schema-verified; the excerpt below is
+illustrative — arrays were cut short, so do not validate it against the schema.
+It is [`overview-example.json`](overview-example.json). Every value is copied verbatim from that fixture —
+nothing was invented or recomputed.
 
 ## What was trimmed
 
@@ -21,6 +22,7 @@ with their buckets and days:
 | `views["all"]` buckets and the same parallel arrays | 5 | first 2 |
 | `largestEvents.items` | 20 | first 2 |
 | `records` | 28 | first 2 |
+| Series `unreconciled` / KPI `sparkUnreconciled` index arrays | into the full arrays | kept only where they point into the kept buckets (e.g. the 90d `[2]` became `[]`) |
 
 Kept whole: `chains` (6), `day` (7 rows: `all` plus one per chain), all 7 driver and `issuerVsBridge` scopes,
 `status` (6 chains), `reconciliation` (summary plus 6 chains). Note that the `issuerVsBridge` aggregates
@@ -45,8 +47,8 @@ trimmed buckets.
   amount, timestamp, transaction link, and the bridge metadata (CCTP version and peer) or the `unpaired` mark
   when a bridge log has no counterpart.
 - **`records`**: all-time records with their value, day, and the `since` date of the search range. A record can
-  be `null` with a reason in its quality note — the second record here is exactly that (`complete: false`,
-  value and day `null`): missing data is never rendered as 0.
+  be `null` with a reason in its quality note — the first two records here are both exactly that
+  (`complete: false`, value and day `null`): missing data is never rendered as 0.
 - **`status`**: per-chain standing — state (`ok`, `delayed`, `unreconciled`, `no_data`), coverage
   (`historyStart`, `lastClosedDay`), chain position (`lastBlock`), schedule (`nextDueAt`, `lagHours`), the last
   run, the last closed day's three reconciliation checks, and the list of mismatched days.

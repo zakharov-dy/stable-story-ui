@@ -75,3 +75,30 @@
 - None so far: screenshots from `long-history`, `.demo` hidden only for the hero capture, publication envelope
   in `docs/architecture.md`, data-shape facts in both `docs/architecture.md` and `docs/data-quality.md`,
   `charts.png` referenced from the README "What the page shows" section.
+
+## Implementation review round 1 (2026-11-07)
+
+### F3 — trimmed example kept out-of-range `unreconciled` indices (accepted, fixed)
+
+- Finding: the 90d view kept 2 buckets/values per line but lines still carried `unreconciled: [2]`, which
+  `SeriesLine` rejects (`indicesWithin`). A repo-wide scan of the excerpt showed only the 90d view affected
+  (30d/all views and header `sparkUnreconciled` were already clean); `unreconciledDays` are day strings, not
+  indices, and needed no change.
+- Resolution: regenerated `docs/overview-example.json` filtering every `unreconciled`/`sparkUnreconciled`
+  index array to the kept buckets (90d `[2]` → `[]`), with an assertion in the (removed-after-run) trim script.
+  `docs/overview-example.md` gained a trimming-table row for the index filtering, a "do not validate the
+  excerpt" note (the full fixture document is the schema-verified one), and the corrected records wording
+  (the first two excerpt records are both `null`).
+
+### Minor items (all fixed)
+
+- README checks table: one line per row so GFM keeps the table.
+- Start here: five bullets, five links — the `publication.ts` link folded into words (the envelope is covered
+  by the architecture doc).
+- "About 600 lines" now names `packages/contracts/src/schemas.ts` (641 lines, 603 non-blank).
+- Architecture: manifest binds "as-of day and build time" (not "day range"); kept the $0/month sentence.
+- Data quality: supply mismatch is "a nonzero difference" (matches the `supply === 'ok'` ⟺ `supplyDiff === '0'`
+  invariant).
+- Charts image gained a mock-render caption, matching the hero (the mock date shows as-is; no values altered).
+- Hero stays 1280x800: the social-preview assignment itself is owner-side, and the checked-in file is the
+  verified headless render; any 2:1 crop for the preview setting is the owner's call at assignment time.

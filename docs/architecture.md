@@ -10,15 +10,17 @@ defined by the schemas in this repository's contracts package.
 On the owner's machine, chain logs flow through per-day reconciliations into Postgres. A publisher then prepares
 immutable, read-only documents and writes them to a private Cloudflare R2 bucket: each publication is a versioned
 envelope — a `current.json` pointer carrying the publication UUID, the manifest hash, and the previous version —
-beside a manifest and a single document keyed under that version. There is no database server in production;
-hosting the data costs $0/month.
+beside a manifest and a single document keyed under that version. The manifest binds the version to the
+document's as-of day and build time with its byte length and SHA-256, so any consumer can verify the bytes it
+received. There is no database server in production; hosting the data costs $0/month.
 
 ## The publication envelope
 
 Versioning lives in the envelope, not in the data: the `overview` JSON itself has no version field. The pointer
 (`current.json`) names the current publication UUID; the manifest binds that UUID to exactly one document key
-(`versions/<uuid>/supply/usdc/overview.json`) with its byte length, SHA-256, and day range, so any consumer can
-verify the bytes it received. A new day is a new UUID and a new immutable key; the old documents stay untouched.
+(`versions/<uuid>/supply/usdc/overview.json`) with its as-of day, build time, byte length, and SHA-256, so any
+consumer can verify the bytes it received. A new day is a new UUID and a new immutable key; the old documents
+stay untouched.
 
 ## The day and flow model
 

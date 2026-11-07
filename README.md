@@ -16,7 +16,8 @@ What's unusual about this page:
   unpaired logs are flagged, never silently counted.
 - Production has no database server: the backend stays local and publishes prepared read-only documents;
   hosting the data costs $0/month.
-- The data contract is about 600 lines of zod invariants with negative tests asserting the exact error path.
+- The data contract is about 600 lines of zod invariants in `packages/contracts/src/schemas.ts`, with negative
+  tests asserting the exact error path.
 
 [^working-name]: Stable Story is a working name; it may change.
 
@@ -24,8 +25,7 @@ What's unusual about this page:
 
 - The live site: [stable-story.vercel.app](https://stable-story.vercel.app).
 - The data contract: [`packages/contracts/src/schemas.ts`](packages/contracts/src/schemas.ts) — every invariant
-  the page relies on, including the publication envelope in
-  [`packages/contracts/src/publication.ts`](packages/contracts/src/publication.ts).
+  the page relies on, including the publication envelope.
 - The shared view logic: [`packages/view`](packages/view) — pure formatting, quality, periods, and chart scales
   over API responses; it never aggregates.
 - [Data quality](docs/data-quality.md) — the three daily reconciliations, CCTP pairing, and the gap and
@@ -41,6 +41,8 @@ mirrored in the sticky bar once the hero scrolls away:
 
 ![Charts at 30D/90D/ALL with the sticky period control](docs/media/charts.png)
 
+*Same mock render as above: the 30D stack and the flows section under the sticky bar.*
+
 The server decides the window step and the selection; the page renders the step it is given and never aggregates.
 A chain without data for a period is "no data" — not zero, not drawn. How it all fits together is in
 [architecture](docs/architecture.md); what "reconciled" means is in [data quality](docs/data-quality.md); the
@@ -54,10 +56,8 @@ document shape, with a trimmed real example, is in [the overview example](docs/o
 | `pnpm typecheck` | The workspace root and every package compile under strict TypeScript. |
 | `pnpm lint` | ESLint passes, including the enforced module boundaries between contracts, view, and apps. |
 | `pnpm test` | Unit suite: the shared view logic, the zod contract with negative tests on the error path, page tests. |
-| `pnpm check:build` | The production build uses self-hosted fonts only, leaks no API/R2 access or contract internals into
-client assets, and passes the daily-window HTML/RSC check. |
-| `pnpm browser-smoke` | Headless Chrome over every mock state (ok, delayed, unreconciled, empty-day, short-history, gap, empty,
-unavailable, long-history): console, layout, charts, and tooltips. |
+| `pnpm check:build` | The production build uses self-hosted fonts only, leaks no API/R2 access or contract internals into client assets, and passes the daily-window HTML/RSC check. |
+| `pnpm browser-smoke` | Headless Chrome over every mock state (ok, delayed, unreconciled, empty-day, short-history, gap, empty, unavailable, long-history): console, layout, charts, and tooltips. |
 | `pnpm test:rn` | The Expo app's native component tests. |
 
 ```bash
