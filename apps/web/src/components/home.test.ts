@@ -248,6 +248,11 @@ describe('accepted home boards', () => {
     expect(section).not.toContain('<summary');
     expect(section).toContain('class="status-list"');
     expect(section).toContain(texts.status.asOf(formatDay(overview.asOf)));
+    expect(
+      [...section.matchAll(/<li data-chain="([^"]+)" data-chain-index="(\d+)"/g)].map(
+        (match) => match[1],
+      ),
+    ).toEqual(overview.chains.map((chain) => chain.slug));
     const brand = /<header class="brand-row"[\s\S]*?<\/header>/.exec(html)![0];
     expect(brand).toContain('href="#chain-status"');
     expect(visibleText(brand)).toContain(

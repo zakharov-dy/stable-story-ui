@@ -1,9 +1,14 @@
 // DOM assertions over the accepted home states. No images or pixel comparisons.
 import type { Overview } from '@app/contracts';
-import { disabledPeriods, historyDays } from '@app/view';
+import { historyDays } from '@app/view';
 import type { Page } from 'playwright-core';
 import { texts } from '../src/texts.ts';
-import { bucketLabel, formatCount, PERIOD_ORDER } from '../src/view.ts';
+import {
+  bucketLabel,
+  formatCount,
+  formatDay,
+  PERIOD_ORDER,
+} from '../src/view.ts';
 import { checkLayout } from './browser-smoke-layout.ts';
 
 const requireFact = (condition: boolean, message: string): void => {
@@ -264,13 +269,63 @@ export async function checkLaunchInteractions(
       await page.locator('table.status').isHidden(),
       'phone shows the status list',
     );
+    const listColours = await page
+      .locator('.status-list li .dot')
+      .evaluateAll((dots) =>
+        dots.map((dot) => getComputedStyle(dot).backgroundColor),
+      );
+    requireFact(
+      new Set(listColours).size === overview.chains.length,
+      'phone status rows carry the chain colours',
+    );
+    const listOrder = await page
+      .locator('.status-list li')
+      .evaluateAll((items) =>
+        items.map((item) => item.getAttribute('data-chain-index')),
+      );
+    requireFact(
+      JSON.stringify(listOrder) ===
+        JSON.stringify(overview.chains.map((_, index) => String(index + 1))),
+      'phone status rows in registry order',
+    );
   }
   await checkLayout(page);
-  const disabled = new Set(disabledPeriods(historyDays(overview)));
+  // The board default is computed from the accepted rule, not from the page's
+  // own availability set: ALL first, 90D and 30D after it; ALL needs more than
+  // 90 days of history, so short history opens on 90D.
   const expectedDefault =
-    PERIOD_ORDER.find(
-      (period) => !disabled.has(period) && overview.views[period] !== null,
-    ) ?? '30d';
+    overview.views.all !== null && historyDays(overview) > 90
+      ? 'all'
+      : overview.views['90d'] !== null
+        ? '90d'
+        : '30d';
+  const allOff = overview.views.all === null || historyDays(overview) <= 90;
+  requireFact(
+    (await page.locator('input[name="period"][value="all"]').isDisabled()) ===
+      allOff,
+    'ALL availability follows the 90-day rule',
+  );
+  requireFact(
+    (await page.locator('input[name="period"][value="90d"]').isDisabled()) ===
+      (overview.views['90d'] === null),
+    '90D stays available when the server supplies it',
+  );
+  requireFact(
+    (await page
+      .locator('#sticky-bar [data-sticky-period="all"]')
+      .isDisabled()) === allOff,
+    'sticky ALL availability follows the 90-day rule',
+  );
+  if (allOff && overview.historyStart !== null)
+    requireFact(
+      await page
+        .getByText(
+          texts.period.allNote(formatDay(overview.historyStart)),
+          { exact: true },
+        )
+        .isVisible(),
+      'the ALL reason names the history start',
+    );
   requireFact(
     await page
       .locator(`input[name="period"][value="${expectedDefault}"]`)

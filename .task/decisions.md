@@ -50,3 +50,33 @@
   the reason styling is not one of the five changes, and the aligned variant collided with the peak
   annotation in the gap state. (An intermediate smoke failure was a stale build: the smoke reuses
   the check:build output, so the rebuild had to run before judging the CSS fixes.)
+
+## Review round 1 (2026-11-07) — majors fixed
+
+- F1 (short history opened on 30D): the page now owns its availability rule
+  (`offPeriods` in apps/web/src/view.ts): ALL is off while `historyDays(overview) <= 90` (or its
+  view is null); 90D and 30D are off only when the server supplies no view. The accepted board's
+  demo history is 90 days, but the task's acceptance binds the fallback to the short-history state
+  as built (7 days): ALL disabled with the ALL-specific reason, 90D active in the chart head and the
+  sticky bar, flows on 90D. `texts.period.shortNote` is gone; the reason is always the ALL note.
+  packages/view stays untouched (its `disabledPeriods` remains for mobile).
+- F2 (phone status dots grey): each `status-list` li now carries `data-chain-index`, so the shared
+  `[data-chain-index]` --chain-color slots apply; the smoke asserts six distinct colours and the
+  registry order of the phone rows.
+- F3 (smoke endorsed the bug): `browser-smoke-launch.ts` derives the expected default from the
+  accepted rule itself (ALL when its view exists and history > 90 days, else 90D, else 30D) and
+  asserts the ALL/90D radio and sticky disabled states plus the visible ALL reason against that
+  rule, independent of the page's set. page-html.ts gained the same doc-rule checks for the radios,
+  sticky disabled states and the reason on every state (unit + check:build), so the short-history
+  default can no longer pass for the wrong reason. The sticky `aria-pressed` default is asserted
+  pre-interaction by the smoke only — the interaction checks press other periods before the
+  hydrated HTML is captured, so that attribute is not stable in the shared HTML check.
+- Minor fixes: the phone state marker is `●` (texts.status.stateMark) coloured by state, ◇ only for
+  unreconciled; the status table's first cell keeps table layout (dot and name wrapped in a
+  `.chain-name` flex span); the delayed brand-note check slices every brand link instead of the
+  first; the phone status meta lines are now asserted by page-html.ts from the overview.
+- Reviewer question on the phone brand row: Home-1107-390 keeps date and link in one flowing
+  `.through` span, so at 390 the date's row ends after the "·" and the link wraps as inline text,
+  tagline last. Our separate `data-date` element plus `.brand-note { order: 1 }` produces the same
+  composition (date row, then link, tagline full-width below; one row when the width allows), and
+  keeps `data-date="brand"` carrying exactly the full data date for LC-04.

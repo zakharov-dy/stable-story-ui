@@ -34,7 +34,7 @@ An unavailable response shows the wordmark, Data unavailable, its explanation an
 
 Every displayed amount, percentage and date is selected from the Overview document and formatted. The page never derives metric totals, differences, shares or time buckets. The waterfall uses the supplied scope-all row. Chart axes, paths and positions are rendering geometry.
 
-The page opens on ALL, with 90D and 30D after it in the chart head and the sticky bar. With history no longer than 90 days ALL is disabled with its reason and the default falls back to 90D. The main native radio group works through CSS with JavaScript disabled. It drives the stack, and the flows follow the main period. The sticky copy synchronizes it after hydration. A period change keeps the selected chain and Level or Share mode. Availability follows the server coverage policy, with a visible reason for disabled longer periods.
+The page opens on ALL, with 90D and 30D after it in the chart head and the sticky bar. ALL is disabled with a visible reason while the history is no longer than 90 days, and the default falls back to 90D; 90D and 30D stay available while the server supplies their views. The main native radio group works through CSS with JavaScript disabled. It drives the stack, and the flows follow the main period. The sticky copy synchronizes it after hydration. A period change keeps the selected chain and Level or Share mode.
 
 30D uses supplied daily buckets, 90D supplied weekly buckets and ALL supplied monthly buckets. The visible sentence explains that older periods are shown by week and month. The build window check rejects older daily chart values in HTML and RSC.
 
