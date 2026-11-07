@@ -6,8 +6,23 @@ import {
   createHistory,
   createSeries,
   createTooltip,
+  disabledPeriods,
+  historyDays,
 } from '@app/view';
+import type { Overview } from '@app/contracts';
+import type { PeriodId } from '@app/view';
 import { texts } from './texts.ts';
+
+/** Board order of the period controls; the view package's PERIODS order is not the display order. */
+export const PERIOD_ORDER: readonly PeriodId[] = ['all', '90d', '30d'];
+
+/** The period the page opens on: the first board-order period the server supplies. */
+export const defaultPeriod = (overview: Overview): PeriodId =>
+  PERIOD_ORDER.find(
+    (period) =>
+      !disabledPeriods(historyDays(overview)).includes(period) &&
+      overview.views[period] !== null,
+  ) ?? '30d';
 
 export const {
   formatAmount,
