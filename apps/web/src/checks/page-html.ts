@@ -7,6 +7,7 @@ import {
   formatCompact,
   formatCount,
   formatDay,
+  formatRunTime,
   formatShortDay,
   roundedChange,
 } from '../view.ts';
@@ -14,6 +15,7 @@ import { texts } from '../texts.ts';
 import {
   fromQuality,
   qualityAttribute,
+  historyDays,
   merge,
   signedValue,
   TERMS,
@@ -198,8 +200,9 @@ export function checkPageHtml(
     count(markup, texts.resolution.sentence) === 1,
     'one older-period sentence',
   );
+  const statusSection = slice(markup, 'data-block="status"', '</section>');
   expect(
-    visibleText(slice(markup, 'class="stamp"', '</p>')).includes(
+    visibleText(statusSection).includes(
       texts.header.stamp(
         formatCount(overview.reconciliation.reconciledChains),
         formatCount(overview.chains.length),
@@ -207,7 +210,11 @@ export function checkPageHtml(
         formatCount(overview.reconciliation.all.closedDays),
       ),
     ),
-    'ready reconciliation stamp',
+    'status section carries the reconciliation stamp as its aside',
+  );
+  expect(
+    !statusSection.includes('<details') && !statusSection.includes('<summary'),
+    'the status section is always open without JavaScript',
   );
   const header = slice(markup, 'data-block="header"', '</section>');
   expect(
@@ -251,7 +258,7 @@ export function checkPageHtml(
     expect(
       statusTable.includes(`data-chain="${chain.slug}"`) &&
         statusTable.includes(`data-chain-state="${status?.state}"`),
-      `disclosed state ${chain.slug}`,
+      `status table state ${chain.slug}`,
     );
     if (status?.state === 'delayed')
       expect(
@@ -260,6 +267,57 @@ export function checkPageHtml(
         ),
         `delayed lag ${chain.slug}`,
       );
+  });
+  const statusList = slice(markup, '<ul class="status-list"', '</ul>');
+  const statusListText = visibleText(statusList);
+  overview.chains.forEach((chain, index) => {
+    const status = overview.status.chains.find(
+      (candidate) => candidate.chain === chain.slug,
+    );
+    const summary = overview.reconciliation.chains.find(
+      (candidate) => candidate.chain === chain.slug,
+    );
+    expect(
+      statusList.includes(`data-chain="${chain.slug}"`) &&
+        statusList.includes(`data-chain-index="${index + 1}"`) &&
+        statusList.includes(`data-chain-state="${status?.state}"`),
+      `phone status row ${chain.slug}`,
+    );
+    const checks =
+      status?.reconciliation == null
+        ? texts.noData
+        : (['supply', 'bridge', 'continuity'] as const)
+            .map(
+              (check) =>
+                `${texts.status.checks[check]} ${texts.status.checkMarks[status.reconciliation![check]]}`,
+            )
+            .join(' · ');
+    expect(
+      statusListText.includes(
+        texts.status.closedLine(
+          status?.lastClosedDay == null
+            ? texts.noData
+            : formatShortDay(status.lastClosedDay),
+          checks,
+        ),
+      ) &&
+        statusListText.includes(
+          texts.status.runLine(
+            status?.lastRun == null
+              ? texts.noData
+              : texts.status.run(
+                  formatRunTime(status.lastRun.finishedAt),
+                  status.lastRun.status,
+                ),
+            summary === undefined
+              ? texts.noData
+              : texts.status.mismatchedShort(
+                  formatCount(summary.mismatchedDays),
+                ),
+          ),
+        ),
+      `phone status meta lines ${chain.slug}`,
+    );
   });
   const operations = [
     ...markup.matchAll(/<a\b[^>]*data-operation="([^"]+)"[^>]*>/g),
@@ -311,12 +369,13 @@ export function checkPageHtml(
       feed.includes(texts.feed.showAll(overview.largestEvents.items.length)),
       'closed control label',
     );
-    expect(feed.includes(texts.feed.showFive), 'open control label');
     expect(
-      /<details class="operations-more">\s*<summary/.test(feed),
+      /<details class="operations-more"[^>]*>\s*<summary/.test(feed),
       'the summary opens the disclosure',
     );
-    const details = feed.indexOf('<details class="operations-more">');
+    // The hydrated page may carry the open attribute: the smoke leaves the
+    // disclosure open because the open state has no control to close it.
+    const details = feed.indexOf('<details class="operations-more"');
     const close = feed.indexOf('</details>', details);
     expect(
       count(feed.slice(details, close), 'data-operation=') ===
@@ -360,15 +419,52 @@ export function checkPageHtml(
     'header incomplete note must explain every displayed figure',
   );
   const brand = slice(markup, '<header class="brand-row"', '</header>');
-  expect(
-    visibleText(brand).includes(
-      texts.header.reconciled(
-        formatCount(overview.reconciliation.reconciledChains),
-        formatCount(overview.chains.length),
-      ),
-    ),
-    'brand ready tally in every data state',
+  const brandLinks = [
+    ...brand.matchAll(/<a\b[^>]*href="#chain-status"[^>]*>[\s\S]*?<\/a>/g),
+  ].map((match) => match[0]);
+  const delayedChains = overview.status.chains.filter(
+    (status) => status.state === 'delayed',
   );
+  const flagged = overview.status.chains.some(
+    (status) => status.state === 'unreconciled',
+  );
+  if (delayedChains.length > 0) {
+    expect(
+      brandLinks.length === delayedChains.length,
+      'one delayed brand note link per delayed chain',
+    );
+    delayedChains.forEach((status, index) => {
+      const name =
+        overview.chains.find((chain) => chain.slug === status.chain)?.name ??
+        status.chain;
+      expect(
+        visibleText(brandLinks[index] ?? '').includes(
+          texts.tags.behind(name, formatCount(status.lagHours)),
+        ),
+        `delayed brand note is the link to the status section for ${status.chain}`,
+      );
+    });
+  } else {
+    expect(
+      brandLinks.length === 1,
+      'one brand link to the status section',
+    );
+    expect(
+      visibleText(brandLinks[0] ?? '').includes(
+        texts.header.reconciled(
+          formatCount(overview.reconciliation.reconciledChains),
+          formatCount(overview.chains.length),
+        ),
+      ),
+      'brand ready tally links to the status section',
+    );
+    expect(
+      visibleText(brandLinks[0] ?? '').includes(
+        flagged ? texts.status.unreconciled : texts.status.checkMarks.ok,
+      ),
+      'brand link carries the reconciliation mark',
+    );
+  }
   for (const status of overview.status.chains) {
     if (
       status.lastClosedDay === null ||
@@ -406,5 +502,44 @@ export function checkPageHtml(
       `server step ${period}`,
     );
   }
+  // The board default: ALL · 90D · 30D, opening on ALL; ALL needs more than 90 days
+  // of history, the shorter periods follow the server's views. The fallback is 90D.
+  const availability = (period: 'all' | '90d' | '30d'): boolean =>
+    overview.views[period] === null ||
+    (period === 'all' && historyDays(overview) <= 90);
+  const expectedPeriod = (['all', '90d', '30d'] as const).find(
+    (period) => !availability(period),
+  );
+  for (const period of ['all', '90d', '30d'] as const) {
+    const radio =
+      new RegExp(`<input\\b[^>]*name="period"[^>]*value="${period}"[^>]*>`).exec(
+        markup,
+      )?.[0] ?? '';
+    expect(radio !== '', `period radio ${period}`);
+    expect(
+      radio.includes('checked') === (period === expectedPeriod),
+      `default period radio ${period}`,
+    );
+    expect(
+      radio.includes('disabled') === availability(period),
+      `period availability ${period}`,
+    );
+    const sticky =
+      new RegExp(`<button\\b[^>]*data-sticky-period="${period}"[^>]*>`).exec(
+        markup,
+      )?.[0] ?? '';
+    expect(sticky !== '', `sticky period button ${period}`);
+    expect(
+      sticky.includes('disabled') === availability(period),
+      `sticky availability ${period}`,
+    );
+    // The sticky aria-pressed default is asserted pre-interaction by the smoke:
+    // the interaction checks themselves press other periods before capture.
+  }
+  if (availability('all') && overview.historyStart !== null)
+    expect(
+      text.includes(texts.period.allNote(formatDay(overview.historyStart))),
+      'the ALL reason names the history start',
+    );
   return problems;
 }

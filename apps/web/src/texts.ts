@@ -112,7 +112,6 @@ export const texts = {
       PeriodId,
       string
     >,
-    shortNote: '90D and ALL are off: the history is shorter than 90 days.',
     allNote: (day: string) =>
       `ALL is off: history starts ${day}, no longer than 90D.`,
   },
@@ -139,6 +138,14 @@ export const texts = {
     bridge_out: 'bridge out',
     net: 'net',
   },
+  flowsShort: {
+    issuer_mint: 'mint',
+    issuer_burn: 'burn',
+    bridge_in: 'in',
+    bridge_out: 'out',
+    net: 'net',
+  },
+  flowGroups: { issuer: 'issuer', bridge: 'cctp bridge' },
   issuerVsBridge: {
     noFlow: { in: 'no inflow in the period', out: 'no outflow in the period' },
   },
@@ -146,7 +153,6 @@ export const texts = {
     title: 'Largest operations',
     window: (range: string) => `7 days · ${range}`,
     showAll: (count: number) => `Show all ${count}`,
-    showFive: 'Show 5',
     version: (version: number) => `V${version}`,
     none: 'No events in the last 7 days.',
     link: '↗',
@@ -164,7 +170,11 @@ export const texts = {
     },
   },
   status: {
-    title: 'Chain status',
+    title: 'Status',
+    asOf: (day: string) => `as of ${day}`,
+    closedLine: (day: string, checks: string) => `Last closed ${day} · ${checks}`,
+    runLine: (run: string, mismatched: string) => `Last run ${run} · ${mismatched}`,
+    mismatchedShort: (count: string) => `${count} mismatched`,
     columns: {
       chain: 'Chain',
       state: 'State',
@@ -179,6 +189,7 @@ export const texts = {
       unreconciled: 'Unreconciled',
       no_data: 'No data',
     },
+    stateMark: '●',
     checks: { supply: 'supply', bridge: 'bridge', continuity: 'continuity' },
     failure: (check: string) => `${check} check failed`,
     checkMarks: { ok: '✓', mismatch: '✕', none: '—' },

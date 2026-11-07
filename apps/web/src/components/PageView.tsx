@@ -1,11 +1,12 @@
-import {
-  type PageProps,
-  disabledPeriods,
-  historyDays,
-  PERIODS,
-} from '@app/view';
+import type { PageProps, PeriodId } from '@app/view';
 import { texts } from '../texts.ts';
-import { formatCount, formatDay } from '../view.ts';
+import {
+  defaultPeriod,
+  formatCount,
+  formatDay,
+  offPeriods,
+  PERIOD_ORDER,
+} from '../view.ts';
 import { Drivers } from './Drivers.tsx';
 import { Feed } from './Feed.tsx';
 import { Header } from './Header.tsx';
@@ -22,8 +23,8 @@ export function PageView({ model, demoState }: PageProps) {
     overview?.asOf === null || overview?.asOf === undefined
       ? null
       : texts.asOf(formatDay(overview.asOf));
-  const off = new Set(
-    overview === null ? PERIODS : disabledPeriods(historyDays(overview)),
+  const off = new Set<PeriodId>(
+    overview === null ? [] : offPeriods(overview),
   );
   const delayed =
     overview?.status.chains.filter((status) => status.state === 'delayed') ??
@@ -31,6 +32,7 @@ export function PageView({ model, demoState }: PageProps) {
   const flagged =
     overview?.status.chains.some((status) => status.state === 'unreconciled') ??
     false;
+  const initial = overview === null ? '30d' : defaultPeriod(overview);
   return (
     <main className="page" data-page-state={model.state}>
       {model.state === 'unavailable' ? (
@@ -56,30 +58,47 @@ export function PageView({ model, demoState }: PageProps) {
             </p>
           )}
           {model.state === 'data' ? (
-            <span
-              className={`brand-note ${flagged ? 'unrec' : ''}`}
-              data-quality={flagged ? 'unreconciled' : 'ok'}
-            >
-              {texts.header.reconciled(
-                formatCount(model.overview.reconciliation.reconciledChains),
-                formatCount(model.overview.chains.length),
-              )}{' '}
-              {flagged ? texts.status.unreconciled : texts.status.checkMarks.ok}
+            <span className="sep" aria-hidden="true">
+              ·
             </span>
           ) : null}
-          {delayed.map((status) => (
-            <span
-              key={status.chain}
-              className="brand-note delayed"
-              data-quality="delayed"
-            >
-              {texts.tags.behind(
-                overview?.chains.find((chain) => chain.slug === status.chain)
-                  ?.name ?? status.chain,
-                formatCount(status.lagHours),
-              )}
-            </span>
-          ))}
+          {model.state === 'data' && delayed.length > 0
+            ? delayed.map((status) => (
+                <a
+                  key={status.chain}
+                  className="brand-note rec-link delayed"
+                  href="#chain-status"
+                  data-quality="delayed"
+                >
+                  {texts.tags.behind(
+                    overview?.chains.find(
+                      (chain) => chain.slug === status.chain,
+                    )?.name ?? status.chain,
+                    formatCount(status.lagHours),
+                  )}
+                </a>
+              ))
+            : model.state === 'data'
+              ? (
+                  <a
+                    className="brand-note rec-link"
+                    href="#chain-status"
+                    data-quality={flagged ? 'unreconciled' : 'ok'}
+                  >
+                    {texts.header.reconciled(
+                      formatCount(
+                        model.overview.reconciliation.reconciledChains,
+                      ),
+                      formatCount(model.overview.chains.length),
+                    )}{' '}
+                    <span className={flagged ? 'unrec' : 'ok'}>
+                      {flagged
+                        ? texts.status.unreconciled
+                        : texts.status.checkMarks.ok}
+                    </span>
+                  </a>
+                )
+              : null}
         </header>
         {model.state === 'unavailable' ? (
           <div className="state-box" role="alert">
@@ -101,17 +120,6 @@ export function PageView({ model, demoState }: PageProps) {
         ) : null}
         {model.state === 'data' ? (
           <>
-            <div className="stamp-row">
-              <p className="stamp">
-                {texts.header.stamp(
-                  formatCount(model.overview.reconciliation.reconciledChains),
-                  formatCount(model.overview.chains.length),
-                  formatCount(model.overview.reconciliation.all.mismatchedDays),
-                  formatCount(model.overview.reconciliation.all.closedDays),
-                )}
-              </p>
-              <Status overview={model.overview} />
-            </div>
             <Header overview={model.overview} />
             <div className="period-group">
               <SupplyByChain overview={model.overview} />
@@ -119,51 +127,42 @@ export function PageView({ model, demoState }: PageProps) {
             </div>
             <Feed overview={model.overview} />
             <Records overview={model.overview} />
+            <Status overview={model.overview} />
             <HowWeCount />
             <div className="sticky" id="sticky-bar" hidden>
-              <a
-                className="wordmark"
-                href="#hero"
-                aria-label={texts.productName}
-              >
-                <Mark />
-                <span>{texts.productName}</span>
-              </a>
-              <span className="through" data-date="sticky">
-                {date}
-              </span>
-              <div
-                className="seg"
-                role="group"
-                aria-label={texts.period.legend}
-              >
-                {PERIODS.map((period) => (
-                  <button
-                    key={period}
-                    type="button"
-                    data-sticky-period={period}
-                    disabled={
-                      off.has(period) || model.overview.views[period] === null
-                    }
-                    aria-pressed={period === '30d'}
-                  >
-                    {texts.period.options[period]}
-                  </button>
-                ))}
+              <div className="sticky-in">
+                <a
+                  className="wordmark"
+                  href="#hero"
+                  aria-label={texts.productName}
+                >
+                  <Mark />
+                  <span>{texts.productName}</span>
+                </a>
+                <span className="through" data-date="sticky">
+                  {date}
+                </span>
+                <div
+                  className="seg"
+                  role="group"
+                  aria-label={texts.period.legend}
+                >
+                  {PERIOD_ORDER.map((period) => (
+                    <button
+                      key={period}
+                      type="button"
+                      data-sticky-period={period}
+                      disabled={
+                        off.has(period) ||
+                        model.overview.views[period] === null
+                      }
+                      aria-pressed={period === initial}
+                    >
+                      {texts.period.options[period]}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <button
-                type="button"
-                className={`sdot ${delayed.length > 0 ? 'delayed' : flagged ? 'unrec' : ''}`}
-                data-status-link
-                data-quality={
-                  delayed.length > 0
-                    ? 'delayed'
-                    : flagged
-                      ? 'unreconciled'
-                      : 'ok'
-                }
-                aria-label={texts.status.title}
-              />
             </div>
             <HomeInteractions />
           </>

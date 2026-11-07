@@ -41,15 +41,6 @@ export function HomeInteractions() {
         );
         radio?.click();
       }
-      if (element?.closest('[data-status-link]')) {
-        const disclosure =
-          document.querySelector<HTMLDetailsElement>('#chain-status');
-        if (disclosure !== null) {
-          disclosure.open = true;
-          disclosure.scrollIntoView();
-          disclosure.querySelector('summary')?.focus();
-        }
-      }
       sync();
     };
     const highlight = (event: Event) => {

@@ -229,7 +229,7 @@ export function checkPageState(facts: Pick<PageFacts, 'dom' | 'html'>, expectati
       const charts = Object.values(overview.views).filter((view) => view !== null).length * 2
         + Object.values(overview.views).reduce((total, view) => total + (view?.drivers.length ?? 0), 0) + 1;
       expect(dom.chartSvgs === charts, `expected ${charts} data SVGs, found ${dom.chartSvgs}`);
-      expect(dom.chainStates.length === overview.chains.length * 3, 'dots, list and disclosure each carry every chain state');
+      expect(dom.chainStates.length === overview.chains.length * 3, 'chain list, status table and phone status list each carry every chain state');
       if (overview.status.chains.some((status) => status.state === 'delayed')) expect(dom.delayedFlags > 0, 'delayed quality mark');
       if (overview.status.chains.some((status) => status.state === 'unreconciled')) expect(dom.unreconciled > 0, 'unreconciled quality mark');
     }
