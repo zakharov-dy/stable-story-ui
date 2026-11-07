@@ -33,10 +33,7 @@ export function Feed({ overview }: { overview: Overview }) {
         {page.items.length > 5 ? (
           <details className="operations-more">
             <summary className="disclosure">
-              <span className="when-closed">
-                {texts.feed.showAll(page.items.length)}
-              </span>
-              <span className="when-open">{texts.feed.showFive}</span>
+              {texts.feed.showAll(page.items.length)}
               <svg
                 width="12"
                 height="12"

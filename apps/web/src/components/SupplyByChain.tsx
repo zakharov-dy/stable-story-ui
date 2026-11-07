@@ -444,7 +444,6 @@ export function ChainList({ overview }: { overview: Overview }) {
             key={chain.slug}
             href="#chain-status"
             className="crow"
-            data-status-link
             data-chain-index={index + 1}
             data-chain={chain.slug}
             data-chain-state={status?.state}
