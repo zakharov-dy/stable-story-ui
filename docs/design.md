@@ -22,7 +22,7 @@ The supply block follows the hero. Desktop places the stack beside the chain lis
 
 What moved it shows the selected period range and the ready issuer shares of inflow and outflow. A separate sentence carries the seven-day issuer mint and burn figures. Wrapping chips choose All or a chain for this block. Every chart uses its own value scale.
 
-Largest operations shows the first five supplied rows in server order and names its own seven-day window. Each complete row links to its explorer transaction. Additional supplied rows appear through Show all N. A response with at most five rows has no disclosure. Bridge routes show their peer, direction and version, with unknown peers and unpaired operations explicitly marked.
+Largest operations shows the first five supplied rows in server order and names its own seven-day window. Each complete row links to its explorer transaction. Additional supplied rows appear through Show all N, the control after the last row in both states. A response with at most five rows has no disclosure. Bridge routes show their peer, direction and version, with unknown peers and unpaired operations explicitly marked.
 
 Records filters the supplied records to scope all and presents their values and dates in a plain line, with two columns on phones. It names its own since date. The method block contains the concise counting explanation, the sentence about untracked bridge domains and the disclaimer.
 

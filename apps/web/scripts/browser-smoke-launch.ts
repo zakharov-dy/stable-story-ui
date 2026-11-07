@@ -65,6 +65,101 @@ async function chainGrowth(page: Page): Promise<void> {
   }
 }
 
+/** The operations disclosure sits after the last row in both states and every row opens in a new tab. */
+async function checkOperationsControl(
+  page: Page,
+  overview: Overview,
+  keyboardOpen: boolean,
+): Promise<void> {
+  const feed = page.locator('[data-block="feed"]');
+  const links = feed.locator('a.op');
+  const total = overview.largestEvents.items.length;
+  requireFact((await links.count()) === total, 'every operation row links');
+  const facts = await links.evaluateAll((nodes) =>
+    nodes.map((node) => ({
+      href: node.getAttribute('href'),
+      target: node.getAttribute('target'),
+      rel: node.getAttribute('rel'),
+    })),
+  );
+  overview.largestEvents.items.forEach((row, index) => {
+    requireFact(
+      facts[index]?.href === row.explorerUrl,
+      `operation URL ${row.id}`,
+    );
+    requireFact(
+      facts[index]?.target === '_blank',
+      `operation new-tab ${row.id}`,
+    );
+    requireFact(
+      facts[index]?.rel === 'noopener noreferrer',
+      `operation rel ${row.id}`,
+    );
+  });
+  const disclosure = feed.locator('details.operations-more');
+  if (total <= 5) {
+    requireFact(
+      (await disclosure.count()) === 0,
+      'no control for five or fewer rows',
+    );
+    return;
+  }
+  requireFact((await disclosure.count()) === 1, 'one operations control');
+  const control = feed.locator('details.operations-more > summary');
+  const arrow = control.locator('svg');
+  // Closed disclosure content keeps layout boxes (content-visibility), so visibility
+  // is read from rendering, not geometry.
+  const visibleRows = () =>
+    feed
+      .locator('.op')
+      .evaluateAll(
+        (nodes) =>
+          nodes.filter((node) =>
+            (node as HTMLElement).checkVisibility({
+              opacityProperty: true,
+              visibilityProperty: true,
+            }),
+          ).length,
+      );
+  const controlBelowLastRow = (): Promise<boolean> =>
+    control.evaluate((summary) => {
+      const rendered = (node: Element): boolean =>
+        (node as HTMLElement).checkVisibility({
+          opacityProperty: true,
+          visibilityProperty: true,
+        });
+      const block = summary.closest('[data-block="feed"]')!;
+      const rows = [...block.querySelectorAll('.op')].filter(rendered);
+      const last = rows.at(-1)?.getBoundingClientRect();
+      const box = summary.getBoundingClientRect();
+      return last !== undefined && box.top >= last.bottom - 1;
+    });
+  const arrowTransform = (): Promise<string> =>
+    arrow.evaluate((node) => getComputedStyle(node).transform);
+  requireFact((await visibleRows()) === 5, 'closed operations show five rows');
+  requireFact(
+    (await control.innerText()).includes(texts.feed.showAll(total)),
+    'closed control label',
+  );
+  requireFact((await arrowTransform()) !== 'none', 'closed arrow points down');
+  requireFact(await controlBelowLastRow(), 'closed control after the fifth row');
+  if (keyboardOpen) {
+    await control.focus();
+    await page.keyboard.press('Enter');
+  } else {
+    await control.click();
+  }
+  requireFact((await visibleRows()) === total, 'open operations show every row');
+  requireFact(
+    (await control.innerText()).includes(texts.feed.showFive),
+    'open control label',
+  );
+  requireFact((await arrowTransform()) === 'none', 'open arrow points up');
+  requireFact(await controlBelowLastRow(), 'open control after the last row');
+  await control.click();
+  requireFact((await visibleRows()) === 5, 'operations close again');
+}
+
 export async function checkLaunchInteractions(
   page: Page,
   overview: Overview,
@@ -128,6 +223,7 @@ export async function checkLaunchInteractions(
   }
   await checkLayout(page);
   await page.locator('#chain-status summary').click();
+  await checkOperationsControl(page, overview, false);
   if (overview.chains.length === 6) await chainGrowth(page);
 
   for (const period of ['30d', '90d', 'all'] as const) {
@@ -364,5 +460,6 @@ export async function checkNoJavascript(
       overview.chains.length,
     'no-JS disclosure',
   );
+  await checkOperationsControl(page, overview, true);
   await checkLayout(page);
 }

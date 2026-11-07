@@ -30,24 +30,38 @@ export function Feed({ overview }: { overview: Overview }) {
         {page.items.slice(0, 5).map((row) => (
           <OperationRow key={row.id} row={row} chains={overview.chains} />
         ))}
-      </div>
-      {page.items.length === 0 ? (
-        <p className="sub">{texts.feed.none}</p>
-      ) : null}
-      {page.items.length > 5 ? (
-        <details className="operations-more">
-          <summary>
-            <span className="when-closed">
-              {texts.feed.showAll(page.items.length)}
-            </span>
-            <span className="when-open">{texts.feed.showFive}</span>
-          </summary>
-          <div className="oplist">
+        {page.items.length > 5 ? (
+          <details className="operations-more">
+            <summary className="disclosure">
+              <span className="when-closed">
+                {texts.feed.showAll(page.items.length)}
+              </span>
+              <span className="when-open">{texts.feed.showFive}</span>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M3 7.5l3-3 3 3"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </summary>
             {page.items.slice(5).map((row) => (
               <OperationRow key={row.id} row={row} chains={overview.chains} />
             ))}
-          </div>
-        </details>
+          </details>
+        ) : null}
+      </div>
+      {page.items.length === 0 ? (
+        <p className="sub">{texts.feed.none}</p>
       ) : null}
     </section>
   );
