@@ -66,8 +66,10 @@ function StatusRows({ overview }: { overview: Overview }) {
             }
           >
             <th scope="row">
-              <span className="dot" />
-              {chain.name}
+              <span className="chain-name">
+                <span className="dot" />
+                {chain.name}
+              </span>
             </th>
             <td data-label={texts.status.columns.state}>
               {status.state === 'delayed'
@@ -131,7 +133,7 @@ function StatusRows({ overview }: { overview: Overview }) {
 function StatusListItems({ overview }: { overview: Overview }) {
   return (
     <>
-      {overview.chains.map((chain) => {
+      {overview.chains.map((chain, index) => {
         const status = overview.status.chains.find(
           (candidate) => candidate.chain === chain.slug,
         );
@@ -150,6 +152,7 @@ function StatusListItems({ overview }: { overview: Overview }) {
           <li
             key={chain.slug}
             data-chain={chain.slug}
+            data-chain-index={index + 1}
             data-chain-state={status.state}
             data-quality={
               status.state === 'unreconciled'
@@ -167,7 +170,7 @@ function StatusListItems({ overview }: { overview: Overview }) {
               <span className={`sl-mark ${status.state}`} aria-hidden="true">
                 {status.state === 'unreconciled'
                   ? texts.status.unreconciled
-                  : texts.status.checkMarks.ok}
+                  : texts.status.stateMark}
               </span>{' '}
               {status.state === 'delayed'
                 ? texts.tags.behind(
