@@ -44,3 +44,9 @@
   checks now tolerate the runtime `open` attribute instead of matching the closed-form literal.
 - Coordinator-cap note: the first implementation turn hit the turn cap mid-probe; work resumed from
   the worktree with no loss, and the fixes above are the only changes beyond the approved plan.
+- Stress-width fix: the figure keeps `flex:none` but gains `max-width:100%`, so long hero notes
+  (unreconciled/incomplete copy) wrap inside the figure at 320 px instead of widening it past the
+  viewport. The board's right-aligned `.reason` rule was reverted to the built left-aligned one —
+  the reason styling is not one of the five changes, and the aligned variant collided with the peak
+  annotation in the gap state. (An intermediate smoke failure was a stale build: the smoke reuses
+  the check:build output, so the rebuild had to run before judging the CSS fixes.)
