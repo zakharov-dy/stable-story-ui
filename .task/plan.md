@@ -16,6 +16,17 @@ Branch: keep the assigned `worktree-go-showdoc` (task names `web/showcase`; repo
   largestEvents, records, status, reconciliation`. `largestEvents`: 20 items over a 7-day window.
   Views: `30d → day`, `90d → week`, `all → month`. `design.md` confirms: page never aggregates, server owns
   steps/buckets, `null` never becomes zero, no-data chains are not drawn.
+- `fixtures/long-history/overview.json` is the six-chain document (Ethereum, Base, Arbitrum, OP Mainnet,
+  Polygon PoS, Avalanche C-Chain) and the only state `docs/web-testing.md` allows for screenshot evidence.
+  The `ok` fixture has three chains; the `published` state is demo-free but serves the 3-chain `ok`
+  overview (`test-support/publication.ts` defaults to `state = 'ok'`) — rejected for screenshots.
+- Publication envelope (`packages/contracts/src/publication.ts`, in this repo): `PublicationCurrent`
+  (`formatVersion: 1`, UUID `version`, `manifestSha256`, `publishedAt`, nullable `previous`) and
+  `PublicationManifest` (single-document tuple, key `versions/<version>/supply/usdc/overview.json` plus
+  `byteLength`/`sha256`/`asOf`/`generatedAt`). Versioning lives in the envelope; the `Overview` shape
+  carries no version field. Consumers hash exact UTF-8 bytes themselves.
+- Data shape (`packages/contracts/src/primitives.ts`): exact token amounts as canonical decimal strings
+  (no floats), percentages rounded to at most six places, `null` never rendered as 0.
 - Mobile tabs: `(today)`, `history`, `operations` (+ chain push screen — rechecked at write time).
 - `browser-smoke.ts`: `--shots <dir>` catalog (full page per state+viewport; per-period stack/flows sections on
   `long-history`); viewports 1440x900, 375x812; `next start` with `API_MODE=mock MOCK_STATE=<state>`.
@@ -24,7 +35,8 @@ Branch: keep the assigned `worktree-go-showdoc` (task names `web/showcase`; repo
 
 ## Deliverables (files I may change: `README.md`, `docs/**`, `ci.yml` comment only)
 
-1. `README.md` (rewrite), order: screenshot → tagline linked to the live site → `live · updated daily ·
+1. `README.md` (rewrite), order: screenshot → tagline linked to the live site (+ long-form sentence
+   "USDC supply by chain. Every day attributed to issuer or bridge, and reconciled against the contract.") → `live · updated daily ·
    six chains` → exactly three "what's unusual" bullets → working-name footnote; then Start here (five links:
    live site, overview schema in `packages/contracts`, shared view logic, `docs/data-quality.md`,
    `docs/architecture.md`), checks table (six rows: typecheck/lint/test/check:build/browser-smoke/test:rn —
@@ -34,19 +46,25 @@ Branch: keep the assigned `worktree-go-showdoc` (task names `web/showcase`; repo
    mobile after web launch; CI manual dispatch).
 2. `docs/architecture.md` — backend as black box with interfaces only
    (logs → reconciliations → Postgres → publisher → R2 → SSR; same document → Worker + App Check → Expo).
+   Publisher interface: `current.json` → manifest → immutable `versions/<uuid>/supply/usdc/overview.json`; versioning lives
+   in the publication envelope, not inside the overview JSON (which has no version field). No backend code,
    Contracts, day/flow model, three reconciliations, overview document (periods, server steps, `null` ≠ 0),
    credential boundary (browser gets no backend/R2 access, no credentials). No backend code, no other
    repository, no internal doc paths or decision-record numbers.
 3. `docs/data-quality.md` — three reconciliations, CCTP pairing, gap policy (missing = "no data", never zero),
    unreconciled-day policy (stays closed, flagged, counted).
-4. `docs/overview-example.json` (trimmed from `fixtures/ok/overview.json`: arrays cut to first 2–3 elements,
+4. `docs/overview-example.json` (trimmed from the six-chain `fixtures/long-history/overview.json`:
+   cuts by bucket count across every parallel array — paired arrays stay aligned, all six scopes kept;
    pure JSON, no added fields) + `docs/overview-example.md` ("how to read it": what each block is and exactly
    what was trimmed). README links both.
-5. `docs/media/hero.png` (first screen, 1440x900 viewport) + `docs/media/charts.png` (chart section with period
-   + sticky controls), each ≤ 300 KB, only images in the diff. Produced by `browser-smoke --shots` into
-   `$TMPDIR` (hero: crop of the full-page ok capture at the same viewport — identical pixels; charts: small
-   headless render of the built mock page scrolled so the sticky bar shows, allowed as "another local headless
-   render"). Compress locally (sips) to fit the limit; verify sizes before commit.
+5. `docs/media/hero.png` (first screen: 1440x900 viewport, above the fold, of the six-chain
+   `long-history` mock page with only the mock-harness `.demo` element hidden — absent in production)
+   + `docs/media/charts.png` (same page scrolled past `#hero` with `#sticky-bar` unhidden and the
+   30D/90D/ALL controls asserted present), each ≤ 300 KB, only images in the diff. Base artifact: the
+   `browser-smoke --states long-history --shots` catalog in `$TMPDIR` (the only state allowed for
+   screenshot evidence); both PNGs are headless renders of that same built mock page
+   (`next start`, `API_MODE=mock MOCK_STATE=long-history`). Verify each with `ls -l` before commit;
+   resize fallback to 1280/1200 px wide if either exceeds the limit.
 6. `.github/workflows/ci.yml` — reword the head comment to manual-only; drop billing reason and backend mention.
 
 ## Language guardrails (reviewer-major if violated)
@@ -62,6 +80,8 @@ Branch: keep the assigned `worktree-go-showdoc` (task names `web/showcase`; repo
 
 - Full gate on the last code commit with `set -o pipefail`, cut outputs: typecheck, lint, test, check:build
   (with `env -u AI_AGENT -u CLAUDECODE`), browser-smoke (`CI=true`, same unsets). Report every exit code + sha.
+  Before each push: `git log -1 --format='%an <%ae>'` (owner identity) + `Co-Authored-By` trailer of the
+  writing model. First code push opens the PR (CI is manual-only; no run expected).
 - `check:build` before any screenshots (smoke reuses its build). Screenshots do not need network
   (headless render of the local mock build; if a download became unavoidable I would `QUESTION:` first).
 - Follow-up outside this task (owner/coordinator side): assigning `hero.png` as the GitHub social preview image
