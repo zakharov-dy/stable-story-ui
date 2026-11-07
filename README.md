@@ -41,7 +41,7 @@ mirrored in the sticky bar once the hero scrolls away:
 
 ![Charts at 30D/90D/ALL with the sticky period control](docs/media/charts.png)
 
-*Same mock render as above: the 30D stack and the flows section under the sticky bar.*
+*Same mock render as above: the ALL stack and the flows section under the sticky bar; the page opens on ALL.*
 
 The server decides the window step and the selection; the page renders the step it is given and never aggregates.
 A chain without data for a period is "no data" — not zero, not drawn. How it all fits together is in
