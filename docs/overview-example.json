@@ -1,0 +1,3977 @@
+{
+  "asset": "usdc",
+  "generatedAt": "2027-03-16T06:00:00.000Z",
+  "asOf": "2027-03-15",
+  "historyStart": "2026-11-15",
+  "chains": [
+    {
+      "slug": "ethereum",
+      "name": "Ethereum",
+      "explorerTx": "https://etherscan.io/tx/{hash}"
+    },
+    {
+      "slug": "base",
+      "name": "Base",
+      "explorerTx": "https://basescan.org/tx/{hash}"
+    },
+    {
+      "slug": "arbitrum",
+      "name": "Arbitrum",
+      "explorerTx": "https://arbiscan.io/tx/{hash}"
+    },
+    {
+      "slug": "optimism",
+      "name": "OP Mainnet",
+      "explorerTx": "https://optimistic.etherscan.io/tx/{hash}"
+    },
+    {
+      "slug": "polygon",
+      "name": "Polygon PoS",
+      "explorerTx": "https://polygonscan.com/tx/{hash}"
+    },
+    {
+      "slug": "avalanche",
+      "name": "Avalanche C-Chain",
+      "explorerTx": "https://snowtrace.io/tx/{hash}"
+    }
+  ],
+  "header": {
+    "days": [
+      "2027-02-14",
+      "2027-02-15",
+      "2027-02-16"
+    ],
+    "supply": {
+      "value": "188546.456789",
+      "changePct": null,
+      "spark": [
+        "150557.456789",
+        "151964.456789",
+        "153371.456789"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    },
+    "change1d": {
+      "value": "1407",
+      "changePct": "0.751846",
+      "spark": [
+        "1407",
+        "1407",
+        "1407"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    },
+    "change7d": {
+      "value": "9849",
+      "changePct": "5.51155",
+      "spark": [
+        "9849",
+        "9849",
+        "9849"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    },
+    "issuerMinted7d": {
+      "value": "1470",
+      "changePct": "0",
+      "spark": [
+        "1470",
+        "1470",
+        "1470"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    },
+    "issuerBurned7d": {
+      "value": "441",
+      "changePct": "0",
+      "spark": [
+        "441",
+        "441",
+        "441"
+      ],
+      "sparkUnreconciled": [],
+      "quality": {
+        "complete": true,
+        "unreconciledDays": [],
+        "operationsComplete": true,
+        "unpairedEvents": 0
+      }
+    }
+  },
+  "views": {
+    "30d": {
+      "from": "2027-02-14",
+      "to": "2027-03-15",
+      "period": "day",
+      "noDataChains": [
+        [],
+        [],
+        []
+      ],
+      "supplyByChain": {
+        "level": {
+          "period": "day",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2027-02-14",
+              "end": "2027-02-14",
+              "complete": true
+            },
+            {
+              "start": "2027-02-15",
+              "end": "2027-02-15",
+              "complete": true
+            },
+            {
+              "start": "2027-02-16",
+              "end": "2027-02-16",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "7277.456789",
+                "7344.456789",
+                "7411.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "14328",
+                "14462",
+                "14596"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "21492",
+                "21693",
+                "21894"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "28656",
+                "28924",
+                "29192"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "35820",
+                "36155",
+                "36490"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "42984",
+                "43386",
+                "43788"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "share": {
+          "period": "day",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2027-02-14",
+              "end": "2027-02-14",
+              "complete": true
+            },
+            {
+              "start": "2027-02-15",
+              "end": "2027-02-15",
+              "complete": true
+            },
+            {
+              "start": "2027-02-16",
+              "end": "2027-02-16",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "4.833674",
+                "4.83301",
+                "4.832357"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "9.516633",
+                "9.516699",
+                "9.516764"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "14.274949",
+                "14.275049",
+                "14.275146"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "19.033265",
+                "19.033398",
+                "19.033529"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "23.791581",
+                "23.791748",
+                "23.791911"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "28.549898",
+                "28.550097",
+                "28.550293"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "total": {
+          "period": "day",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2027-02-14",
+              "end": "2027-02-14",
+              "complete": true
+            },
+            {
+              "start": "2027-02-15",
+              "end": "2027-02-15",
+              "complete": true
+            },
+            {
+              "start": "2027-02-16",
+              "end": "2027-02-16",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "all",
+              "values": [
+                "150557.456789",
+                "151964.456789",
+                "153371.456789"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedLevel": {
+          "period": "day",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2027-02-14",
+              "end": "2027-02-14",
+              "complete": true
+            },
+            {
+              "start": "2027-02-15",
+              "end": "2027-02-15",
+              "complete": true
+            },
+            {
+              "start": "2027-02-16",
+              "end": "2027-02-16",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "7277.456789",
+                "7344.456789",
+                "7411.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "21605.456789",
+                "21806.456789",
+                "22007.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "43097.456789",
+                "43499.456789",
+                "43901.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "71753.456789",
+                "72423.456789",
+                "73093.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "107573.456789",
+                "108578.456789",
+                "109583.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "150557.456789",
+                "151964.456789",
+                "153371.456789"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedShare": {
+          "period": "day",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2027-02-14",
+              "end": "2027-02-14",
+              "complete": true
+            },
+            {
+              "start": "2027-02-15",
+              "end": "2027-02-15",
+              "complete": true
+            },
+            {
+              "start": "2027-02-16",
+              "end": "2027-02-16",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "4.833674",
+                "4.83301",
+                "4.832357"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "14.350307",
+                "14.349709",
+                "14.349122"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "28.625256",
+                "28.624757",
+                "28.624268"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "47.658521",
+                "47.658155",
+                "47.657797"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "71.450102",
+                "71.449903",
+                "71.449707"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "100",
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        }
+      },
+      "drivers": [
+        {
+          "scope": "all",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2027-02-14",
+                "end": "2027-02-14",
+                "complete": true
+              },
+              {
+                "start": "2027-02-15",
+                "end": "2027-02-15",
+                "complete": true
+              },
+              {
+                "start": "2027-02-16",
+                "end": "2027-02-16",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "210",
+                  "210",
+                  "210"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "63",
+                  "63",
+                  "63"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "2100",
+                  "2100",
+                  "2100"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "840",
+                  "840",
+                  "840"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "1407",
+                  "1407",
+                  "1407"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            30,
+            30,
+            30
+          ]
+        },
+        {
+          "scope": "ethereum",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2027-02-14",
+                "end": "2027-02-14",
+                "complete": true
+              },
+              {
+                "start": "2027-02-15",
+                "end": "2027-02-15",
+                "complete": true
+              },
+              {
+                "start": "2027-02-16",
+                "end": "2027-02-16",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "10",
+                  "10",
+                  "10"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "3",
+                  "3",
+                  "3"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "100",
+                  "100",
+                  "100"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "40",
+                  "40",
+                  "40"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "67",
+                  "67",
+                  "67"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "scope": "base",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2027-02-14",
+                "end": "2027-02-14",
+                "complete": true
+              },
+              {
+                "start": "2027-02-15",
+                "end": "2027-02-15",
+                "complete": true
+              },
+              {
+                "start": "2027-02-16",
+                "end": "2027-02-16",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "20",
+                  "20",
+                  "20"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "6",
+                  "6",
+                  "6"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "200",
+                  "200",
+                  "200"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "80",
+                  "80",
+                  "80"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "134",
+                  "134",
+                  "134"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "scope": "arbitrum",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2027-02-14",
+                "end": "2027-02-14",
+                "complete": true
+              },
+              {
+                "start": "2027-02-15",
+                "end": "2027-02-15",
+                "complete": true
+              },
+              {
+                "start": "2027-02-16",
+                "end": "2027-02-16",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "30",
+                  "30",
+                  "30"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "9",
+                  "9",
+                  "9"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "300",
+                  "300",
+                  "300"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "120",
+                  "120",
+                  "120"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "201",
+                  "201",
+                  "201"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "scope": "optimism",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2027-02-14",
+                "end": "2027-02-14",
+                "complete": true
+              },
+              {
+                "start": "2027-02-15",
+                "end": "2027-02-15",
+                "complete": true
+              },
+              {
+                "start": "2027-02-16",
+                "end": "2027-02-16",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "40",
+                  "40",
+                  "40"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "12",
+                  "12",
+                  "12"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "400",
+                  "400",
+                  "400"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "160",
+                  "160",
+                  "160"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "268",
+                  "268",
+                  "268"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "scope": "polygon",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2027-02-14",
+                "end": "2027-02-14",
+                "complete": true
+              },
+              {
+                "start": "2027-02-15",
+                "end": "2027-02-15",
+                "complete": true
+              },
+              {
+                "start": "2027-02-16",
+                "end": "2027-02-16",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "50",
+                  "50",
+                  "50"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "15",
+                  "15",
+                  "15"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "500",
+                  "500",
+                  "500"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "200",
+                  "200",
+                  "200"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "335",
+                  "335",
+                  "335"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "scope": "avalanche",
+          "series": {
+            "period": "day",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2027-02-14",
+                "end": "2027-02-14",
+                "complete": true
+              },
+              {
+                "start": "2027-02-15",
+                "end": "2027-02-15",
+                "complete": true
+              },
+              {
+                "start": "2027-02-16",
+                "end": "2027-02-16",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "60",
+                  "60",
+                  "60"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "18",
+                  "18",
+                  "18"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "600",
+                  "600",
+                  "600"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "240",
+                  "240",
+                  "240"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "402",
+                  "402",
+                  "402"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            5,
+            5,
+            5
+          ]
+        }
+      ],
+      "issuerVsBridge": [
+        {
+          "scope": "all",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "5880",
+              "bridge": "58800",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 174,
+              "bridge": 168,
+              "issuerShare": "50.877193"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1764",
+              "bridge": "23520",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 168,
+              "bridge": 168,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "ethereum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "280",
+              "bridge": "2800",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 29,
+              "bridge": 28,
+              "issuerShare": "50.877193"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "84",
+              "bridge": "1120",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 28,
+              "bridge": 28,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "base",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "560",
+              "bridge": "5600",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 29,
+              "bridge": 28,
+              "issuerShare": "50.877193"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "168",
+              "bridge": "2240",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 28,
+              "bridge": 28,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "arbitrum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "840",
+              "bridge": "8400",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 29,
+              "bridge": 28,
+              "issuerShare": "50.877193"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "252",
+              "bridge": "3360",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 28,
+              "bridge": 28,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "optimism",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1120",
+              "bridge": "11200",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 29,
+              "bridge": 28,
+              "issuerShare": "50.877193"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "336",
+              "bridge": "4480",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 28,
+              "bridge": 28,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "polygon",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1400",
+              "bridge": "14000",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 29,
+              "bridge": 28,
+              "issuerShare": "50.877193"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "420",
+              "bridge": "5600",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 28,
+              "bridge": 28,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "avalanche",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1680",
+              "bridge": "16800",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 29,
+              "bridge": 28,
+              "issuerShare": "50.877193"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "504",
+              "bridge": "6720",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 28,
+              "bridge": 28,
+              "issuerShare": "50"
+            }
+          }
+        }
+      ]
+    },
+    "90d": {
+      "from": "2026-12-16",
+      "to": "2027-03-15",
+      "period": "week",
+      "noDataChains": [
+        [],
+        []
+      ],
+      "supplyByChain": {
+        "level": {
+          "period": "week",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-12-16",
+              "end": "2026-12-20",
+              "complete": false
+            },
+            {
+              "start": "2026-12-21",
+              "end": "2026-12-27",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "3412",
+                "3994.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "6824",
+                "7762"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "10236",
+                "11643"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "13648",
+                "15524"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "17060",
+                "19405"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "20472",
+                "23286"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "share": {
+          "period": "week",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-12-16",
+              "end": "2026-12-20",
+              "complete": false
+            },
+            {
+              "start": "2026-12-21",
+              "end": "2026-12-27",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "4.761905",
+                "4.894301"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "9.52381",
+                "9.51057"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "14.285714",
+                "14.265855"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "19.047619",
+                "19.02114"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "23.809524",
+                "23.776425"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "28.571429",
+                "28.53171"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "total": {
+          "period": "week",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-12-16",
+              "end": "2026-12-20",
+              "complete": false
+            },
+            {
+              "start": "2026-12-21",
+              "end": "2026-12-27",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "all",
+              "values": [
+                "71652",
+                "81614.456789"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedLevel": {
+          "period": "week",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-12-16",
+              "end": "2026-12-20",
+              "complete": false
+            },
+            {
+              "start": "2026-12-21",
+              "end": "2026-12-27",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "3412",
+                "3994.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "10236",
+                "11756.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "20472",
+                "23399.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "34120",
+                "38923.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "51180",
+                "58328.456789"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "71652",
+                "81614.456789"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "stackedShare": {
+          "period": "week",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-12-16",
+              "end": "2026-12-20",
+              "complete": false
+            },
+            {
+              "start": "2026-12-21",
+              "end": "2026-12-27",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "4.761905",
+                "4.894301"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "14.285714",
+                "14.40487"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "28.571429",
+                "28.670725"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "47.619048",
+                "47.691865"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "71.428571",
+                "71.46829"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "100",
+                "100"
+              ],
+              "unreconciled": []
+            }
+          ]
+        }
+      },
+      "drivers": [
+        {
+          "scope": "all",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-12-16",
+                "end": "2026-12-20",
+                "complete": false
+              },
+              {
+                "start": "2026-12-21",
+                "end": "2026-12-27",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "1050",
+                  "1583.456789"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "315",
+                  "441"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "10500",
+                  "14700"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "4200",
+                  "5880"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "7035",
+                  "9962.456789"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            150,
+            210
+          ]
+        },
+        {
+          "scope": "ethereum",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-12-16",
+                "end": "2026-12-20",
+                "complete": false
+              },
+              {
+                "start": "2026-12-21",
+                "end": "2026-12-27",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "50",
+                  "183.456789"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "15",
+                  "21"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "500",
+                  "700"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "200",
+                  "280"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "335",
+                  "582.456789"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            25,
+            35
+          ]
+        },
+        {
+          "scope": "base",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-12-16",
+                "end": "2026-12-20",
+                "complete": false
+              },
+              {
+                "start": "2026-12-21",
+                "end": "2026-12-27",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "100",
+                  "140"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "30",
+                  "42"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "1000",
+                  "1400"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "400",
+                  "560"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "670",
+                  "938"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            25,
+            35
+          ]
+        },
+        {
+          "scope": "arbitrum",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-12-16",
+                "end": "2026-12-20",
+                "complete": false
+              },
+              {
+                "start": "2026-12-21",
+                "end": "2026-12-27",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "150",
+                  "210"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "45",
+                  "63"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "1500",
+                  "2100"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "600",
+                  "840"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "1005",
+                  "1407"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            25,
+            35
+          ]
+        },
+        {
+          "scope": "optimism",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-12-16",
+                "end": "2026-12-20",
+                "complete": false
+              },
+              {
+                "start": "2026-12-21",
+                "end": "2026-12-27",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "200",
+                  "280"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "60",
+                  "84"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "2000",
+                  "2800"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "800",
+                  "1120"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "1340",
+                  "1876"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            25,
+            35
+          ]
+        },
+        {
+          "scope": "polygon",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-12-16",
+                "end": "2026-12-20",
+                "complete": false
+              },
+              {
+                "start": "2026-12-21",
+                "end": "2026-12-27",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "250",
+                  "350"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "75",
+                  "105"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "2500",
+                  "3500"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "1000",
+                  "1400"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "1675",
+                  "2345"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            25,
+            35
+          ]
+        },
+        {
+          "scope": "avalanche",
+          "series": {
+            "period": "week",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-12-16",
+                "end": "2026-12-20",
+                "complete": false
+              },
+              {
+                "start": "2026-12-21",
+                "end": "2026-12-27",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "300",
+                  "420"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "90",
+                  "126"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "3000",
+                  "4200"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "1200",
+                  "1680"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "2010",
+                  "2814"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            25,
+            35
+          ]
+        }
+      ],
+      "issuerVsBridge": [
+        {
+          "scope": "all",
+          "in": {
+            "quality": {
+              "complete": false,
+              "unreconciledDays": [
+                "2026-12-30"
+              ],
+              "operationsComplete": false,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            },
+            "count": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": false,
+              "unreconciledDays": [
+                "2026-12-30"
+              ],
+              "operationsComplete": false,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            },
+            "count": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            }
+          }
+        },
+        {
+          "scope": "ethereum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [
+                "2026-12-30"
+              ],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "993.456789",
+              "bridge": "8800",
+              "issuerShare": "10.144087"
+            },
+            "count": {
+              "issuer": 89,
+              "bridge": 88,
+              "issuerShare": "50.282486"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [
+                "2026-12-30"
+              ],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "264",
+              "bridge": "3520",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 88,
+              "bridge": 88,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "base",
+          "in": {
+            "quality": {
+              "complete": false,
+              "unreconciledDays": [],
+              "operationsComplete": false,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            },
+            "count": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": false,
+              "unreconciledDays": [],
+              "operationsComplete": false,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            },
+            "count": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            }
+          }
+        },
+        {
+          "scope": "arbitrum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "2640",
+              "bridge": "26400",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 89,
+              "bridge": 88,
+              "issuerShare": "50.282486"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "792",
+              "bridge": "10560",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 88,
+              "bridge": 88,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "optimism",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "3520",
+              "bridge": "35200",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 89,
+              "bridge": 88,
+              "issuerShare": "50.282486"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1056",
+              "bridge": "14080",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 88,
+              "bridge": 88,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "polygon",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "4400",
+              "bridge": "44000",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 89,
+              "bridge": 88,
+              "issuerShare": "50.282486"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1320",
+              "bridge": "17600",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 88,
+              "bridge": 88,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "avalanche",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "5280",
+              "bridge": "52800",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 89,
+              "bridge": 88,
+              "issuerShare": "50.282486"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1584",
+              "bridge": "21120",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 88,
+              "bridge": 88,
+              "issuerShare": "50"
+            }
+          }
+        }
+      ]
+    },
+    "all": {
+      "from": "2026-11-15",
+      "to": "2027-03-15",
+      "period": "month",
+      "noDataChains": [
+        [],
+        []
+      ],
+      "supplyByChain": {
+        "level": {
+          "period": "month",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-11-15",
+              "end": "2026-11-30",
+              "complete": false
+            },
+            {
+              "start": "2026-12-01",
+              "end": "2026-12-31",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "2072",
+                "4262.456789"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "4144",
+                "8298"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "6216",
+                "12447"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "8288",
+                "16596"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "10360",
+                "20745"
+              ],
+              "unreconciled": []
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "12432",
+                "24894"
+              ],
+              "unreconciled": []
+            }
+          ]
+        },
+        "share": {
+          "period": "month",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-11-15",
+              "end": "2026-11-30",
+              "complete": false
+            },
+            {
+              "start": "2026-12-01",
+              "end": "2026-12-31",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "4.761905",
+                "4.88576"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "9.52381",
+                "9.511424"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "14.285714",
+                "14.267136"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "19.047619",
+                "19.022848"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "23.809524",
+                "23.77856"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "28.571429",
+                "28.534272"
+              ],
+              "unreconciled": [
+                1
+              ]
+            }
+          ]
+        },
+        "total": {
+          "period": "month",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-11-15",
+              "end": "2026-11-30",
+              "complete": false
+            },
+            {
+              "start": "2026-12-01",
+              "end": "2026-12-31",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "all",
+              "values": [
+                "43512",
+                "87242.456789"
+              ],
+              "unreconciled": [
+                1
+              ]
+            }
+          ]
+        },
+        "stackedLevel": {
+          "period": "month",
+          "unit": "tokens",
+          "buckets": [
+            {
+              "start": "2026-11-15",
+              "end": "2026-11-30",
+              "complete": false
+            },
+            {
+              "start": "2026-12-01",
+              "end": "2026-12-31",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "2072",
+                "4262.456789"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "6216",
+                "12560.456789"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "12432",
+                "25007.456789"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "20720",
+                "41603.456789"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "31080",
+                "62348.456789"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "43512",
+                "87242.456789"
+              ],
+              "unreconciled": [
+                1
+              ]
+            }
+          ]
+        },
+        "stackedShare": {
+          "period": "month",
+          "unit": "percent",
+          "buckets": [
+            {
+              "start": "2026-11-15",
+              "end": "2026-11-30",
+              "complete": false
+            },
+            {
+              "start": "2026-12-01",
+              "end": "2026-12-31",
+              "complete": true
+            }
+          ],
+          "lines": [
+            {
+              "key": "ethereum",
+              "chain": "ethereum",
+              "values": [
+                "4.761905",
+                "4.88576"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "base",
+              "chain": "base",
+              "values": [
+                "14.285714",
+                "14.397184"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "arbitrum",
+              "chain": "arbitrum",
+              "values": [
+                "28.571429",
+                "28.66432"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "optimism",
+              "chain": "optimism",
+              "values": [
+                "47.619048",
+                "47.687168"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "polygon",
+              "chain": "polygon",
+              "values": [
+                "71.428571",
+                "71.465728"
+              ],
+              "unreconciled": [
+                1
+              ]
+            },
+            {
+              "key": "avalanche",
+              "chain": "avalanche",
+              "values": [
+                "100",
+                "100"
+              ],
+              "unreconciled": [
+                1
+              ]
+            }
+          ]
+        }
+      },
+      "drivers": [
+        {
+          "scope": "all",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-11-15",
+                "end": "2026-11-30",
+                "complete": false
+              },
+              {
+                "start": "2026-12-01",
+                "end": "2026-12-31",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "3360",
+                  "6623.456789"
+                ],
+                "unreconciled": [
+                  1
+                ]
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "1008",
+                  "1953"
+                ],
+                "unreconciled": [
+                  1
+                ]
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "33600",
+                  "65100"
+                ],
+                "unreconciled": [
+                  1
+                ]
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "13440",
+                  "26040"
+                ],
+                "unreconciled": [
+                  1
+                ]
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "22512",
+                  "43730.456789"
+                ],
+                "unreconciled": [
+                  1
+                ]
+              }
+            ]
+          },
+          "events": [
+            480,
+            930
+          ]
+        },
+        {
+          "scope": "ethereum",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-11-15",
+                "end": "2026-11-30",
+                "complete": false
+              },
+              {
+                "start": "2026-12-01",
+                "end": "2026-12-31",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "160",
+                  "423.456789"
+                ],
+                "unreconciled": [
+                  1
+                ]
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "48",
+                  "93"
+                ],
+                "unreconciled": [
+                  1
+                ]
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "1600",
+                  "3100"
+                ],
+                "unreconciled": [
+                  1
+                ]
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "640",
+                  "1240"
+                ],
+                "unreconciled": [
+                  1
+                ]
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "1072",
+                  "2190.456789"
+                ],
+                "unreconciled": [
+                  1
+                ]
+              }
+            ]
+          },
+          "events": [
+            80,
+            155
+          ]
+        },
+        {
+          "scope": "base",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-11-15",
+                "end": "2026-11-30",
+                "complete": false
+              },
+              {
+                "start": "2026-12-01",
+                "end": "2026-12-31",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "320",
+                  "620"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "96",
+                  "186"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "3200",
+                  "6200"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "1280",
+                  "2480"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "2144",
+                  "4154"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            80,
+            155
+          ]
+        },
+        {
+          "scope": "arbitrum",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-11-15",
+                "end": "2026-11-30",
+                "complete": false
+              },
+              {
+                "start": "2026-12-01",
+                "end": "2026-12-31",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "480",
+                  "930"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "144",
+                  "279"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "4800",
+                  "9300"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "1920",
+                  "3720"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "3216",
+                  "6231"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            80,
+            155
+          ]
+        },
+        {
+          "scope": "optimism",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-11-15",
+                "end": "2026-11-30",
+                "complete": false
+              },
+              {
+                "start": "2026-12-01",
+                "end": "2026-12-31",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "640",
+                  "1240"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "192",
+                  "372"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "6400",
+                  "12400"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "2560",
+                  "4960"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "4288",
+                  "8308"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            80,
+            155
+          ]
+        },
+        {
+          "scope": "polygon",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-11-15",
+                "end": "2026-11-30",
+                "complete": false
+              },
+              {
+                "start": "2026-12-01",
+                "end": "2026-12-31",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "800",
+                  "1550"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "240",
+                  "465"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "8000",
+                  "15500"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "3200",
+                  "6200"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "5360",
+                  "10385"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            80,
+            155
+          ]
+        },
+        {
+          "scope": "avalanche",
+          "series": {
+            "period": "month",
+            "unit": "tokens",
+            "buckets": [
+              {
+                "start": "2026-11-15",
+                "end": "2026-11-30",
+                "complete": false
+              },
+              {
+                "start": "2026-12-01",
+                "end": "2026-12-31",
+                "complete": true
+              }
+            ],
+            "lines": [
+              {
+                "key": "issuer_mint",
+                "flow": "issuer_mint",
+                "values": [
+                  "960",
+                  "1860"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "issuer_burn",
+                "flow": "issuer_burn",
+                "values": [
+                  "288",
+                  "558"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_in",
+                "flow": "bridge_in",
+                "values": [
+                  "9600",
+                  "18600"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "bridge_out",
+                "flow": "bridge_out",
+                "values": [
+                  "3840",
+                  "7440"
+                ],
+                "unreconciled": []
+              },
+              {
+                "key": "net",
+                "flow": "net",
+                "values": [
+                  "6432",
+                  "12462"
+                ],
+                "unreconciled": []
+              }
+            ]
+          },
+          "events": [
+            80,
+            155
+          ]
+        }
+      ],
+      "issuerVsBridge": [
+        {
+          "scope": "all",
+          "in": {
+            "quality": {
+              "complete": false,
+              "unreconciledDays": [
+                "2026-12-30"
+              ],
+              "operationsComplete": false,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            },
+            "count": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": false,
+              "unreconciledDays": [
+                "2026-12-30"
+              ],
+              "operationsComplete": false,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            },
+            "count": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            }
+          }
+        },
+        {
+          "scope": "ethereum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [
+                "2026-12-30"
+              ],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1303.456789",
+              "bridge": "11900",
+              "issuerShare": "9.872087"
+            },
+            "count": {
+              "issuer": 120,
+              "bridge": 119,
+              "issuerShare": "50.209205"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [
+                "2026-12-30"
+              ],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "357",
+              "bridge": "4760",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 119,
+              "bridge": 119,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "base",
+          "in": {
+            "quality": {
+              "complete": false,
+              "unreconciledDays": [],
+              "operationsComplete": false,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            },
+            "count": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": false,
+              "unreconciledDays": [],
+              "operationsComplete": false,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            },
+            "count": {
+              "issuer": null,
+              "bridge": null,
+              "issuerShare": null
+            }
+          }
+        },
+        {
+          "scope": "arbitrum",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "3570",
+              "bridge": "35700",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 120,
+              "bridge": 119,
+              "issuerShare": "50.209205"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1071",
+              "bridge": "14280",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 119,
+              "bridge": 119,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "optimism",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "4760",
+              "bridge": "47600",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 120,
+              "bridge": 119,
+              "issuerShare": "50.209205"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1428",
+              "bridge": "19040",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 119,
+              "bridge": 119,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "polygon",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "5950",
+              "bridge": "59500",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 120,
+              "bridge": 119,
+              "issuerShare": "50.209205"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "1785",
+              "bridge": "23800",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 119,
+              "bridge": 119,
+              "issuerShare": "50"
+            }
+          }
+        },
+        {
+          "scope": "avalanche",
+          "in": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "7140",
+              "bridge": "71400",
+              "issuerShare": "9.090909"
+            },
+            "count": {
+              "issuer": 120,
+              "bridge": 119,
+              "issuerShare": "50.209205"
+            }
+          },
+          "out": {
+            "quality": {
+              "complete": true,
+              "unreconciledDays": [],
+              "operationsComplete": true,
+              "unpairedEvents": 0
+            },
+            "volume": {
+              "issuer": "2142",
+              "bridge": "28560",
+              "issuerShare": "6.976744"
+            },
+            "count": {
+              "issuer": 119,
+              "bridge": 119,
+              "issuerShare": "50"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "day": {
+    "date": "2027-03-15",
+    "rows": [
+      {
+        "scope": "all",
+        "values": {
+          "issuer_mint": "210",
+          "issuer_burn": "63",
+          "bridge_in": "2100",
+          "bridge_out": "840",
+          "net": "1407"
+        },
+        "events": 30,
+        "unreconciled": false
+      },
+      {
+        "scope": "ethereum",
+        "values": {
+          "issuer_mint": "10",
+          "issuer_burn": "3",
+          "bridge_in": "100",
+          "bridge_out": "40",
+          "net": "67"
+        },
+        "events": 5,
+        "unreconciled": false
+      },
+      {
+        "scope": "base",
+        "values": {
+          "issuer_mint": "20",
+          "issuer_burn": "6",
+          "bridge_in": "200",
+          "bridge_out": "80",
+          "net": "134"
+        },
+        "events": 5,
+        "unreconciled": false
+      },
+      {
+        "scope": "arbitrum",
+        "values": {
+          "issuer_mint": "30",
+          "issuer_burn": "9",
+          "bridge_in": "300",
+          "bridge_out": "120",
+          "net": "201"
+        },
+        "events": 5,
+        "unreconciled": false
+      },
+      {
+        "scope": "optimism",
+        "values": {
+          "issuer_mint": "40",
+          "issuer_burn": "12",
+          "bridge_in": "400",
+          "bridge_out": "160",
+          "net": "268"
+        },
+        "events": 5,
+        "unreconciled": false
+      },
+      {
+        "scope": "polygon",
+        "values": {
+          "issuer_mint": "50",
+          "issuer_burn": "15",
+          "bridge_in": "500",
+          "bridge_out": "200",
+          "net": "335"
+        },
+        "events": 5,
+        "unreconciled": false
+      },
+      {
+        "scope": "avalanche",
+        "values": {
+          "issuer_mint": "60",
+          "issuer_burn": "18",
+          "bridge_in": "600",
+          "bridge_out": "240",
+          "net": "402"
+        },
+        "events": 5,
+        "unreconciled": false
+      }
+    ]
+  },
+  "largestEvents": {
+    "from": "2027-03-09",
+    "to": "2027-03-15",
+    "quality": {
+      "complete": true,
+      "unreconciledDays": [],
+      "operationsComplete": true,
+      "unpairedEvents": 0
+    },
+    "items": [
+      {
+        "id": "avalanche:0x73796e7468657469639e4c567847bce5fbe66086a79ccdacaf418f119540b0f0:20",
+        "chain": "avalanche",
+        "flow": "bridge_in",
+        "amount": "600",
+        "time": "2027-03-15T07:12:00.000Z",
+        "txHash": "0x73796e7468657469639e4c567847bce5fbe66086a79ccdacaf418f119540b0f0",
+        "explorerUrl": "https://snowtrace.io/tx/0x73796e7468657469639e4c567847bce5fbe66086a79ccdacaf418f119540b0f0",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      },
+      {
+        "id": "avalanche:0x73796e746865746963731af96c923d047ca9b7611741c23313758a577f63a679:20",
+        "chain": "avalanche",
+        "flow": "bridge_in",
+        "amount": "600",
+        "time": "2027-03-14T07:12:00.000Z",
+        "txHash": "0x73796e746865746963731af96c923d047ca9b7611741c23313758a577f63a679",
+        "explorerUrl": "https://snowtrace.io/tx/0x73796e746865746963731af96c923d047ca9b7611741c23313758a577f63a679",
+        "unreconciled": false,
+        "unpaired": false,
+        "bridge": {
+          "version": 2,
+          "peer": {
+            "domain": 0,
+            "chain": "ethereum",
+            "name": "Ethereum"
+          }
+        }
+      }
+    ],
+    "nextCursor": null
+  },
+  "records": [
+    {
+      "kind": "max_supply",
+      "scope": "all",
+      "since": "2026-11-15",
+      "quality": {
+        "complete": false,
+        "unreconciledDays": [
+          "2026-12-30"
+        ],
+        "operationsComplete": false,
+        "unpairedEvents": 0
+      },
+      "value": null,
+      "day": null
+    },
+    {
+      "kind": "max_issuer_mint_day",
+      "scope": "all",
+      "since": "2026-11-15",
+      "quality": {
+        "complete": false,
+        "unreconciledDays": [
+          "2026-12-30"
+        ],
+        "operationsComplete": false,
+        "unpairedEvents": 0
+      },
+      "value": null,
+      "day": null
+    }
+  ],
+  "status": {
+    "chains": [
+      {
+        "chain": "ethereum",
+        "state": "ok",
+        "historyStart": "2026-11-15",
+        "lastClosedDay": "2027-03-15",
+        "lastBlock": "122699",
+        "nextDueAt": "2027-03-17T06:00:00.000Z",
+        "lagHours": 6,
+        "lastRun": {
+          "finishedAt": "2027-03-16T05:39:52.000Z",
+          "status": "ok",
+          "toBlock": "122699"
+        },
+        "reconciliation": {
+          "day": "2027-03-15",
+          "supply": "ok",
+          "supplyDiff": "0",
+          "bridge": "ok",
+          "continuity": "ok"
+        },
+        "unreconciledDays": [
+          "2026-12-30"
+        ]
+      },
+      {
+        "chain": "base",
+        "state": "ok",
+        "historyStart": "2026-11-15",
+        "lastClosedDay": "2027-03-15",
+        "lastBlock": "222699",
+        "nextDueAt": "2027-03-17T06:00:00.000Z",
+        "lagHours": 6,
+        "lastRun": {
+          "finishedAt": "2027-03-16T05:43:52.000Z",
+          "status": "ok",
+          "toBlock": "222699"
+        },
+        "reconciliation": {
+          "day": "2027-03-15",
+          "supply": "ok",
+          "supplyDiff": "0",
+          "bridge": "ok",
+          "continuity": "ok"
+        },
+        "unreconciledDays": []
+      },
+      {
+        "chain": "arbitrum",
+        "state": "ok",
+        "historyStart": "2026-11-15",
+        "lastClosedDay": "2027-03-15",
+        "lastBlock": "322699",
+        "nextDueAt": "2027-03-17T06:00:00.000Z",
+        "lagHours": 6,
+        "lastRun": {
+          "finishedAt": "2027-03-16T05:47:54.000Z",
+          "status": "ok",
+          "toBlock": "322699"
+        },
+        "reconciliation": {
+          "day": "2027-03-15",
+          "supply": "ok",
+          "supplyDiff": "0",
+          "bridge": "ok",
+          "continuity": "ok"
+        },
+        "unreconciledDays": []
+      },
+      {
+        "chain": "optimism",
+        "state": "ok",
+        "historyStart": "2026-11-15",
+        "lastClosedDay": "2027-03-15",
+        "lastBlock": "422699",
+        "nextDueAt": "2027-03-17T06:00:00.000Z",
+        "lagHours": 6,
+        "lastRun": {
+          "finishedAt": "2027-03-16T05:51:56.000Z",
+          "status": "ok",
+          "toBlock": "422699"
+        },
+        "reconciliation": {
+          "day": "2027-03-15",
+          "supply": "ok",
+          "supplyDiff": "0",
+          "bridge": "ok",
+          "continuity": "ok"
+        },
+        "unreconciledDays": []
+      },
+      {
+        "chain": "polygon",
+        "state": "ok",
+        "historyStart": "2026-11-15",
+        "lastClosedDay": "2027-03-15",
+        "lastBlock": "522699",
+        "nextDueAt": "2027-03-17T06:00:00.000Z",
+        "lagHours": 6,
+        "lastRun": {
+          "finishedAt": "2027-03-16T05:55:58.000Z",
+          "status": "ok",
+          "toBlock": "522699"
+        },
+        "reconciliation": {
+          "day": "2027-03-15",
+          "supply": "ok",
+          "supplyDiff": "0",
+          "bridge": "ok",
+          "continuity": "ok"
+        },
+        "unreconciledDays": []
+      },
+      {
+        "chain": "avalanche",
+        "state": "ok",
+        "historyStart": "2026-11-15",
+        "lastClosedDay": "2027-03-15",
+        "lastBlock": "622699",
+        "nextDueAt": "2027-03-17T06:00:00.000Z",
+        "lagHours": 6,
+        "lastRun": {
+          "finishedAt": "2027-03-16T06:00:00.000Z",
+          "status": "ok",
+          "toBlock": "622699"
+        },
+        "reconciliation": {
+          "day": "2027-03-15",
+          "supply": "ok",
+          "supplyDiff": "0",
+          "bridge": "ok",
+          "continuity": "ok"
+        },
+        "unreconciledDays": []
+      }
+    ]
+  },
+  "reconciliation": {
+    "all": {
+      "closedDays": 725,
+      "events": 3571,
+      "mismatchedDays": 1,
+      "streakDays": 68,
+      "streakEnd": "2027-03-15"
+    },
+    "chains": [
+      {
+        "chain": "ethereum",
+        "closedDays": 121,
+        "events": 596,
+        "mismatchedDays": 1,
+        "streakDays": 75,
+        "streakEnd": "2027-03-15"
+      },
+      {
+        "chain": "base",
+        "closedDays": 120,
+        "events": 591,
+        "mismatchedDays": 0,
+        "streakDays": 68,
+        "streakEnd": "2027-03-15"
+      },
+      {
+        "chain": "arbitrum",
+        "closedDays": 121,
+        "events": 596,
+        "mismatchedDays": 0,
+        "streakDays": 121,
+        "streakEnd": "2027-03-15"
+      },
+      {
+        "chain": "optimism",
+        "closedDays": 121,
+        "events": 596,
+        "mismatchedDays": 0,
+        "streakDays": 121,
+        "streakEnd": "2027-03-15"
+      },
+      {
+        "chain": "polygon",
+        "closedDays": 121,
+        "events": 596,
+        "mismatchedDays": 0,
+        "streakDays": 121,
+        "streakEnd": "2027-03-15"
+      },
+      {
+        "chain": "avalanche",
+        "closedDays": 121,
+        "events": 596,
+        "mismatchedDays": 0,
+        "streakDays": 121,
+        "streakEnd": "2027-03-15"
+      }
+    ],
+    "reconciledChains": 6
+  }
+}

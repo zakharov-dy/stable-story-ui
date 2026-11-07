@@ -1,8 +1,8 @@
 name: CI
 
-# Manual only, like the backend's workflow: the automatic runs stay off while GitHub
-# Actions billing is blocked. Run it on demand with the "Run workflow" button or
-# `gh workflow run CI`. To turn it back on, restore these two triggers:
+# Manual only: this workflow never runs on its own. Start it on demand with the
+# "Run workflow" button or `gh workflow run CI`. To turn automatic runs on,
+# restore these two triggers:
 #
 #   pull_request:
 #   push:

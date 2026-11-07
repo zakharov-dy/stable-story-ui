@@ -1,44 +1,85 @@
-# Stable Story UI
+# Stable Story[^working-name]
 
-*Working name; it may change.*
+![The first screen: tracked supply, day waterfall, and chain list](docs/media/hero.png)
 
-The public site and the mobile app of Stable Story, with the API contracts, design tokens and shared
-view logic they use. The UI is a self-contained workspace: it imports nothing outside this directory,
-installs from its own lockfile and runs all of its checks from here.
+*Screenshot rendered from the six-chain mock state the project's own checks use for screenshot evidence.*
 
-## Layout
+[**The supply of USDC, accounted for.**](https://stable-story.vercel.app)
 
-| Path | What it is |
+USDC supply by chain. Every day attributed to issuer or bridge, and reconciled against the contract.
+
+`live · updated daily · six chains`
+
+What's unusual about this page:
+
+- Every day is reconciled against the on-chain contract, and every bridge operation is paired across chains —
+  unpaired logs are flagged, never silently counted.
+- Production has no database server: the backend stays local and publishes prepared read-only documents;
+  hosting the data costs $0/month.
+- The data contract is about 600 lines of zod invariants in `packages/contracts/src/schemas.ts`, with negative
+  tests asserting the exact error path.
+
+[^working-name]: Stable Story is a working name; it may change.
+
+## Start here
+
+- The live site: [stable-story.vercel.app](https://stable-story.vercel.app).
+- The data contract: [`packages/contracts/src/schemas.ts`](packages/contracts/src/schemas.ts) — every invariant
+  the page relies on, including the publication envelope.
+- The shared view logic: [`packages/view`](packages/view) — pure formatting, quality, periods, and chart scales
+  over API responses; it never aggregates.
+- [Data quality](docs/data-quality.md) — the three daily reconciliations, CCTP pairing, and the gap and
+  unreconciled-day policies.
+- [Architecture](docs/architecture.md) — the whole system with the backend as a black box with interfaces.
+
+## What the page shows
+
+Header figures, the day equation (issuer mint, issuer burn, bridge in, bridge out, net), the 20 largest
+operations of 7 days, records, and per-chain status. Charts run at three periods — 30D by days, 90D by weeks
+(covering exactly 90 days), ALL by months from the earliest day with data of any chain — with the period control
+mirrored in the sticky bar once the hero scrolls away:
+
+![Charts at 30D/90D/ALL with the sticky period control](docs/media/charts.png)
+
+*Same mock render as above: the 30D stack and the flows section under the sticky bar.*
+
+The server decides the window step and the selection; the page renders the step it is given and never aggregates.
+A chain without data for a period is "no data" — not zero, not drawn. How it all fits together is in
+[architecture](docs/architecture.md); what "reconciled" means is in [data quality](docs/data-quality.md); the
+document shape, with a trimmed real example, is in [the overview example](docs/overview-example.md)
+([raw JSON](docs/overview-example.json)).
+
+## Checks
+
+| Check | What it proves |
 |---|---|
-| `apps/web` | The public page: Next.js dynamic SSR, seven views, How we count, disclaimer. Reads the API through `ApiClient` only. |
-| `apps/mobile` | Expo SDK 58 / React Native development-client skeleton. |
-| `packages/contracts` | API zod schemas, DTOs, `ApiClient` (http and mock), API fixtures; publication pointer and manifest schemas. |
-| `packages/tokens` | Typed design constants for web and React Native; source of the committed generated web `tokens.css`. |
-| `packages/view` | Pure view logic over API responses: formatting, quality, day equation, periods, series, chart scales and tooltip values. |
-| `docs` | The design language (`docs/design.md`), the testing workflow (`docs/web-testing.md`) and the UI decisions (`docs/decisions/`). |
-
-## Commands
+| `pnpm typecheck` | The workspace root and every package compile under strict TypeScript. |
+| `pnpm lint` | ESLint passes, including the enforced module boundaries between contracts, view, and apps. |
+| `pnpm test` | Unit suite: the shared view logic, the zod contract with negative tests on the error path, page tests. |
+| `pnpm check:build` | The production build uses self-hosted fonts only, leaks no API/R2 access or contract internals into client assets, and passes the daily-window HTML/RSC check. |
+| `pnpm browser-smoke` | Headless Chrome over every mock state (ok, delayed, unreconciled, empty-day, short-history, gap, empty, unavailable, long-history): console, layout, charts, and tooltips. |
+| `pnpm test:rn` | The Expo app's native component tests. |
 
 ```bash
 pnpm install
-pnpm typecheck      # the workspace root and every UI package
-pnpm lint           # ESLint, including the UI module boundaries
-pnpm test           # Vitest project "unit": **/*.test.ts
-pnpm check:build    # web: next build without the API, plain-HTTP pages per mock state
-pnpm browser-smoke  # web: headless Chrome over every mock state, reusing that build
-pnpm test:rn        # mobile: jest-expo native component tests
+pnpm typecheck && pnpm lint && pnpm test
+env -u AI_AGENT -u CLAUDECODE pnpm check:build
+CI=true env -u AI_AGENT -u CLAUDECODE pnpm browser-smoke
+pnpm test:rn
 ```
 
-`browser-smoke` runs the technical checks in headless Chrome; in a sandbox that cannot start Chrome
-it exits with a clear message before it launches the browser (`BROWSER_SMOKE_UNSUPPORTED_SANDBOX`),
-and that is not a pass.
+## Mobile
 
-## Rules
+An Expo (React Native) app reads the same `overview` document through a Cloudflare Worker that checks Firebase
+App Check: Today (day waterfall + chains), History (30D/90D/ALL with pinned tooltip), Operations (largest +
+records), and a Chain push screen. It reaches users after the web launch.
 
-- The UI knows only `contracts`, `tokens` and `view`; it reaches data through `ApiClient` and builds
-  no metrics. `contracts` imports no server package; `tokens` imports no workspace package; `view`
-  imports only types from `contracts` and uses ES APIs and `Intl` only.
-- The web and mobile apps share contracts, tokens and view logic, never components or UI texts.
-- A contract change updates the schemas, fixtures and consumers together.
-- Code, comments and docs are in English. The product name is a working name; web product code takes
-  it only from `apps/web/src/texts.ts`, mobile from its resolved Expo config.
+## Known limitations
+
+- Stable Story is a working name and may change.
+- ALL starts at the earliest covered day; older periods are resolved by weeks (90D) and months (ALL) on the
+  server — the page never re-buckets.
+- Chain histories start at each chain's coverage start (Base from its deployment day) and deepen over time.
+- There is no public API and no data export by design; the page itself is the interface.
+- The mobile app reaches users after the web launch.
+- CI runs on manual dispatch.
