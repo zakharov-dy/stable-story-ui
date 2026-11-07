@@ -1,4 +1,6 @@
 import { createMockClient, type Overview } from '@app/contracts';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
@@ -17,6 +19,12 @@ const render = (overview: Overview) =>
       demoState: null,
     }),
   );
+const feedOf = (html: string) =>
+  /data-block="feed"[\s\S]*?<\/section>/.exec(html)?.[0] ?? '';
+const listsCss = readFileSync(
+  path.join(import.meta.dirname, '..', 'styles', 'lists.css'),
+  'utf8',
+);
 
 describe('accepted home boards', () => {
   it.each(mockStates)(
@@ -190,7 +198,53 @@ describe('accepted home boards', () => {
     }));
     expect(render(overview)).toContain(texts.feed.showAll(8));
     overview.largestEvents.items = overview.largestEvents.items.slice(0, 5);
-    expect(render(overview)).not.toContain('operations-more');
+    const closed = render(overview);
+    expect(closed).not.toContain('operations-more');
+    expect(feedOf(closed)).not.toContain('<summary');
+  });
+
+  it('keeps the operations control visually after the last row with both labels and the board chevron', async () => {
+    const overview = await createMockClient('long-history').overview();
+    expect(overview.largestEvents.items.length).toBeGreaterThan(5);
+    const feed = feedOf(render(overview));
+    expect(feed).not.toBe('');
+    expect(feed.split('class="oplist"')).toHaveLength(2);
+    expect(feed).toContain(
+      texts.feed.showAll(overview.largestEvents.items.length),
+    );
+    expect(feed).toContain(texts.feed.showFive);
+    // The summary stays first in the disclosure (native toggle and hiding);
+    // the stylesheet orders it after the wrapped rows.
+    expect(feed).toMatch(/<details class="operations-more">\s*<summary/);
+    const details = feed.indexOf('<details class="operations-more">');
+    const close = feed.indexOf('</details>', details);
+    expect(
+      close > details &&
+        feed.slice(details, close).split('data-operation=').length - 1,
+    ).toBe(overview.largestEvents.items.length - 5);
+    // The stylesheet orders the first-child summary after the wrapped rows.
+    expect(listsCss).toMatch(
+      /\.operations-more\s*>\s*summary\s*\{[^}]*order:\s*1/,
+    );
+    expect(feed).toContain('<path d="M3 7.5l3-3 3 3"');
+    expect(feed).not.toContain('⌄');
+  });
+
+  it('opens every operation row in a new tab without changing its explorer URL', async () => {
+    const overview = await createMockClient('long-history').overview();
+    const tags = [
+      ...render(overview).matchAll(
+        /<a\b[^>]*data-operation="([^"]+)"[^>]*>/g,
+      ),
+    ];
+    expect(tags.map((match) => match[1])).toEqual(
+      overview.largestEvents.items.map((row) => row.id),
+    );
+    for (const [index, row] of overview.largestEvents.items.entries()) {
+      expect(tags[index]?.[0]).toContain(`href="${row.explorerUrl}"`);
+      expect(tags[index]?.[0]).toContain('target="_blank"');
+      expect(tags[index]?.[0]).toContain('rel="noopener noreferrer"');
+    }
   });
 
   it('marks bridge routes, versions, unknown peers and pairing on complete link rows', async () => {

@@ -18,6 +18,7 @@ export function OperationRow({
     <a
       className="op"
       href={row.explorerUrl}
+      target="_blank"
       rel="noopener noreferrer"
       data-operation={row.id}
       data-flow={row.flow}

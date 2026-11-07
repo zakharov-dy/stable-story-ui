@@ -52,15 +52,31 @@
   flex-direction: column;
 }
 .operations-more > summary {
-  display: list-item;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  order: 1;
+  list-style: none;
   color: var(--color-accent);
   font-size: var(--font-size-sm);
   cursor: pointer;
   margin-top: var(--space-3);
   min-height: 36px;
 }
+.operations-more > summary::-webkit-details-marker {
+  display: none;
+}
+.operations-more > summary::marker {
+  content: '';
+}
 .operations-more[open] > summary {
   margin-bottom: var(--space-3);
+}
+.operations-more .disclosure svg {
+  transform: rotate(180deg);
+}
+.operations-more[open] .disclosure svg {
+  transform: none;
 }
 .when-open,
 .operations-more[open] .when-closed {

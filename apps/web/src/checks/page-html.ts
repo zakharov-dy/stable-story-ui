@@ -275,6 +275,14 @@ export function checkPageHtml(
       `operation URL ${row.id}`,
     );
     expect(
+      tag.includes('target="_blank"'),
+      `operation new-tab target ${row.id}`,
+    );
+    expect(
+      tag.includes('rel="noopener noreferrer"'),
+      `operation rel ${row.id}`,
+    );
+    expect(
       tag.includes('data-unreconciled="true"') === row.unreconciled,
       `operation reconciliation ${row.id}`,
     );
@@ -288,6 +296,45 @@ export function checkPageHtml(
       (overview.largestEvents.items.length > 5 ? 1 : 0),
     'nonempty operations disclosure',
   );
+  const feed = slice(markup, 'data-block="feed"', '</section>');
+  const feedSummaries = count(feed, '<summary');
+  expect(
+    feedSummaries === (overview.largestEvents.items.length > 5 ? 1 : 0),
+    'feed disclosure control count',
+  );
+  expect(
+    count(feed, 'class="oplist"') === 1,
+    'feed rows form one list',
+  );
+  if (overview.largestEvents.items.length > 5) {
+    expect(
+      feed.includes(texts.feed.showAll(overview.largestEvents.items.length)),
+      'closed control label',
+    );
+    expect(feed.includes(texts.feed.showFive), 'open control label');
+    expect(
+      /<details class="operations-more">\s*<summary/.test(feed),
+      'the summary opens the disclosure',
+    );
+    const details = feed.indexOf('<details class="operations-more">');
+    const close = feed.indexOf('</details>', details);
+    expect(
+      count(feed.slice(details, close), 'data-operation=') ===
+        overview.largestEvents.items.length - 5,
+      'the disclosure wraps every additional row',
+    );
+    const controlMarkup = feed.slice(details, close);
+    expect(
+      controlMarkup.includes('<svg') &&
+        controlMarkup.includes('aria-hidden="true"'),
+      'board chevron on the control',
+    );
+    expect(
+      controlMarkup.includes('<path d="M3 7.5l3-3 3 3"'),
+      'board chevron shape',
+    );
+    expect(!feed.includes('⌄'), 'no native marker text on the feed control');
+  }
   expect(
     count(markup, 'data-record=') ===
       overview.records.filter((record) => record.scope === 'all').length,
