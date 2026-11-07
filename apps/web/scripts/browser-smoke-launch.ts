@@ -1,8 +1,9 @@
 // DOM assertions over the accepted home states. No images or pixel comparisons.
 import type { Overview } from '@app/contracts';
+import { disabledPeriods, historyDays } from '@app/view';
 import type { Page } from 'playwright-core';
 import { texts } from '../src/texts.ts';
-import { bucketLabel } from '../src/view.ts';
+import { bucketLabel, formatCount, PERIOD_ORDER } from '../src/view.ts';
 import { checkLayout } from './browser-smoke-layout.ts';
 
 const requireFact = (condition: boolean, message: string): void => {
@@ -150,14 +151,7 @@ async function checkOperationsControl(
     await control.click();
   }
   requireFact((await visibleRows()) === total, 'open operations show every row');
-  requireFact(
-    (await control.innerText()).includes(texts.feed.showFive),
-    'open control label',
-  );
-  requireFact((await arrowTransform()) === 'none', 'open arrow points up');
-  requireFact(await controlBelowLastRow(), 'open control after the last row');
-  await control.click();
-  requireFact((await visibleRows()) === 5, 'operations close again');
+  requireFact(await control.isHidden(), 'the control disappears when open');
 }
 
 export async function checkLaunchInteractions(
@@ -203,11 +197,15 @@ export async function checkLaunchInteractions(
     new Set(colours).size === overview.chains.length,
     'distinct enabled chain colours',
   );
-  await page.locator('#chain-status summary').click();
   requireFact(
     (await page.locator('table.status tbody tr').count()) ===
       overview.chains.length,
-    'every chain has disclosed status',
+    'every chain has a status row',
+  );
+  requireFact(
+    (await page.locator('#chain-status details, #chain-status summary').count()) ===
+      0,
+    'the status section needs no disclosure',
   );
   for (const chain of overview.status.chains) {
     const row = page.locator(`table.status tr[data-chain="${chain.chain}"]`);
@@ -221,8 +219,99 @@ export async function checkLaunchInteractions(
         'disclosed delay',
       );
   }
+  const brandLink = page.locator('.brand-row a[href="#chain-status"]');
+  const delayedChains = overview.status.chains.filter(
+    (status) => status.state === 'delayed',
+  );
+  if (delayedChains.length > 0) {
+    const first = delayedChains[0];
+    requireFact(
+      (await brandLink.count()) === delayedChains.length,
+      'delayed notes are the brand-row links',
+    );
+    requireFact(
+      (await brandLink.first().innerText()).includes(
+        texts.tags.behind(
+          overview.chains.find((chain) => chain.slug === first.chain)?.name ??
+            first.chain,
+          formatCount(first.lagHours),
+        ),
+      ),
+      'delayed brand note links to the status section',
+    );
+  } else {
+    requireFact(
+      (await brandLink.count()) === 1,
+      'one brand link to the status section',
+    );
+    requireFact(
+      (await brandLink.innerText()).includes(
+        texts.header.reconciled(
+          formatCount(overview.reconciliation.reconciledChains),
+          formatCount(overview.chains.length),
+        ),
+      ),
+      'brand tally links to the status section',
+    );
+  }
+  if (phone) {
+    requireFact(
+      (await page.locator('.status-list li').count()) ===
+        overview.chains.length,
+      'phone status rows',
+    );
+    requireFact(
+      await page.locator('table.status').isHidden(),
+      'phone shows the status list',
+    );
+  }
   await checkLayout(page);
-  await page.locator('#chain-status summary').click();
+  const disabled = new Set(disabledPeriods(historyDays(overview)));
+  const expectedDefault =
+    PERIOD_ORDER.find(
+      (period) => !disabled.has(period) && overview.views[period] !== null,
+    ) ?? '30d';
+  requireFact(
+    await page
+      .locator(`input[name="period"][value="${expectedDefault}"]`)
+      .isChecked(),
+    'the board default period is checked',
+  );
+  const periodOrder = PERIOD_ORDER.map((period) => texts.period.options[period]);
+  const headOrder = await page.locator('#period label span').allTextContents();
+  requireFact(
+    JSON.stringify(headOrder) === JSON.stringify(periodOrder),
+    'chart head period order ALL · 90D · 30D',
+  );
+  const stickyOrder = await page
+    .locator('#sticky-bar [data-sticky-period]')
+    .evaluateAll((buttons) =>
+      buttons.map((button) => button.textContent?.trim() ?? ''),
+    );
+  requireFact(
+    JSON.stringify(stickyOrder) === JSON.stringify(periodOrder),
+    'sticky bar period order ALL · 90D · 30D',
+  );
+  requireFact(
+    (await page
+      .locator(`#sticky-bar [data-sticky-period="${expectedDefault}"]`)
+      .getAttribute('aria-pressed')) === 'true',
+    'sticky default period pressed',
+  );
+  requireFact(
+    await page
+      .locator(
+        `section[data-period="${expectedDefault}"][aria-labelledby^="h-supply-by-chain"]`,
+      )
+      .isVisible(),
+    'default stack visible',
+  );
+  requireFact(
+    await page
+      .locator(`figure[data-period="${expectedDefault}"][data-scope="all"]`)
+      .isVisible(),
+    'flows follow the default period',
+  );
   await checkOperationsControl(page, overview, false);
   if (overview.chains.length === 6) await chainGrowth(page);
 
@@ -387,13 +476,21 @@ export async function checkLaunchInteractions(
   await page.mouse.move(0, 0);
   await page.locator('#h-drivers').scrollIntoViewIfNeeded();
   await page.locator('#sticky-bar').waitFor({ state: 'visible' });
+  requireFact(
+    (await page.locator('#sticky-bar .sdot').count()) === 0,
+    'no status button in the sticky bar',
+  );
   const stickyFits = await page.locator('#sticky-bar').evaluate((bar) => {
     const boundary = bar.getBoundingClientRect();
-    const children = [...bar.children].map((child) =>
+    const column = bar.querySelector('.sticky-in')!;
+    const inner = column.getBoundingClientRect();
+    const children = [...column.children].map((child) =>
       child.getBoundingClientRect(),
     );
+    const contentEdge = Math.min(innerWidth, 1280);
     return (
       boundary.height === 48 &&
+      Math.abs(inner.width - contentEdge) <= 1 &&
       children.every((box, index) => {
         const next = children[index + 1];
         return (
@@ -403,12 +500,15 @@ export async function checkLaunchInteractions(
           box.bottom <= boundary.bottom &&
           (next === undefined || box.right <= next.left)
         );
-      })
+      }) &&
+      // Wordmark at the column's left edge; date and period together at its right.
+      children[0].left - inner.left <= 81 &&
+      inner.right - children[children.length - 1].right <= 81
     );
   });
   requireFact(
     stickyFits,
-    'sticky date and controls fit the 48px bar without overlap',
+    'sticky wordmark, date and period fill the 48px content column without overlap',
   );
   const stickyPeriod = page.locator('[data-sticky-period="90d"]');
   if (!(await stickyPeriod.isDisabled())) {
@@ -419,12 +519,6 @@ export async function checkLaunchInteractions(
     );
     await page.locator('[data-sticky-period="30d"]').click();
   }
-  await page.locator('[data-status-link].sdot').click();
-  requireFact(
-    (await page.locator('#chain-status').getAttribute('open')) !== null,
-    'sticky status opens disclosure',
-  );
-  await page.locator('#chain-status summary').click();
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.locator('#sticky-bar').waitFor({ state: 'hidden' });
   await checkLayout(page);
@@ -454,11 +548,16 @@ export async function checkNoJavascript(
       `no-JS ${period} flows`,
     );
   }
-  await page.locator('#chain-status summary').click();
+  requireFact(
+    (await page
+      .locator('#chain-status details, #chain-status summary')
+      .count()) === 0,
+    'no-JS status section needs no disclosure',
+  );
   requireFact(
     (await page.locator('table.status tbody tr').count()) ===
       overview.chains.length,
-    'no-JS disclosure',
+    'no-JS status table',
   );
   await checkOperationsControl(page, overview, true);
   await checkLayout(page);

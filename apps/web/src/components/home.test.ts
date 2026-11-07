@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { checkPageHtml, visibleText } from '../checks/page-html.ts';
 import { mockStates } from '../server/config.ts';
 import { texts } from '../texts.ts';
-import { formatCompact, formatDay, roundedChange } from '../view.ts';
+import { formatCompact, formatCount, formatDay, roundedChange } from '../view.ts';
 import { flowBound } from './Drivers.tsx';
 import { PageView } from './PageView.tsx';
 import { stackGeometry } from './SupplyByChain.tsx';
@@ -61,7 +61,7 @@ describe('accepted home boards', () => {
         overview,
         demoState: null,
       }),
-    ).toContain('ready reconciliation stamp');
+    ).toContain('status section carries the reconciliation stamp as its aside');
   });
 
   it('places the full data date in the brand row and sticky bar', async () => {
@@ -79,13 +79,13 @@ describe('accepted home boards', () => {
       (match) => match[1],
     );
     expect(blocks).toEqual([
-      'status',
       'header',
       'waterfall',
       'supply-by-chain',
       'drivers',
       'feed',
       'records',
+      'status',
       'how-we-count',
       'disclaimer',
     ]);
@@ -203,7 +203,7 @@ describe('accepted home boards', () => {
     expect(feedOf(closed)).not.toContain('<summary');
   });
 
-  it('keeps the operations control visually after the last row with both labels and the board chevron', async () => {
+  it('keeps the operations control as the full-width last row while closed and hides it when open', async () => {
     const overview = await createMockClient('long-history').overview();
     expect(overview.largestEvents.items.length).toBeGreaterThan(5);
     const feed = feedOf(render(overview));
@@ -212,9 +212,9 @@ describe('accepted home boards', () => {
     expect(feed).toContain(
       texts.feed.showAll(overview.largestEvents.items.length),
     );
-    expect(feed).toContain(texts.feed.showFive);
-    // The summary stays first in the disclosure (native toggle and hiding);
-    // the stylesheet orders it after the wrapped rows.
+    expect(feed).not.toContain('Show 5');
+    // The summary stays first in the disclosure (native toggle); the extra rows
+    // follow it, and the stylesheet hides the control once it is open.
     expect(feed).toMatch(/<details class="operations-more">\s*<summary/);
     const details = feed.indexOf('<details class="operations-more">');
     const close = feed.indexOf('</details>', details);
@@ -222,12 +222,40 @@ describe('accepted home boards', () => {
       close > details &&
         feed.slice(details, close).split('data-operation=').length - 1,
     ).toBe(overview.largestEvents.items.length - 5);
-    // The stylesheet orders the first-child summary after the wrapped rows.
+    // The board's full-width last row: centered, accent, and gone when open.
     expect(listsCss).toMatch(
-      /\.operations-more\s*>\s*summary\s*\{[^}]*order:\s*1/,
+      /\.operations-more\s*>\s*summary\s*\{[^}]*justify-content:\s*center/,
+    );
+    expect(listsCss).toMatch(
+      /\.operations-more\[open\]\s*>\s*summary\s*\{\s*display:\s*none/,
     );
     expect(feed).toContain('<path d="M3 7.5l3-3 3 3"');
     expect(feed).not.toContain('⌄');
+  });
+
+  it('places the always-open Status section after Records and links the brand row to it', async () => {
+    const overview = await createMockClient('long-history').overview();
+    const html = render(overview);
+    const records = html.indexOf('data-block="records"');
+    const status = html.indexOf('data-block="status"');
+    const how = html.indexOf('data-block="how-we-count"');
+    expect(records).toBeGreaterThan(-1);
+    expect(status).toBeGreaterThan(records);
+    expect(how).toBeGreaterThan(status);
+    const section = html.slice(html.lastIndexOf('<section', status), how);
+    expect(section).toContain('id="chain-status"');
+    expect(section).not.toContain('<details');
+    expect(section).not.toContain('<summary');
+    expect(section).toContain('class="status-list"');
+    expect(section).toContain(texts.status.asOf(formatDay(overview.asOf)));
+    const brand = /<header class="brand-row"[\s\S]*?<\/header>/.exec(html)![0];
+    expect(brand).toContain('href="#chain-status"');
+    expect(visibleText(brand)).toContain(
+      texts.header.reconciled(
+        formatCount(overview.reconciliation.reconciledChains),
+        formatCount(overview.chains.length),
+      ),
+    );
   });
 
   it('opens every operation row in a new tab without changing its explorer URL', async () => {

@@ -31,7 +31,9 @@ which is manual only. A failure there is a defect of the page, not of the design
 The six-chain `long-history` coverage includes independent last-bucket level and share numbers for
 30D, 90D and ALL, a supplied-share mutation to detect page-side arithmetic, null versus zero,
 thin-layer label retention and midpoint placement, the sixth-chain slot identity, one resolution
-sentence, and Last run without a repeated block. The other state tests cover common coverage,
+sentence, the ALL default with the ALL · 90D · 30D order in both period switches, the always-open
+Status section (table plus phone list, no disclosure), and Last run without a repeated block. The
+other state tests cover common coverage,
 delayed/unreconciled notes, closed-day zero versus gap, unpaired bridge identity and operation n/a,
 disabled longer periods, empty and load-error blocks.
 

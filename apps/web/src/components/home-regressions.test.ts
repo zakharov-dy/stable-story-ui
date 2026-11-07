@@ -52,20 +52,22 @@ describe('home review regressions', () => {
     expect(render(overview)).toBe(before);
   });
 
-  it('keeps the ready reconciled tally beside the delayed note', async () => {
+  it('shows the delayed note as the brand-row link and the supplied tally in the status aside', async () => {
     const overview = await createMockClient('delayed').overview();
     overview.reconciliation.reconciledChains = 2;
+    const html = render(overview);
     const brand = /<header class="brand-row"[\s\S]*?<\/header>/.exec(
-      render(overview),
+      html,
     )![0];
-    expect(visibleText(brand)).toContain('2/3 reconciled');
     expect(visibleText(brand)).toContain('Base · 30 h behind');
-    expect(
-      checkPageHtml(render(overview).replace('2/3 reconciled', ''), {
-        overview,
-        demoState: null,
-      }),
-    ).toContain('brand ready tally in every data state');
+    expect(brand).toContain('href="#chain-status"');
+    expect(visibleText(brand)).not.toContain('2/3 reconciled');
+    const statusSection = html.slice(
+      html.indexOf('data-block="status"'),
+      html.indexOf('data-block="how-we-count"'),
+    );
+    expect(visibleText(statusSection)).toContain('2/3 chains · ');
+    expect(checkPageHtml(html, { overview, demoState: null })).toEqual([]);
   });
 
   it('shows a chain’s own latest mismatch even when it differs from the common day', async () => {
