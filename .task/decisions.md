@@ -56,3 +56,22 @@
 - Branch: assigned `worktree-go-showdoc` kept instead of `web/showcase`.
 - Social-preview assignment (`hero.png` as the GitHub social preview) is a repo setting owned separately;
   this task only references the image from the README.
+
+## Implementation round (plan approved, 2026-11-07)
+
+### Reviewer questions from plan round 2 (answered by the implementation)
+
+- Example scopes: yes — `docs/overview-example.json` keeps all 7 day scopes (`all` + six chains), all 7 driver
+  and `issuerVsBridge` scopes, 6 status chains and 6 reconciliation chains. `docs/overview-example.md` lists
+  every cut array with full→excerpt counts (header days/sparks, per-view buckets, `noDataChains` rows, line
+  values, driver events) and notes that `issuerVsBridge` aggregates describe the full fixture window, copied
+  as-is rather than recomputed over the trimmed buckets.
+- Mock date in the hero (fixture `asOf` 2027-03-15 under "live · updated daily"): accepted with an honest
+  caption. The README captions both screenshots as renders from the six-chain mock state the project's checks
+  use for screenshot evidence; no values were altered or invented to hide the date.
+
+### Deviations from the plan, with reasons
+
+- None so far: screenshots from `long-history`, `.demo` hidden only for the hero capture, publication envelope
+  in `docs/architecture.md`, data-shape facts in both `docs/architecture.md` and `docs/data-quality.md`,
+  `charts.png` referenced from the README "What the page shows" section.

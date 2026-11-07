@@ -4,7 +4,8 @@ Branch: keep the assigned `worktree-go-showdoc` (task names `web/showcase`; repo
 
 ## Verified facts (from the worktree, not just the brief)
 
-- Tagline in `apps/web/src/texts.ts:6`: "The supply of USDC, accounted for." Six-chain copy exists in texts (`optimism: 'OP'`, polygon, avalanche); fixtures are 3-chain mocks.
+- Tagline in `apps/web/src/texts.ts:6`: "The supply of USDC, accounted for." The `long-history` fixture is the
+  six-chain document; the `ok` fixture is a three-chain mock.
 - `packages/contracts/src/schemas.ts` is 641 lines; schema roots: `Quality`, `Series(Line)`, `Kpi`, `Split`,
   `EventRow`, `EventsPage`, `EventsStats`, `RecordItem`, `ChainStatus`, `OverviewDriver`, `OverviewView`,
   `OverviewDay` (five terms: issuer_mint, issuer_burn, bridge_in, bridge_out, net), `ReconciliationSummary`
@@ -47,12 +48,12 @@ Branch: keep the assigned `worktree-go-showdoc` (task names `web/showcase`; repo
 2. `docs/architecture.md` — backend as black box with interfaces only
    (logs → reconciliations → Postgres → publisher → R2 → SSR; same document → Worker + App Check → Expo).
    Publisher interface: `current.json` → manifest → immutable `versions/<uuid>/supply/usdc/overview.json`; versioning lives
-   in the publication envelope, not inside the overview JSON (which has no version field). No backend code,
-   Contracts, day/flow model, three reconciliations, overview document (periods, server steps, `null` ≠ 0),
-   credential boundary (browser gets no backend/R2 access, no credentials). No backend code, no other
-   repository, no internal doc paths or decision-record numbers.
+   in the publication envelope, not inside the overview JSON (which has no version field). Contents: contracts,
+   the day/flow model, the three reconciliations, the overview document (periods, server steps, `null` ≠ 0),
+   the data-shape facts, and the delivery and credential boundary (browser gets no backend/R2 access, no
+   credentials). No backend code, no other repository, no internal doc paths or decision-record numbers.
 3. `docs/data-quality.md` — three reconciliations, CCTP pairing, gap policy (missing = "no data", never zero),
-   unreconciled-day policy (stays closed, flagged, counted).
+   unreconciled-day policy (stays closed, flagged, counted), and the data-shape facts.
 4. `docs/overview-example.json` (trimmed from the six-chain `fixtures/long-history/overview.json`:
    cuts by bucket count across every parallel array — paired arrays stay aligned, all six scopes kept;
    pure JSON, no added fields) + `docs/overview-example.md` ("how to read it": what each block is and exactly
@@ -64,7 +65,8 @@ Branch: keep the assigned `worktree-go-showdoc` (task names `web/showcase`; repo
    `browser-smoke --states long-history --shots` catalog in `$TMPDIR` (the only state allowed for
    screenshot evidence); both PNGs are headless renders of that same built mock page
    (`next start`, `API_MODE=mock MOCK_STATE=long-history`). Verify each with `ls -l` before commit;
-   resize fallback to 1280/1200 px wide if either exceeds the limit.
+   resize fallback to 1280/1200 px wide if either exceeds the limit. README references: hero at the top,
+   charts in the "What the page shows" section.
 6. `.github/workflows/ci.yml` — reword the head comment to manual-only; drop billing reason and backend mention.
 
 ## Language guardrails (reviewer-major if violated)
