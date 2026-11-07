@@ -38,10 +38,18 @@ function Waterfall({ overview }: { overview: Overview }) {
         row?.unreconciled ? 'unreconciled' : known ? 'ok' : 'incomplete'
       }
     >
+      <div className="wf-row">
+        {TERMS.map((term, index) => (
+          <div key={term} data-flow={term}>
+            <span className="wf-v">{roundedChange(values[index] ?? null)}</span>
+          </div>
+        ))}
+      </div>
       {known ? (
         <svg
           className="wf-plot"
-          viewBox="0 0 520 120"
+          viewBox="0 0 560 120"
+          preserveAspectRatio="none"
           role="img"
           aria-label={texts.header.waterfall(
             overview.day === null
@@ -63,14 +71,14 @@ function Waterfall({ overview }: { overview: Overview }) {
               </pattern>
             ))}
           </defs>
-          <line className="wf-zero" x1="0" x2="520" y1="60" y2="60" />
+          <line className="wf-zero" x1="0" x2="560" y1="60" y2="60" />
           {edges.map(([start, end], index) => (
             <g key={TERMS[index]}>
               {index < 4 ? (
                 <line
                   className="wf-connector"
-                  x1={index * 104 + 78}
-                  x2={(index + 1) * 104 + 26}
+                  x1={index * 112 + 80}
+                  x2={(index + 1) * 112 + 32}
                   y1={coordinate(y(end))}
                   y2={coordinate(y(end))}
                 />
@@ -80,9 +88,9 @@ function Waterfall({ overview }: { overview: Overview }) {
                 data-unreconciled={
                   index === 4 && row?.unreconciled ? 'true' : undefined
                 }
-                x={index * 104 + 26}
+                x={index * 112 + 32}
                 y={coordinate(Math.min(y(start), y(end)))}
-                width="52"
+                width="48"
                 height={coordinate(Math.max(1, Math.abs(y(start) - y(end))))}
               />
             </g>
@@ -90,15 +98,15 @@ function Waterfall({ overview }: { overview: Overview }) {
         </svg>
       ) : null}
       <div className="wf-row">
-        {TERMS.map((term, index) => (
-          <div key={term} data-flow={term}>
-            <div className="wf-v">{roundedChange(values[index] ?? null)}</div>
-            <div className="wf-c">
-              <span className="sw" data-flow={term} />
-              {texts.flows[term]}
-            </div>
-          </div>
+        {TERMS.map((term) => (
+          <span key={term} className="wf-c" data-flow={term}>
+            {texts.flowsShort[term]}
+          </span>
         ))}
+      </div>
+      <div className="wf-row wf-groups">
+        <span className="wf-g">{texts.flowGroups.issuer}</span>
+        <span className="wf-g">{texts.flowGroups.bridge}</span>
       </div>
       <figcaption className="wf-cap">
         <span className="ix">{texts.header.marker}</span>{' '}
@@ -126,7 +134,7 @@ export function Header({ overview }: { overview: Overview }) {
       data-quality={qualityAttribute(quality)}
       aria-label={texts.header.cards.supply}
     >
-      <div>
+      <div className="figure">
         <p className="monument" aria-label={texts.header.cards.supply}>
           {formatCompact(overview.header.supply.value)}
         </p>
