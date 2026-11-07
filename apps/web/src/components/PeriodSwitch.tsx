@@ -1,11 +1,10 @@
 import { texts } from '../texts.ts';
-import { disabledPeriods, historyDays } from '@app/view';
-import { defaultPeriod, PERIOD_ORDER } from '../view.ts';
+import { defaultPeriod, offPeriods, PERIOD_ORDER } from '../view.ts';
 import type { Overview } from '@app/contracts';
 
 /** Native radios drive the server-rendered views through CSS, including without JavaScript. */
 export function PeriodSwitch({ overview }: { overview: Overview }) {
-  const off = new Set(disabledPeriods(historyDays(overview)));
+  const off = offPeriods(overview);
   const initial = defaultPeriod(overview);
   return (
     <fieldset className="seg" id="period">

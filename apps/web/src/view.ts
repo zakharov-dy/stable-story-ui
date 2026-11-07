@@ -6,7 +6,6 @@ import {
   createHistory,
   createSeries,
   createTooltip,
-  disabledPeriods,
   historyDays,
 } from '@app/view';
 import type { Overview } from '@app/contracts';
@@ -16,13 +15,21 @@ import { texts } from './texts.ts';
 /** Board order of the period controls; the view package's PERIODS order is not the display order. */
 export const PERIOD_ORDER: readonly PeriodId[] = ['all', '90d', '30d'];
 
+/**
+ * Availability on the page: ALL needs more than 90 days of history; 90D and 30D follow the server's
+ * views. Short history keeps 90D selectable, so the board default falls back to 90D, not 30D.
+ */
+export const offPeriods = (overview: Overview): ReadonlySet<PeriodId> => {
+  const off = new Set<PeriodId>();
+  if (overview.views.all === null || historyDays(overview) <= 90) off.add('all');
+  if (overview.views['90d'] === null) off.add('90d');
+  if (overview.views['30d'] === null) off.add('30d');
+  return off;
+};
+
 /** The period the page opens on: the first board-order period the server supplies. */
 export const defaultPeriod = (overview: Overview): PeriodId =>
-  PERIOD_ORDER.find(
-    (period) =>
-      !disabledPeriods(historyDays(overview)).includes(period) &&
-      overview.views[period] !== null,
-  ) ?? '30d';
+  PERIOD_ORDER.find((period) => !offPeriods(overview).has(period)) ?? '30d';
 
 export const {
   formatAmount,

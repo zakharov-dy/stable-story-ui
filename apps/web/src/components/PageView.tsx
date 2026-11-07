@@ -1,9 +1,10 @@
-import { type PageProps, disabledPeriods, historyDays } from '@app/view';
+import type { PageProps, PeriodId } from '@app/view';
 import { texts } from '../texts.ts';
 import {
   defaultPeriod,
   formatCount,
   formatDay,
+  offPeriods,
   PERIOD_ORDER,
 } from '../view.ts';
 import { Drivers } from './Drivers.tsx';
@@ -22,8 +23,8 @@ export function PageView({ model, demoState }: PageProps) {
     overview?.asOf === null || overview?.asOf === undefined
       ? null
       : texts.asOf(formatDay(overview.asOf));
-  const off = new Set(
-    overview === null ? [] : disabledPeriods(historyDays(overview)),
+  const off = new Set<PeriodId>(
+    overview === null ? [] : offPeriods(overview),
   );
   const delayed =
     overview?.status.chains.filter((status) => status.state === 'delayed') ??

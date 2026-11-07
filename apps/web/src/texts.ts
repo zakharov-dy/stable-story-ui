@@ -112,7 +112,6 @@ export const texts = {
       PeriodId,
       string
     >,
-    shortNote: '90D and ALL are off: the history is shorter than 90 days.',
     allNote: (day: string) =>
       `ALL is off: history starts ${day}, no longer than 90D.`,
   },
@@ -190,6 +189,7 @@ export const texts = {
       unreconciled: 'Unreconciled',
       no_data: 'No data',
     },
+    stateMark: '●',
     checks: { supply: 'supply', bridge: 'bridge', continuity: 'continuity' },
     failure: (check: string) => `${check} check failed`,
     checkMarks: { ok: '✓', mismatch: '✕', none: '—' },

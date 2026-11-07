@@ -17,8 +17,6 @@ import {
   unscale,
   fromSeries,
   qualityAttribute,
-  disabledPeriods,
-  historyDays,
   PERIODS,
   tooltipText,
   type Frame,
@@ -32,6 +30,7 @@ import {
   formatShare,
   formatShortDay,
   formatMonth,
+  offPeriods,
   roundedChange,
   tone,
 } from '../view.ts';
@@ -478,10 +477,8 @@ const formatCountLag = (hours: number | null) =>
   hours === null ? texts.noData : String(hours);
 
 export function SupplyByChain({ overview }: { overview: Overview }) {
-  const off = new Set(disabledPeriods(historyDays(overview)));
-  const reason = off.has('90d')
-    ? texts.period.shortNote
-    : off.has('all') && overview.historyStart !== null
+  const reason =
+    offPeriods(overview).has('all') && overview.historyStart !== null
       ? texts.period.allNote(formatDay(overview.historyStart))
       : null;
   return (
