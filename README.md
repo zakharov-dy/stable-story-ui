@@ -74,3 +74,8 @@ pnpm test:rn
 - `ALL` starts at the earliest covered day of any enabled chain (`2018-08-03` on Ethereum); older periods are pre-bucketed by week (`90D`) and calendar month (`ALL`) on the server, and the client never re-aggregates.
 - There is no public API or raw data export by design — the page is the interface.
 - GitHub Actions CI runs on manual dispatch (`workflow_dispatch`).
+
+## License
+
+Copyright © 2026 Dmitrii Zakharov. All rights reserved. Published as a source-available engineering showcase — see [`LICENSE`](LICENSE).
+
