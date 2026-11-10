@@ -1,6 +1,6 @@
 # Stable Story
 
-[**The supply of USDC, accounted for.**](https://stable-story.vercel.app)
+[**The supply of USDC, accounted for.**](https://stablestory.vercel.app)
 
 USDC supply across Ethereum, Base, Arbitrum, OP Mainnet, Polygon PoS, and Avalanche C-Chain — every closed day attributed to Circle (issuer) or the CCTP bridge, and reconciled against the on-chain contract.
 
@@ -16,7 +16,7 @@ USDC supply across Ethereum, Base, Arbitrum, OP Mainnet, Polygon PoS, and Avalan
 
 ## Start here
 
-1. **Live site:** [stable-story.vercel.app](https://stable-story.vercel.app)
+1. **Live site:** [stablestory.vercel.app](https://stablestory.vercel.app)
 2. **Data contract:** [`packages/contracts/src/schemas.ts`](packages/contracts/src/schemas.ts) and [`packages/contracts/src/publication.ts`](packages/contracts/src/publication.ts) — schemas, cross-field invariants, and the R2 pointer/manifest envelope.
 3. **Shared view logic:** [`packages/view`](packages/view) — pure TypeScript formatting, quality flags, day equation, period selection, and chart scales (`Intl` and ES APIs only; never aggregates or re-buckets).
 4. **System architecture:** [`docs/architecture.md`](docs/architecture.md) — end-to-end data flow with the analytical backend documented as an interface-level black box.
