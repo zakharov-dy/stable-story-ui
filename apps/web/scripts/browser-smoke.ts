@@ -1,5 +1,5 @@
 // Browser smoke of the web page: no model, and no screenshot unless `--shots` (or BROWSER_SMOKE_SHOTS) asks
-// for the catalog (apps/web/browser-test/README.md, docs/design.md). Run with
+// for the catalog (docs/web-testing.md, docs/design.md). Run with
 // `pnpm --filter @app/web browser-smoke` after a build (`pnpm --filter @app/web build`), locally and in the CI
 // job `web` after `check:build`, whose build it reuses.
 //

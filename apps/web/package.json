@@ -9,7 +9,6 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "check:build": "node scripts/check-build.ts",
-    "browser-test": "node scripts/browser-test.ts",
     "browser-smoke": "node scripts/browser-smoke.ts"
   },
   "dependencies": {

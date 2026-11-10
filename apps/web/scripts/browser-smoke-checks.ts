@@ -1,7 +1,5 @@
 // The checks of the browser smoke (scripts/browser-smoke.ts) as pure functions over data collected from
-// the page: no browser, no I/O. Each returns the list of problems, empty when the check passes. The rules
-// are the technical checks of the design-comparison browser test (browser-test/prompt.md), stated exactly; where the
-// prompt was vague the choice is written next to the rule.
+// the page: no browser, no I/O. Each returns the list of problems, empty when the check passes.
 
 import type { Overview } from '@app/contracts';
 import { ALL_BLOCKS, checkPageHtml } from '../src/checks/page-html.ts';

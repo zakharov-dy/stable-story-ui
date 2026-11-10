@@ -7,10 +7,10 @@ export default defineConfig({
         test: {
           name: 'unit',
           // The default 5 s is too tight for a loaded machine; the shared UI suites include
-          // CPU-bound chart, token and browser-test checks.
+          // CPU-bound chart and token checks.
           testTimeout: 20_000,
           include: ['{packages,apps}/**/*.test.ts', '*.test.ts'],
-          exclude: [...configDefaults.exclude],
+          exclude: [...configDefaults.exclude, '**/.claude/**'],
         },
       },
     ],

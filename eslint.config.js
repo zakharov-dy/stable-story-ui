@@ -24,7 +24,7 @@ const expoConfig = rawExpoConfig.map((config) => ({
 
 export default defineConfig([
   globalIgnores([
-    '**/node_modules/**', '**/dist/**', '**/.next/**', '**/coverage/**', 'docs/**',
+    '**/node_modules/**', '**/dist/**', '**/.next/**', '**/coverage/**', '**/.claude/**', 'docs/**',
     'apps/mobile/.expo/**', 'apps/mobile/expo-env.d.ts', 'apps/mobile/ios/**', 'apps/mobile/android/**',
   ]),
   { files: ['apps/mobile/**/*.{js,ts,tsx}'], extends: [expoConfig] },
